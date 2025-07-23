@@ -6,15 +6,19 @@ class ZikoUIXMLWrapper extends ZikoUIElement{
     }
 }
 function html2dom(htmlString) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(`<div>${htmlString}</div>`, 'text/html');
-    doc.body.firstChild.style.display = "contents"
-    return doc.body.firstChild;
+    if(globalThis?.DOMParser){
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(`<div>${htmlString}</div>`, 'text/html');
+        doc.body.firstChild.style.display = "contents"
+        return doc.body.firstChild;
+    }
   }
 function svg2dom(svgString) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(svgString.replace(/\s+/g, ' ').trim(), 'image/svg+xml');
-    return doc.documentElement; // SVG elements are usually at the root
+    if(globalThis?.DOMParser){
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgString.replace(/\s+/g, ' ').trim(), 'image/svg+xml');
+        return doc.documentElement; // SVG elements are usually at the root
+    }
 }
 class ZikoUIHTMLWrapper extends ZikoUIXMLWrapper{
     constructor(HTMLContent){
