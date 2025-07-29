@@ -1,18 +1,6 @@
-// pointer.d.ts
-
 import { __ZikoEvent__ } from "../__ZikoEvent__.js";
-import type { EventMethodesBinder, Callback } from './__Shared__.js';
+import type { EventMethodesBinder, Callback, PointerEventKeys } from './__Shared__.js';
 import { ZikoUIElement } from "../../ui/index.js";
-
-type PointerEventKeys =
-  | 'PtrMove'
-  | 'PtrDown'
-  | 'PtrUp'
-  | 'PtrLeave'
-  | 'PtrEnter'
-  | 'PtrOut'
-  | 'PtrCancel';
-
 
 type PointerEventMethodesBinder = EventMethodesBinder<PointerEventKeys, ZikoEventPointer>;
 
@@ -26,7 +14,7 @@ declare class ZikoEventPointer extends __ZikoEvent__ implements PointerEventMeth
 
   mx?: number;
   my?: number;
-  isMove?: boolean;
+  isMoving?: boolean;
 
   ux?: number;
   uy?: number;

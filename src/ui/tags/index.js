@@ -4,7 +4,7 @@ const tags = new Proxy({}, {
     if (typeof prop !== 'string') return undefined;
     let tag = prop.replaceAll("_","-").toLowerCase();
     switch(tag){
-      case "html"  :
+      case "html"  : globalThis?.document?.createElement("html")
       case "head"  :
       case "style" :
       case "link"  :

@@ -106,3 +106,43 @@ export declare class __ZikoEvent__ {
     ...callbacks: ((ctx: this) => void)[]
   ): this;
 }
+// export type ClickEventKeys = 
+//         | 'Click'
+//         | 'DblClick';
+
+// export type PointerEventKeys =
+//         | 'PtrMove'
+//         | 'PtrDown'
+//         | 'PtrUp'
+//         | 'PtrLeave'
+//         | 'PtrEnter'
+//         | 'PtrOut'
+//         | 'PtrCancel'
+
+// export type MouseEventKeys = 
+//         | 'MouseMove'
+//         | 'MouseDown';
+// export type TouchEventKeys = 
+//         | 'ToucMove'
+//         | 'ToucDown';
+// export type KeyEventKeys = 
+//         | 'keyDown'
+//         | 'keyPress'
+//         | 'keyUs';
+// export type ClipboardEventKeys = 
+//         | 'Copy'
+//         | 'Cut'
+//         | 'Paste';
+// export type FocusEventKeys = 
+//         | 'focus'
+//         | 'blur';
+// export type DragEventKeys = 
+//         | 'Drag'
+//         | 'DragStart'
+//         | 'DragEnd'
+//         | 'Drop';        
+// export type MediaEventKeys = 
+//         | '__';
+// export type HashEventKeys = 
+//         | 'HashChange'
+  

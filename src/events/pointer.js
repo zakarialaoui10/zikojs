@@ -16,7 +16,7 @@ function details_setter(){
         case "pointermove" : {
             this.mx = parseInt(this.event.offsetX);
             this.my = parseInt(this.event.offsetY);
-            this.isMove = true
+            this.isMoving = true
         }; break;
         case "pointerup" : {
             this.ux = parseInt(this.event.offsetX);
