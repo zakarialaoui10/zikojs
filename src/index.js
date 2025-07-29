@@ -1,4 +1,4 @@
-import { __ExtractAll__,__RemoveAll__ } from "./__helpers__";
+import { __ExtractAll__,__RemoveAll__ } from "./__helpers__/index.js";
 import Math from "./math/index.js";
 import UI from "./ui/index.js";
 import Time from "./time/index.js";

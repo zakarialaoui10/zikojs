@@ -32,6 +32,9 @@
       "import": "./dist/ziko.mjs",
       "require": "./dist/ziko.cjs"
     },
+    "./helpers": {
+      "import" : "./src/__helpers__.js"
+    },
     "./src": "./src/index.js",
     "./math": {},
     "./ui": {},
