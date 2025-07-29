@@ -1,6 +1,6 @@
 {
   "name": "ziko",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "a versatile javaScript framework offering a rich set of UI components, advanced mathematical utilities, reactivity, animations, client side routing and graphics capabilities",
   "keywords": [
     "front-end",
