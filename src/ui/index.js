@@ -1,24 +1,24 @@
-export * from "./elements/text";
-export * from "./elements/list";
-export * from "./elements/io";
-export * from "./elements/media";
-export * from "./elements/table";
-export * from "./elements/semantic";
-export * from "./elements/misc";
-export * from "./elements/flex";
-export * from "./elements/grid";
+export * from "./elements/text/index.js";
+export * from "./elements/list/index.js";
+export * from "./elements/io/index.js";
+export * from "./elements/media/index.js";
+export * from "./elements/table/index.js";
+export * from "./elements/semantic/index.js";
+export * from "./elements/misc/index.js";
+export * from "./elements/flex/index.js";
+export * from "./elements/grid/index.js";
 
-import * as Text from "./elements/text";
-import * as List from "./elements/list";
-import * as Io from "./elements/io";
-import * as Media from "./elements/media";
-import * as Table from "./elements/table";
-import * as Semantic from "./elements/semantic";
-import * as Misc from "./elements/misc";
-import * as Flex from "./elements/flex";
-import * as Grid from "./elements/grid";
+import * as Text from "./elements/text/index.js";
+import * as List from "./elements/list/index.js";
+import * as Io from "./elements/io/index.js";
+import * as Media from "./elements/media/index.js";
+import * as Table from "./elements/table/index.js";
+import * as Semantic from "./elements/semantic/index.js";
+import * as Misc from "./elements/misc/index.js";
+import * as Flex from "./elements/flex/index.js";
+import * as Grid from "./elements/grid/index.js";
 
-import ZikoUIElement from "./elements/ZikoUIElement";
+import ZikoUIElement from "./elements/ZikoUIElement.js";
 
 export{
     ZikoUIElement

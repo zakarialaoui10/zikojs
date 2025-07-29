@@ -46,12 +46,12 @@ class B{
     }
 }
 
-class AB {
-    constructor() {
-        this.msg="from AB"
-        mixin(this.__proto__, A, B);
-    }
-}
+// class AB {
+//     constructor() {
+//         this.msg="from AB"
+//         mixin(this.__proto__, A, B);
+//     }
+// }
 
 // ab=new AB()
 export{

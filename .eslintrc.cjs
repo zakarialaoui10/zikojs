@@ -13,5 +13,9 @@ module.exports = {
     },
     "ignorePatterns": ["**/*.txt"],
     "rules": {
+        // Disallow missing extensions
+        'import/extensions': ['error', 'always', {
+            js: 'always',
+        }],
     }
 }

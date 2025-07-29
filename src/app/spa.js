@@ -1,6 +1,6 @@
-import { text } from "../ui";
-import { dynamicRoutesParser,routesMatcher,isDynamic } from "./routes";
-import { ZikoApp } from "./ziko-app";
+import { text } from "../ui/index.js";
+import { dynamicRoutesParser,routesMatcher,isDynamic } from "./routes.js";
+import { ZikoApp } from "./ziko-app.js";
 class ZikoSPA extends ZikoApp{
     constructor({head, wrapper, target, routes}){
         super({head, wrapper, target})

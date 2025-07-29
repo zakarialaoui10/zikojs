@@ -1,5 +1,5 @@
-import { SPA } from "./spa";
-import { Section } from "../ui";
+import { SPA } from "./spa.js";
+import { Section } from "../ui/index.js";
 // import.meta.glob('./src/pages/**/*.js')
 async function FileBasedRouting(pages /* use import.meta.glob */){
    const routes = Object.keys(pages)

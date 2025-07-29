@@ -1,19 +1,19 @@
 import { __ExtractAll__,__RemoveAll__ } from "./__helpers__";
-import Math from "./math";
-import UI from "./ui";
-import Time from "./time";
-import Data from "./data";
-import Reactivity from "./reactivity";
-import Graphics from "./graphics";
+import Math from "./math/index.js";
+import UI from "./ui/index.js";
+import Time from "./time/index.js";
+import Data from "./data/index.js";
+import Reactivity from "./reactivity/index.js";
+import Graphics from "./graphics/index.js";
 import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter} from "./app";
 
-export * from "./math";
-export * from "./ui";
-export * from "./time";
-export * from "./data";
-export * from "./reactivity"
-export * from "./graphics";
-export * from "./app";
+export * from "./math/index.js";
+export * from "./ui/index.js";
+export * from "./time/index.js";
+export * from "./data/index.js";
+export * from "./reactivity/index.js"
+export * from "./graphics/index.js";
+export * from "./app/index.js";
 
 [
     App,

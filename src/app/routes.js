@@ -1,4 +1,3 @@
-
 function routesMatcher(mask, route) {
     const maskSegments = mask.split('/');
     const routeSegments = route.split('/');
