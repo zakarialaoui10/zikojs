@@ -1,6 +1,13 @@
-// __ZikoEvent__.d.ts
-
 export type EventCustomizer = ((this: __ZikoEvent__) => void) | ((ctx: __ZikoEvent__) => void);
+
+export type EventMethodesBinder<
+  EventKeys extends string,
+  InstanceType
+> = {
+  [K in EventKeys as `on${K}`]: (...callbacks: ((ctx: InstanceType) => void)[]) => InstanceType
+};
+
+export type Callback<InstanceType> = (ctx: InstanceType) => void;
 
 export interface ZikoEventStream {
   enabled: Record<string, boolean>;

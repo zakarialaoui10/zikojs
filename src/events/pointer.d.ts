@@ -1,6 +1,8 @@
 // pointer.d.ts
 
 import { __ZikoEvent__ } from "./__ZikoEvent__.js";
+import type { EventMethodesBinder, Callback } from './__Shared__.js';
+import { ZikoUIElement } from "../ui/index.js";
 
 type PointerEventKeys =
   | 'PtrMove'
@@ -11,13 +13,10 @@ type PointerEventKeys =
   | 'PtrOut'
   | 'PtrCancel';
 
-type Callback = (ctx: ZikoEventPointer) => void;
 
-type PointerEventHandlers = {
-  [K in PointerEventKeys as `on${K}`]: (...callbacks: Callback[]) => ZikoEventPointer;
-};
+type PointerEventMethodesBinder = EventMethodesBinder<PointerEventKeys, ZikoEventPointer>;
 
-declare class ZikoEventPointer extends __ZikoEvent__ implements PointerEventHandlers {
+declare class ZikoEventPointer extends __ZikoEvent__ implements PointerEventMethodesBinder {
   constructor(target: any, customizer?: Function);
 
   isDown: boolean;
@@ -40,16 +39,17 @@ declare class ZikoEventPointer extends __ZikoEvent__ implements PointerEventHand
   };
 
   // Explicitly declare the dynamic methods to get editor support
-  onPtrMove(...callbacks: Callback[]): this;
-  onPtrDown(...callbacks: Callback[]): this;
-  onPtrUp(...callbacks: Callback[]): this;
-  onPtrLeave(...callbacks: Callback[]): this;
-  onPtrEnter(...callbacks: Callback[]): this;
-  onPtrOut(...callbacks: Callback[]): this;
-  onPtrCancel(...callbacks: Callback[]): this;
+    onPtrMove(...callbacks: Callback<ZikoEventPointer>[]): this;
+    onPtrDown(...callbacks: Callback<ZikoEventPointer>[]): this;
+    onPtrUp(...callbacks: Callback<ZikoEventPointer>[]): this;
+    onPtrLeave(...callbacks: Callback<ZikoEventPointer>[]): this;
+    onPtrEnter(...callbacks: Callback<ZikoEventPointer>[]): this;
+    onPtrOut(...callbacks: Callback<ZikoEventPointer>[]): this;
+    onPtrCancel(...callbacks: Callback<ZikoEventPointer>[]): this;
+
 }
 
-declare const bindPointerEvent: (target: any, customizer?: Function) => ZikoEventPointer;
+declare const bindPointerEvent: (target: ZikoUIElement, customizer?: Function) => ZikoEventPointer;
 
 export {
   ZikoEventPointer,
