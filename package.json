@@ -38,9 +38,15 @@
     "./events": {
       "import": "./src/events/index.js"
     },
+    "./ui":{
+      "import": "./src/ui/index.js",
+      "type": "./src/ui/index.d.ts"
+    },
+    "./tags":{
+      "import": "./src/tags/index.js"
+    },
     "./src": "./src/index.js",
     "./math": {},
-    "./ui": {},
     "./html": {},
     "./app": {},
     "./time": {},

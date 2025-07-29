@@ -1,8 +1,8 @@
 // pointer.d.ts
 
-import { __ZikoEvent__ } from "./__ZikoEvent__.js";
+import { __ZikoEvent__ } from "../__ZikoEvent__.js";
 import type { EventMethodesBinder, Callback } from './__Shared__.js';
-import { ZikoUIElement } from "../ui/index.js";
+import { ZikoUIElement } from "../../ui/index.js";
 
 type PointerEventKeys =
   | 'PtrMove'

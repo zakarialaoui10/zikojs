@@ -7,6 +7,7 @@ export * from "./elements/semantic/index.js";
 export * from "./elements/misc/index.js";
 export * from "./elements/flex/index.js";
 export * from "./elements/grid/index.js";
+export * from "./tags/index.js"
 
 import * as Text from "./elements/text/index.js";
 import * as List from "./elements/list/index.js";
@@ -17,6 +18,7 @@ import * as Semantic from "./elements/semantic/index.js";
 import * as Misc from "./elements/misc/index.js";
 import * as Flex from "./elements/flex/index.js";
 import * as Grid from "./elements/grid/index.js";
+
 
 import ZikoUIElement from "./elements/ZikoUIElement.js";
 
