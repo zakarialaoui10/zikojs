@@ -19,9 +19,9 @@ function details_setter(){
 
     }
 }
-const __useKeyEvent = (target, customizer) => new ZikoEventKey(target, customizer)
+const bindKeyEvent = (target, customizer) => new ZikoEventKey(target, customizer)
 
 export{
-    __useKeyEvent,
+    bindKeyEvent,
     ZikoEventKey
 }

@@ -10,10 +10,9 @@ function details_setter(){
     else this.dx = 1
     // console.log(this.currentEvent)
 }
-const __useClickEvent = (target, customizer) => new ZikoEventClick(target, customizer)
+const bindClickEvent = (target, customizer) => new ZikoEventClick(target, customizer)
 
-globalThis.expClick = __useClickEvent
 export{
-    __useClickEvent,
+    bindClickEvent,
     ZikoEventClick
 }
