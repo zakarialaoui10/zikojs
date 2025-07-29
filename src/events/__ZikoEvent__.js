@@ -3,8 +3,9 @@ function event_controller(e, event_name, details_setter, customizer, push_object
     this.cache.currentEvent = event_name;
     this.cache.event = e;
     details_setter?.call(this);
-    if(customizer?.hasOwnProperty("prototype"))customizer?.call(this)
-    else customizer?.call(null, this)
+    customizer?.hasOwnProperty("prototype") ? customizer?.call(this) : customizer?.call(null, this);
+    // if(customizer?.hasOwnProperty("prototype")) customizer?.call(this)
+    // else customizer?.call(null, this)
     if(this.cache.preventDefault[event_name]) e.preventDefault();
     if(this.cache.stopPropagation[event_name]) e.stopPropagation();
     if(this.cache.stopImmediatePropagation[event_name]) e.stopImmediatePropagation();
@@ -145,7 +146,7 @@ class __ZikoEvent__ {
         return this;
      }
     clear(){
-
+        return this;
     }
     dispose(overrides = {}, defaultValue = "default"){
         this.pause(overrides, defaultValue);
