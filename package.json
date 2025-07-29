@@ -35,6 +35,9 @@
     "./helpers": {
       "import" : "./src/__helpers__.js"
     },
+    "./events": {
+      "import": "./src/events/index.js"
+    },
     "./src": "./src/index.js",
     "./math": {},
     "./ui": {},
