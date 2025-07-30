@@ -1,6 +1,6 @@
 export * from "./click.js";
 export * from "./clipboard.js";
-// export * from "./custom-event.js";
+export * from "./custom-event.js";
 export * from "./drag.js";
 export * from "./focus.js";
 export * from "./hash.js";
