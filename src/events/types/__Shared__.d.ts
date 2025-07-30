@@ -47,6 +47,13 @@ export declare class __ZikoEvent__ {
   get currentEvent(): string | null;
   get event(): Event | null;
 
+  _register_events(
+    Events: string[] | undefined,
+    details_setter: (e: this) => any,
+    customizer: (e: this) => any, // To Check
+    REGISTER_METHODES?: boolean
+  ): this;
+
   setTarget(UI: any): this;
 
   preventDefault(

@@ -3,6 +3,10 @@ class ZikoEventCustom extends __ZikoEvent__{
     constructor(target, events, customizer){
         super(target, events, details_setter, customizer)
     }
+    _register_events(events){
+        super._register_events(events, null, null, false);
+        return this;
+    }
     emit(event_name, details = {}){
         const event=new Event(event_name);
         this.targetElement.dispatchEvent(event);

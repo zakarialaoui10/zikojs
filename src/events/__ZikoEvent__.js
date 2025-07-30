@@ -35,7 +35,7 @@ class __ZikoEvent__ {
         }
         if(Events)this._register_events(Events, details_setter, customizer);
     }
-    _register_events(Events, details_setter, customizer){
+    _register_events(Events, details_setter, customizer, REGISTER_METHODES = true){
         const events = Events?.map(n=>getEvent(n))
         events?.forEach((event,i)=>{
             Object.assign(this.cache.preventDefault, {[event] : false});
@@ -45,7 +45,7 @@ class __ZikoEvent__ {
             Object.assign(this.cache.stream.clear, {[event] : false});
             Object.assign(this.cache.stream.history, {[event] : []});
             Object.assign(this.cache.__controllers__, {[event] : e=>event_controller.call(this, e, event, details_setter, customizer)});
-            Object.assign(this, { [`on${Events[i]}`] : (...callbacks)=> this.__onEvent(event, this.cache.options[event], {}, ...callbacks)})
+            if(REGISTER_METHODES)Object.assign(this, { [`on${Events[i]}`] : (...callbacks)=> this.__onEvent(event, this.cache.options[event], {}, ...callbacks)})
         })
         return this;
     }
