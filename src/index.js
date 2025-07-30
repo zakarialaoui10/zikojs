@@ -5,7 +5,7 @@ import Time from "./time/index.js";
 import Data from "./data/index.js";
 import Reactivity from "./reactivity/index.js";
 import Graphics from "./graphics/index.js";
-import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter} from "./app";
+import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter, __HYDRATION__} from "./app";
 
 export * from "./math/index.js";
 export * from "./ui/index.js";
@@ -45,6 +45,7 @@ if ( globalThis.__Ziko__ ) {
 		globalThis.__Ziko__={
             ...Ziko,
             __UI__,
+            __HYDRATION__,
             __HYDRATION_MAP__,
             __Config__,
             __CACHE__,

@@ -20,6 +20,13 @@ const __UI__={
         
     }
 }
+const __HYDRATION__ = {
+    map : new Map(),
+    index : 0,
+    increment : function(){
+        return this.index ++
+    }
+}
 const __HYDRATION_MAP__ = new Map()
 const __Config__={
     default:{
@@ -48,5 +55,6 @@ export {
     __UI__,
     __HYDRATION_MAP__,
     __Config__,
-    __CACHE__
+    __CACHE__,
+    __HYDRATION__
 }

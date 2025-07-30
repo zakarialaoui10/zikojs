@@ -65,7 +65,7 @@ class ZikoUIElement {
       intersection:null
     }
     this.uuid = `${this.cache.name}-${Random.string(16)}`
-    this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index() 
+    this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index();
     this.cache.style.linkTo(this);
     useDefaultStyle && this.style({ 
       position: "relative",
@@ -78,13 +78,23 @@ class ZikoUIElement {
     this.items = [];
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
     element && globalThis.__Ziko__.__Config__.default.render && this.render()
-    this.setAttr("data-ui-index", this.ui_index);
-    if(globalThis.__Ziko__.__Config__.renderingMode !== "spa" && !globalThis.__Ziko__.__Config__.isSSC) {
-      globalThis.__Ziko__.__HYDRATION_MAP__.set(this.uuid, ()=>this)
-  }
+    if(
+      // globalThis.__Ziko__.__Config__.renderingMode !== "spa" 
+      // && 
+      // !globalThis.__Ziko__.__Config__.isSSC
+      // && 
+      this.isInteractive()
+    ){
+      this.setAttr("ziko-hydration-index", globalThis.__Ziko__.__HYDRATION__.index);
+      globalThis.__Ziko__.__HYDRATION__.map.set(globalThis.__Ziko__.__HYDRATION__.index, ()=>this);
+      globalThis.__Ziko__.__HYDRATION__.increment()
+    }
   }
   get element(){
     return this.__ele__;
+  }
+  isInteractive(){
+    return [true, false][Math.floor(2*Math.random())];
   }
   get isZikoUIElement(){
     return true;
