@@ -55,7 +55,6 @@ class B{
 
 // ab=new AB()
 export{
-    mixin,
     __ExtractAll__,
     __RemoveAll__
 }
