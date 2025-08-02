@@ -99,6 +99,10 @@ class ZikoUIElement {
   get isZikoUIElement(){
     return true;
   }
+  register(){
+
+    return this;
+  }
   get st(){
     return this.cache.style;
   }

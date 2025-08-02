@@ -16,7 +16,7 @@ const __RemoveAll__ =(obj)=> {
         }
     }
 }
-const mixin = (target, ...sources) => {
+export const mixin = (target, ...sources) => {
     sources.forEach(source => {
         Object.getOwnPropertyNames(source.prototype).forEach(name => {
             if (name !== 'constructor') {
@@ -59,3 +59,6 @@ export{
     __ExtractAll__,
     __RemoveAll__
 }
+
+
+export * from "./composition/index.js"
