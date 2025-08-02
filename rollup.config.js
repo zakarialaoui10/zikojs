@@ -20,14 +20,16 @@ const output = [
     file: 'dist/ziko.mjs',
     format: 'es',
     banner,
-    exports: "named"
+    exports: "named",
+    inlineDynamicImports: true,
   },
   {
     file: 'dist/ziko.js',
     format: 'umd',
     name:"Ziko",
     banner,
-    exports: "named"
+    exports: "named",
+    inlineDynamicImports: true,
   },
 ]
 isProduction && output.push(
@@ -35,7 +37,8 @@ isProduction && output.push(
     file: 'dist/ziko.cjs',
     format: 'cjs',
     banner,
-    exports: "named"
+    exports: "named",
+    inlineDynamicImports: true,
   },
   {
     file: 'dist/ziko.min.js',
@@ -43,6 +46,7 @@ isProduction && output.push(
     name:"Ziko",
     banner,
     exports: "named",
+    inlineDynamicImports: true,
     plugins:[terser({
       output: {
         comments: (node, { type, value }) => type === 'comment2' && value.includes('Author'),

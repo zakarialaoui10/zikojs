@@ -42,6 +42,11 @@ class ZikoUIElement {
       DomMethods,
       IndexingMethods
     )
+    // if(false){
+    //   import("../methods/tree.js").then(({ default: ExternalMethods }) => {
+    //     compose(this, ExternalMethods);
+    //   });
+    // }
     this.cache = {
       name,
       parent:null,
