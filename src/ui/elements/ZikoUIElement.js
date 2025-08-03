@@ -90,7 +90,7 @@ class ZikoUIElement {
      });
     this.items = [];
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
-    element && globalThis.__Ziko__.__Config__.default.render && this.render()
+    element && globalThis.__Ziko__.__Config__.default.render && this?.render?.()
     if(
       // globalThis.__Ziko__.__Config__.renderingMode !== "spa" 
       // && 
@@ -515,19 +515,19 @@ class ZikoUIElement {
     this.observer.intersection.start();
     return this;
   }
-  setFullScreen(set = true, e) {
-    if(!this.element.requestFullscreen){
-      console.error("Fullscreen API is not supported in this browser.");
-      return this;
-    }
-    if (set) this.element.requestFullscreen(e);
-    else globalThis.document.exitFullscreen();
-    return this;
-  }
-  toggleFullScreen(e) {
-    if (!globalThis.document.fullscreenElement) this.element.requestFullscreen(e);
-    else globalThis.document.exitFullscreen();
-    return this;
-  }
+  // setFullScreen(set = true, e) {
+  //   if(!this.element.requestFullscreen){
+  //     console.error("Fullscreen API is not supported in this browser.");
+  //     return this;
+  //   }
+  //   if (set) this.element.requestFullscreen(e);
+  //   else globalThis.document.exitFullscreen();
+  //   return this;
+  // }
+  // toggleFullScreen(e) {
+  //   if (!globalThis.document.fullscreenElement) this.element.requestFullscreen(e);
+  //   else globalThis.document.exitFullscreen();
+  //   return this;
+  // }
 }
 export default ZikoUIElement;
