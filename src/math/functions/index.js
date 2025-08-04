@@ -5,11 +5,11 @@ import {
     min,
     max 
 }from "../statistics/index.js";
-import { 
-    gamma,
-    bessel,
-    beta 
-} from "../calculus/index.js";
+// import { 
+//     gamma,
+//     bessel,
+//     beta 
+// } from "../calculus/index.js";
 
 const abs=(...x)=>mapfun(Math.abs,...x);
 const sqrt=(...x)=>mapfun(Math.sqrt,...x);
@@ -156,8 +156,8 @@ export{
     hypot,
     sig,
     atan2,
-    gamma,
-    bessel,
-    beta
+    // gamma,
+    // bessel,
+    // beta
   };
   
