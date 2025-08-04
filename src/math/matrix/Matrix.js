@@ -7,11 +7,6 @@ import{
 import {Utils} from "../utils/index.js";
 import {Complex } from "../complex/index.js";
 import {Random} from "../random/index.js"
-import { 
-    luDecomposition,
-    qrDecomposition,
-    choleskyDecomposition
- } from "./Decomposition.js";
 import { arr2str } from "../../data/index.js";
 class Matrix extends ZikoMath{
     constructor(rows, cols, element = [] ) {
@@ -546,51 +541,7 @@ class Matrix extends ZikoMath{
         matrix.arr = data.arr;
         return matrix;
     }
-    DecompositionLU(){
-        const [L,U]=luDecomposition(this);
-        return {
-            L,
-            U
-        }
-    }
-    static DecompositionLU(...M){
-        const Decomposition=M.map(n=>n.clone.LU());
-        return Decomposition.length===1?Decomposition[0]:Decomposition;
-    }
-    DecompositionQR(){
-        const [Q,R]=qrDecomposition(this);
-        return {
-            Q,
-            R
-        }
-    }
-    static DecompositionQR(...M){
-        const Decomposition=M.map(n=>n.clone.DecompositionQr());
-        return Decomposition.length===1?Decomposition[0]:Decomposition;
-    }
-    DecompositionCholesky(){
-        return {
-            L:choleskyDecomposition(this)
-        }
-    }
-    static DecompositionCholesky(...M){
-        const Decomposition=M.map(n=>n.clone.DecompositionCholesky());
-        return Decomposition.length===1?Decomposition[0]:Decomposition;
-    }
-    get decomposition(){
-        return{
-            LU:()=>this.DecompositionLU(),
-            QR:()=>this.DecompositionQR(),
-            Cholesky:()=>this.DecompositionCholesky()
-        }
-    }
-    static get decomposition(){
-        return{
-            LU:(...M)=>Matrix.LU(...M),
-            QR:(...M)=>Matrix.QR(...M),
-            CHOLESKY:(...M)=>Matrix.CHOLESKY(...M)
-        }
-    }
+
     toTable() {
         var table = new DocumentFragment();
         var Tr = new Array(this.rows).fill(null).map(() => document?.createElement("tr"));
