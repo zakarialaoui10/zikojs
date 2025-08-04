@@ -2,7 +2,7 @@ import { __ZikoEvent__ } from "./__ZikoEvent__.js";
 import { Events } from "./__Events__.js";
 class ZikoEventPointer extends __ZikoEvent__{
     constructor(target, customizer){
-        super(target, Events.Pointer, details_setter, customizer);
+        super(target, Events.Ptr, details_setter, customizer);
         this.isDown = false;
     }
 }

@@ -3,7 +3,7 @@ const Events = {
         'Click',
         'DblClick'
     ],
-    'Pointer' : [
+    'Ptr' : [
         'PtrMove',
         'PtrDown',
         'PtrUp',
@@ -12,8 +12,15 @@ const Events = {
         'PtrOut',
         'PtrCancel'
     ],
-    'Mouse' : [],
-    'Touch' : [],
+    'Mouse' : [
+        'MouseMove',
+        'MouseDown',
+        'MouseUp',
+        'MouseEnter',
+        'MouseLeave',
+        'MouseOut'
+    ],
+    // 'Touch' : [],
     'Key' : [
         'KeyDown',
         'KeyPress',
@@ -34,12 +41,15 @@ const Events = {
         "DragEnd",
         "Drop"
     ],
-    'Media':[
-
-    ],
-    'Hash':[
-        "HashChange"
+    'Wheel': [
+        'Wheel'
     ]
+    // 'Media':[
+
+    // ],
+    // 'Hash':[
+    //     "HashChange"
+    // ]
 }
 
 export {
