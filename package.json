@@ -10,10 +10,6 @@
     "math",
     "user-interface",
     "time",
-    "data",
-    "svg",
-    "canvas",
-    "reactivity",
     "dom",
     "single page application",
     "file based routing"
@@ -38,6 +34,9 @@
     "./events": {
       "import": "./src/events/index.js"
     },
+    "./use": {
+      "import": "./src/use/index.js"
+    },
     "./ui":{
       "import": "./src/ui/index.js",
       "type": "./src/ui/index.d.ts"
@@ -50,7 +49,6 @@
     "./html": {},
     "./app": {},
     "./time": {},
-    "./use": {},
     "./components": {}
   },
   "bin": {
