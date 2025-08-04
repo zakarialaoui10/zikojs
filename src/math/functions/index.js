@@ -155,9 +155,6 @@ export{
     fact,
     hypot,
     sig,
-    atan2,
-    // gamma,
-    // bessel,
-    // beta
+    atan2
   };
   

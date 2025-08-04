@@ -4,7 +4,7 @@ import {
     min,
     max,
     accum
-} from "./Functions/index.js"
+} from "./functions/index.js"
 const Stats={
     sum,
     prod,
@@ -13,4 +13,4 @@ const Stats={
     accum,
 }
 export default Stats;
-export * from "./Functions/index.js"
+export * from "./functions/index.js"
