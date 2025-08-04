@@ -1,6 +1,6 @@
 export { useType } from "./type";
 
-export { 
-    useThrottle,
-    useDebounce
- } from "../../../time";
+// export { 
+//     useThrottle,
+//     useDebounce
+//  } from "../../../time";

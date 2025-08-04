@@ -1,6 +1,6 @@
 // export * from "./click.js";
 // export * from "./pointer.js";
-export * from "./mouse.js";
+// export * from "./mouse.js";
 // export * from "./wheel.js";
 // export * from "./key.js";
 // export * from "./drag.js";
