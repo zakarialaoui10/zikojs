@@ -5,6 +5,10 @@ import Time from "./time/index.js";
 import Data from "./data/index.js";
 import Reactivity from "./reactivity/index.js";
 import Graphics from "./graphics/index.js";
+
+import * as Events from "./events/index.js"
+import * as Use from "./use/index.js"
+
 import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter, __HYDRATION__} from "./app";
 
 export * from "./math/index.js";
@@ -15,6 +19,9 @@ export * from "./reactivity/index.js"
 export * from "./graphics/index.js";
 export * from "./app/index.js";
 
+export * from "./events/index.js";
+export * from "./use/index.js";
+
 [
     App,
     Math,
@@ -22,7 +29,7 @@ export * from "./app/index.js";
     Time,
     Data,
     Reactivity,
-    Graphics
+    Graphics,
 ].forEach(n=>Object.assign(n,{
     ExtractAll:()=>__ExtractAll__(n),
     RemoveAll:()=>__RemoveAll__(n)
@@ -35,8 +42,7 @@ const Ziko={
     Time,
     Data,
     Reactivity,
-    Graphics,
-
+    Graphics
 }
 
 if ( globalThis.__Ziko__ ) {

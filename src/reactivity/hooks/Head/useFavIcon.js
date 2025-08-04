@@ -1,4 +1,4 @@
-import { useEventEmitter } from "../Interactions/useEventEmmiter";
+import { useEventEmitter } from "../../../use/interactions/use-event-emmiter.js";
 class ZikoUseFavIcon{
     constructor(FavIcon,useEventEmitter=true){
         this.#init();
@@ -9,7 +9,7 @@ class ZikoUseFavIcon{
         this.set(FavIcon);
     }
     #init(){     
-        this.__FavIcon__=document.querySelector("link[rel*='icon']") || document?.createElement('link');   
+        this.__FavIcon__ = document.querySelector("link[rel*='icon']") || document?.createElement('link');   
         this.__FavIcon__.type = 'image/x-icon';
         this.__FavIcon__.rel = 'shortcut icon';
         return this;
