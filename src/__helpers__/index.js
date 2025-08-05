@@ -1,3 +1,4 @@
+export * from "./composition/index.js"
 const __ExtractAll__ =(obj)=> {
     const keys = Object.keys(obj);
     for (let i = 0; i < keys.length; i++) {
@@ -26,25 +27,25 @@ export const mixin = (target, ...sources) => {
     });
 }
 
-class A {
-    constructor(){
-        this.msg="from A";
-    }
-    a() {
-        console.log(this.msg);
-        return this;
-    }
-}
+// class A {
+//     constructor(){
+//         this.msg="from A";
+//     }
+//     a() {
+//         console.log(this.msg);
+//         return this;
+//     }
+// }
 
-class B{
-    constructor(){
-        this.msg="from B";
-    }
-    b() {
-        console.log(this.msg);
-        return this;
-    }
-}
+// class B{
+//     constructor(){
+//         this.msg="from B";
+//     }
+//     b() {
+//         console.log(this.msg);
+//         return this;
+//     }
+// }
 
 // class AB {
 //     constructor() {
