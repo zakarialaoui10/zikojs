@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../../../constructors/ziko-ui-element.js";
+import ZikoUIElement from "../../../../dom/ziko-ui-element.js";
 import { btn } from "../../../misc";
 class ZikoUIInputImage extends ZikoUIElement {
     constructor(text = "File") {

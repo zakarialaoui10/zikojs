@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../constructors/ziko-ui-element.js";
+import ZikoUIElement from "../../dom/ziko-ui-element.js";
 class __ZikoUIDynamicMediaElement__ extends ZikoUIElement {
     constructor(element, name) {
       super(element, name);

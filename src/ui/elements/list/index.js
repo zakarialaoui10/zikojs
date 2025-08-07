@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../constructors/ziko-ui-element.js";
+import ZikoUIElement from "../../dom/ziko-ui-element.js";
 import {text} from "../text/index.js";
 class ZikoUILI extends ZikoUIElement{
   constructor(UI){

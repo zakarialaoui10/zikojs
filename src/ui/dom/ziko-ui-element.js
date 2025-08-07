@@ -1,3 +1,4 @@
+import ZikoUINode from "./ziko-ui-node.js";
 import { compose } from "../../__helpers__/index.js";
 import { DomMethods } from "../methods/dom.js";
 import { IndexingMethods } from "../methods/indexing.js";
@@ -14,7 +15,7 @@ import {
 } from "../../reactivity/index.js"
 import { Random } from "../../math/index.js";
 import { Str } from "../../data/index.js";
-class ZikoUIElement {
+class ZikoUIElement extends ZikoUINode{
   constructor(element, name="", {el_type="html", useDefaultStyle=false}={}){
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
@@ -27,7 +28,7 @@ class ZikoUIElement {
     else{
       this.target = element.parentElement;
     }
-    if(element)this.__ele__ = element;
+    // if(element)this.__ele__ = element;
     compose(
       this, 
       DomMethods,
@@ -39,8 +40,9 @@ class ZikoUIElement {
     //     compose(this, ExternalMethods);
     //   });
     // }
-    this.cache = {
+    Object.assign(this.cache, {
       name,
+      isInteractive : [true, false][Math.floor(2*Math.random())],
       parent:null,
       isBody:false,
       isRoot:false,
@@ -51,7 +53,7 @@ class ZikoUIElement {
       attributes: {},
       filters: {},
       temp:{}
-    };
+    })
     this.events = {
       ptr:null,
       mouse:null,
@@ -69,6 +71,7 @@ class ZikoUIElement {
       resize:null,
       intersection:null
     }
+    if(element)Object.assign(this.cache,{element});
     this.uuid = `${this.cache.name}-${Random.string(16)}`
     this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index();
     this.cache.style.linkTo(this);
@@ -96,12 +99,13 @@ class ZikoUIElement {
     }
   }
   get element(){
-    return this.__ele__;
+    return this.cache.element;
   }
   isInteractive(){
-    return [true, false][Math.floor(2*Math.random())];
+    return this.cache.isInteractive;
   }
-  get isZikoUIElement(){
+  // Remove get
+  isZikoUIElement(){
     return true;
   }
   register(){

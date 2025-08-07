@@ -1,4 +1,4 @@
-import ZikoUIElement from "../constructors/ziko-ui-element.js";
+import ZikoUIElement from "../dom/ziko-ui-element.js";
 const Id = (a) => document.getElementById(a);
 const Class = (a) => [...document.getElementsByClassName(a)];
 const $=(...selector)=>{

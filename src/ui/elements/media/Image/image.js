@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../../constructors/ziko-ui-element.js";
+import ZikoUIElement from "../../../dom/ziko-ui-element.js";
 class ZikoUIImage extends ZikoUIElement {
     constructor(src,alt, w, h) {
       super("img","image");

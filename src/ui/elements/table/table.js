@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../constructors/ziko-ui-element.js"
+import ZikoUIElement from "../../dom/ziko-ui-element.js"
 import { tbody,caption,ZikoUICaption,thead} from "./elements.js";
 import { matrix } from "../../../math/matrix/index.js";
 import { MatrixToTableUI } from "./utils.js";
