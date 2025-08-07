@@ -1,4 +1,4 @@
-import ZikoUIElement from "../ZikoUIElement.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
 class ZikoUIHtmlTag extends ZikoUIElement {
   constructor(element) {
     super(element,"html");

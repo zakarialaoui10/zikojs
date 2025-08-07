@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../ZikoUIElement.js";
+import ZikoUIElement from "../../../constructors/ziko-ui-element.js";
 import { Random } from "../../../../math/index.js";
 class ZikoUILabel extends ZikoUIElement{
     constructor(){

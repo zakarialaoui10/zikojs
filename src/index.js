@@ -6,8 +6,8 @@ import Data from "./data/index.js";
 import Reactivity from "./reactivity/index.js";
 import Graphics from "./graphics/index.js";
 
-import * as Events from "./events/index.js"
-import * as Use from "./use/index.js"
+// import * as Events from "./events/index.js"
+// import * as Use from "./use/index.js"
 
 import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter, __HYDRATION__} from "./app";
 

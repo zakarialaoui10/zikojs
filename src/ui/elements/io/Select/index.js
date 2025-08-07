@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../ZikoUIElement";
+import ZikoUIElement from "../../../constructors/ziko-ui-element.js";
 import { ZikoUIInputOption } from "../Inputs/__helpers__";
 class ZikoUISelect extends ZikoUIElement {
     constructor(){

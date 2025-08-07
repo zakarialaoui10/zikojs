@@ -1,4 +1,4 @@
-import ZikoUIElement from "../ZikoUIElement.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
 class ZikoUIHeading extends ZikoUIElement {
     constructor(type = 1, value = "") {
       super(`h${type}`,`h${type}`);

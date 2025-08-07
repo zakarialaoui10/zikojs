@@ -2,7 +2,7 @@ import { compose } from "../../__helpers__/index.js";
 import { DomMethods } from "../methods/dom.js";
 import { IndexingMethods } from "../methods/indexing.js";
 import { EventsMethodes } from "../methods/events.js";
-import { ZikoUseStyle } from "../../reactivity/hooks/UI/useStyle.js";
+import { ZikoUseStyle } from "../../reactivity/hooks/ui/useStyle.js";
 import { ZikoUIElementStyle } from "../style/index.js";
 import { 
   useCustomEvent,

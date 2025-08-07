@@ -1,4 +1,4 @@
-import ZikoUIElement from "../ZikoUIElement.js"
+import ZikoUIElement from "../../constructors/ziko-ui-element.js"
 class ZikoUIGrid extends ZikoUIElement {
     constructor(tag ="div", w = "50vw", h = "50vh") {
       super(tag,"Grid");

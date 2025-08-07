@@ -1,4 +1,4 @@
-import ZikoUIElement from "../ZikoUIElement";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
 class ZikoUIXMLWrapper extends ZikoUIElement{
     constructor(XMLContent, type){
         super("div", "")

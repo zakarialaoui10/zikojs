@@ -1,6 +1,6 @@
 {
   "name": "ziko",
-  "version": "0.34.1",
+  "version": "0.34.2",
   "description": "a versatile javaScript framework offering a rich set of UI components, advanced mathematical utilities, reactivity, animations, client side routing and graphics capabilities",
   "keywords": [
     "front-end",
@@ -33,6 +33,9 @@
     },
     "./events": {
       "import": "./src/events/index.js"
+    },
+    "./watch": {
+      "import": "./src/watch/index.js"
     },
     "./use": {
       "import": "./src/use/index.js"

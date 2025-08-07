@@ -1,4 +1,4 @@
-import ZikoUIElement from "../ZikoUIElement.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
 // function loadComponent() {
 //     return new Promise((resolve) => {
 //       setTimeout(() => {
