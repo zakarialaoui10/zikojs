@@ -17,6 +17,7 @@ import { Random } from "../../math/index.js";
 import { Str } from "../../data/index.js";
 class ZikoUIElement extends ZikoUINode{
   constructor(element, name="", {el_type="html", useDefaultStyle=false}={}){
+    super()
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
       switch(el_type){
