@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../../../dom/ziko-ui-element.js";
+import ZikoUIElement from "../../../../constructors/ziko-ui-element.js";
 import { useInputEvent } from "../../../../../reactivity/index.js";
 class ZikoUIInput extends ZikoUIElement {
   constructor(type, name , value = "", datalist) {

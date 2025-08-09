@@ -20,7 +20,7 @@ import * as Flex from "./elements/flex/index.js";
 import * as Grid from "./elements/grid/index.js";
 
 
-import ZikoUIElement from "./dom/ziko-ui-element.js";
+import ZikoUIElement from "./constructors/ziko-ui-element.js";
 
 export{
     ZikoUIElement

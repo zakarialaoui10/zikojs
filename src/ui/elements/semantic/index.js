@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../dom/ziko-ui-element.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
 const elements = ['Main', 'Header', 'Nav', 'Section', 'Article', 'Aside', 'Footer']
 
 // Storage for Classes and component functions

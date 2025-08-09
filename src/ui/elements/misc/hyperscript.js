@@ -1,4 +1,4 @@
-import ZikoUIElement from '../../dom/ziko-ui-element.js';
+import ZikoUIElement from '../../constructors/ziko-ui-element.js';
 const _h=(tag, type, attributes, ...children)=>{
     const { name, style, ...attrs } = attributes;
     let element = new ZikoUIElement(tag, name, type);
