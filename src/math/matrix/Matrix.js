@@ -38,7 +38,7 @@ class Matrix extends ZikoMath{
         this.cols = cols;
         this.arr = arr;   
     }
-    this._maintain();
+    this.#maintain();
         //Object.seal(this);
     }
     toString(){
@@ -75,9 +75,18 @@ class Matrix extends ZikoMath{
     get imag() {
         return new Matrix(this.cols, this.rows, this.arr.flat(1).imag);
     }
-    _maintain(){
-        for(let i=0;i<this.arr.length;i++)Object.assign(this,{[[i]]:this.arr[i]});
-        return this;
+    [Symbol.iterator]() {
+      return this.arr[Symbol.iterator]();
+    }
+    #maintain() {
+    for (let i = 0; i < this.arr.length; i++) {
+        Object.defineProperty(this, i, {
+        value: this.arr[i],
+        writable: true,
+        configurable: true,
+        enumerable: false 
+        });
+        }
     }
     get(row = 0, col = 0) {
         if (col == -1) return this.arr[row];
