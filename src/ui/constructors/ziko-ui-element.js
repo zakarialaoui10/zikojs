@@ -170,11 +170,18 @@ class ZikoUIElement extends ZikoUINode{
     this.st.size(width,height);
     return this; 
   }
+  [Symbol.iterator]() {
+    return this.items[Symbol.iterator]();
+  }
   maintain() {
-    for (let i = 0; i < this.items.length; i++)
-      Object.assign(this, { [[i]]: this.items[i] });
-    this.length = this.items.length;
-    return this;
+  for (let i = 0; i < this.items.length; i++) {
+    Object.defineProperty(this, i, {
+      value: this.items[i],
+      writable: true,
+      configurable: true,
+      enumerable: false 
+      });
+    }
   }
   filter(condition_callback, if_callback = () => {}, else_callback = () => {}) {
     const FilterItems = this.items.filter(condition_callback);
