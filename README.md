@@ -8,28 +8,34 @@ A versatile JavaScript library offering a rich set of Hyperscript Based UI compo
 
 </div>
 
-<!-- ## Philosophy -->
+<!-- 
+## Philosophy
+Methodes Chaining 
+Composition 
+ -->
 ## Demos
 - [ Windows entanglement using zikojs and ziko-gl ](https://www.linkedin.com/feed/update/urn:li:activity:7144023650394918913/) 
 
 ## 🔥 Features
 ### 💎 Core
-- ***🚫 Zero Dependency***
-- ***🌳 Partial Tree Shaking***
-- ***🔢 Rich Math Functions and Utilities***
-- ***✨ Hyperscript-Based Declarative UI (No Template Engines needed)***
-- ***📱 Single Page Application With File Based Routing***
-- ***🤝 One Way Interleaving With [Vanjs]()***
-- ***⏰ Time loop and animations support***
+- 🚫 Zero Dependency
+- 🌳 Partial Tree Shaking
+- 🔢 Rich Math Functions and Utilities
+<!-- - The Math Module supports a new Paradigm  -->
+- ✨ Hyperscript-Based Declarative UI (No Template Engines needed)
+- 📱 Single Page Application With File Based Routing
+- 🤝 One Way Interleaving With [Vanjs]()
+- ⏰ Time loop and animations support
+
 ### 🚀 External : 
-- ***🧩 Extra UI Components :*** [Zextra]()
-- ***🖥️ Server Side Rendering With File Based Routing and Client Side Hydration :*** [ziko-server]()
-- ***📝 Mdx-Like Markdown Preprocessor :*** [Mdz]()
-- ***🔌 Flexible Integration with Popular Frameworks/Libraries :*** [Ziko-wrapper]()
+- 🧩 Extra UI Components : [Zextra]()
+- 🖥️ Server Side Rendering With File Based Routing and Client Side Hydration : [ziko-server]()
+- 📝 Mdx-Like Markdown Preprocessor : [Mdz]()
+- 🔌 Flexible Integration with Popular Frameworks/Libraries : [Ziko-wrapper]()
   - 🔄 Bi-directional : `React`, `Preact`, `Solid`, `Svelte`, `Vue` , `Vanjs`
   - ➡️ Uni-directional (ZikoJS → X) : 
     - `Astro` : (SSR + Client Hydration)
-- ***📦 Growing Add-On Ecosystem :*** 
+- 📦 Growing Add-On Ecosystem : 
     - Ziko-Gl : WebGL/3D Graphics, Built on Top of [Threejs]()
     - Ziko-Chart 
     - Ziko-Code
