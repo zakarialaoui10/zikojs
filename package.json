@@ -51,10 +51,12 @@
     "./tags":{
       "import": "./src/tags/index.js"
     },
+    "./src": "./src/index.js",
     "./html": {},
     "./app": {},
     "./time": {},
     "./components": {}
+    
   },
   "bin": {
     "create-ziko-app": "starter/bin/index.js"

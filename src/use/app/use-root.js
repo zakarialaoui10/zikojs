@@ -38,13 +38,6 @@ class ZikoUseRoot {
            })
        }
     }
-    #maintain_getters(){
-        for (let i = 0; i < this.items.length; i++) {
-            Object.defineProperty(this, i, {
-
-            });
-        }
-    }
 }
 
 
@@ -55,4 +48,21 @@ export{
     useRoot
 }
 
-// let A = useRoot(CosmicBlue)
+// Usage 
+
+/*
+const Styles = {
+ S1 : {
+  background : 'white',
+  color : 'darkblue'
+  bordrr : '2px darkblue solid"'
+ },
+ S2 : {
+  background : 'darkblue',
+  color : 'white'
+  bordrr : '2px green solid"'
+ }
+}
+const {use, border, background, color} = useRoot(Style.S1)
+
+*/
