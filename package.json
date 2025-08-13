@@ -1,7 +1,7 @@
 {
   "name": "ziko",
-  "version": "0.35.1",
-  "description": "a versatile javaScript framework offering a rich set of UI components, advanced mathematical utilities, reactivity, animations, client side routing and graphics capabilities",
+  "version": "0.36.0",
+  "description": "A versatile JavaScript library offering a rich set of Hyperscript Based UI components, advanced mathematical utilities, interactivity ,animations, client side routing and more ...",
   "keywords": [
     "front-end",
     "framework",
