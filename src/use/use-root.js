@@ -16,16 +16,17 @@ class ZikoUseRoot {
     #maintain(){
        const root = globalThis?.document?.documentElement?.style
        for(let prop in this.currentPropsMap){
-        const cssProp = this.namespace ? `--${this.namespace}-${prop}` : `-${prop}`
+        const cssProp = this.namespace ? `--${this.namespace}-${prop}` : `--${prop}`
            root.setProperty(
             cssProp, 
             this.currentPropsMap[prop]
             ); 
+            console.log({cssProp})
         //    Object.assign(this.pairs, {
         //     [prop] : `var(--${this.namespace}-${prop})`
         //    })
            Object.defineProperty(this, prop, {
-                value: `var(--${this.namespace}-${prop})`,
+                value: `var(${cssProp})`,
                 writable: true,
                 configurable: true,
                 enumerable: false 
@@ -43,7 +44,7 @@ function ValidateCssProps(PropsMap){
     }
 }
 
-const useRoot = (PropsMap, {namespace, register, ValidateCssProps}) => new ZikoUseRoot(PropsMap, {namespace, register, ValidateCssProps});
+const useRoot = (PropsMap, {namespace, register, ValidateCssProps} = {}) => new ZikoUseRoot(PropsMap, {namespace, register, ValidateCssProps});
 
 export{
     ZikoUseRoot,

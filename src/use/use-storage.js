@@ -1,5 +1,5 @@
 // To do : remove old items
-import { useChannel } from "../interactions/use-channel.js";
+import { useChannel } from "./use-channel.js";
 class ZikoUseStorage{
     constructor(storage, globalKey, initialValue){
         this.cache={

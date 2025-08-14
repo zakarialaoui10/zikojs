@@ -1,4 +1,4 @@
-import { useEventEmitter } from "../../../use/interactions/use-event-emmiter.js";
+import { useEventEmitter } from "../../../use/use-event-emmiter.js";
 class ZikoUseTitle{
     constructor(title=document.title,useEventEmitter=true){
         this.cache={
