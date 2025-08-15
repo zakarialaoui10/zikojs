@@ -43,6 +43,7 @@ const mapfun=(fun,...X)=>{
             }
         }
         else if(x instanceof Object){
+            return Object.fromEntries(Object.entries(x).map(n=>n=[n[0],mapfun(fun,n[1])]))
             return fun(Object) || Object.fromEntries(Object.entries(x).map(n=>n=[n[0],mapfun(fun,n[1])]))
         }
     });
