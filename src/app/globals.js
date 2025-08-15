@@ -1,3 +1,4 @@
+import { defineParamsGetter } from './params.js'
 const __UI__={
     __all__(){
         return Object.values(this)
@@ -64,6 +65,7 @@ if ( !globalThis?.__Ziko__ ){
                 // ExtractAll,
                 // RemoveAll
             };
+    defineParamsGetter(__Ziko__)
 }
 export {
     __UI__,
