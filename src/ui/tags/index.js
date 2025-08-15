@@ -1,5 +1,5 @@
-import ZikoUIElement from "../constructors/ziko-ui-element.js";
-import { HTMLTags, SVGTags } from "./tags.js";
+import ZikoUIElement from "../constructors/ZikoUIElement.js";
+import { HTMLTags, SVGTags } from "./tags-list.js";
 const _h=(tag, type, attributes, ...children)=>{
     const { name, style, ...attrs } = attributes;
     let element = new ZikoUIElement(tag, name, type);

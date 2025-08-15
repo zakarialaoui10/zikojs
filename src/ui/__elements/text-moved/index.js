@@ -1,4 +1,3 @@
-
 import ZikoUINode from "../../constructors/ziko-ui-node.js";
 class ZikoUIText extends ZikoUINode {
     constructor(...value) {

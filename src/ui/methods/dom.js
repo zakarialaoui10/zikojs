@@ -1,4 +1,4 @@
-import { text } from "../elements/text/index.js";
+import { text } from "../text/index.js";
 export const DomMethods = {
   append(...ele) {
     __addItem__.call(this, "append", "push", ...ele);

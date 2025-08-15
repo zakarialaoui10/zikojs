@@ -1,6 +1,6 @@
-import { addSuffixeToNumber } from "../utils/index.js";
-import { Matrix,cos,sin} from "../../math/index.js";
-import { Str } from "../../data/index.js";
+import { addSuffixeToNumber } from "../../utils/index.js";
+import { Matrix,cos,sin} from "../../../math/index.js";
+import { Str } from "../../../data/index.js";
 class ZikoUIElementStyle{
     constructor(defaultStyle={}){
         this.target=null;

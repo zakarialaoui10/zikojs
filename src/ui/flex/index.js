@@ -1,4 +1,4 @@
-import ZikoUIElement from "../../constructors/ziko-ui-element.js";
+import ZikoUIElement from "../constructors/ZikoUIElement.js";
 class ZikoUIFlex extends ZikoUIElement {
   constructor(tag = "div", w = "100%", h = "100%") {
     super(tag ,"Flex");
