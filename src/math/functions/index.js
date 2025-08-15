@@ -58,29 +58,29 @@ const sqrtn=(x,n)=>{
         }
     }
 }
-const e=(...x)=>mapfun(Math.exp,...x);
-const ln=(...x)=>mapfun(Math.log,...x);
-const cos=(...x)=>mapfun(Fixed.cos,...x);
-const sin=(...x)=>mapfun(Fixed.sin,...x);
-const tan=(...x)=>mapfun(Fixed.tan,...x);
-const sec=(...x)=>mapfun(Fixed.sec,...x);
-const sinc=(...x)=>mapfun(Fixed.sinc,...x)
-const csc=(...x)=>mapfun(Fixed.csc,...x);
-const cot=(...x)=>mapfun(Fixed.cot,...x);
-const acos=(...x)=>mapfun(Fixed.acos,...x);
-const asin=(...x)=>mapfun(Fixed.asin,...x);
-const atan=(...x)=>mapfun(Fixed.atan,...x);
-const acot=(...x)=>mapfun(Fixed.acot,...x);
-const cosh=(...x)=>mapfun(Fixed.cosh,...x);
-const sinh=(...x)=>mapfun(Fixed.sinh,...x);
-const tanh=(...x)=>mapfun(Fixed.tanh,...x);
-const coth=(...x)=>mapfun(Fixed.coth,...x);
-const acosh=(...x)=>mapfun(Fixed.acosh,...x);
-const asinh=(...x)=>mapfun(Fixed.asinh,...x);
-const atanh=(...x)=>mapfun(Fixed.atanh,...x);
-const ceil=(...x)=>mapfun(Math.ceil,...x);
-const floor=(...x)=>mapfun(Math.floor,...x);
-const round=(...x)=>mapfun(Math.round,...x);
+const e=(...x) => mapfun(Math.exp,...x);
+const ln=(...x) => mapfun(Math.log,...x);
+const cos=(...x) => mapfun(Fixed.cos,...x);
+const sin=(...x) => mapfun(Fixed.sin,...x);
+const tan=(...x) => mapfun(Fixed.tan,...x);
+const sec=(...x) => mapfun(Fixed.sec,...x);
+const sinc=(...x) => mapfun(Fixed.sinc,...x)
+const csc=(...x) => mapfun(Fixed.csc,...x);
+const cot=(...x) => mapfun(Fixed.cot,...x);
+const acos=(...x) => mapfun(Fixed.acos,...x);
+const asin=(...x) => mapfun(Fixed.asin,...x);
+const atan=(...x) => mapfun(Fixed.atan,...x);
+const acot=(...x) => mapfun(Fixed.acot,...x);
+const cosh=(...x) => mapfun(Fixed.cosh,...x);
+const sinh=(...x) => mapfun(Fixed.sinh,...x);
+const tanh=(...x) => mapfun(Fixed.tanh,...x);
+const coth=(...x) => mapfun(Fixed.coth,...x);
+const acosh=(...x) => mapfun(Fixed.acosh,...x);
+const asinh=(...x) => mapfun(Fixed.asinh,...x);
+const atanh=(...x) => mapfun(Fixed.atanh,...x);
+const ceil=(...x) => mapfun(Math.ceil,...x);
+const floor=(...x) => mapfun(Math.floor,...x);
+const round=(...x) => mapfun(Math.round,...x);
 const atan2=(x,y,rad=true)=>{
     if(typeof x === "number"){
         if(typeof y === "number")return rad?Math.atan2(x,y):Math.atan2(x,y)*180/Math.PI;
