@@ -2,7 +2,7 @@ import ZikoUINode from "../constructors/ZikoUINode.js";
 class ZikoUIText extends ZikoUINode {
     constructor(...value) {
       super("span", "text", false, ...value);
-      this.element = document.createTextNode(...value)
+      this.element = globalThis?.document?.createTextNode(...value)
     }
     isText(){
       return true

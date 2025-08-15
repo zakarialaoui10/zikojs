@@ -18,7 +18,7 @@ const tags = new Proxy({}, {
     if(HTMLTags.includes(tag)) return (...args)=>{
       if(!(args[0] instanceof ZikoUIElement) && args[0] instanceof Object){
         let attributes = args.shift()
-        console.log(args)
+        // console.log(args)
         return new ZikoUIElement(tag).setAttr(attributes).append(...args)
       }
       return new ZikoUIElement(tag).append(...args);

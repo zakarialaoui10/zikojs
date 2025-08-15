@@ -15,6 +15,7 @@ import {
 } from "../../reactivity/index.js"
 import { Random } from "../../math/index.js";
 import { Str } from "../../data/index.js";
+import '../../app/globals.js'
 class ZikoUIElement extends ZikoUINode{
   constructor(element, name="", {el_type="html", useDefaultStyle=false}={}){
     super()
@@ -280,7 +281,7 @@ class ZikoUIElement extends ZikoUINode{
   }
     // Attributes
   #setAttr(name, value){
-    if(this.element.tagName !== "svg") name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
+    if(this.element?.tagName !== "svg") name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
     if(this?.attr[name] && this?.attr[name]===value) return;
     this.element.setAttribute(name, value)
     Object.assign(this.cache.attributes, {[name]:value});

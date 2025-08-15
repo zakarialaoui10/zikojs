@@ -24,16 +24,16 @@
     "LICENCE"
   ],
   "exports": {
-    "./*" : "./src/*",
+    "./*": "./src/*",
     ".": {
       "import": "./dist/ziko.mjs",
       "require": "./dist/ziko.cjs"
     },
     "./math": {
-      "import" : "./src/math/index.js"
+      "import": "./src/math/index.js"
     },
     "./helpers": {
-      "import" : "./src/__helpers__.js"
+      "import": "./src/__helpers__.js"
     },
     "./events": {
       "import": "./src/events/index.js"
@@ -47,11 +47,11 @@
     "./hooks": {
       "import": "./src/hooks/index.js"
     },
-    "./ui":{
+    "./ui": {
       "import": "./src/ui/index.js",
       "type": "./src/ui/index.d.ts"
     },
-    "./tags":{
+    "./tags": {
       "import": "./src/tags/index.js"
     },
     "./src": "./src/index.js",
@@ -59,13 +59,12 @@
     "./app": {},
     "./time": {},
     "./components": {}
-    
   },
   "bin": {
     "create-ziko-app": "starter/bin/index.js"
   },
   "scripts": {
-    "test": "npx jasmine --config=jasmine.json",
+    "test": "npx vitest",
     "test-link": "node _link/index.js",
     "lint": "eslint src/*/*/*",
     "dev": "cross-env NODE_ENV=development rollup --config rollup.config.js",
@@ -88,11 +87,9 @@
     "@rollup/plugin-terser": "^0.4.4",
     "cross-env": "^7.0.3",
     "eslint": "^8.57.1",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-spellcheck": "^0.0.20",
-    "jasmine": "^5.3.0",
     "rollup": "^4.1.5",
     "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-serve": "^1.1.1"
+    "rollup-plugin-serve": "^1.1.1",
+    "vitest": "^3.2.4"
   }
 }

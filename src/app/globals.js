@@ -53,6 +53,18 @@ const __CACHE__ = {
         return this.ui_index ++
     }
 }
+if ( !globalThis?.__Ziko__ ){
+    globalThis.__Ziko__ = {
+                // ...Ziko,
+                __UI__,
+                __HYDRATION__,
+                __HYDRATION_MAP__,
+                __Config__,
+                __CACHE__,
+                // ExtractAll,
+                // RemoveAll
+            };
+}
 export {
     __UI__,
     __HYDRATION_MAP__,
