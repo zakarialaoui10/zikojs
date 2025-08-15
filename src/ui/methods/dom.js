@@ -75,6 +75,18 @@ function __addItem__(adder, pusher, ...ele) {
   }
   for (let i = 0; i < ele.length; i++) {
     if (["number", "string"].includes(typeof ele[i])) ele[i] = text(ele[i]);
+        // Fix Items Latter
+    if (ele[i] instanceof Function) {
+     const getter = ele[i]();
+      if (getter.isStateGetter) {
+        ele[i] = text(getter.value);
+        getter._subscribe(
+            (newValue) => (ele[i].element.textContent = newValue),
+            ele[i] 
+        );
+        // this.element.appendChild(textNode);
+      }
+    }
     if (typeof globalThis?.Node === "function" && ele[i] instanceof globalThis?.Node) ele[i] = new this.constructor(ele[i]);
     if (ele[i]?.isZikoUIElement) {
         ele[i].cache.parent = this;
@@ -82,18 +94,6 @@ function __addItem__(adder, pusher, ...ele) {
         ele[i].target = this.element;
         this.items[pusher](ele[i]);
     } 
-    // Fix Items Latter
-    if (ele[i] instanceof Function) {
-     const getter = ele[i]();
-      if (getter.isStateGetter) {
-        const textNode = document.createTextNode(getter.value);
-        this.element.appendChild(textNode);
-        getter._subscribe(
-            (newValue) => (textNode.textContent = newValue),
-            textNode 
-        );
-      }
-    }
     else if (ele[i] instanceof Object) {
       if (ele[i]?.style) this.style(ele[i]?.style);
       if (ele[i]?.attr) {
