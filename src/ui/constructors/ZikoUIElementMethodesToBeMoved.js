@@ -1,0 +1,96 @@
+class Ziko{
+get #SwitchedStyleRTL_LTR(){
+    const CalculedStyle = globalThis.getComputedStyle(this.element); 
+    const SwitchedStyle = {}
+    if(CalculedStyle.marginRight!=="0px")Object.assign(SwitchedStyle, {marginLeft: CalculedStyle.marginRight});
+    if(CalculedStyle.marginLeft!=="0px")Object.assign(SwitchedStyle, {marginRight: CalculedStyle.marginLeft});
+    if(CalculedStyle.paddingRight!=="0px")Object.assign(SwitchedStyle, {paddingLeft: CalculedStyle.paddingRight});
+    if(CalculedStyle.paddingLeft!=="0px")Object.assign(SwitchedStyle, {paddingRight: CalculedStyle.paddingLeft});
+    if(CalculedStyle.left!=="0px")Object.assign(SwitchedStyle, {right: CalculedStyle.left});
+    if(CalculedStyle.right!=="0px")Object.assign(SwitchedStyle, {left: CalculedStyle.right});
+    if(CalculedStyle.textAlign === "right")Object.assign(SwitchedStyle, {textAlign: "left"});
+    if(CalculedStyle.textAlign === "left")Object.assign(SwitchedStyle, {textAlign: "right"});
+    if(CalculedStyle.float === "right")Object.assign(SwitchedStyle, {float: "left"});
+    if(CalculedStyle.float === "left")Object.assign(SwitchedStyle, {float: "right"});
+    if(CalculedStyle.borderRadiusLeft!=="0px")Object.assign(SwitchedStyle, {right: CalculedStyle.borderRadiusRight});
+    if(CalculedStyle.borderRadiusRight!=="0px")Object.assign(SwitchedStyle, {right: CalculedStyle.borderRadiusLeft});
+    if(["flex","inline-flex"].includes(CalculedStyle.display)){
+      if(CalculedStyle.justifyContent === "flex-end")Object.assign(SwitchedStyle, {justifyContent: "flex-start"});
+      if(CalculedStyle.justifyContent === "flex-start")Object.assign(SwitchedStyle, {justifyContent: "flex-end"});
+    }
+    return SwitchedStyle;
+  }
+  useRtl(switchAll = false){
+    switchAll ? this.style({
+      ...this.#SwitchedStyleRTL_LTR,
+      direction : "rtl"
+    }) : this.style({direction : "rtl"}); 
+    return this;
+  }
+  useLtr(switchAll = false){
+    switchAll ? this.style({
+      ...this.#SwitchedStyleRTL_LTR,
+      direction : "ltr"
+    }) : this.style({direction : "ltr"}); 
+    return this;
+
+    
+  }
+
+    filter(condition_callback, if_callback = () => {}, else_callback = () => {}) {
+    const FilterItems = this.items.filter(condition_callback);
+    FilterItems.forEach(if_callback);
+    this.items
+      .filter((item) => !FilterItems.includes(item))
+      .forEach(else_callback);
+    return this;
+  }
+  filterByTextContent(text, exactMatch = false) {
+    this.items.forEach((n) => n.render());
+    this.filter(
+      (n) => !(exactMatch ? n.text === text : n.text.includes(text)),
+      (e) => e.unrender(),
+    );
+    // this.items.filter(n=>{
+    //   const content=n.element.textContent;
+    //   return !(exactMatch?content===text:content.includes(text))
+    // }).map(n=>n.unrender());
+    //  return this;
+  }
+  filterByClass(value) {
+    this.items.map((n) => n.render());
+    this.items
+      .filter((n) => !n.classes.includes(value))
+      .map((n) => n.unrender());
+    return this;
+  }
+  sortByTextContent(value, displays) {
+    let item = this.children;
+    item
+      .filter((n) => !n.textContent.toLowerCase().includes(value.toLowerCase()))
+      .map((n) => {
+        n.style.display = "none";
+      });
+    item
+      .filter((n) => n.textContent.toLowerCase().includes(value.toLowerCase()))
+      .map((n, i) => (n.style.display = displays[i]));
+    //return item.filter(n=>n.style.display!="none")
+    item.filter((n) => n.style.display != "none");
+    return this;
+  }
+
+    // setFullScreen(set = true, e) {
+  //   if(!this.element.requestFullscreen){
+  //     console.error("Fullscreen API is not supported in this browser.");
+  //     return this;
+  //   }
+  //   if (set) this.element.requestFullscreen(e);
+  //   else globalThis.document.exitFullscreen();
+  //   return this;
+  // }
+  // toggleFullScreen(e) {
+  //   if (!globalThis.document.fullscreenElement) this.element.requestFullscreen(e);
+  //   else globalThis.document.exitFullscreen();
+  //   return this;
+  // }
+}

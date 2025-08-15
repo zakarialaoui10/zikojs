@@ -1,4 +1,4 @@
-import { ZikoHead , useHead} from "../reactivity/hooks/Head/index.js";
+import { ZikoHead , useHead} from "../reactivity/hooks/head/index.js";
 class ZikoApp {
     constructor({head = null, wrapper = null, target = null}){
         this.head = head;
