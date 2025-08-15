@@ -1,7 +1,7 @@
 export function useState(initialValue) {
     let value = initialValue;
     const subscribers = new Set();
-    let Paused = false
+    let paused = false;
 
     function getValue() {
         return {
@@ -10,28 +10,38 @@ export function useState(initialValue) {
             _subscribe: (fn, element) => {
                 subscribers.add(fn);
 
-                // Automatically remove subscriber if the element is removed from DOM
                 const observer = new MutationObserver(() => {
                     if (!document.body.contains(element)) {
-                        Paused = true
                         subscribers.delete(fn);
                         observer.disconnect();
                     }
                 });
+
                 observer.observe(document.body, { childList: true, subtree: true });
             },
         };
     }
 
     function setValue(newValue) {
-        if(!Paused){
-            if (typeof newValue === "function") newValue = newValue(value);
-            if (newValue !== value) {
-                value = newValue;
-                subscribers.forEach(fn => fn(value));
-            }
+        if (paused) return;
+        if (typeof newValue === "function") newValue = newValue(value);
+        if (newValue !== value) {
+            value = newValue;
+            subscribers.forEach(fn => fn(value));
         }
     }
 
-    return [getValue, setValue];
+    const controller = {
+        pause: () => { paused = true; },
+        resume: () => { paused = false; },
+        clear: () => { subscribers.clear(); },
+        force: (newValue) => { // force update even if paused
+            if (typeof newValue === "function") newValue = newValue(value);
+            value = newValue;
+            subscribers.forEach(fn => fn(value));
+        },
+        getSubscribers: () => new Set(subscribers),
+    };
+
+    return [getValue, setValue, controller];
 }
