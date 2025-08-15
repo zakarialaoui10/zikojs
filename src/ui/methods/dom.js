@@ -83,13 +83,14 @@ function __addItem__(adder, pusher, ...ele) {
         this.items[pusher](ele[i]);
     } 
     // Fix Items Latter
-    if( ele[i] instanceof Function){
-      const getter = ele[i]();
+    if (ele[i] instanceof Function) {
+     const getter = ele[i]();
       if (getter.isStateGetter) {
-        const textNode = document?.createTextNode(getter.value);
+        const textNode = document.createTextNode(getter.value);
         this.element.appendChild(textNode);
         getter._subscribe(
-          (newValue) => (textNode.textContent = newValue),
+            (newValue) => (textNode.textContent = newValue),
+            textNode 
         );
       }
     }
