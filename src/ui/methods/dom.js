@@ -1,4 +1,4 @@
-import { text } from "../elements/text/text.js";
+import { text } from "../elements/text/index.js";
 export const DomMethods = {
   append(...ele) {
     __addItem__.call(this, "append", "push", ...ele);
@@ -88,7 +88,7 @@ function __addItem__(adder, pusher, ...ele) {
       }
     }
     if (typeof globalThis?.Node === "function" && ele[i] instanceof globalThis?.Node) ele[i] = new this.constructor(ele[i]);
-    if (ele[i]?.isZikoUIElement) {
+    if (ele[i]?.isZikoUINode) {
         ele[i].cache.parent = this;
         this.element[adder](ele[i].element);
         ele[i].target = this.element;

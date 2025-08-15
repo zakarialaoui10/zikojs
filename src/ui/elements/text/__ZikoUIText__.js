@@ -1,8 +1,8 @@
 import ZikoUIElement from "../../constructors/ziko-ui-element.js";
-import { 
-  ZikoUISubText,
-  ZikoUISupText
- } from "./text.js";
+// import { 
+//   ZikoUISubText,
+//   ZikoUISupText
+//  } from "./text.js";
 import { 
   Complex,
   Matrix
