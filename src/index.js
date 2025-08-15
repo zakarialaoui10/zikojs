@@ -4,7 +4,6 @@ import * as Time from './time/index.js';
 import * as Data from './data/index.js';
 
 import * as Reactivity from './reactivity/index.js'
-import * as Graphics from './graphics/index.js'
 
 
 // import * as Events from "./events/index.js"
@@ -17,7 +16,6 @@ export * from "./ui/index.js";
 export * from "./time/index.js";
 export * from "./data/index.js";
 export * from "./reactivity/index.js"
-export * from "./graphics/index.js";
 export * from "./app/index.js";
 
 export * from "./events/index.js";
@@ -32,7 +30,6 @@ const Ziko={
     Time,
     Data,
     Reactivity,
-    Graphics
 }
 
 if ( globalThis.__Ziko__ ) {
