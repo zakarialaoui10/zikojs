@@ -1,8 +1,8 @@
 import ZikoUINode from "./ZikoUINode.js";
 import { compose } from "../../__helpers__/index.js";
-import { DomMethods } from "../methods/dom.js";
-import { IndexingMethods } from "../methods/indexing.js";
-import { EventsMethodes } from "../methods/events.js";
+import { DomMethods } from "../__methods__/dom.js";
+import { IndexingMethods } from "../__methods__/indexing.js";
+import { EventsMethodes } from "../__methods__/events.js";
 import { ZikoUseStyle } from "../../reactivity/hooks/UI/useStyle.js";
 import { ZikoUIElementStyle } from "./style/index.js";
 import { 

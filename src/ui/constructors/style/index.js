@@ -1,4 +1,4 @@
-import { addSuffixeToNumber } from "../../utils/index.js";
+import { addSuffixeToNumber } from "../../__utils__/index.js";
 import { Matrix,cos,sin} from "../../../math/index.js";
 import { Str } from "../../../data/index.js";
 class ZikoUIElementStyle{

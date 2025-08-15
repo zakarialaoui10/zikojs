@@ -1,18 +1,4 @@
-import ZikoUIElement from "../../constructors/ziko-ui-element.js";
-// function loadComponent() {
-//     return new Promise((resolve) => {
-//       setTimeout(() => {
-//         resolve(p(1000))
-//       }, 500);
-//     });
-//   }
-
-//   Suspense(p("Loading ..."),()=>fetch('https://jsonplaceholder.typicode.com/todos/1')
-//   .then(response => response.json())
-//   .then(json => h2(json.title)))
-
- 
-
+import ZikoUIElement from "../constructors/ZikoUIElement";
 class ZikoUISuspense extends ZikoUIElement{
     constructor(fallback_ui, callback){
         super("div", "suspense")
