@@ -6,3 +6,4 @@ export * from './flex/index.js';
 export * from './grid/index.js';
 export * from './suspense/index.js';
 export * from './wrapper/index.js';
+export * from './graphics/index.js'
