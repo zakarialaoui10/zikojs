@@ -1,5 +1,5 @@
-import ZikoUIElement from "../ZikoUIElement.js";
-import { Str } from "../../../../data.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
+import { Str } from "../../../data/index.js";
 class ZikoUIYoutubePlayer extends ZikoUIElement{
     constructor(src, title){
         super("iframe", "YoutubePlayer");

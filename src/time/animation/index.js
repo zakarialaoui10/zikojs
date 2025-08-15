@@ -1,5 +1,5 @@
-import { Ease } from "./utils";
-import { map } from "../math/utils"
+import { Ease } from "../utils";
+import { map } from "../../math/utils"
 class ZikoTimeAnimation{
     constructor(callback,ease=Ease.Linear,step=50,{t=[0,null],start=true,duration=3000}={}){
         this.cache={

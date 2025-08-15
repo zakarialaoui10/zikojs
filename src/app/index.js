@@ -9,7 +9,7 @@ import * as Spa from "./spa.js"
 import * as Global from "./globals.js"
 // import * as Params from "./params"
 
-const App={
+const App = {
     ...__App__,
     ...Spa,
     ...Global,

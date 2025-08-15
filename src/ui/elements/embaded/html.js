@@ -1,4 +1,5 @@
-import ZikoUIElement from "../ZikoUIElement.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
+
 
 class ZikoUIHtmlViewer extends ZikoUIElement{
     constructor(src, title){

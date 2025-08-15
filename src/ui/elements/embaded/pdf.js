@@ -1,4 +1,5 @@
-import  ZikoUIElement  from "../ZikoUIElement.js";
+import ZikoUIElement from "../../constructors/ziko-ui-element.js";
+
 class ZikoUIPdf extends ZikoUIElement{
     constructor(src, title = "Pdf Document Embaded in Zikojs App"){
         super("embed","PDFViewer")

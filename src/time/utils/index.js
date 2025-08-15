@@ -13,6 +13,5 @@ export{
     timeTaken,
     Ease
 }
-export * from "./decorators.js";
 export * from "./performance.js";
 export * from "./ui.js"

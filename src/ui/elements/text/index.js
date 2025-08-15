@@ -1,3 +1,3 @@
 export * from "./text";
-export * from "./p";
-export *from "./heading";
+// export * from "./p";
+// export *from "./heading";

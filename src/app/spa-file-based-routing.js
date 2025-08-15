@@ -1,5 +1,5 @@
 import { SPA } from "./spa.js";
-import { Section } from "../ui/index.js";
+import { tags } from "../ui/index.js";
 // import.meta.glob('./src/pages/**/*.js')
 async function FileBasedRouting(pages /* use import.meta.glob */){
    const routes = Object.keys(pages)
@@ -16,7 +16,7 @@ async function FileBasedRouting(pages /* use import.meta.glob */){
          "/" : ()=>{},
          ...pairs
       },
-      wrapper : Section()
+      wrapper : tags.section()
    })   
 }
 function customPath(inputPath, root = './src/pages', extensions = ['js', 'ts']) {

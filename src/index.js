@@ -1,15 +1,16 @@
-import { __ExtractAll__,__RemoveAll__ } from "./__helpers__/index.js";
-import Math from "./math/index.js";
-import UI from "./ui/index.js";
-import Time from "./time/index.js";
-import Data from "./data/index.js";
-import Reactivity from "./reactivity/index.js";
-import Graphics from "./graphics/index.js";
+import * as Math from './math/index.js';
+import * as UI from './ui/index.js';
+import * as Time from './time/index.js';
+import * as Data from './data/index.js';
+
+import * as Reactivity from './reactivity/index.js'
+import * as Graphics from './graphics/index.js'
+
 
 // import * as Events from "./events/index.js"
 // import * as Use from "./use/index.js"
 
-import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter, __HYDRATION__} from "./app";
+import App,{__UI__,__HYDRATION_MAP__, __Config__, __CACHE__, defineParamsGetter, __HYDRATION__} from "./app/index.js";
 
 export * from "./math/index.js";
 export * from "./ui/index.js";
@@ -22,18 +23,7 @@ export * from "./app/index.js";
 export * from "./events/index.js";
 export * from "./use/index.js";
 
-[
-    App,
-    Math,
-    UI,
-    Time,
-    Data,
-    Reactivity,
-    Graphics,
-].forEach(n=>Object.assign(n,{
-    ExtractAll:()=>__ExtractAll__(n),
-    RemoveAll:()=>__RemoveAll__(n)
-}))
+
 
 const Ziko={
     App,
@@ -55,8 +45,8 @@ if ( globalThis.__Ziko__ ) {
             __HYDRATION_MAP__,
             __Config__,
             __CACHE__,
-            ExtractAll,
-            RemoveAll
+            // ExtractAll,
+            // RemoveAll
         };
         defineParamsGetter(__Ziko__)
 	}
@@ -69,23 +59,6 @@ if ( globalThis.__Ziko__ ) {
 // };
 if(globalThis?.document){
     document?.addEventListener("DOMContentLoaded", __Ziko__.__Config__.init());
-}
-function ExtractAll(){
-    UI.ExtractAll();
-    Math.ExtractAll();
-    Time.ExtractAll();
-    Reactivity.ExtractAll();
-    Graphics.ExtractAll();
-    Data.ExtractAll()
-    return this;
-}
-function RemoveAll(){
-    UI.RemoveAll();
-    Math.RemoveAll();
-    Time.RemoveAll();
-    Reactivity.RemoveAll();
-    Graphics.RemoveAll();
-    Data.RemoveAll()
 }
 
 export default Ziko;
