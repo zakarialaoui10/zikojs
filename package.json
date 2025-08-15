@@ -44,6 +44,9 @@
     "./use": {
       "import": "./src/use/index.js"
     },
+    "./hooks": {
+      "import": "./src/hooks/index.js"
+    },
     "./ui":{
       "import": "./src/ui/index.js",
       "type": "./src/ui/index.d.ts"
