@@ -21,7 +21,6 @@ class ZikoUseRoot {
             cssProp, 
             this.currentPropsMap[prop]
             ); 
-            console.log({cssProp})
         //    Object.assign(this.pairs, {
         //     [prop] : `var(--${this.namespace}-${prop})`
         //    })
