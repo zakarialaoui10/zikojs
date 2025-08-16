@@ -12,5 +12,6 @@ if(globalThis?.document){
     document?.addEventListener("DOMContentLoaded", __Ziko__.__Config__.init());
 }
 
+import './math/functions/proxy.js'
 
 

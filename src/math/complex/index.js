@@ -53,6 +53,9 @@ class Complex extends ZikoMath{
             this.b = +b.toFixed(32);
         }
     }
+    isComplex(){
+        return true
+    }
     toString(){
         let str = "";
         if (this.a !== 0)
