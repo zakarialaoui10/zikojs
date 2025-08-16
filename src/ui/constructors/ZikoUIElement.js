@@ -1,10 +1,11 @@
 import ZikoUINode from "./ZikoUINode.js";
-import { compose } from "../../__helpers__/index.js";
 import { DomMethods } from "../__methods__/dom.js";
 import { IndexingMethods } from "../__methods__/indexing.js";
 import { EventsMethodes } from "../__methods__/events.js";
 import { ZikoUseStyle } from "../../reactivity/hooks/UI/useStyle.js";
 import { ZikoUIElementStyle } from "./style/index.js";
+import { register } from "../../__helpers__/register/index.js";
+
 import { 
   useCustomEvent,
   useSwipeEvent,
@@ -30,18 +31,7 @@ class ZikoUIElement extends ZikoUINode{
     else{
       this.target = element.parentElement;
     }
-    // if(element)this.__ele__ = element;
-    compose(
-      this, 
-      DomMethods,
-      IndexingMethods,
-      EventsMethodes
-    )
-    // if(false){
-    //   import("../methods/tree.js").then(({ default: ExternalMethods }) => {
-    //     compose(this, ExternalMethods);
-    //   });
-    // }
+    register(this, DomMethods, IndexingMethods, EventsMethodes)
     Object.assign(this.cache, {
       name,
       isInteractive : [true, false][Math.floor(2*Math.random())],
