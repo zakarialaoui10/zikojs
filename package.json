@@ -60,6 +60,7 @@
     "./time": {},
     "./components": {}
   },
+  "sideEffects" : false,
   "bin": {
     "create-ziko-app": "starter/bin/index.js"
   },

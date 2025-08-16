@@ -1,10 +1,12 @@
 import ZikoUINode from "./ZikoUINode.js";
-import { DomMethods } from "../__methods__/dom.js";
-import { IndexingMethods } from "../__methods__/indexing.js";
-import { EventsMethodes } from "../__methods__/events.js";
+import { register } from "../../__helpers__/register/index.js";
+import { 
+  DomMethods,
+  IndexingMethods,
+  EventsMethodes
+} from "../__methods__/index.js";
 import { ZikoUseStyle } from "../../reactivity/hooks/UI/useStyle.js";
 import { ZikoUIElementStyle } from "./style/index.js";
-import { register } from "../../__helpers__/register/index.js";
 
 import { 
   useCustomEvent,
@@ -16,7 +18,8 @@ import {
 } from "../../reactivity/index.js"
 import { Random } from "../../math/index.js";
 import { Str } from "../../data/index.js";
-import '../../__ziko__/index.js';
+import {__init__global__} from '../../__ziko__/index.js';
+__init__global__()
 class ZikoUIElement extends ZikoUINode{
   constructor(element, name="", {el_type="html", useDefaultStyle=false}={}){
     super()
@@ -31,7 +34,7 @@ class ZikoUIElement extends ZikoUINode{
     else{
       this.target = element.parentElement;
     }
-    register(this, DomMethods, IndexingMethods, EventsMethodes)
+    register(this, DomMethods, IndexingMethods, EventsMethodes);
     Object.assign(this.cache, {
       name,
       isInteractive : [true, false][Math.floor(2*Math.random())],
@@ -98,10 +101,6 @@ class ZikoUIElement extends ZikoUINode{
   }
   isZikoUIElement(){
     return true;
-  }
-  register(){
-
-    return this;
   }
   get st(){
     return this.cache.style;
