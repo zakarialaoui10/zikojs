@@ -15,23 +15,22 @@ const tags = new Proxy({}, {
   get(target, prop) {
     if (typeof prop !== 'string') return undefined;
     let tag = prop.replaceAll("_","-").toLowerCase();
+    let type ;
+    if(HTMLTags.includes(tag)) type = 'html'
+    if(SVGTags.includes(tag)) type = 'svg'
     if(HTMLTags.includes(tag)) return (...args)=>{
-      if(!(args[0] instanceof ZikoUIElement) && args[0] instanceof Object){
-        let attributes = args.shift()
-        // console.log(args)
-        return new ZikoUIElement(tag).setAttr(attributes).append(...args)
-      }
-      return new ZikoUIElement(tag).append(...args);
+      if(args[0] instanceof ZikoUIElement || (typeof args[0] === 'function' && args[0]().isStateGetter())) return new ZikoUIElement(tag, tag, {el_type : type}).append(...args);
+      return new ZikoUIElement(tag).setAttr(args.shift()).append(...args)
     }
-    if(SVGTags.includes(tag)) return (...args)=>new ZikoUIElement(tag,"",{el_type : "svg"}).append(...args);
-    return (...args)=>{
-      if(!(args[0] instanceof ZikoUIElement) && args[0] instanceof Object){
-        let attributes = args.shift()
-        return new ZikoUIElement(tag).setAttr(attributes).append(...args)
-      }
-      return new ZikoUIElement(tag).append(...args);
-    }
-    // switch(tag){
+    // if(SVGTags.includes(tag)) return (...args) => new ZikoUIElement(tag,"",{el_type : "svg"}).append(...args);
+    // return (...args)=>{
+    //   if(!(args[0] instanceof ZikoUIElement) && args[0] instanceof Object){
+    //     let attributes = args.shift()
+    //     return new ZikoUIElement(tag).setAttr(attributes).append(...args)
+    //   }
+    //   return new ZikoUIElement(tag).append(...args);
+    // }
+    // // switch(tag){
     //   case "html"  : globalThis?.document?.createElement("html")
     //   case "head"  :
     //   case "style" :
