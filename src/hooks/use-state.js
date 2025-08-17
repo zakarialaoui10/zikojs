@@ -45,3 +45,8 @@ export function useState(initialValue) {
 
     return [getValue, setValue, controller];
 }
+
+export const isStateGetter = (arg) => {
+    return typeof(arg) === 'function' && arg?.()?.isStateGetter?.()
+}
+

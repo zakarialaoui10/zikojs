@@ -21,11 +21,11 @@ import { Str } from "../../data/index.js";
 import {__init__global__} from '../../__ziko__/index.js';
 __init__global__()
 class ZikoUIElement extends ZikoUINode{
-  constructor(element, name="", {el_type="html", useDefaultStyle=false}={}){
+  constructor(element, name="", {type="html", useDefaultStyle=false}={}){
     super()
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
-      switch(el_type){
+      switch(type){
         case "html" : element = globalThis?.document?.createElement(element); break;
         case "svg" : element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element);
         default : throw Error("Not supported")
