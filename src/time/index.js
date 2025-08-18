@@ -1,4 +1,4 @@
-export * from './schedule/index.js'
+export * from './clocks/index.js'
 
 export * from './loop/index.js'
 export * from './animation/index.js'

@@ -1,0 +1,1 @@
+export const step_fps = (step_or_fps) => 1000 / step_or_fps;
