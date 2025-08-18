@@ -24,6 +24,10 @@ export const AttrsMethods = {
   getAttr(name){
     name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
     return this.element.attributes[name].value;
+  },
+  setContentEditable(bool = true) {
+    this.setAttr("contenteditable", bool);
+    return this;
   }
 };
 

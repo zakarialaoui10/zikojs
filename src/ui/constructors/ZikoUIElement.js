@@ -5,9 +5,8 @@ import {
   DomMethods,
   IndexingMethods,
   EventsMethodes,
+  StyleMethods
 } from "../__methods__/index.js";
-import { ZikoUseStyle } from "../../reactivity/hooks/UI/useStyle.js";
-import { ZikoUIElementStyle } from "./style/index.js";
 
 import { 
   useCustomEvent,
@@ -18,11 +17,10 @@ import {
   watchChildren
 } from "../../reactivity/index.js"
 import { Random } from "../../math/index.js";
-import { Str } from "../../data/index.js";
 import {__init__global__} from '../../__ziko__/index.js';
 __init__global__()
 class ZikoUIElement extends ZikoUINode{
-  constructor(element, name="", {type="html", useDefaultStyle=false}={}){
+  constructor(element, name="", {name ='', type="html", useDefaultStyle=false}={}){
     super()
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
@@ -35,7 +33,14 @@ class ZikoUIElement extends ZikoUINode{
     else{
       this.target = element.parentElement;
     }
-    register(this, AttrsMethods, DomMethods, IndexingMethods, EventsMethodes);
+    register(
+      this, 
+      AttrsMethods, 
+      DomMethods, 
+      StyleMethods,
+      IndexingMethods, 
+      EventsMethodes
+    );
     Object.assign(this.cache, {
       name,
       isInteractive : [true, false][Math.floor(2*Math.random())],
@@ -45,7 +50,6 @@ class ZikoUIElement extends ZikoUINode{
       isHidden: false,
       isFrozzen:false,
       legacyParent : null,
-      style: new ZikoUIElementStyle({}),
       attributes: {},
       filters: {},
       temp:{}
@@ -70,7 +74,6 @@ class ZikoUIElement extends ZikoUINode{
     if(element)Object.assign(this.cache,{element});
     this.uuid = `${this.cache.name}-${Random.string(16)}`
     this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index();
-    this.cache.style.linkTo(this);
     useDefaultStyle && this.style({ 
       position: "relative",
       boxSizing:"border-box",
@@ -152,26 +155,18 @@ class ZikoUIElement extends ZikoUINode{
     else UI.element=this.element.cloneNode(true);
     return UI.render(render);
   }
-  style(styles){
-    styles instanceof ZikoUseStyle ? this.st.style(styles.current): this.st.style(styles);
-    return this;
-  }
-  size(width,height){
-    this.st.size(width,height);
-    return this; 
-  }
   [Symbol.iterator]() {
     return this.items[Symbol.iterator]();
   }
   maintain() {
-  for (let i = 0; i < this.items.length; i++) {
-    Object.defineProperty(this, i, {
-      value: this.items[i],
-      writable: true,
-      configurable: true,
-      enumerable: false 
-      });
-    }
+    for (let i = 0; i < this.items.length; i++) {
+      Object.defineProperty(this, i, {
+        value: this.items[i],
+        writable: true,
+        configurable: true,
+        enumerable: false 
+        });
+      }
   }
   freeze(freeze){
     this.cache.isFrozzen=freeze;
@@ -187,14 +182,6 @@ class ZikoUIElement extends ZikoUINode{
   }
   describe(label){
     if(label)this.setAttr("aria-label",label)
-  }
-  animate(keyframe, {duration=1000, iterations=1, easing="ease"}={}){
-    this.element?.animate(keyframe,{duration, iterations, easing});
-    return this;
-  }
-  setContentEditable(bool = true) {
-    this.setAttr("contenteditable", bool);
-    return this;
   }
   get children() {
     return [...this.element.children];
