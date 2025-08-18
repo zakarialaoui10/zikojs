@@ -1,4 +1,4 @@
-import ZikoUINode from "./ZikoUINode.js";
+import UINode from "./UINode.js";
 import { register } from "../../__helpers__/register/index.js";
 import { 
   AttrsMethods,
@@ -19,7 +19,7 @@ import {
 import { Random } from "../../math/index.js";
 import {__init__global__} from '../../__ziko__/index.js';
 __init__global__()
-class ZikoUIElement extends ZikoUINode{
+class UIElement extends UINode{
   constructor({element, name ='', type="html", useDefaultStyle=false}={}){
     super()
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
@@ -31,7 +31,7 @@ class ZikoUIElement extends ZikoUINode{
       }
     }
     else{
-      this.target = element.parentElement;
+      this.target = element?.parentElement;
     }
     register(
       this, 
@@ -166,7 +166,7 @@ class ZikoUIElement extends ZikoUINode{
         configurable: true,
         enumerable: false 
         });
-      }
+    }
   }
   freeze(freeze){
     this.cache.isFrozzen=freeze;
@@ -254,4 +254,4 @@ class ZikoUIElement extends ZikoUINode{
   }
 
 }
-export default ZikoUIElement;
+export default UIElement;

@@ -1,6 +1,6 @@
 import { __ZikoEvent__ } from "../__ZikoEvent__.js";
 import type { Callback } from './__Shared__.js';
-import { ZikoUIElement } from "../../ui/index.js";
+import { UIElement } from "../../ui/index.js";
 
 declare class ZikoEventFocus extends __ZikoEvent__ {
   constructor(target: any, customizer?: Function);
@@ -11,7 +11,7 @@ declare class ZikoEventFocus extends __ZikoEvent__ {
 
 }
 
-declare const bindFocusEvent: (target: ZikoUIElement, customizer?: Function) => ZikoEventFocus;
+declare const bindFocusEvent: (target: UIElement, customizer?: Function) => ZikoEventFocus;
 
 export {
   ZikoEventFocus,

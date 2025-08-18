@@ -1,5 +1,5 @@
-import ZikoUIElement from "../constructors/ZikoUIElement.js";
-class ZikoUIFlex extends ZikoUIElement {
+import UIElement from "../constructors/UIElement.js";
+class ZikoUIFlex extends UIElement {
   constructor(tag = "div", w = "100%", h = "100%") {
     super({element : tag , name : "Flex"});
     this.direction = "cols";
@@ -69,13 +69,13 @@ class ZikoUIFlex extends ZikoUIElement {
   }
 }
 
-const Flex = (...ZikoUIElement) =>{
+const Flex = (...UIElement) =>{
   let tag="div";
-  if(typeof ZikoUIElement[0]==="string"){
-    tag=ZikoUIElement[0];
-    ZikoUIElement.pop();
+  if(typeof UIElement[0]==="string"){
+    tag=UIElement[0];
+    UIElement.pop();
   }
-  return new ZikoUIFlex(tag).append(...ZikoUIElement);
+  return new ZikoUIFlex(tag).append(...UIElement);
 }
 function set_vertical(direction){
   direction == 1

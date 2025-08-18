@@ -1,14 +1,14 @@
-**`ZikoUIElement`** is the constructor class of every UI element in zikojs. 
+**`UIElement`** is the constructor class of every UI element in zikojs. 
 It encapsulates the properties and behaviors of a UI element, including its HTML representation, styling, attributes, and event handling...
 You can create a new UI element using the following syntax :
 
 ```js
- const UI = new ZikoUIElement(element);
+ const UI = new UIElement(element);
  // element can be an HTML tag string or a DOM element.
 ```
 Alternatively, you can simply use the [Built-in UI Elements]() provided by zikojs UI module."
 
-In general, ZikoUIElement supports:
+In general, UIElement supports:
  - Nesting UI elements within each other.
  - Applying styling to UI elements using object notation.
  - Event handling 
@@ -19,7 +19,7 @@ In general, ZikoUIElement supports:
    - `🧩 .html` : Get the HTML content of the UI element
    - `🧩 .text`:  Get the Text content of the UI element
 - **DOM :**
-   - `📦 .clone()` : Clone the ZikoUIElement 
+   - `📦 .clone()` : Clone the UIElement 
    - `📦 .render()` : Render the UI element to the DOM
    - `📦 .renderAfter(delay)` : Render the UI element after a specified delay
    - `📦 .unrender()` : Remove the UI element from the DOM.
@@ -219,10 +219,10 @@ In general, ZikoUIElement supports:
   - `📦 .toPdf()` :
   
 
-**ZikoUIContainerElement** is a specialized subclass of ***`ZikoUIElement`*** designed to manage and contain other UI elements. It inherits all methods from ZikoUIElement and introduces additional methods and getters for handling child elements:
+**ZikoUIContainerElement** is a specialized subclass of ***`UIElement`*** designed to manage and contain other UI elements. It inherits all methods from UIElement and introduces additional methods and getters for handling child elements:
 
 - **Acces :**
-   - `📦 .at(index)` : Retrieves the UI element at the specified index within the ZikoUIElement
+   - `📦 .at(index)` : Retrieves the UI element at the specified index within the UIElement
    - `🧊 [index]` : Alternative syntax for accessing UI elements by index
 - **Dom :** 
    - `📦 .append(...items)` : Append child elements to the UI element

@@ -1,15 +1,15 @@
-ZikoJS provides a comprehensive set of built-in UI elements, each designed to simplify the process of creating rich, interactive user interfaces. These elements are built on top of the ZikoUIElement class, ensuring consistency and ease of use. Below is an overview of the available elements, organized by category:
+ZikoJS provides a comprehensive set of built-in UI elements, each designed to simplify the process of creating rich, interactive user interfaces. These elements are built on top of the UIElement class, ensuring consistency and ease of use. Below is an overview of the available elements, organized by category:
 
 # Primitive Elements 
  <!-- ## Special Element Constructor
-  - ***`html(tag : string | HTMLElement, ...Element : (ZikoUIElement | undefined)[])`*** :
+  - ***`html(tag : string | HTMLElement, ...Element : (UIElement | undefined)[])`*** :
  ## Text Elements
 
   - ***`text(...str : (string | number | boolean)[])`*** : Represents a standard text element.
     - `📦 .setValue(newTextContent : string, add : boolean)`
 
 
-  - ***`p(UIElement : []ZikoUIElement)`*** : Represents a paragraph element
+  - ***`p(UIElement : []UIElement)`*** : Represents a paragraph element
   
   **Usage**
    ```js
@@ -31,8 +31,8 @@ ZikoJS provides a comprehensive set of built-in UI elements, each designed to si
   - ***`h6(text : string)`*** : Represents a sixth-level heading.
 
  ## List Elements :
-  - ***`ol(....Element : ZikoUIElement[])`*** : Represents an ordered list.
-  - ***`ul(...Element : ZikoUIElement[])`*** : Represents an unordered list.
+  - ***`ol(....Element : UIElement[])`*** : Represents an ordered list.
+  - ***`ul(...Element : UIElement[])`*** : Represents an unordered list.
 
  ## Media Elements :
   - ***`image(src : string, width : string | number, height : string | number)`*** : Represents an image element.
@@ -84,7 +84,7 @@ ZikoJS provides a comprehensive set of built-in UI elements, each designed to si
   - ***`brs(n : number)`*** : Represents multiple line break elements.
   - ***`hrs(n : number)`*** : Represents multiple horizontal rule elements. -->
 # Custom Elements : 
-  - ***`Collapsible(summary : ZikoUIElement, content : ZikoUIElement,icon? : string)`*** : Represents an accordion element for collapsible content.
+  - ***`Collapsible(summary : UIElement, content : UIElement,icon? : string)`*** : Represents an accordion element for collapsible content.
   **Usage**
   ```js
   let summary = text("What is ZikoGL");
@@ -97,7 +97,7 @@ ZikoJS provides a comprehensive set of built-in UI elements, each designed to si
     )
   ```
 
-  - ***`Tabs(Controllers : ZikoUIElement[],Contents : ZikoUIElement[])`*** : Represents a tabbed content element.
+  - ***`Tabs(Controllers : UIElement[],Contents : UIElement[])`*** : Represents a tabbed content element.
   **Usage**
   ```js
   let Controllers = [

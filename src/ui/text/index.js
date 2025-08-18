@@ -1,5 +1,5 @@
-import ZikoUINode from "../constructors/ZikoUINode.js";
-class ZikoUIText extends ZikoUINode {
+import UINode from "../constructors/UINode.js";
+class ZikoUIText extends UINode {
     constructor(...value) {
       super("span", "text", false, ...value);
       this.element = globalThis?.document?.createTextNode(...value)

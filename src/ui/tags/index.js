@@ -1,9 +1,9 @@
-import ZikoUIElement from "../constructors/ZikoUIElement.js";
+import UIElement from "../constructors/UIElement.js";
 import { HTMLTags, SVGTags } from "./tags-list.js";
 import { isStateGetter } from "../../hooks/use-state.js";
 const _h=(tag, type, attributes, ...children)=>{
     const { name, style, ...attrs } = attributes;
-    let element = new ZikoUIElement(tag, name, type);
+    let element = new UIElement(tag, name, type);
     style && element.style(style);
     attrs && element.setAttr(attrs);
     children && element.append(...children);
@@ -28,18 +28,18 @@ const tags = new Proxy({}, {
     //  }
       if(
         ['string', 'number'].includes(typeof args[0]) 
-        || args[0] instanceof ZikoUIElement 
+        || args[0] instanceof UIElement 
         || (typeof args[0] === 'function' && args[0]().isStateGetter())
-      ) return new ZikoUIElement({element :tag, name : tag, type}).append(...args);
-      return new ZikoUIElement({element : tag}).setAttr(args.shift()).append(...args)
+      ) return new UIElement({element :tag, name : tag, type}).append(...args);
+      return new UIElement({element : tag}).setAttr(args.shift()).append(...args)
     }
-    // if(SVGTags.includes(tag)) return (...args) => new ZikoUIElement(tag,"",{el_type : "svg"}).append(...args);
+    // if(SVGTags.includes(tag)) return (...args) => new UIElement(tag,"",{el_type : "svg"}).append(...args);
     // return (...args)=>{
-    //   if(!(args[0] instanceof ZikoUIElement) && args[0] instanceof Object){
+    //   if(!(args[0] instanceof UIElement) && args[0] instanceof Object){
     //     let attributes = args.shift()
-    //     return new ZikoUIElement(tag).setAttr(attributes).append(...args)
+    //     return new UIElement(tag).setAttr(attributes).append(...args)
     //   }
-    //   return new ZikoUIElement(tag).append(...args);
+    //   return new UIElement(tag).append(...args);
     // }
     // // switch(tag){
     //   case "html"  : globalThis?.document?.createElement("html")
@@ -49,7 +49,7 @@ const tags = new Proxy({}, {
     //   case "meta"  :
     //   case "srcipt":
     //   case "body"  : return null; break;
-    //   default : return new ZikoUIElement(tag);
+    //   default : return new UIElement(tag);
     // }
   }
 });

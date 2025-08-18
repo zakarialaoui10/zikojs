@@ -1,5 +1,5 @@
-import ZikoUIElement from "../constructors/ZikoUIElement.js"
-class ZikoUIGrid extends ZikoUIElement {
+import UIElement from "../constructors/UIElement.js"
+class ZikoUIGrid extends UIElement {
     constructor(tag ="div", w = "50vw", h = "50vh") {
       super({element : tag, name : "Grid"});
       this.direction = "cols";
@@ -29,5 +29,5 @@ class ZikoUIGrid extends ZikoUIElement {
         return this;
     }
 }
-const Grid = (...ZikoUIElement) => new ZikoUIGrid("div").append(...ZikoUIElement);
+const Grid = (...UIElement) => new ZikoUIGrid("div").append(...UIElement);
 export {Grid,ZikoUIGrid};

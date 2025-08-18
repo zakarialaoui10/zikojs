@@ -1,5 +1,5 @@
-import ZikoUIElement from "../constructors/ZikoUIElement.js";
-class ZikoUIXMLWrapper extends ZikoUIElement{
+import UIElement from "../constructors/UIElement.js";
+class ZikoUIXMLWrapper extends UIElement{
     constructor(XMLContent, type){
         super({element : "div", name : ""})
         this.element.append(type==="svg"?svg2dom(XMLContent):html2dom(XMLContent))

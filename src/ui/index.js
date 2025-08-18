@@ -1,5 +1,5 @@
-export { default as ZikoUIElement } from "./constructors/ZikoUIElement.js"
-export { default as ZikoUINode } from "./constructors/ZikoUINode.js"
+export { default as UIElement } from "./constructors/UIElement.js"
+export { default as UINode } from "./constructors/UINode.js"
 export * from './tags/index.js';
 export * from './text/index.js';
 export * from './flex/index.js';

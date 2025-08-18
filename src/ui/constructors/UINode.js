@@ -1,4 +1,4 @@
-export default class ZikoUINode {
+export default class UINode {
     constructor(node){
         this.cache = {
             node
@@ -12,4 +12,4 @@ export default class ZikoUINode {
     } 
 }
 
-globalThis.node = (node) => new ZikoUINode(node);
+globalThis.node = (node) => new UINode(node);

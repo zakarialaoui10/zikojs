@@ -1,6 +1,6 @@
 import { __ZikoEvent__ } from "../__ZikoEvent__.js";
 import type { Callback, ClipboardEventKeys } from './__Shared__.js';
-import { ZikoUIElement } from "../../ui/index.js";
+import { UIElement } from "../../ui/index.js";
 
 declare class ZikoEventClipboard extends __ZikoEvent__ {
   constructor(target: any, customizer?: Function);
@@ -12,7 +12,7 @@ declare class ZikoEventClipboard extends __ZikoEvent__ {
 
 }
 
-declare const bindClipboardEvent: (target: ZikoUIElement, customizer?: Function) => ZikoEventClipboard;
+declare const bindClipboardEvent: (target: UIElement, customizer?: Function) => ZikoEventClipboard;
 
 export {
   ZikoEventClipboard,

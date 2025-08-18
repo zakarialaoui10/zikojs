@@ -1,5 +1,5 @@
 - **Special Element Constructor :**
-***`html(tag : string | HTMLElement, ...Element : (ZikoUIElement | undefined)[])`*** :
+***`html(tag : string | HTMLElement, ...Element : (UIElement | undefined)[])`*** :
 
 - **Button :**
  ***`btn(textContent? : string)`*** :

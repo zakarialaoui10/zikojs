@@ -1,5 +1,5 @@
-import ZikoUIElement from "../constructors/ZikoUIElement";
-class ZikoUISuspense extends ZikoUIElement{
+import UIElement from "../constructors/UIElement";
+class ZikoUISuspense extends UIElement{
     constructor(fallback_ui, callback){
         super({element : "div", name : "suspense"})
         this.setAttr({

@@ -17,7 +17,7 @@
 
   - ***`abbrText(abbr : (string | number | boolean)[], title : (string | number | boolean)[])`*** : Defines an abbreviation with a tooltip using the abbr content and the title attribute.
 
-  - ***`p(...UIElement : []ZikoUIElement)`*** : Creates a paragraph containing the provided ZikoUIElement instances.
+  - ***`p(...UIElement : []UIElement)`*** : Creates a paragraph containing the provided UIElement instances.
 
   - ***`blockquote(...UIElement : []ZikoUIQuote)`*** : Creates a block quotation element with the provided ZikoUIQuote instances.
 

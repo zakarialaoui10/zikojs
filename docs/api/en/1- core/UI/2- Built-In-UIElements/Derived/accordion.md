@@ -1,5 +1,5 @@
 - **Collapsible :**
-***`Collapsible(summary : ZikoUIElement, content : ZikoUIElement,icon? : string)`*** : Represents an UI element that toggles the visibility of its content when the summary is clicked. The `summary` is the header or title that remains visible, while the content is the expandable area. Optionally, an icon can be displayed next to the summary to indicate the collapsible nature.
+***`Collapsible(summary : UIElement, content : UIElement,icon? : string)`*** : Represents an UI element that toggles the visibility of its content when the summary is clicked. The `summary` is the header or title that remains visible, while the content is the expandable area. Optionally, an icon can be displayed next to the summary to indicate the collapsible nature.
 **Usage**
   ```js
   let summary = text("What is ZikoGL");

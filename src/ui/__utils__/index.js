@@ -1,11 +1,11 @@
-import ZikoUIElement from "../constructors/ZikoUIElement.js";
+import UIElement from "../constructors/UIElement.js";
 const Id = (a) => document.getElementById(a);
 const Class = (a) => [...document.getElementsByClassName(a)];
 const $=(...selector)=>{
   var ele=[]
   for(let i=0;i<selector.length;i++){
     if(typeof selector[i]=="string")ele.push(...document.querySelectorAll(selector[i]));
-    if(selector[i] instanceof ZikoUIElement)ele.push(selector[i].element)
+    if(selector[i] instanceof UIElement)ele.push(selector[i].element)
   }
   return ele.length===1?ele[0]:ele;
 }
