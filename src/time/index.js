@@ -1,3 +1,5 @@
+export * from './scheduler/index.js'
+
 export * from './loop/index.js'
 export * from './animation/index.js'
 export * from './utils/index.js';

@@ -1,5 +1,5 @@
 import { tags, UIElement } from 'ziko/ui'
-import { useState } from './'
+import { useState } from 'ziko/hooks'
 import { expect, test} from 'vitest'
 
 test('test tags', ()=>{

@@ -11,7 +11,7 @@ export const StyleMethods = {
                         console.log({newValue})
                         Object.assign(this.element.style, {[key] : newValue})
                     },
-                    this 
+                    // this 
                 );
             }
             else Object.assign(this.element.style, {[key] : value})
@@ -21,8 +21,14 @@ export const StyleMethods = {
     size(width, height){
         return this.style({width, height})
     },
+    hide(){
+
+    },
+    show(){
+
+    },
     animate(keyframe, {duration=1000, iterations=1, easing="ease"}={}){
         this.element?.animate(keyframe,{duration, iterations, easing});
         return this;
-  }
+    }
 }
