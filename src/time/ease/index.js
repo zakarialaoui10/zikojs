@@ -71,3 +71,7 @@ export const OutBounce = (t, n1 = 7.5625, d1 = 2.75) => {
 }
 
 export const InOutBounce = (t, n1 = 7.5625, d1 = 2.75) => t < 0.5 ? OutBounce(1 - 2 * t, n1, d1)/2 : OutBounce(2 * t - 1, n1, d1)/2
+
+
+export const Step = (t, steps = 5) => Math.floor(t*steps) / steps;
+export const Discret = (t, segments = 5) => Math.ceil(t*segments) / segments;
