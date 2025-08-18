@@ -1,5 +1,8 @@
-import { Str } from "../../data";
 import { isStateGetter } from "../../hooks/use-state.js";
+import { 
+  is_camelcase,
+  camel2hyphencase
+ } from '../../data/string/index.js'
 
 // To Do add getter, watchAttr
 export const AttrsMethods = {
@@ -22,7 +25,7 @@ export const AttrsMethods = {
     return this;
   },
   getAttr(name){
-    name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
+    name = is_camelcase(name) ? camel2hyphencase(name) : name;
     return this.element.attributes[name].value;
   },
   setContentEditable(bool = true) {
@@ -32,7 +35,7 @@ export const AttrsMethods = {
 };
 
 function _set_attrs_(name, value){
-    if(this.element?.tagName !== "svg") name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
+    if(this.element?.tagName !== "svg") name = is_camelcase(name) ? camel2hyphencase(name) : name;
     if(this?.attr[name] && this?.attr[name]===value) return;
     if(isStateGetter(value)){
         const getter = value()

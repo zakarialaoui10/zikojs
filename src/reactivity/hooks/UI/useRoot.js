@@ -1,4 +1,4 @@
-import { Str } from "../../../data"
+import { camel2hyphencase } from "../../../data/converter/string/index.js";
 class ZikoUseRoot{
     constructor(props){
         this.props={};
@@ -15,7 +15,7 @@ class ZikoUseRoot{
         return this;
     }
     #setOneProp(prop, value){
-        const CssProp = `--${Str.camel2hyphencase(prop)}`
+        const CssProp = `--${camel2hyphencase(prop)}`
         document.documentElement.style.setProperty(CssProp,value);
         Object.assign(this.props, {[prop]: `var(${CssProp})`})
         Object.assign(this, {[prop] : `var(${CssProp})`})
@@ -23,7 +23,7 @@ class ZikoUseRoot{
 }
 
 const useRootValue=CssVar=>{
-    if(!CssVar.startsWith("--")) CssVar = `--${Str.camel2hyphencase(CssVar)}`
+    if(!CssVar.startsWith("--")) CssVar = `--${camel2hyphencase(CssVar)}`
     return `var(${CssVar})`
 }
 // const useRootStaticValue=CssVar=>{

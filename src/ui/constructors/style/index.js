@@ -1,6 +1,7 @@
 import { addSuffixeToNumber } from "../../__utils__/index.js";
 import { Matrix,cos,sin} from "../../../math/index.js";
 import { Str } from "../../../data/index.js";
+import { camel2hyphencase } from '../../../data/string/converters.js'
 class ZikoUIElementStyle{
     constructor(defaultStyle={}){
         this.target=null;
@@ -25,7 +26,7 @@ class ZikoUIElementStyle{
         for(const [key, value] of Object.entries(styles)){
             if(Str.isCamelCase(key)){
                 delete styles[key];
-                Object.assign(styles,{[Str.camel2hyphencase(key)]:value})
+                Object.assign(styles,{[camel2hyphencase(key)]:value})
             }
         }
         if(this?.target?.element?.style)Object.assign(this?.target?.element?.style, styles);
