@@ -1,87 +1,103 @@
-class ZikoTimeLoop {
-  constructor(callback, step = 1000/30, startTime=0, endTime = Infinity, started = true) {
+export class TimeLoop {
+  constructor(callback, { step = 1000, t0 = 0, t1 = Infinity, autoplay = true } = {}) {
     this.callback = callback;
     this.cache = {
       isRunning: false,
-      AnimationId : null,
-      t0 : null,
+      id: null,
+      last_tick: null,
       step,
-      // fps,
-      startTime,
-      endTime,
-      started
+      t0,
+      t1,
+      autoplay,
+      pauseTime: null,
+      frame : 0,
     };
-    this.init();
-    this.i=0;
-  }
-  init(){
-    // if(this.cache.step && this.cache.fps){
-    //   console.warn(`Fps will be adjusted from ${this.cache.fps} to ${1000/this.cache.step} to ensure a smoother animation`);
-    //   this.cache.fps=1000/this.cache.step;
-    // }
-    if(this.cache.started){
-      this.cache.startTime?this.startAfter(this.cache.startTime):this.start();
-      if(this.cache.endTime&&this.cache.endTime!==Infinity)this.stopAfter(this.cache.endTime);
+
+    if (autoplay) {
+      t0 ? this.startAfter(t0) : this.start();
+      if (t1 !== Infinity) this.stopAfter(t1);
     }
-    return this;
   }
-  // get TIME_STEP() {
-  //   // return this.cache.step?this.cache.step:1000 / this.cache.fps;
-  //   return this.cache.step;
-  // }
+
+  get frame(){
+    return this.cache.frame;
+  }
+  get elapsed(){
+    return this.cache.elapsed;
+  }
+
   start() {
     if (!this.cache.isRunning) {
-      this.i=0;
+      this.cache.frame = 0;
       this.cache.isRunning = true;
-      this.cache.t0 = Date.now();
+      this.cache.last_tick = Date.now();
       this.animate();
     }
     return this;
   }
+
   pause() {
     if (this.cache.isRunning) {
-      clearTimeout(this.cache.AnimationId);
+      clearTimeout(this.cache.id);
       this.cache.isRunning = false;
+      this.cache.pauseTime = Date.now();
     }
     return this;
   }
-  stop(){
+
+  resume() {
+    if (!this.cache.isRunning) {
+      this.cache.isRunning = true;
+      if (this.cache.pauseTime) {
+        // adjust start time so delta stays consistent
+        const pausedDuration = Date.now() - this.cache.pauseTime;
+        this.cache.last_tick += pausedDuration;
+      }
+      this.animate();
+    }
+    return this;
+  }
+
+  stop() {
     this.pause();
-    this.i=0;
+    this.cache.frame = 0;
     return this;
   }
-  resume(){
-    this.cache.isRunning=true;
-    this.animate();
+
+  startAfter(t = 1000) {
+    setTimeout(() => this.start(), t);
     return this;
   }
-  startAfter(t=1000){
-    setTimeout(this.start.bind(this),t);
+
+  stopAfter(t = 1000) {
+    setTimeout(() => this.stop(), t);
     return this;
   }
-  stopAfter(t=1000){
-    setTimeout(this.stop.bind(this),t);
-    return this;   
-  }
+
   animate = () => {
     if (this.cache.isRunning) {
       const now = Date.now();
-      const delta = now - this.cache.t0;
-      if (delta > this.cache.step) {
+      const delta = now - this.cache.last_tick;
+
+      if (delta >= this.cache.step) {
+        this.cache.elapsed = now - (this.cache.t0 || 0);
         this.callback(this);
-        this.i++;
-        this.cache.t0 = now - (delta % this.cache.step);
+        this.cache.frame++;
+        this.cache.last_tick = now - (delta % this.cache.step);
       }
-      this.cache.AnimationId = setTimeout(this.animate, 0);
-    };
+
+      this.cache.id = setTimeout(this.animate, 0);
+    }
   }
 }
-const useFps = fps => 1000/fps;
-const useTimeLoop = (callback, step, startTime, endTime, started) => new ZikoTimeLoop(callback, step, startTime, endTime, started);
+
+export const loop = (callback, options = {}) => new TimeLoop(callback, options);
 
 
-//const a = useTimeLoop((e) => console.log(e.i), {step:100,fps:30,t:[500,4001],start:true});
-export {
-  useTimeLoop,
-  useFps
-}
+// Helpers
+// const useFps = (fps) => 1000 / fps;
+
+// const _loop = loop( e => {
+//   console.log("Frame:", e.frame, " Elapsed: ", e.elapsed);
+// });
+

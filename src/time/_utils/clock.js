@@ -40,3 +40,19 @@ export class Clock extends Tick {
 }
 
 const clock = (tickMs) => new Clock(tickMs)
+
+
+/* 
+
+    const clock = new Clock(200);
+
+    clock.onTick(({ elapsed, delta }) => {
+      console.log(`Elapsed: ${elapsed.toFixed(0)}ms, Delta: ${delta.toFixed(0)}ms`);
+    });
+
+    clock.start();
+
+    setTimeout(() => clock.pause(), 1000);  
+    setTimeout(() => clock.resume(), 2000); 
+
+*/
