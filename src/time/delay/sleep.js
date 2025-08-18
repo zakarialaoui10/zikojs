@@ -1,4 +1,3 @@
-import { timeout } from "./timeout.js";
-export const sleep = (ms) => timeout(ms).promise;
+export const sleep= ms => new Promise(res => setTimeout(res, ms));
 
 // use it with await 

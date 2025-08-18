@@ -1,4 +1,4 @@
-import Ease from "./ease.js";
+// import Ease from "./ease.js";
 const wait=(delayInMS)=>{
     return new Promise((resolve) => setTimeout(resolve, delayInMS));
 }
@@ -11,7 +11,7 @@ const timeTaken = callback => {
 export{
     wait,
     timeTaken,
-    Ease
+    // Ease
 }
 export * from "./performance.js";
 export * from "./ui.js"
