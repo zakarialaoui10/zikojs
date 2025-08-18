@@ -19,18 +19,14 @@ const tags = new Proxy({}, {
     let type ;
     if(HTMLTags.includes(tag)) type = 'html'
     if(SVGTags.includes(tag)) type = 'svg'
-    if(HTMLTags.includes(tag)) return (...args)=>{
+    return (...args)=>{
       console.log(isStateGetter(args[0]))
-    //  if(typeof args[0] === 'function') {
-    //   console.log(args[0], args[0]?.() instanceof StateGetter)
-    //   globalThis.a = args[0]
-    //   console.log({t : a.constructor})
-    //  }
       if(
         ['string', 'number'].includes(typeof args[0]) 
         || args[0] instanceof UIElement 
         || (typeof args[0] === 'function' && args[0]().isStateGetter())
-      ) return new UIElement({element :tag, name : tag, type}).append(...args);
+      ) return new UIElement({element : tag, name : tag, type}).append(...args);
+      // console.log(args[0])
       return new UIElement({element : tag}).setAttr(args.shift()).append(...args)
     }
     // if(SVGTags.includes(tag)) return (...args) => new UIElement(tag,"",{el_type : "svg"}).append(...args);
