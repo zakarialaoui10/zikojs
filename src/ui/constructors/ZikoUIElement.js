@@ -1,9 +1,10 @@
 import ZikoUINode from "./ZikoUINode.js";
 import { register } from "../../__helpers__/register/index.js";
 import { 
+  AttrsMethods,
   DomMethods,
   IndexingMethods,
-  EventsMethodes
+  EventsMethodes,
 } from "../__methods__/index.js";
 import { ZikoUseStyle } from "../../reactivity/hooks/UI/useStyle.js";
 import { ZikoUIElementStyle } from "./style/index.js";
@@ -34,7 +35,7 @@ class ZikoUIElement extends ZikoUINode{
     else{
       this.target = element.parentElement;
     }
-    register(this, DomMethods, IndexingMethods, EventsMethodes);
+    register(this, AttrsMethods, DomMethods, IndexingMethods, EventsMethodes);
     Object.assign(this.cache, {
       name,
       isInteractive : [true, false][Math.floor(2*Math.random())],
@@ -190,35 +191,6 @@ class ZikoUIElement extends ZikoUINode{
   animate(keyframe, {duration=1000, iterations=1, easing="ease"}={}){
     this.element?.animate(keyframe,{duration, iterations, easing});
     return this;
-  }
-    // Attributes
-  #setAttr(name, value){
-    if(this.element?.tagName !== "svg") name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
-    if(this?.attr[name] && this?.attr[name]===value) return;
-    this.element?.setAttribute(name, value)
-    Object.assign(this.cache.attributes, {[name]:value});
-  }
-  setAttr(name, value) {
-    if(name instanceof Object){
-      const [names,values]=[Object.keys(name),Object.values(name)];
-      for(let i=0;i<names.length;i++){
-        if(values[i] instanceof Array)value[i] = values[i].join(" ");
-        this.#setAttr(names[i], values[i])
-      }
-    }
-    else{
-      if(value instanceof Array)value = value.join(" ");
-      this.#setAttr(name, value)
-    }
-    return this;
-  }
-  removeAttr(...names) {
-    for(let i=0;i<names.length;i++)this.element?.removeAttribute(names[i]);
-    return this;
-  }
-  getAttr(name){
-    name = Str.isCamelCase(name) ? Str.camel2hyphencase(name) : name;
-    return this.element.attributes[name].value;
   }
   setContentEditable(bool = true) {
     this.setAttr("contenteditable", bool);

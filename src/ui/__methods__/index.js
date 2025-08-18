@@ -1,3 +1,4 @@
+export * from './attrs.js'
 export * from './dom.js'
 export * from './events.js'
 export * from './indexing.js'
