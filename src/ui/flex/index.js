@@ -1,7 +1,7 @@
 import ZikoUIElement from "../constructors/ZikoUIElement.js";
 class ZikoUIFlex extends ZikoUIElement {
   constructor(tag = "div", w = "100%", h = "100%") {
-    super(tag ,"Flex");
+    super({element : tag , name : "Flex"});
     this.direction = "cols";
     if (typeof w == "number") w += "%";
     if (typeof h == "number") h += "%";

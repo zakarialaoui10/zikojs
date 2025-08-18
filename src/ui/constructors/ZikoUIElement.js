@@ -20,7 +20,7 @@ import { Random } from "../../math/index.js";
 import {__init__global__} from '../../__ziko__/index.js';
 __init__global__()
 class ZikoUIElement extends ZikoUINode{
-  constructor(element, name="", {name ='', type="html", useDefaultStyle=false}={}){
+  constructor({element, name ='', type="html", useDefaultStyle=false}={}){
     super()
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {

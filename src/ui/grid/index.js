@@ -1,7 +1,7 @@
 import ZikoUIElement from "../constructors/ZikoUIElement.js"
 class ZikoUIGrid extends ZikoUIElement {
     constructor(tag ="div", w = "50vw", h = "50vh") {
-      super(tag,"Grid");
+      super({element : tag, name : "Grid"});
       this.direction = "cols";
       if (typeof w == "number") w += "%";
       if (typeof h == "number") h += "%";

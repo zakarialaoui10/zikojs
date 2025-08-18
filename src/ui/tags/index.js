@@ -30,8 +30,8 @@ const tags = new Proxy({}, {
         ['string', 'number'].includes(typeof args[0]) 
         || args[0] instanceof ZikoUIElement 
         || (typeof args[0] === 'function' && args[0]().isStateGetter())
-      ) return new ZikoUIElement(tag, tag, {type}).append(...args);
-      return new ZikoUIElement(tag).setAttr(args.shift()).append(...args)
+      ) return new ZikoUIElement({element :tag, name : tag, type}).append(...args);
+      return new ZikoUIElement({element : tag}).setAttr(args.shift()).append(...args)
     }
     // if(SVGTags.includes(tag)) return (...args) => new ZikoUIElement(tag,"",{el_type : "svg"}).append(...args);
     // return (...args)=>{
