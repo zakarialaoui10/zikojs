@@ -68,7 +68,7 @@ export const DomMethods = {
 
 };
 
-function __addItem__(adder, pusher, ...ele) {
+async function __addItem__(adder, pusher, ...ele) {
   if (this.cache.isFrozzen) {
     console.warn("You can't append new item to frozzen element");
     return this;
@@ -94,6 +94,13 @@ function __addItem__(adder, pusher, ...ele) {
         ele[i].target = this.element;
         this.items[pusher](ele[i]);
     } 
+    else if(ele[i] instanceof Promise){
+      const UIEle = await ele[i]
+      UIEle.cache.parent = this;
+      this.element?.[adder](UIEle.element);
+      UIEle.target = this.element;
+      this.items[pusher](UIEle)
+    }
     else if (ele[i] instanceof Object) {
       if (ele[i]?.style) this.style(ele[i]?.style);
       if (ele[i]?.attr) {
