@@ -1,6 +1,6 @@
 import { Tick } from "./tick.js";
 
-export class Clock extends Tick {
+class Clock extends Tick {
   constructor(tickMs = 1000 / 60) {
     super(tickMs, () => this._tick());
     this.elapsed = 0;

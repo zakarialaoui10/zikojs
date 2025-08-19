@@ -1,4 +1,4 @@
-export class Tick {
+class Tick {
   constructor(ms, fn) {
     this.ms = ms;
     this.fn = fn;
@@ -27,8 +27,8 @@ export class Tick {
     return this.running;
   }
 }
-const tick = (ms, fn) => new Tick(ms, fn)
-export {
-    tick,
-    Tick
+const tick = (ms, fn) => new Tick(ms, fn);
+export{
+  Tick,
+  tick
 }
