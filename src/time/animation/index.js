@@ -1,76 +1,94 @@
-import { Ease } from "../utils";
-import { map } from "../../math/utils"
-class ZikoTimeAnimation{
-    constructor(callback,ease=Ease.Linear,step=50,{t=[0,null],start=true,duration=3000}={}){
-        this.cache={
-            isRunning:false,
-            AnimationId:null,
-            startTime:null,
-            ease,
-            step,
-            intervall:t,
-            started:start,
-            duration
-        }
-        this.t=0;
-        this.tx=0;
-        this.ty=0;
-        this.i=0;
-        this.callback=callback;
+import { Linear } from "../ease/index.js";
+import { map } from "../../math/utils/index.js";
+
+class TimeAnimation {
+  constructor(callback, { ease = Linear, step = 50, t0 = 0, start = true, duration = 3000 } = {}) {
+    this.callback = callback;
+    this.state = {
+      isRunning: false,
+      animationId: null,
+      startTime: null,
+      ease,
+      step,
+    //   interval: [t0, t1],
+      autoStart: start,
+      duration
+    };
+
+    this.t = 0;   // elapsed time
+    this.tx = 0;  // normalized [0,1]
+    this.ty = 0;  // eased value
+    this.i = 0;   // frame index
+
+    if (this.state.autoStart) {
+      this.start();
     }
-    #animation_handler(){
-            this.t+=this.cache.step;
-            this.i++;
-            this.tx=map(this.t,0,this.cache.duration,0,1);
-            this.ty=this.cache.ease(this.tx);
-            this.callback(this)
-            if(this.t>=this.cache.duration){
-                clearInterval(this.cache.AnimationId);
-                this.cache.isRunning=false;
-            }
+  }
+
+  // ---- private loop handler ----
+  #tick = () => {
+    this.t += this.state.step;
+    this.i++;
+
+    this.tx = map(this.t, 0, this.state.duration, 0, 1);
+    this.ty = this.state.ease(this.tx);
+
+    this.callback(this);
+
+    if (this.t >= this.state.duration) {
+      clearInterval(this.state.animationId);
+      this.state.isRunning = false;
     }
-    reset(restart=true){
-        this.t=0
-        this.tx=0;
-        this.ty=0;
-        this.i=0;
-        if(restart)this.start();
-        return this;
+  };
+
+  // ---- core runner ----
+  #run(reset = true) {
+    if (!this.state.isRunning) {
+      if (reset) this.reset(false);
+
+      this.state.isRunning = true;
+      this.state.startTime = Date.now();
+      this.state.animationId = setInterval(this.#tick, this.state.step);
     }
-    #animate(reset=true){
-        if(!this.cache.isRunning){
-            if(reset)this.reset(false);
-            this.cache.isRunning=true;
-            this.cache.startTime = Date.now();
-            this.cache.AnimationId=setInterval(this.#animation_handler.bind(this),this.cache.step);
-        }
-        return this;
+    return this;
+  }
+
+  // ---- lifecycle methods ----
+  start() {
+    return this.#run(true);
+  }
+
+  pause() {
+    if (this.state.isRunning) {
+      clearInterval(this.state.animationId);
+      this.state.isRunning = false;
     }
-    start(){
-        this.#animate(true);
-        return this;
-    }
-    pause(){
-        if (this.cache.isRunning) {
-            clearTimeout(this.cache.AnimationId);
-            this.cache.isRunning = false;
-          }
-        return this;
-    }
-    resume(){
-        this.#animate(false);
-        return this;
-    }
-    stop(){
-        this.pause();
-        this.reset(false);
-        return this;
-    }
-    // clear(){
-    // }
-    // stream(){
-    // }
+    return this;
+  }
+
+  resume() {
+    return this.#run(false);
+  }
+
+  stop() {
+    this.pause();
+    this.reset(false);
+    return this;
+  }
+
+  reset(restart = true) {
+    this.t = 0;
+    this.tx = 0;
+    this.ty = 0;
+    this.i = 0;
+
+    if (restart) this.start();
+    return this;
+  }
 }
 
-const useAnimation=(callback,ease=Ease.Linear,step=50,config)=>new ZikoTimeAnimation(callback,ease=Ease.Linear,step=50,config)
-export{useAnimation}
+// Hook-style factory
+const animation = (callback, {ease, t0, t1, start, duration} = {}) =>
+  new TimeAnimation(callback, {ease, t0, t1, start, duration});
+
+export { TimeAnimation, animation };

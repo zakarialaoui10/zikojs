@@ -40,6 +40,10 @@ export class Clock extends Tick {
 }
 
 const clock = (tickMs) => new Clock(tickMs)
+export{
+  Clock,
+  clock
+}
 
 
 /* 
