@@ -20,7 +20,8 @@ const tags = new Proxy({}, {
     if(HTMLTags.includes(tag)) type = 'html'
     if(SVGTags.includes(tag)) type = 'svg'
     return (...args)=>{
-      console.log(isStateGetter(args[0]))
+      // Fix undefined
+      // console.log(isStateGetter(args[0]))
       if(
         ['string', 'number'].includes(typeof args[0]) 
         || args[0] instanceof UIElement 
