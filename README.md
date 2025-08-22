@@ -96,7 +96,7 @@ setInterval(()=>{
 - 📱 Single Page Application With File Based Routing
 ```js
 import { FileBasedRouting } from "ziko";
-FileBasedRouting(import.meta.glob("./src/pages/**/*.js"))
+FileBasedRouting(import.meta.glob("./pages/**/*.js"))
 ```
 - 🤝 One Way Interleaving With [Vanjs]()
 - ⏰ Time loop and animations support
@@ -110,7 +110,7 @@ FileBasedRouting(import.meta.glob("./src/pages/**/*.js"))
   - ➡️ Uni-directional (ZikoJS → X) : 
     - `Astro` : (SSR + Client Hydration)
 - 📦 Growing Add-On Ecosystem : 
-    - Ziko-Gl : WebGL/3D Graphics, Built on Top of [Threejs](https://github.com/zakarialaoui10/ziko-gl)
+    - Ziko-Tgl : WebGL/3D Graphics, Built on Top of [Threejs](https://github.com/zakarialaoui10/ziko-gl)
     - Ziko-Chart 
     - Ziko-Code
     - Ziko-Lottie
