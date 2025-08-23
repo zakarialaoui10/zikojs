@@ -1,15 +1,26 @@
 class Tick {
-  constructor(ms, fn) {
+  constructor(fn, ms, count = Infinity, start) {
     this.ms = ms;
     this.fn = fn;
+    this.count = count;
+    this.frame = 1;
     this.id = null;
     this.running = false;
+    if(start) this.start()
   }
 
   start() {
     if (!this.running) {
       this.running = true;
-      this.id = setInterval(this.fn, this.ms);
+      this.frame = 1;
+      this.id = setInterval(() => {
+        if (this.frame > this.count) {
+          this.stop();
+          return;
+        }
+        this.fn.call(null, this);
+        this.frame++;
+      }, this.ms);
     }
     return this;
   }
@@ -27,8 +38,11 @@ class Tick {
     return this.running;
   }
 }
-const tick = (ms, fn) => new Tick(ms, fn);
-export{
+
+// Helper factory
+const tick = (fn, ms, count = Infinity, start = true) => new Tick(fn, ms, count, start);
+
+export {
   Tick,
   tick
-}
+};
