@@ -7,21 +7,7 @@ export function useState(initialValue) {
         return {
             value,
             isStateGetter: () => true,
-            _subscribe: (
-                fn, 
-                // UIElement 
-            ) => {
-                subscribers.add(fn);
-
-                // const observer = new MutationObserver(() => {
-                //     if (!document.body.contains(UIElement.element)) {
-                //         subscribers.delete(fn);
-                //         observer.disconnect();
-                //     }
-                // });
-
-                // observer.observe(document.body, { childList: true, subtree: true });
-            },
+            _subscribe: (fn) => subscribers.add(fn)
         };
     }
 
