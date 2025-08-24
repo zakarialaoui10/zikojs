@@ -5,4 +5,3 @@ export const __HYDRATION__ = {
         this.store.set(this.index++, component)
     }
 }
-export const __HYDRATION_MAP__ = new Map()
