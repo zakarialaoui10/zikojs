@@ -17,7 +17,7 @@ import {
   watchChildren
 } from "../../reactivity/index.js"
 // import { Random } from "../../math/index.js";
-import {__init__global__} from '../../__ziko__/index.js';
+import {__init__global__, UIStore} from '../../__ziko__/index.js';
 __init__global__()
 class UIElement extends UINode{
   constructor({element, name ='', type="html", render = __Ziko__.__Config__.default.render, useDefaultStyle=false}={}){
@@ -71,7 +71,7 @@ class UIElement extends UINode{
       resize:null,
       intersection:null
     }
-    if(element)Object.assign(this.cache,{element});
+    if(element) Object.assign(this.cache,{element});
     // this.uuid = `${this.cache.name}-${Random.string(16)}`
     this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index();
     useDefaultStyle && this.style({ 
@@ -82,7 +82,7 @@ class UIElement extends UINode{
       width : "auto",
       height : "auto"
      });
-    this.items = [];
+    this.items = new UIStore();
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
     element && render && this?.render?.()
     if(
@@ -95,6 +95,7 @@ class UIElement extends UINode{
       this.setAttr("ziko-hydration-index", globalThis.__Ziko__.__HYDRATION__.index);
       globalThis.__Ziko__.__HYDRATION__.register(() => this)
     }
+    globalThis.__Ziko__.__UI__.push(this)
   }
   get element(){
     return this.cache.element;
