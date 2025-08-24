@@ -1,44 +1,44 @@
-const runtimeStore = new Map();
-globalThis.runtimeStore = runtimeStore
+import { __State__ } from "../__ziko__/__state__.js";
+export function useState(initialValue) {
+    if(!__Ziko__) globalThis.__Ziko__ = {}
+    if(!__Ziko__.__State__) __Ziko__.__State__
 
-export function useState(initialValue, key = Math.random()) {
-    if (!runtimeStore.has(key)) {
-        runtimeStore.set(key, {
-            value: initialValue,
-            subscribers: new Set(),
-            paused: false,
-        });
-    }
+    const {store, index} = __Ziko__.__State__
+    __Ziko__.__State__.register({
+            value : initialValue,
+            subscribers : new Set(),
+            paused : false
+    })
 
-    const store = runtimeStore.get(key);
+    const current = store.get(index);
 
     function getValue() {
         return {
-            value: store.value,
+            value: current.value,
             isStateGetter: () => true,
-            _subscribe: (fn) => store.subscribers.add(fn),
+            _subscribe: (fn) => current.subscribers.add(fn),
         };
     }
 
     function setValue(newValue) {
-        if (store.paused) return;
-        if (typeof newValue === "function") newValue = newValue(store.value);
-        if (newValue !== store.value) {
-            store.value = newValue;
-            store.subscribers.forEach(fn => fn(store.value));
+        if (current.paused) return;
+        if (typeof newValue === "function") newValue = newValue(current.value);
+        if (newValue !== current.value) {
+            current.value = newValue;
+            current.subscribers.forEach(fn => fn(current.value));
         }
     }
 
     const controller = {
-        pause: () => { store.paused = true; },
-        resume: () => { store.paused = false; },
-        clear: () => { store.subscribers.clear(); },
+        pause: () => { current.paused = true; },
+        resume: () => { current.paused = false; },
+        clear: () => { current.subscribers.clear(); },
         force: (newValue) => {
-            if (typeof newValue === "function") newValue = newValue(store.value);
-            store.value = newValue;
-            store.subscribers.forEach(fn => fn(store.value));
+            if (typeof newValue === "function") newValue = newValue(current.value);
+            current.value = newValue;
+            current.subscribers.forEach(fn => fn(current.value));
         },
-        getSubscribers: () => new Set(store.subscribers),
+        getSubscribers: () => new Set(current.subscribers),
     };
 
     return [getValue, setValue, controller];
