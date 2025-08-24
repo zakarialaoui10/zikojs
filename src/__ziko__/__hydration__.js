@@ -1,8 +1,8 @@
 export const __HYDRATION__ = {
-    map : new Map(),
+    store : new Map(),
     index : 0,
-    increment : function(){
-        return this.index ++
+    register: function(component){
+        this.store.set(this.index++, component)
     }
 }
 export const __HYDRATION_MAP__ = new Map()

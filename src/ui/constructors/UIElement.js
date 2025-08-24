@@ -16,11 +16,11 @@ import {
   watchAttr,
   watchChildren
 } from "../../reactivity/index.js"
-import { Random } from "../../math/index.js";
+// import { Random } from "../../math/index.js";
 import {__init__global__} from '../../__ziko__/index.js';
 __init__global__()
 class UIElement extends UINode{
-  constructor({element, name ='', type="html", useDefaultStyle=false}={}){
+  constructor({element, name ='', type="html", render = __Ziko__.__Config__.default.render, useDefaultStyle=false}={}){
     super()
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
@@ -72,7 +72,7 @@ class UIElement extends UINode{
       intersection:null
     }
     if(element)Object.assign(this.cache,{element});
-    this.uuid = `${this.cache.name}-${Random.string(16)}`
+    // this.uuid = `${this.cache.name}-${Random.string(16)}`
     this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index();
     useDefaultStyle && this.style({ 
       position: "relative",
@@ -84,7 +84,7 @@ class UIElement extends UINode{
      });
     this.items = [];
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
-    element && globalThis.__Ziko__.__Config__.default.render && this?.render?.()
+    element && render && this?.render?.()
     if(
       // globalThis.__Ziko__.__Config__.renderingMode !== "spa" 
       // && 
@@ -93,8 +93,7 @@ class UIElement extends UINode{
       this.isInteractive()
     ){
       this.setAttr("ziko-hydration-index", globalThis.__Ziko__.__HYDRATION__.index);
-      globalThis.__Ziko__.__HYDRATION__.map.set(globalThis.__Ziko__.__HYDRATION__.index, ()=>this);
-      globalThis.__Ziko__.__HYDRATION__.increment()
+      globalThis.__Ziko__.__HYDRATION__.register(() => this)
     }
   }
   get element(){
