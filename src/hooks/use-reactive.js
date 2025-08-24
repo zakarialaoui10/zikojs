@@ -6,7 +6,7 @@ const useReactive = (nested_value) => mapfun(
         const state = useState(n)
         console.log(state)
         return {
-            value : state[0],
+            get : state[0],
             set : state[1],
         }
     }, 

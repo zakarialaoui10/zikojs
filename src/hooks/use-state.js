@@ -1,41 +1,50 @@
-export function useState(initialValue) {
-    let value = initialValue;
-    const subscribers = new Set();
-    let paused = false;
+const runtimeStore = new Map();
+globalThis.runtimeStore = runtimeStore
+
+export function useState(initialValue, key = Math.random()) {
+    if (!runtimeStore.has(key)) {
+        runtimeStore.set(key, {
+            value: initialValue,
+            subscribers: new Set(),
+            paused: false,
+        });
+    }
+
+    const store = runtimeStore.get(key);
 
     function getValue() {
         return {
-            value,
+            value: store.value,
             isStateGetter: () => true,
-            _subscribe: (fn) => subscribers.add(fn)
+            _subscribe: (fn) => store.subscribers.add(fn),
         };
     }
 
     function setValue(newValue) {
-        if (paused) return;
-        if (typeof newValue === "function") newValue = newValue(value);
-        if (newValue !== value) {
-            value = newValue;
-            subscribers.forEach(fn => fn(value));
+        if (store.paused) return;
+        if (typeof newValue === "function") newValue = newValue(store.value);
+        if (newValue !== store.value) {
+            store.value = newValue;
+            store.subscribers.forEach(fn => fn(store.value));
         }
     }
 
     const controller = {
-        pause: () => { paused = true; },
-        resume: () => { paused = false; },
-        clear: () => { subscribers.clear(); },
-        force: (newValue) => { // force update even if paused
-            if (typeof newValue === "function") newValue = newValue(value);
-            value = newValue;
-            subscribers.forEach(fn => fn(value));
+        pause: () => { store.paused = true; },
+        resume: () => { store.paused = false; },
+        clear: () => { store.subscribers.clear(); },
+        force: (newValue) => {
+            if (typeof newValue === "function") newValue = newValue(store.value);
+            store.value = newValue;
+            store.subscribers.forEach(fn => fn(store.value));
         },
-        getSubscribers: () => new Set(subscribers),
+        getSubscribers: () => new Set(store.subscribers),
     };
 
     return [getValue, setValue, controller];
 }
 
-export const isStateGetter = (arg) => {
-    return typeof(arg) === 'function' && arg?.()?.isStateGetter?.()
-}
 
+export const isStateGetter = (arg) => {
+    return typeof arg === 'function' && arg?.()?.isStateGetter?.();
+};
