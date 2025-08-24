@@ -1,7 +1,19 @@
-import { __State__ } from "../__ziko__/__state__.js";
+import { __init__global__ } from "../__ziko__/index.js";
+if(!globalThis.__Ziko__) __init__global__()
+
+    // HMR persistence
+if (import.meta.hot) {
+    import.meta.hot.data.__Ziko__ = import.meta.hot.data.__Ziko__ || globalThis.__Ziko__;
+    globalThis.__Ziko__ = import.meta.hot.data.__Ziko__;
+    // import.meta.hot.accept(n=>console.log(n));
+    // console.log(import.meta.hot.data.__Ziko__.__State__.store)
+}
+
+
+
 export function useState(initialValue) {
-    if(!__Ziko__) globalThis.__Ziko__ = {}
-    if(!__Ziko__.__State__) __Ziko__.__State__
+
+    // console.log(import.meta.hot.data.__Ziko__.__State__.store.get(0))
 
     const {store, index} = __Ziko__.__State__
     __Ziko__.__State__.register({
