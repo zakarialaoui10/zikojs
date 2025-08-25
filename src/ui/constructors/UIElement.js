@@ -7,7 +7,6 @@ import {
   EventsMethodes,
   StyleMethods
 } from "../__methods__/index.js";
-import { isStateGetter } from "../../hooks/use-state.js";
 import { 
   useCustomEvent,
   useSwipeEvent,
@@ -105,24 +104,6 @@ class UIElement extends UINode{
   }
   isZikoUIElement(){
     return true;
-  }
-  style(styles){
-    for(let key in styles){
-        const value = styles[key];
-        if(isStateGetter(value)){
-            const getter = value()
-            Object.assign(this.element.style, {[key] : getter.value})
-            getter._subscribe(
-                (newValue) => {
-                    console.log({newValue})
-                    Object.assign(this.element.style, {[key] : newValue})
-                },
-                // this 
-            );
-        }
-        else Object.assign(this.element.style, {[key] : value})
-    }
-    return this;
   }
   get st(){
     return this.cache.style;
