@@ -7,7 +7,7 @@ import {
   EventsMethodes,
   StyleMethods
 } from "../__methods__/index.js";
-
+import { isStateGetter } from "../../hooks/use-state.js";
 import { 
   useCustomEvent,
   useSwipeEvent,
@@ -106,6 +106,24 @@ class UIElement extends UINode{
   isZikoUIElement(){
     return true;
   }
+  style(styles){
+    for(let key in styles){
+        const value = styles[key];
+        if(isStateGetter(value)){
+            const getter = value()
+            Object.assign(this.element.style, {[key] : getter.value})
+            getter._subscribe(
+                (newValue) => {
+                    console.log({newValue})
+                    Object.assign(this.element.style, {[key] : newValue})
+                },
+                // this 
+            );
+        }
+        else Object.assign(this.element.style, {[key] : value})
+    }
+    return this;
+  }
   get st(){
     return this.cache.style;
   }
@@ -146,14 +164,13 @@ class UIElement extends UINode{
     return this.element.getBoundingClientRect().left;
   }
   clone(render=false) {
-    const UI = new this.constructor();
-    UI.__proto__=this.__proto__;
-    if(this.items.length){
-      const items = [...this.items].map(n=>n.clone());
-      UI.append(...items);
-    }
-    else UI.element=this.element.cloneNode(true);
-    return UI.render(render);
+    // UI.__proto__=this.__proto__;
+    // if(this.items.length){
+    //   const items = [...this.items].map(n=>n.clone());
+    //   UI.append(...items);
+    // }
+    // else UI.element=this.element.cloneNode(true);
+    // return UI.render(render);
   }
   [Symbol.iterator]() {
     return this.items[Symbol.iterator]();
@@ -172,14 +189,14 @@ class UIElement extends UINode{
     this.cache.isFrozzen=freeze;
     return this;
   }
-  setTarget(tg) {
-    if(this.isBody) return ;
-    if (tg?.isZikoUIElement) tg = tg.element;
-    this.unrender();
-    this.target = tg;
-    this.render();
-    return this;
-  }
+  // setTarget(tg) {
+  //   if(this.isBody) return ;
+  //   if (tg?.isZikoUIElement) tg = tg.element;
+  //   this.unrender();
+  //   this.target = tg;
+  //   this.render();
+  //   return this;
+  // }
   describe(label){
     if(label)this.setAttr("aria-label",label)
   }
