@@ -1,6 +1,6 @@
-import UIElement from "../constructors/UIElement.js";
+import {UIElement} from "../constructors/UIElement.js";
 import { HTMLTags, SVGTags } from "./tags-list.js";
-import { isStateGetter } from "../../hooks/use-state.js";
+// import { isStateGetter } from "../../hooks/use-state.js";
 const _h=(tag, type, attributes, ...children)=>{
     const { name, style, ...attrs } = attributes;
     let element = new UIElement(tag, name, type);

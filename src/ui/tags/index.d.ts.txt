@@ -1,4 +1,4 @@
-import UIElement from "../elements/UIElement.js";
+import {UIElement} from "../elements/UIElement.js";
 interface HtmlTags {
     a: UIElement;
     abbr: UIElement;

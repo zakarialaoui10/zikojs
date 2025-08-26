@@ -1,4 +1,4 @@
-import UIElement from "../constructors/UIElement.js";
+import { UIElement } from "../constructors/UIElement.js";
 const Id = (a) => document.getElementById(a);
 const Class = (a) => [...document.getElementsByClassName(a)];
 const $=(...selector)=>{

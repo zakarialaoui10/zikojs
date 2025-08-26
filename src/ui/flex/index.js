@@ -1,4 +1,4 @@
-import UIElement from "../constructors/UIElement.js";
+import { UIElement } from "../constructors/UIElement.js";
 class ZikoUIFlex extends UIElement {
   constructor(tag = "div", w = "100%", h = "100%") {
     super({element : tag , name : "Flex"});

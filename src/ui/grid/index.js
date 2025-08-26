@@ -1,4 +1,4 @@
-import UIElement from "../constructors/UIElement.js"
+import {UIElement} from "../constructors/UIElement.js"
 class ZikoUIGrid extends UIElement {
     constructor(tag ="div", w = "50vw", h = "50vh") {
       super({element : tag, name : "Grid"});

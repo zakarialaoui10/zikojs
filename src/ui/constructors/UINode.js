@@ -1,4 +1,4 @@
-export default class UINode {
+export class UINode {
     constructor(node){
         this.cache = {
             node
@@ -12,4 +12,4 @@ export default class UINode {
     } 
 }
 
-globalThis.node = (node) => new UINode(node);
+// globalThis.node = (node) => new UINode(node);

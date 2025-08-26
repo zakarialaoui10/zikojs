@@ -1,4 +1,4 @@
-import  UIElement from "../constructors/UIElement.js";
+import {UIElement} from "../constructors/UIElement.js";
 import {Matrix} from "../../math/matrix/Matrix.js"
 class ZikoUICanvas extends UIElement{
     constructor(w,h){

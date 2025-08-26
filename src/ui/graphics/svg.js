@@ -1,4 +1,4 @@
-import UIElement  from "../constructors/UIElement.js";
+import {UIElement}  from "../constructors/UIElement.js";
 class ZikoUISvg extends UIElement {
     constructor(w=360,h=300) {
       super("svg","svg");

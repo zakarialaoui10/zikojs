@@ -1,4 +1,4 @@
-import UINode from "./UINode.js";
+import {UINode} from "./UINode.js";
 import { register } from "../../__helpers__/register/index.js";
 import { 
   AttrsMethods,
@@ -252,4 +252,4 @@ class UIElement extends UINode{
   }
 
 }
-export default UIElement;
+export { UIElement }

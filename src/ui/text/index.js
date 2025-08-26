@@ -1,4 +1,4 @@
-import UINode from "../constructors/UINode.js";
+import {UINode} from "../constructors/UINode.js";
 class ZikoUIText extends UINode {
     constructor(...value) {
       super("span", "text", false, ...value);
