@@ -1,4 +1,6 @@
-export * from "./composition/index.js"
+export * from './register/index.js'
+export * from './checkers/index.js'
+
 const __ExtractAll__ =(obj)=> {
     const keys = Object.keys(obj);
     for (let i = 0; i < keys.length; i++) {
@@ -61,4 +63,3 @@ export{
 }
 
 
-export * from "./composition/index.js"
