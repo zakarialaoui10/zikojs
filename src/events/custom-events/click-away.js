@@ -6,7 +6,7 @@ class ClickAwayEvent extends Event {
   }
 }
 
-function listen_click_away(element) {
+function register_click_away_event(element) {
   function handler(e) {
     if (!element.contains(e.target)) {
       const clickAwayEvent = new ClickAwayEvent(e, element);
@@ -16,15 +16,13 @@ function listen_click_away(element) {
 
   globalThis?.document?.addEventListener("click", handler);
 
-  // return cleanup function
-  return () => {
-    globalThis?.document?.removeEventListener("click", handler);
-  };
+  return () => globalThis?.document?.removeEventListener("click", handler);
+  
 }
 
 export{
     ClickAwayEvent,
-    listen_click_away
+    register_click_away_event
 }
 
 // // Example usage

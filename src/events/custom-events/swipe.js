@@ -8,7 +8,7 @@ class SwipeEvent extends Event {
   }
 }
 
-function listen_swipe(element, threshold = 50, restraint = 100, allowedTime = 500) {
+function register_swipe_event(element, threshold = 50, restraint = 100, allowedTime = 500) {
   let startX, startY, startTime, isPointerDown = false;
   function onPointerDown(e) {
     startX = e.clientX;
@@ -46,7 +46,6 @@ function listen_swipe(element, threshold = 50, restraint = 100, allowedTime = 50
   element.addEventListener("pointerdown", onPointerDown, false);
   element.addEventListener("pointerup", onPointerUp, false);
 
-  // cleanup function
   return () => {
     element.removeEventListener("pointerdown", onPointerDown, false);
     element.removeEventListener("pointerup", onPointerUp, false);
@@ -55,5 +54,5 @@ function listen_swipe(element, threshold = 50, restraint = 100, allowedTime = 50
 
 export{
     SwipeEvent,
-    listen_swipe
+    register_swipe_event
 }
