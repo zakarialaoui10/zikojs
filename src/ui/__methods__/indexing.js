@@ -1,15 +1,15 @@
-export const IndexingMethods = {
-  at(index) {
+
+  export function at(index) {
     return this.items.at(index);
-  },
-  forEach(callback) {
+  }
+  export function forEach(callback) {
     this.items.forEach(callback);
     return this;
-  },
-  map(callback) {
+  }
+  export function map(callback) {
     return this.items.map(callback);
-  },
-  find(condition) {
+  }
+  export function find(condition) {
     return this.items.filter(condition);
-  },
-};
+  }
+

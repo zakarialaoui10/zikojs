@@ -1,4 +1,4 @@
-import {UIElement} from "../constructors/UIElement";
+import {UIElement} from "../constructors/UIElement-lite.js";
 class ZikoUISuspense extends UIElement{
     constructor(fallback_ui, callback){
         super({element : "div", name : "suspense"})

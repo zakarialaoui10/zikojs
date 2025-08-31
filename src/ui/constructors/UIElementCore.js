@@ -7,9 +7,12 @@ class UIElementCore extends UINode{
         name ='', 
         type="html", 
         render = __Ziko__.__Config__.default.render, 
-        isInteractive = [true, false][Math.floor(2*Math.random())],
+        isInteractive = false,
     }={}){
     super()
+    this.init(element, name, type, render, isInteractive)
+  }
+  init(element, name, type, render, isInteractive = [true, false][Math.floor(2*Math.random())]){
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
       switch(type){
@@ -59,9 +62,6 @@ class UIElementCore extends UINode{
     //   height : "auto"
     //  });
     this.items = new UIStore();
-    this.init(render)
-  }
-  init(element, render){
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
     element && render && this?.render?.()
     if(
