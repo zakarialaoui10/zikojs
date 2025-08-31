@@ -20,7 +20,7 @@ export function insertAt(index, ...ele) {
 export function remove(...ele) {
   const remove = (ele) => {
     if (typeof ele === "number") ele = this.items[ele];
-    if (ele?.isZikoUIElement) this.element?.removeChild(ele.element);
+    if (ele?.isUIElement) this.element?.removeChild(ele.element);
     this.items = this.items.filter((n) => n !== ele);
   };
   for (let i = 0; i < ele.length; i++) remove(ele[i]);
@@ -36,7 +36,7 @@ export function clear(){
 }
 export function render(target = this.target) {
   if(this.isBody)return ;
-  if(target?.isZikoUIElement)target=target.element;
+  if(target?.isUIElement)target=target.element;
   this.target=target;
   this.target?.appendChild(this.element);
   return this;
@@ -55,12 +55,12 @@ export function unrenderAfter(t = 1) {
   return this;
 }
 export function after(ui){
-  if(ui?.isZikoUIElement) ui=ui.element;
+  if(ui?.isUIElement) ui=ui.element;
   this.element?.after(ui)
   return this;
 }
 export function before(ui){
-  if(ui?.isZikoUIElement) ui=ui.element;
+  if(ui?.isUIElement) ui=ui.element;
   this.element?.before(ui)
   return this;
 }

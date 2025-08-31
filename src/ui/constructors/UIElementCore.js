@@ -153,7 +153,7 @@ class UIElementCore extends UINode{
 //   }
   // setTarget(tg) {
   //   if(this.isBody) return ;
-  //   if (tg?.isZikoUIElement) tg = tg.element;
+  //   if (tg?.isUIElement) tg = tg.element;
   //   this.unrender();
   //   this.target = tg;
   //   this.render();

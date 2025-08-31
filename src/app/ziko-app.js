@@ -21,7 +21,7 @@ class ZikoApp {
         return this;
     }
     setWrapper(wrapper){
-        if(wrapper?.isZikoUIElement) this.wrapper = wrapper;
+        if(wrapper?.isUIElement) this.wrapper = wrapper;
         else if(typeof wrapper === "function") this.wrapper = wrapper();
         return this;
     }

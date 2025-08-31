@@ -13,7 +13,7 @@ class ZikoSPA extends ZikoApp{
     }
     clear(){
         [...this.routes].forEach(n=>{
-            !isDynamic(n[0]) && n[1]?.isZikoUIElement && n[1].unrender()
+            !isDynamic(n[0]) && n[1]?.isUIElement && n[1].unrender()
         })   
         // this.wrapper.clear();
         return this;
@@ -26,10 +26,10 @@ class ZikoSPA extends ZikoApp{
             element = callback.call(this,params)
         }
         else {
-            callback?.isZikoUIElement && callback.render(this.wrapper); 
+            callback?.isUIElement && callback.render(this.wrapper); 
             if(typeof callback === "function") element = callback();  
         }
-        if(element?.isZikoUIElement) element.render(this.wrapper);
+        if(element?.isUIElement) element.render(this.wrapper);
         // if(element?.isZikoApp) element.render(this.wrapper);
         if(element instanceof Promise){
             element.then(e=>e.render(this.wrapper))

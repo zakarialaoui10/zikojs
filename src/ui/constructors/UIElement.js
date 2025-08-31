@@ -34,7 +34,7 @@ class UIElement extends UIElementCore{
   isInteractive(){
     return this.cache.isInteractive;
   }
-  // isZikoUIElement(){
+  // isUIElement(){
   //   return true;
   // }
   get st(){
@@ -104,7 +104,7 @@ class UIElement extends UIElementCore{
   // }
   // setTarget(tg) {
   //   if(this.isBody) return ;
-  //   if (tg?.isZikoUIElement) tg = tg.element;
+  //   if (tg?.isUIElement) tg = tg.element;
   //   this.unrender();
   //   this.target = tg;
   //   this.render();
