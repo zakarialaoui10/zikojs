@@ -13,3 +13,5 @@ export * from "./wheel.js";
 export * from "./__ZikoEvent__.js";
 export * from "./utils.js";
 
+
+export * from './custom-event.js'

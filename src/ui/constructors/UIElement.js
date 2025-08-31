@@ -1,4 +1,5 @@
 import {UINode} from "./UINode.js";
+import { UIElementCore } from "./UIElementCore.js";
 import { register } from "../../__helpers__/register/index.js";
 import { 
   AttrsMethods,
@@ -15,23 +16,11 @@ import {
   watchAttr,
   watchChildren
 } from "../../reactivity/index.js"
-// import { Random } from "../../math/index.js";
 import {__init__global__, UIStore} from '../../__ziko__/index.js';
 __init__global__()
-class UIElement extends UINode{
-  constructor({element, name ='', type="html", render = __Ziko__.__Config__.default.render, useDefaultStyle=false}={}){
-    super()
-    this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
-    if(typeof element === "string") {
-      switch(type){
-        case "html" : element = globalThis?.document?.createElement(element); break;
-        case "svg" : element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element);
-        default : throw Error("Not supported")
-      }
-    }
-    else{
-      this.target = element?.parentElement;
-    }
+class UIElement extends UIElementCore{
+  constructor({element, name ='', type="html", render = __Ziko__.__Config__.default.render}={}){
+    super({element, name, type, render})
     register(
       this, 
       AttrsMethods, 
@@ -40,61 +29,7 @@ class UIElement extends UINode{
       IndexingMethods, 
       EventsMethodes
     );
-    Object.assign(this.cache, {
-      name,
-      isInteractive : [true, false][Math.floor(2*Math.random())],
-      parent:null,
-      isBody:false,
-      isRoot:false,
-      isHidden: false,
-      isFrozzen:false,
-      legacyParent : null,
-      attributes: {},
-      filters: {},
-      temp:{}
-    })
-    this.events = {
-      ptr:null,
-      mouse:null,
-      wheel:null,
-      key:null,
-      drag:null,
-      drop:null,
-      click:null,
-      clipboard:null,
-      focus:null,
-      swipe:null,
-      custom:null,
-    }
-    this.observer={
-      resize:null,
-      intersection:null
-    }
-    if(element) Object.assign(this.cache,{element});
-    // this.uuid = `${this.cache.name}-${Random.string(16)}`
-    this.ui_index = globalThis.__Ziko__.__CACHE__.get_ui_index();
-    useDefaultStyle && this.style({ 
-      position: "relative",
-      boxSizing:"border-box",
-      margin:0,
-      padding:0,
-      width : "auto",
-      height : "auto"
-     });
-    this.items = new UIStore();
-    globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
-    element && render && this?.render?.()
-    if(
-      // globalThis.__Ziko__.__Config__.renderingMode !== "spa" 
-      // && 
-      // !globalThis.__Ziko__.__Config__.isSSC
-      // && 
-      this.isInteractive()
-    ){
-      this.setAttr("ziko-hydration-index", globalThis.__Ziko__.__HYDRATION__.index);
-      globalThis.__Ziko__.__HYDRATION__.register(() => this)
-    }
-    globalThis.__Ziko__.__UI__.push(this)
+    this.init(element, render)
   }
   get element(){
     return this.cache.element;
