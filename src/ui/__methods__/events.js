@@ -1,24 +1,24 @@
 import { Events } from "../../events/__Events__";
 import {
-  bindPointerEvent,
-  bindMouseEvent,
-  bindKeyEvent,
-  bindClickEvent,
-  bindDragEvent,
-  bindClipboardEvent,
-  bindFocusEvent,
-  bindWheelEvent
+  bind_pointer_event,
+  bind_mouse_event,
+  bind_key_event,
+  bind_click_event,
+  bind_drag_event,
+  bind_clipboard_event,
+  bind_focus_event,
+  bind_wheel_event
 } from "../../events/index.js";
 
 const binderMap = {
-  ptr: bindPointerEvent,
-  mouse : bindMouseEvent,
-  key: bindKeyEvent,
-  click : bindClickEvent,
-  drag : bindDragEvent,
-  clipboard : bindClipboardEvent,
-  focus : bindFocusEvent,
-  wheel : bindWheelEvent
+  ptr: bind_pointer_event,
+  mouse : bind_mouse_event,
+  key: bind_key_event,
+  click : bind_click_event,
+  drag : bind_drag_event,
+  clipboard : bind_clipboard_event,
+  focus : bind_focus_event,
+  wheel : bind_wheel_event
 };
 
 const EventsMethodes = {};

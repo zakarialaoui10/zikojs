@@ -154,16 +154,16 @@ class UIElement extends UIElementCore{
   //   this.events.clipboard.onSelect(...callbacks);
   //   return this;
   // }
-  // on(event_name,...callbacks){
-  //   if(!this.events.custom)this.events.custom = useCustomEvent(this);
-  //   this.events.custom.on(event_name,...callbacks);
-  //   return this;
-  // }
-  // emit(event_name,detail={}){
-  //   if(!this.events.custom)this.events.custom = useCustomEvent(this);
-  //   this.events.custom.emit(event_name,detail);
-  //   return this;
-  // }
+  on(event_name,...callbacks){
+    if(!this.events.custom)this.events.custom = useCustomEvent(this);
+    this.events.custom.on(event_name,...callbacks);
+    return this;
+  }
+  emit(event_name,detail={}){
+    if(!this.events.custom)this.events.custom = useCustomEvent(this);
+    this.events.custom.emit(event_name,detail);
+    return this;
+  }
   // watchAttr(callback){
   //   if(!this.observer.attr)this.observer.attr = watchAttr(this,callback);
   //   return this;

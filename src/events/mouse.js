@@ -8,9 +8,9 @@ class ZikoEventMouse extends __ZikoEvent__{
 function details_setter(){
 
 }
-const bindMouseEvent = (target, customizer) => new ZikoEventMouse(target, customizer)
+const bind_mouse_event = (target, customizer) => new ZikoEventMouse(target, customizer)
 
 export{
-    bindMouseEvent,
+    bind_mouse_event,
     ZikoEventMouse
 }

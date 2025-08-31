@@ -8,9 +8,9 @@ class ZikoEventClipboard extends __ZikoEvent__{
 function details_setter(){
 
 }
-const bindClipboardEvent = (target, customizer) => new ZikoEventClipboard(target, customizer)
+const bind_clipboard_event = (target, customizer) => new ZikoEventClipboard(target, customizer)
 
 export{
-    bindClipboardEvent,
+    bind_clipboard_event,
     ZikoEventClipboard
 }

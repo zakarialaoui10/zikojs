@@ -8,9 +8,9 @@ class ZikoEventDrag extends __ZikoEvent__{
 function details_setter(){
 
 }
-const bindDragEvent = (target, customizer) => new ZikoEventDrag(target, customizer)
+const bind_drag_event = (target, customizer) => new ZikoEventDrag(target, customizer)
 
 export{
-    bindDragEvent,
+    bind_drag_event,
     ZikoEventDrag
 }

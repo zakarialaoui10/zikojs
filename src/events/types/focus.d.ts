@@ -11,9 +11,9 @@ declare class ZikoEventFocus extends __ZikoEvent__ {
 
 }
 
-declare const bindFocusEvent: (target: UIElement, customizer?: Function) => ZikoEventFocus;
+declare const bind_focus_event: (target: UIElement, customizer?: Function) => ZikoEventFocus;
 
 export {
   ZikoEventFocus,
-  bindFocusEvent,
+  bind_focus_event,
 };

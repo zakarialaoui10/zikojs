@@ -39,9 +39,9 @@ function details_setter(){
     // else this.dx = 1
     // console.log(this.currentEvent)
 }
-const bindPointerEvent = (target, customizer) => new ZikoEventPointer(target, customizer)
+const bind_pointer_event = (target, customizer) => new ZikoEventPointer(target, customizer)
 
 export{
-    bindPointerEvent,
+    bind_pointer_event,
     ZikoEventPointer
 }

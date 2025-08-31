@@ -12,9 +12,9 @@ declare class ZikoEventClipboard extends __ZikoEvent__ {
 
 }
 
-declare const bindClipboardEvent: (target: UIElement, customizer?: Function) => ZikoEventClipboard;
+declare const bind_clipboard_event: (target: UIElement, customizer?: Function) => ZikoEventClipboard;
 
 export {
   ZikoEventClipboard,
-  bindClipboardEvent,
+  bind_clipboard_event,
 };

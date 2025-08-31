@@ -8,9 +8,9 @@ class ZikoEventFocus extends __ZikoEvent__{
 function details_setter(){
 
 }
-const bindFocusEvent = (target, customizer) => new ZikoEventFocus(target, customizer)
+const bind_focus_event = (target, customizer) => new ZikoEventFocus(target, customizer)
 
 export{
-    bindFocusEvent,
+    bind_focus_event,
     ZikoEventFocus
 }

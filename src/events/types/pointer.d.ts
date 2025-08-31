@@ -37,9 +37,9 @@ declare class ZikoEventPointer extends __ZikoEvent__ implements PointerEventMeth
 
 }
 
-declare const bindPointerEvent: (target: UIElement, customizer?: Function) => ZikoEventPointer;
+declare const bind_pointer_event: (target: UIElement, customizer?: Function) => ZikoEventPointer;
 
 export {
   ZikoEventPointer,
-  bindPointerEvent,
+  bind_pointer_event,
 };

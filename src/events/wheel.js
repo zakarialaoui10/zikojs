@@ -8,9 +8,9 @@ class ZikoEventWheel extends __ZikoEvent__{
 function details_setter(){
 
 }
-const bindWheelEvent = (target, customizer) => new ZikoEventWheel(target, customizer)
+const bind_wheel_event = (target, customizer) => new ZikoEventWheel(target, customizer)
 
 export{
-    bindWheelEvent,
+    bind_wheel_event,
     ZikoEventWheel
 }
