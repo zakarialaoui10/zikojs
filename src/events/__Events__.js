@@ -1,7 +1,8 @@
 const Events = {
     'Click' : [
         'Click',
-        'DblClick'
+        'DblClick',
+        'ClickAway'
     ],
     'Ptr' : [
         'PtrMove',

@@ -1,8 +1,8 @@
-import { isStateGetter } from "../../hooks/use-state.js";
-import { 
-  is_camelcase,
-  camel2hyphencase
- } from '../../data/string/index.js'
+import { _set_attrs_ } from "./utils/index.js";
+// import { 
+//   is_camelcase,
+//   camel2hyphencase
+//  } from '../../data/string/index.js'
 
 export function setAttr(name, value) {
   if(name instanceof Object){
@@ -31,16 +31,3 @@ export function setContentEditable(bool = true) {
   return this;
 }
 
-function _set_attrs_(name, value){
-    if(this.element?.tagName !== "svg") name = is_camelcase(name) ? camel2hyphencase(name) : name;
-    if(this?.attr[name] && this?.attr[name]===value) return;
-    if(isStateGetter(value)){
-        const getter = value()
-        getter._subscribe(
-            (newValue) => this.element?.setAttribute(name, newValue),
-            this 
-        );
-    }
-    else this.element?.setAttribute(name, value)
-    Object.assign(this.cache.attributes, {[name]:value});   
-}
