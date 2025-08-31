@@ -18,6 +18,7 @@ import {
 class UIElement extends UIElementCore{
   constructor({element, name ='', type="html", render = __Ziko__.__Config__.default.render}={}){
     super({element, name, type, render})
+    console.log(this)
     register(
       this, 
       AttrsMethods, 
