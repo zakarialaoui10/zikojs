@@ -8,7 +8,7 @@ import {
   bind_clipboard_event,
   bind_focus_event,
   bind_wheel_event
-} from "../../events/index.js";
+} from "../../events/binders/index.js";
 
 const binderMap = {
   ptr: bind_pointer_event,

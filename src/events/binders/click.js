@@ -1,5 +1,5 @@
-import { __ZikoEvent__ } from "./__ZikoEvent__.js";
-import { Events } from "./__Events__.js";
+import { __ZikoEvent__ } from "../__ZikoEvent__.js";
+import { Events } from "../__Events__.js";
 // import { register_click_away_event } from "./custom-events/click-away.js";
 class ZikoEventClick extends __ZikoEvent__{
     constructor(target, customizer){
