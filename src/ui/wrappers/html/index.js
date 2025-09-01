@@ -2,7 +2,7 @@ import { UIElement } from "../../constructors/UIElement.js";
 
 class UIHTMLWrapper extends UIElement {
     constructor(content){
-        super({elemnt : 'div', name : 'html_wrappper'})
+        super({element : 'div', name : 'html_wrappper'})
         this.element.append(html2dom(content))
         this.style({
             display : 'contents'

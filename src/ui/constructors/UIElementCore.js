@@ -71,7 +71,7 @@ class UIElementCore extends UINode{
       // && 
       this.isInteractive()){
       // this.setAttr("ziko-hydration-index", globalThis.__Ziko__.__HYDRATION__.index);
-      this.element.setAttribute('ziko-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
+      // this.element.setAttribute('ziko-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
       globalThis.__Ziko__.__HYDRATION__.register(() => this)
     }
     globalThis.__Ziko__.__UI__.push(this)

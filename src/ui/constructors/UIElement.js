@@ -1,5 +1,5 @@
 import { UIElementCore } from "./UIElementCore.js";
-import { register } from "../../__helpers__/register/index.js";
+import { register_to_class } from "../../__helpers__/register/register-to-class.js";
 import { 
   AttrsMethods,
   DomMethods,
@@ -18,8 +18,8 @@ import {
 class UIElement extends UIElementCore{
   constructor({element, name ='', type="html", render = __Ziko__.__Config__.default.render}={}){
     super({element, name, type, render})
-    console.log(this)
-    register(
+    // console.log(this)
+    register_to_class(
       this, 
       AttrsMethods, 
       DomMethods, 
