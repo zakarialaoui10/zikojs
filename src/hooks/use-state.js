@@ -2,8 +2,8 @@ import { __init__global__ } from "../__ziko__/index.js";
 if(!globalThis.__Ziko__) __init__global__()
 
     // HMR persistence
-if (import.meta.hot) {
-    import.meta.hot.data.__Ziko__ = import.meta.hot.data.__Ziko__ || globalThis.__Ziko__;
+if (import.meta.hot?.data) {
+    import.meta.hot.data.__Ziko__ = import.meta.hot.data?.__Ziko__ || globalThis?.__Ziko__;
     globalThis.__Ziko__ = import.meta.hot.data.__Ziko__;
     // import.meta.hot.accept(n=>console.log(n));
     // console.log(import.meta.hot.data.__Ziko__.__State__.store)
