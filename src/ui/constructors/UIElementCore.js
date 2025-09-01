@@ -2,22 +2,21 @@ import {UINode} from "./UINode.js";
 import {__init__global__, UIStore} from '../../__ziko__/index.js';
 __init__global__()
 class UIElementCore extends UINode{
-  constructor({
-        element, 
-        name ='', 
-        type="html", 
-        render = __Ziko__.__Config__.default.render, 
-        isInteractive = false,
-    }={}){
+  constructor(){
     super()
-    this.init(element, name, type, render, isInteractive)
   }
   init(element, name, type, render, isInteractive = [true, false][Math.floor(2*Math.random())]){
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
       switch(type){
-        case "html" : element = globalThis?.document?.createElement(element); break;
-        case "svg" : element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element);
+        case "html" : {
+          element = globalThis?.document?.createElement(element);
+          console.log('1')
+        }; break;
+        case "svg" : {
+          element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element); 
+          console.log('2')
+        }; break;
         default : throw Error("Not supported")
       }
     }

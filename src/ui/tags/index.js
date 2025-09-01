@@ -9,8 +9,8 @@ const _h=(tag, type, attributes, ...children)=>{
     children && element.append(...children);
     return element; 
 }
-const h=(tag, attributes = {}, ...children)=> _h(tag, "html", attributes, ...children);
-const s=(tag, attributes = {}, ...children)=> _h(tag, "svg", attributes, ...children);
+// const h=(tag, attributes = {}, ...children)=> _h(tag, "html", attributes, ...children);
+// const s=(tag, attributes = {}, ...children)=> _h(tag, "svg", attributes, ...children);
 
 const tags = new Proxy({}, {
   get(target, prop) {
@@ -19,16 +19,22 @@ const tags = new Proxy({}, {
     let type ;
     if(HTMLTags.includes(tag)) type = 'html'
     if(SVGTags.includes(tag)) type = 'svg'
+    console.log(type)
     return (...args)=>{
       // Fix undefined
       // console.log(isStateGetter(args[0]))
+      // console.log(!!args)
+      if(args.length === 0) {
+        console.log('length 0')
+        return new UIElement({element : tag, name : tag, type})
+      }
       if(
         ['string', 'number'].includes(typeof args[0]) 
         || args[0] instanceof UIElement 
         || (typeof args[0] === 'function' && args[0]().isStateGetter())
       ) return new UIElement({element : tag, name : tag, type}).append(...args);
       // console.log(args[0])
-      return new UIElement({element : tag}).setAttr(args.shift()).append(...args)
+      return new UIElement({element : tag, type}).setAttr(args.shift()).append(...args)
     }
     // if(SVGTags.includes(tag)) return (...args) => new UIElement(tag,"",{el_type : "svg"}).append(...args);
     // return (...args)=>{

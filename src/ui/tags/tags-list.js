@@ -86,7 +86,6 @@ const HTMLTags = [
   'sub',
   'summary',
   'sup',
-  'svg',
   'table',
   'tbody',
   'td',

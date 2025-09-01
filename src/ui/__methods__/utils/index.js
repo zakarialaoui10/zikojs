@@ -50,7 +50,7 @@ export async function __addItem__(adder, pusher, ...ele) {
   return this;
 }
 export function _set_attrs_(name, value){
-    if(this.element?.tagName !== "svg") name = is_camelcase(name) ? camel2hyphencase(name) : name;
+    if(this.element instanceof globalThis?.SVGAElement) name = is_camelcase(name) ? camel2hyphencase(name) : name;
     if(this?.attr[name] && this?.attr[name]===value) return;
     if(isStateGetter(value)){
         const getter = value()
