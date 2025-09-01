@@ -24,12 +24,14 @@ function customPath(inputPath, root = './src/pages', extensions = ['js', 'ts']) 
    const normalizedPath = inputPath.replace(/\\/g, '/').replace(/\[(\w+)\]/g, '$1/:$1');
    const parts = normalizedPath.split('/');
    const rootParts = root.split('/');
-   const rootIndex = parts.indexOf(rootParts[rootParts.length - 1]);
+   const rootIndex = parts.indexOf(rootParts.at(-1));
    if (rootIndex !== -1) {
        const subsequentParts = parts.slice(rootIndex + 1);
-       const lastPart = subsequentParts[subsequentParts.length - 1];
+       const lastPart = parts.at(-1);
        const isIndexFile = lastPart === 'index.js' || lastPart === 'index.ts';
+       console.log({extensions, subsequentParts, lastPart, isIndexFile, rootParts, rootIndex, parts})
        const hasValidExtension = extensions.some(ext => lastPart === `.${ext}` || lastPart.endsWith(`.${ext}`));
+    //    const hasValidExtension = true
        if (isIndexFile) {
            return '/' + (subsequentParts.length > 1 ? subsequentParts.slice(0, -1).join('/') : '');
        }
