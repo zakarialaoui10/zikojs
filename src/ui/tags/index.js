@@ -19,13 +19,13 @@ const tags = new Proxy({}, {
     let type ;
     if(HTMLTags.includes(tag)) type = 'html'
     if(SVGTags.includes(tag)) type = 'svg'
-    console.log(type)
+    // console.log(type)
     return (...args)=>{
       // Fix undefined
       // console.log(isStateGetter(args[0]))
       // console.log(!!args)
       if(args.length === 0) {
-        console.log('length 0')
+        // console.log('length 0')
         return new UIElement({element : tag, name : tag, type})
       }
       if(
