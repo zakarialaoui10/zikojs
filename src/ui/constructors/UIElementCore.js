@@ -11,11 +11,11 @@ class UIElementCore extends UINode{
       switch(type){
         case "html" : {
           element = globalThis?.document?.createElement(element);
-          console.log('1')
+          // console.log('1')
         }; break;
         case "svg" : {
           element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element); 
-          console.log('2')
+          // console.log('2')
         }; break;
         default : throw Error("Not supported")
       }

@@ -28,7 +28,7 @@ class UIElement extends UIElementCore{
       IndexingMethods, 
       EventsMethodes
     );
-    this.init(element, name, type, render)
+    if(element)this.init(element, name, type, render)
   }
   get element(){
     return this.cache.element;

@@ -8,3 +8,4 @@ export * from './suspense/index.js';
 export * from './wrappers/index.js';
 // export * from './graphics/index.js'
 export * from './web-component/index.js'
+export * from './logic/index.js'

@@ -1,16 +1,26 @@
 import { UIElement } from "../../constructors/UIElement.js";
 
-class UISwitch{
+class UISwitch extends UIElement{
     constructor(key, cases){
+        super()
         this.key = key; 
         this.cases = cases;
+        this.init()
     }
-    current_ui(){
+    init(){
+        Object.values(this.cases).filter(n=>n != this.current).forEach(n=>n.unrender())
+        super.init(this.current.element)
+    }
+    get current(){
         const matched = Object.keys(this.cases).find(n => n == this.key) ?? 'default'
-        return this.cases[matched]()
+        return this.cases[matched]
     }
     updateKey(key){
-        this.key
+        this.key = key;
+        this.replaceElementWith(this.current.element)
+        // this.cache.element.replaceWith(this.current.element)
+        // this.cache.element = this.current.element;
+        return this;
     }
     
 }

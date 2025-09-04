@@ -47,6 +47,13 @@ export function unrender(){
   else if(this.target?.children?.length && [...this.target?.children].includes(this.element)) this.target.removeChild(this.element);
   return this;
 }
+export function replaceElementWith(new_element){
+    this.cache.element.replaceWith(new_element)
+    this.cache.element = new_element;
+
+    // To do : Dispose Events and States 
+    return this
+}
 export function renderAfter(t = 1) {
   setTimeout(() => this.render(), t);
   return this;
