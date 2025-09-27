@@ -1,4 +1,4 @@
-import { Events } from "../../events/__Events__";
+import { Events } from "../../events/__Events__.js";
 import {
   bind_pointer_event,
   bind_mouse_event,
