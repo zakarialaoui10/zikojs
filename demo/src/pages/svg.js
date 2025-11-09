@@ -1,4 +1,4 @@
-import {tags} from 'ziko'
+import {tags} from 'ziko/ui'
 const {svg, circle, animate, animateMotion, path, line} = tags;
 
 
