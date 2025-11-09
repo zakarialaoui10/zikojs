@@ -73,7 +73,7 @@ class UIElementCore extends UINode{
       // this.element.setAttribute('ziko-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
       // console.log({i : globalThis.__Ziko__.__HYDRATION__.index})
       // const index = globalThis.__Ziko__.__HYDRATION__.index
-      // this.element.setAttribute('data-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
+      this.element.setAttribute('data-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
       globalThis.__Ziko__.__HYDRATION__.register(this.element, () => this)
     }
     globalThis.__Ziko__.__UI__.push(this)
