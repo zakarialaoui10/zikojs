@@ -129,3 +129,7 @@ npx create-ziko-app [app-title]
 If you appreciate the library, kindly demonstrate your support by giving it a star!<br>
 [![Star](https://img.shields.io/github/stars/zakarialaoui10/ziko.js?style=social)](https://github.com/zakarialaoui10/ziko.js)
 <!--## Financial support-->
+
+
+To do
+ add component middlware/wrapper 
