@@ -5,7 +5,7 @@ const {svg} = tags;
 globalThis.s = key => Switch({
     key ,
     cases : {
-        1 : tags.p('Case 1'),
+        1 : tags.p('Case 1').useClient(),
         2 : tags.p('Case 2'),
         default : tags.p('default')
     }

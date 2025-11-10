@@ -1,6 +1,6 @@
 {
   "name": "ziko",
-  "version": "0.47.2",
+  "version": "0.48.0",
   "description": "A versatile JavaScript library offering a rich set of Hyperscript Based UI components, advanced mathematical utilities, interactivity ,animations, client side routing and more ...",
   "keywords": [
     "front-end",
@@ -21,8 +21,10 @@
   "files": [
     "src",
     "dist",
+    "types",
     "LICENCE"
   ],
+  "types": "./types/global.d.ts",
   "exports": {
     "./*": "./src/*",
     ".": {

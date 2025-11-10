@@ -2,6 +2,10 @@ export class UIStore extends Array {
     constructor(...args) {
         super(...args); 
     }
+    clear(){
+        this.length = 0;
+        return this;
+    }
     getItemById(id) {
         return this.find(n => n.element.id === id);
     }

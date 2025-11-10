@@ -31,7 +31,7 @@ const {count, name} = useReactive({ count: 0, name: 'Zikllo' })
 globalThis.s = section(
     p({id : 'p1', class : 'para'},'Count: ', count.get),
     p({id : 'p2', class : 'para'},'Name: ', name.get),
-    button('Increment').onClick(() => count.set(n=> n+1)),
+    button('Increment').onClick(() => count.set(n=> n+1)).useClient(),
     button('Reset Count').onClick(() => count.set(0)),
     button('Change Name').onClick(() => name.set('Zikojs'))
 ).style({color : "green"})

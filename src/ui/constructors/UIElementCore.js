@@ -5,7 +5,7 @@ class UIElementCore extends UINode{
   constructor(){
     super()
   }
-  init(element, name, type, render, isInteractive = [true, false][Math.floor(2*Math.random())]){
+  init(element, name, type, render){
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
       switch(type){
@@ -23,7 +23,7 @@ class UIElementCore extends UINode{
     else this.target = element?.parentElement;
     Object.assign(this.cache, {
       name,
-      isInteractive,
+      isInteractive : false,
       parent:null,
       isBody:false,
       isRoot:false,
@@ -63,19 +63,6 @@ class UIElementCore extends UINode{
     this.items = new UIStore();
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
     element && render && this?.render?.()
-    if(
-      // globalThis.__Ziko__.__Config__.renderingMode !== "spa" 
-      // && 
-      // !globalThis.__Ziko__.__Config__.isSSC
-      // && 
-      this.isInteractive()){
-      // this.setAttr("ziko-hydration-index", globalThis.__Ziko__.__HYDRATION__.index);
-      // this.element.setAttribute('ziko-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
-      // console.log({i : globalThis.__Ziko__.__HYDRATION__.index})
-      // const index = globalThis.__Ziko__.__HYDRATION__.index
-      this.element.setAttribute('data-hydration-index', globalThis.__Ziko__.__HYDRATION__.index)
-      globalThis.__Ziko__.__HYDRATION__.register(this.element, () => this)
-    }
     globalThis.__Ziko__.__UI__.push(this)
   }
   get element(){

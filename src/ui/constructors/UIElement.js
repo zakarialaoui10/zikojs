@@ -36,6 +36,15 @@ class UIElement extends UIElementCore{
   isInteractive(){
     return this.cache.isInteractive;
   }
+  useClient(directive){
+    if(!this.cache.isInteractive){
+      this.element.setAttribute('data-hydration-index', globalThis.__Ziko__.__HYDRATION__.index);
+      globalThis.__Ziko__.__HYDRATION__.register(() => this);
+      this.cache.isInteractive = true;
+    }
+    if(directive)this.element.setAttribute('data-hydration-directive', directive);
+    return this;
+  }
   // isUIElement(){
   //   return true;
   // }

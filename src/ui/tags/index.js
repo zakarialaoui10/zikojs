@@ -19,7 +19,6 @@ const tags = new Proxy({}, {
     let type ;
     if(HTMLTags.includes(tag)) type = 'html'
     if(SVGTags.includes(tag)) type = 'svg'
-    // console.log(type)
     return (...args)=>{
       // Fix undefined
       // console.log(isStateGetter(args[0]))

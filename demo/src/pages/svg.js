@@ -21,7 +21,7 @@ export default function App(){
     line({ x1: "12", x2: "12.01", y1: "16", y2: "16" })
     ).style({
         border: '1px red solid'
-    })
+    }).useClient()
     return svg({viewbox : '0 0 200 100', width: '200', height : '200'},
         circle({r:5, cx:100, cy:50, fill:'red'},
             // animate({attributeName : 'r', values : '0;.1;.2;.3;.4;.5;.6;.7;.8;.9;1', dur:'1s', count : 5})
