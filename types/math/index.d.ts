@@ -1,1 +1,1 @@
-export * from "./complex.d.ts"
+export * from "./complex"
