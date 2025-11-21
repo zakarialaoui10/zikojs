@@ -1,8 +1,8 @@
-import { Linear } from "../ease/index.js";
+import { linear } from "../ease/index.js";
 import { map } from "../../math/utils/index.js";
 
 class TimeAnimation {
-  constructor(callback, { ease = Linear, step = 50, t0 = 0, start = true, duration = 3000 } = {}) {
+  constructor(callback, { ease = linear, step = 50, t0 = 0, start = true, duration = 3000 } = {}) {
     this.callback = callback;
     this.state = {
       isRunning: false,

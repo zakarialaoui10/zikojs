@@ -24,17 +24,17 @@
     "types",
     "LICENCE"
   ],
-  "types": "./types/global.d.ts",
   "exports": {
-    "./*": "./src/*",
+    "./*": {
+      "import" : "./src/*/index.js",
+      "types" : "./types/*/index.d.ts"
+    },
     ".": {
       "import": "./dist/ziko.mjs",
-      "require": "./dist/ziko.cjs"
+      "require": "./dist/ziko.cjs",
+      "types" : "./types/index.d.ts"
     },
-    "./math": {
-      "import": "./src/math/index.js",
-      "types" : "./types/math/index.d.ts"
-    },
+    
     "./helpers": {
       "import": "./src/__helpers__.js"
     },
@@ -60,7 +60,6 @@
     "./src": "./src/index.js",
     "./html": {},
     "./app": {},
-    "./time": {},
     "./components": {}
   },
   "sideEffects" : true,
