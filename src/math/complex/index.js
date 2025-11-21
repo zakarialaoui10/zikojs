@@ -23,27 +23,27 @@ class Complex extends ZikoMath{
             this.b=a.b;
         }
         else if(typeof(a)==="object"){
-            if(("a" in b && "b" in a)){
+            if(("a" in a && "b" in a)){
                 this.a=a.a;
                 this.b=a.b;
             }
-            else if(("a" in b && "z" in a)){
+            else if(("a" in a && "z" in a)){
                 this.a=a.a;
                 this.b=sqrt((a.z**2)-(a.a**2));
             }
-            else if(("a" in b && "phi" in a)){
+            else if(("a" in a && "phi" in a)){
                 this.a=a.a;
                 this.b=a.a*tan(a.phi);
             }
-            else if(("b" in b && "z" in a)){
+            else if(("b" in a && "z" in a)){
                 this.b=a.b;
                 this.a=sqrt((a.z**2)-(a.b**2));
             }
-            else if(("b" in b && "phi" in a)){
+            else if(("b" in a && "phi" in a)){
                 this.b=b;
                 this.a=a.b/tan(a.phi);
             }
-            else if(("z" in b && "phi" in a)){
+            else if(("z" in a && "phi" in a)){
                 this.a=a.z*cos(a.phi);
                 this.a=a.z*sin(a.phi);
             }
@@ -181,17 +181,6 @@ class Complex extends ZikoMath{
     get tan(){
         const de=cos(this.a*2)+cosh(this.b*2);
         return complex(sin(2*this.a)/de,sinh(2*this.b)/de);
-    }
-    printInConsole() {
-        let string = this.a + " + " + this.b + " * i";
-        console.log(string);
-        return string;
-    }
-    print() {
-        //return text(this.a + " + i * " + this.b);
-    }
-    UI() {
-        return "<span>" + this.a + " + i * " + this.b + "</span>";
     }
 }
 const complex=(a,b)=>{
