@@ -7,7 +7,7 @@ class ZikoUIFlex extends UIElement {
     if (typeof h == "number") h += "%";
     this.style({ width: w, height: h });
     this.style({ display: "flex" });
-    // this.render();
+    // this.mount();
   }
   get isFlex(){
     return true;

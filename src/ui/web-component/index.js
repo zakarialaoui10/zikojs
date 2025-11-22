@@ -25,19 +25,19 @@ export function define_wc(name, UIElement, props = {}, { mode = 'open'} = {}) {
             }
 
             connectedCallback() {
-                this.render();
+                this.mount();
             }
 
-            render() {
+            mount() {
                 this.shadowRoot.innerHTML = '';
-                this.UIElement = UIElement(this.props).render(this.shadowRoot);
+                this.UIElement = UIElement(this.props).mount(this.shadowRoot);
             }
 
             attributeChangedCallback(name, _, newValue) {
                 Object.assign(this.props, {
                     [name]: this.mask[name].type(newValue)
                 });
-                this.render();
+                this.mount();
             }
         }
     );

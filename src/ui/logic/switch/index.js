@@ -8,7 +8,7 @@ class UISwitch extends UIElement{
         this.init()
     }
     init(){
-        Object.values(this.cases).filter(n=>n != this.current).forEach(n=>n.unrender())
+        Object.values(this.cases).filter(n=>n != this.current).forEach(n=>n.unmount())
         super.init(this.current.element)
     }
     get current(){

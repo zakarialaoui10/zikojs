@@ -10,7 +10,7 @@ class ZikoUISuspense extends UIElement{
         (async ()=>{
             try{
                 const ui = await callback()
-                fallback_ui.unrender()
+                fallback_ui.unmount()
                 this.append(ui)
                 // console.log(content)
             }

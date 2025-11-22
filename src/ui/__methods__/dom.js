@@ -31,18 +31,18 @@ export function remove(...ele) {
   return this;
 }
 export function clear(){
-  this?.items?.forEach(n=>n.unrender());
+  this?.items?.forEach(n=>n.unmount());
   this.element.innerHTML = "";
   return this;
 }
-export function render(target = this.target) {
+export function mount(target = this.target) {
   if(this.isBody)return ;
   if(target?.isUIElement)target=target.element;
   this.target=target;
   this.target?.appendChild(this.element);
   return this;
 }
-export function unrender(){
+export function unmount(){
   if(this.cache.parent)this.cache.parent.remove(this);
   else if(this.target?.children?.length && [...this.target?.children].includes(this.element)) this.target.removeChild(this.element);
   return this;
@@ -55,11 +55,11 @@ export function replaceElementWith(new_element){
     return this
 }
 export function renderAfter(t = 1) {
-  setTimeout(() => this.render(), t);
+  setTimeout(() => this.mount(), t);
   return this;
 }
 export function unrenderAfter(t = 1) {
-  setTimeout(() => this.unrender(), t);
+  setTimeout(() => this.unmount(), t);
   return this;
 }
 export function after(ui){

@@ -94,7 +94,7 @@ class UIElement extends UIElementCore{
   //   //   UI.append(...items);
   //   // }
   //   // else UI.element=this.element.cloneNode(true);
-  //   // return UI.render(render);
+  //   // return UI.mount(render);
   // }
   // [Symbol.iterator]() {
   //   return this.items[Symbol.iterator]();
@@ -116,9 +116,9 @@ class UIElement extends UIElementCore{
   // setTarget(tg) {
   //   if(this.isBody) return ;
   //   if (tg?.isUIElement) tg = tg.element;
-  //   this.unrender();
+  //   this.unmount();
   //   this.target = tg;
-  //   this.render();
+  //   this.mount();
   //   return this;
   // }
   // describe(label){

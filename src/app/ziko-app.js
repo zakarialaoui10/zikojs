@@ -13,7 +13,7 @@ class ZikoApp {
         this.head && this.setHead(this.head);
         this.wrapper && this.setWrapper(this.wrapper);
         this.target && this.setTarget(this.target);
-        if(this.wrapper && this.target)this.wrapper.render(this.target);
+        if(this.wrapper && this.target)this.wrapper.mount(this.target);
     }
     setTarget(target){
         if(target instanceof HTMLElement) this.target = target;

@@ -46,22 +46,22 @@ get #SwitchedStyleRTL_LTR(){
     return this;
   }
   filterByTextContent(text, exactMatch = false) {
-    this.items.forEach((n) => n.render());
+    this.items.forEach((n) => n.mount());
     this.filter(
       (n) => !(exactMatch ? n.text === text : n.text.includes(text)),
-      (e) => e.unrender(),
+      (e) => e.unmount(),
     );
     // this.items.filter(n=>{
     //   const content=n.element.textContent;
     //   return !(exactMatch?content===text:content.includes(text))
-    // }).map(n=>n.unrender());
+    // }).map(n=>n.unmount());
     //  return this;
   }
   filterByClass(value) {
-    this.items.map((n) => n.render());
+    this.items.map((n) => n.mount());
     this.items
       .filter((n) => !n.classes.includes(value))
-      .map((n) => n.unrender());
+      .map((n) => n.unmount());
     return this;
   }
   sortByTextContent(value, displays) {

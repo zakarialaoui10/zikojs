@@ -133,7 +133,7 @@ class UIElementCore extends UINode{
 //     //   UI.append(...items);
 //     // }
 //     // else UI.element=this.element.cloneNode(true);
-//     // return UI.render(render);
+//     // return UI.mount(render);
 //   }
 
 //   freeze(freeze){
@@ -143,9 +143,9 @@ class UIElementCore extends UINode{
   // setTarget(tg) {
   //   if(this.isBody) return ;
   //   if (tg?.isUIElement) tg = tg.element;
-  //   this.unrender();
+  //   this.unmount();
   //   this.target = tg;
-  //   this.render();
+  //   this.mount();
   //   return this;
   // }
 //   describe(label){

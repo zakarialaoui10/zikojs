@@ -9,16 +9,16 @@ class ZikoSPA extends ZikoApp{
             ...Object.entries(routes)
         ]);
         this.clear();
-        globalThis.onpopstate = this.render(location.pathname);
+        globalThis.onpopstate = this.mount(location.pathname);
     }
     clear(){
         [...this.routes].forEach(n=>{
-            !isDynamic(n[0]) && n[1]?.isUIElement && n[1].unrender()
+            !isDynamic(n[0]) && n[1]?.isUIElement && n[1].unmount()
         })   
         // this.wrapper.clear();
         return this;
     }
-    render(path){
+    mount(path){
         const [mask, callback] = [...this.routes].find(route=>routesMatcher(route[0],path));
         let element ;
         if(isDynamic(mask)){
@@ -26,13 +26,13 @@ class ZikoSPA extends ZikoApp{
             element = callback.call(this,params)
         }
         else {
-            callback?.isUIElement && callback.render(this.wrapper); 
+            callback?.isUIElement && callback.mount(this.wrapper); 
             if(typeof callback === "function") element = callback();  
         }
-        if(element?.isUIElement) element.render(this.wrapper);
-        // if(element?.isZikoApp) element.render(this.wrapper);
+        if(element?.isUIElement) element.mount(this.wrapper);
+        // if(element?.isZikoApp) element.mount(this.wrapper);
         if(element instanceof Promise){
-            element.then(e=>e.render(this.wrapper))
+            element.then(e=>e.mount(this.wrapper))
         }
         globalThis.history.pushState({}, "", path);
         return this;
