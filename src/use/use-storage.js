@@ -23,10 +23,10 @@ class ZikoUseStorage{
         if(!initialValue)return;
         if(this.cache.storage[this.cache.globalKey]){
             Object.keys(this.items).forEach(key=>this.cache.oldItemKeys.add(key));
-            console.group("Ziko:useStorage")
-            console.warn(`Storage key '${this.cache.globalKey}' already exists. we will not overwrite it.`);
-            console.info(`%cWe'll keep the existing data.`,"background-color:#2222dd; color:gold;");
-            console.group("")
+            // console.group("Ziko:useStorage")
+            // console.warn(`Storage key '${this.cache.globalKey}' already exists. we will not overwrite it.`);
+            // console.info(`%cWe'll keep the existing data.`,"background-color:#2222dd; color:gold;");
+            // console.group("")
         }
         else this.set(initialValue);
     }

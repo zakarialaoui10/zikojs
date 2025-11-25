@@ -1,12 +1,21 @@
+import { useSessionStorage } from '../use/use-storage'
 export const __State__ = {
     store : new Map(),
-    index : import.meta.hot?.data?.__Ziko__?.__State__?.index ?? 0,
+    index : 0,
+    session_storage : null,
     register: function(state){
-        console.log({
-            // hmr : import.meta.hot?.data.__Ziko__.__State__.index,
-            index : this.index
-        })
+        if(!import.meta.env.SSR && import.meta.env.DEV){
+            if(!this.session) this.session_storage = useSessionStorage('ziko-state', {})
+            const savedValue = this.session_storage.get(this.index)
+            if(!savedValue) this.session_storage.add({[this.index] : state.value});
+            else state.value = savedValue
+        }
         this.store.set(this.index++, state)
-    }
-    
+    },
+    update: function(index, value){
+       if(!import.meta.env.SSR && import.meta.env.DEV){
+            this.session_storage.add({[index] : value})
+        } 
+    },
+
 }

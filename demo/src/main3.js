@@ -2,9 +2,18 @@ import { tags, Flex , tick, loop} from "ziko";
 import { useDerived, useState } from "ziko/hooks";
 import { define_wc } from 'ziko/ui/web-component'
 
-loop()
+
 
 const {slot, div, p, button, style} = tags
+
+console.log(import.meta.env)
+
+const [value, setValue] = useState(0)
+const [color, setColor] = useState('red')
+
+div('Value : ', value).mount(document.body)
+tick(()=>setValue(n => n+1), 1000)
+// tick(e => n => setValue(n), 1000)
 // globalThis.asComp = async () => tags.span("async comp")
 // div().style({
 //     color : 'red'
