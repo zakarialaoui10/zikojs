@@ -1,7 +1,7 @@
 import { tags, Flex , tick} from "ziko";
 import { useDerived, useState } from "ziko/hooks";
-import { define_wc } from 'ziko/ui/web-component/index.js'
-const {slot, div, p, button} = tags
+import { define_wc } from 'ziko/ui/web-component'
+const {slot, div, p, button, style} = tags
 // globalThis.asComp = async () => tags.span("async comp")
 // div().style({
 //     color : 'red'
@@ -26,8 +26,8 @@ const {slot, div, p, button} = tags
 // );
 
 define_wc("ziko-span", ()=> tags.span("ziko-span"))
-define_wc("ziko-span", ()=> tags.span("ziko-span"))
-define_wc("ll", ()=> tags.span("ziko-span"))
+// define_wc("ziko-span", ()=> tags.span("ziko-span"))
+// define_wc("ll", ()=> tags.span("ziko-span"))
 
 define_wc(
   "ziko-counter",
@@ -49,7 +49,12 @@ define_wc(
         textAlign : 'center',
         forntSize : '2em'
     });
-    return UI;
+    return [
+      style(`
+        button{ color : red; }
+      `),
+      UI
+    ];
   },
   {
     start: { type: Number },

@@ -1,7 +1,7 @@
 export function define_wc(name, UIElement, props = {}, { mode = 'open'} = {}) {
     if (globalThis.customElements?.get(name)) {
         console.warn(`Custom element "${name}" is already defined`);
-        return; // skip redefinition
+        return;
     }
     if(name.search('-') === -1){
         console.warn(`"${name}" is not a valid custom element name`);
@@ -25,19 +25,21 @@ export function define_wc(name, UIElement, props = {}, { mode = 'open'} = {}) {
             }
 
             connectedCallback() {
-                this.mount();
+                this.render();
             }
 
-            mount() {
+            render() {
                 this.shadowRoot.innerHTML = '';
-                this.UIElement = UIElement(this.props).mount(this.shadowRoot);
+                const item = UIElement(this.props);
+                if(item instanceof Array) item.forEach(n => n.mount(this.shadowRoot)) 
+                else item.mount(this.shadowRoot)
             }
 
             attributeChangedCallback(name, _, newValue) {
                 Object.assign(this.props, {
                     [name]: this.mask[name].type(newValue)
                 });
-                this.mount();
+                this.render();
             }
         }
     );
