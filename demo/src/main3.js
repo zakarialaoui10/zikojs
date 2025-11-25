@@ -1,6 +1,9 @@
-import { tags, Flex , tick} from "ziko";
+import { tags, Flex , tick, loop} from "ziko";
 import { useDerived, useState } from "ziko/hooks";
 import { define_wc } from 'ziko/ui/web-component'
+
+loop()
+
 const {slot, div, p, button, style} = tags
 // globalThis.asComp = async () => tags.span("async comp")
 // div().style({
