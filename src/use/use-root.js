@@ -1,4 +1,4 @@
-class ZikoUseRoot {
+class UseRoot {
     constructor(PropsMap, {namespace = 'Ziko', register, ValidateCssProps = false} = {}){
         this.currentPropsMap = PropsMap;
         this.namespace = namespace;
@@ -43,10 +43,10 @@ function ValidateCssProps(PropsMap){
     }
 }
 
-const useRoot = (PropsMap, {namespace, register, ValidateCssProps} = {}) => new ZikoUseRoot(PropsMap, {namespace, register, ValidateCssProps});
+const useRoot = (PropsMap, {namespace, register, ValidateCssProps} = {}) => new UseRoot(PropsMap, {namespace, register, ValidateCssProps});
 
 export{
-    ZikoUseRoot,
+    UseRoot,
     useRoot
 }
 

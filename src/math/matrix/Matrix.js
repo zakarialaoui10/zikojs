@@ -1,4 +1,3 @@
-import ZikoMath from "../absract.js";
 import{
     pow,
     min,
@@ -8,9 +7,8 @@ import {Utils} from "../utils/index.js";
 import {Complex } from "../complex/index.js";
 import {Random} from "../random/index.js"
 import { arr2str } from "../../data/index.js";
-class Matrix extends ZikoMath{
+class Matrix{
     constructor(rows, cols, element = [] ) {
-        super()
         if(rows instanceof Matrix){
             this.arr=rows.arr;
             this.rows=rows.rows;

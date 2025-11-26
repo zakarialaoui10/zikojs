@@ -1,5 +1,5 @@
 import { Themes } from "../../../global/themes";
-class ZikoUseTheme{
+class UseTheme{
     constructor(theme,id=0){
       this.id="Ziko-Theme-"+id;
       this.use(theme)
@@ -53,7 +53,7 @@ class ZikoUseTheme{
       return this;
     }
   }  
-  const useTheme=(theme, id=0)=>new ZikoUseTheme(theme,id)
+  const useTheme=(theme, id=0)=>new UseTheme(theme,id)
   export {
       useTheme,
       // Themes,

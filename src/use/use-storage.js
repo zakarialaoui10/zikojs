@@ -1,6 +1,6 @@
 // To do : remove old items
 import { useChannel } from "./use-channel.js";
-class ZikoUseStorage{
+class UseStorage{
     constructor(storage, globalKey, initialValue){
         this.cache={
             storage,
@@ -65,8 +65,8 @@ class ZikoUseStorage{
     }
 
 }
-const useLocaleStorage=(key,initialValue)=>new ZikoUseStorage(localStorage,key,initialValue);
-const useSessionStorage=(key,initialValue)=>new ZikoUseStorage(sessionStorage,key,initialValue);
+const useLocaleStorage=(key,initialValue)=>new UseStorage(localStorage,key,initialValue);
+const useSessionStorage=(key,initialValue)=>new UseStorage(sessionStorage,key,initialValue);
 export{
     useLocaleStorage,
     useSessionStorage

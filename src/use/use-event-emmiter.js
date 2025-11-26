@@ -1,4 +1,4 @@
-class ZikoUseEventEmitter {
+class UseEventEmitter {
     constructor() {
       this.events = {};
       this.maxListeners = 10; 
@@ -60,5 +60,5 @@ class ZikoUseEventEmitter {
     }
   }
 
-const useEventEmitter=()=>new ZikoUseEventEmitter()
+const useEventEmitter=()=>new UseEventEmitter()
 export{useEventEmitter}

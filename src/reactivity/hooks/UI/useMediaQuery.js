@@ -10,7 +10,7 @@
             }
         ]
 */
-class ZikoUseMediaQuery {
+class UseMediaQuery {
     constructor(mediaQueryRules=[],fallback=()=>{}) {
         this.mediaQueryRules = mediaQueryRules;
         this.fallback = fallback;
@@ -37,7 +37,7 @@ class ZikoUseMediaQuery {
     }
 }
 
-const useMediaQuery = (mediaQueryRules,fallback) => new ZikoUseMediaQuery(mediaQueryRules,fallback);
+const useMediaQuery = (mediaQueryRules,fallback) => new UseMediaQuery(mediaQueryRules,fallback);
 export {
     useMediaQuery
 };

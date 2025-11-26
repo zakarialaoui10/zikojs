@@ -1,50 +1,61 @@
 import { Random } from "../math/random/index.js";
-class ZikoUseChannel{
-    constructor(name = ""){
+
+class UseChannel {
+    constructor(name = "") {
         this.channel = new BroadcastChannel(name);
-        this.EVENTS_DATAS_PAIRS = new Map();
-        this.EVENTS_HANDLERS_PAIRS = new Map();
-        this.LAST_RECEIVED_EVENT = "";
-        this.UUID="ziko-channel"+Random.string(10);
-        this.SUBSCRIBERS = new Set([this.UUID]);
+        this.eventData = new Map();
+        this.handlers = new Map();
+        this.uuid = "ziko-channel:" + Random.string(10);
+        this.subscribers = new Set([this.uuid]);
+
+        this.channel.addEventListener("message", (e) => {
+            const { last_sent_event, userId, eventData } = e.data;
+
+            // ignore own events
+            if (userId === this.uuid) return;
+
+            this.subscribers.add(userId);
+
+            // sync data
+            this.eventData = new Map(eventData);
+
+            const data = this.eventData.get(last_sent_event);
+            const handlers = this.handlers.get(last_sent_event);
+
+            if (handlers) {
+                handlers.forEach(fn => fn(data));
+            }
+        });
     }
-    get broadcast(){
-        // update receiver
-        return this;
-    }
-    emit(event, data){
-        this.EVENTS_DATAS_PAIRS.set(event,data)
-        this.#maintainEmit(event);
-        return this;
-    }
-    on(event,handler=console.log){
-        this.EVENTS_HANDLERS_PAIRS.set(event,handler);
-        this.#maintainOn()
-        return this;
-    }
-    #maintainOn(){
-        this.channel.onmessage = (e) => {
-            this.LAST_RECEIVED_EVENT=e.data.last_sended_event;
-            const USER_ID=e.data.userId;
-            this.SUBSCRIBERS.add(USER_ID)
-            const Data=e.data.EVENTS_DATAS_PAIRS.get(this.LAST_RECEIVED_EVENT)
-            const Handler=this.EVENTS_HANDLERS_PAIRS.get(this.LAST_RECEIVED_EVENT)
-            if(Data && Handler)Handler(Data)
-          };
-          return this;
-    }
-    #maintainEmit(event){
+
+    emit(event, data) {
+        this.eventData.set(event, data);
+
         this.channel.postMessage({
-            EVENTS_DATAS_PAIRS:this.EVENTS_DATAS_PAIRS,
-            last_sended_event:event,
-            userId:this.UUID
+            eventData: this.eventData,
+            last_sent_event: event,
+            userId: this.uuid
         });
         return this;
     }
-    close(){
+
+    on(event, handler = console.log) {
+        if (!this.handlers.has(event)) {
+            this.handlers.set(event, []);
+        }
+        this.handlers.get(event).push(handler);
+        return this;
+    }
+
+    close() {
         this.channel.close();
         return this;
     }
+
+    get broadcast() {
+        return this;
+    }
 }
-const useChannel = name => new ZikoUseChannel(name);
-export{ useChannel }
+
+const useChannel = (name) => new UseChannel(name);
+export { useChannel };

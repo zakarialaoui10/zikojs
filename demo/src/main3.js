@@ -1,15 +1,23 @@
 import { tags, Flex , tick, loop} from "ziko";
-import { useDerived, useState } from "ziko/hooks";
+import { useDerived, useState, useChannel } from "ziko/hooks";
 import { define_wc } from 'ziko/ui/web-component'
 
+globalThis.ch1 = useChannel('state-sync1')
+globalThis.ch2 = useChannel('state-sync2')
 
 
 const {slot, div, p, button, style} = tags
 
-console.log(import.meta.env)
+// console.log(import.meta.env)
 
 const [value, setValue] = useState(0)
-const [color, setColor] = useState('red')
+
+ch2.on('value', e=>setValue(e))
+
+
+
+// send to specific rooms
+chat.emit("message", "Hello rooms 1 & 2!", ["room1", "room2"]);
 
 div('Value : ', value).mount(document.body)
 tick(()=>setValue(n => n+1), 1000)

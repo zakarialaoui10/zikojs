@@ -1,4 +1,4 @@
-class ZikoUseThreed {
+class UseThreed {
     #workerContent;
     constructor() {
         this.#workerContent = (
@@ -34,7 +34,7 @@ class ZikoUseThreed {
 }
 
 const useThread = (func, callback , close) => {
-    const T = new ZikoUseThreed();
+    const T = new UseThreed();
     if (func) {
         T.call(func, callback , close);
     }

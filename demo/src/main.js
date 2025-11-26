@@ -2,8 +2,10 @@ import { FileBasedRouting } from "ziko";
 FileBasedRouting(import.meta.glob('./pages/**/*.js'))
 
 import {cos} from 'ziko/math'
+import {useChannel} from 'ziko/hooks'
 
 cos(1, 2, 3, {a : 1})
+
 
 // import { Complex, complex, mapfun } from "ziko/math";
 

@@ -1,4 +1,4 @@
-class ZikoUseStyle {
+class UseStyle {
   constructor(style = {}, use = style.hasOwnProperty("default")? "default" : Object.keys(style)[0], id = 0) {
     this.id = "Ziko-Style-" + id;
     this.keys = new Set();
@@ -72,8 +72,8 @@ class ZikoUseStyle {
   }
 }
 
-const useStyle = (styles, use, id) => new ZikoUseStyle(styles, use, id)
+const useStyle = (styles, use, id) => new UseStyle(styles, use, id)
 export { 
   useStyle,
-  ZikoUseStyle
+  UseStyle
  };
