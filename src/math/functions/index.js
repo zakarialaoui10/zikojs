@@ -5,11 +5,6 @@ import {
     min,
     max 
 }from "../statistics/index.js";
-// import { 
-//     gamma,
-//     bessel,
-//     beta 
-// } from "../calculus/index.js";
 
 const abs=(...x)=>mapfun(Math.abs,...x);
 const sqrt=(...x)=>mapfun(Math.sqrt,...x);

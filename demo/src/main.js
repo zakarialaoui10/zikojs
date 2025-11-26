@@ -1,6 +1,10 @@
 import { FileBasedRouting } from "ziko";
 FileBasedRouting(import.meta.glob('./pages/**/*.js'))
 
+import {cos} from 'ziko/math'
+
+cos(1, 2, 3, {a : 1})
+
 // import { Complex, complex, mapfun } from "ziko/math";
 
 // const a = new Complex(1, 1)
