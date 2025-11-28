@@ -10,7 +10,7 @@ const {slot, div, p, button, style} = tags
 
 // console.log(import.meta.env)
 
-const [value, setValue] = useState(0)
+const [value, setValue, controller] = useState('1')
 
 ch2.on('value', e=>setValue(e))
 
