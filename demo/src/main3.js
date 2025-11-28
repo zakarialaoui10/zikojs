@@ -1,9 +1,27 @@
 import { tags, Flex , tick, loop} from "ziko";
-import { useDerived, useState, useChannel } from "ziko/hooks";
+import { useDerived, useState, useChannel, useThread } from "ziko/hooks";
 import { define_wc } from 'ziko/ui/web-component'
-
+console.log(useThread)
 globalThis.ch1 = useChannel('state-sync1')
 globalThis.ch2 = useChannel('state-sync2')
+
+// Function to run in worker
+function heavyComputation() {
+    let sum = 0;
+    for (let i = 0; i < 1_000_000; i++) {
+        sum += i;
+    }
+    return sum;
+}
+
+// Using useThread helper
+useThread(heavyComputation, (result, error) => {
+    if (error) {
+        console.error("Worker error:", error);
+    } else {
+        console.log("Computation result:", result);
+    }
+});
 
 
 const {slot, div, p, button, style} = tags
@@ -12,15 +30,15 @@ const {slot, div, p, button, style} = tags
 
 
 
-ch2.on('value', e=>setValue(e))
+// ch2.on('value', e=>setValue(e))
 
 
 
-// send to specific rooms
-chat.emit("message", "Hello rooms 1 & 2!", ["room1", "room2"]);
+// // send to specific rooms
+// ch2.emit("message", "Hello rooms 1 & 2!", ["room1", "room2"]);
 
-div('Value : ', value).mount(document.body)
-tick(()=>setValue(n => n+1), 1000)
+// div('Value : ', value).mount(document.body)
+// tick(()=>setValue(n => n+1), 1000)
 // tick(e => n => setValue(n), 1000)
 // globalThis.asComp = async () => tags.span("async comp")
 // div().style({
