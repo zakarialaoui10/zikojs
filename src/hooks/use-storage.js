@@ -1,73 +1,99 @@
-// To do : remove old items
 import { useChannel } from "./use-channel.js";
-class UseStorage{
-    constructor(storage, globalKey, initialValue){
-        this.cache={
+
+class UseStorage {
+    constructor(storage, globalKey, initialValue, use_channel = true) {
+        this.cache = {
             storage,
             globalKey,
-            channel:useChannel(`Ziko:useStorage-${globalKey}`),
-            oldItemKeys:new Set()
+            channel: use_channel ? useChannel(`Ziko:useStorage-${globalKey}`) : null,
+            oldItemKeys: new Set()
+        };
+
+        this.#init(initialValue, use_channel);
+    }
+
+    get items() {
+        const raw = this.cache.storage.getItem(this.cache.globalKey);
+        if (!raw) return {};
+        try {
+            return JSON.parse(raw);
+        } catch {
+            return {};
         }
-        this.#init(initialValue);
-        this.#maintain();
     }
-    get items(){
-        return JSON.parse(this.cache.storage[this.cache.globalKey]??null);
-    }
+
     #maintain() {
-        for(let i in this.items)Object.assign(this, { [[i]]: this.items[i] });
-    }
-    #init(initialValue){
-        this.cache.channel=useChannel(`Ziko:useStorage-${this.cache.globalKey}`);
-        this.cache.channel.on("Ziko-Storage-Updated",()=>this.#maintain());
-        if(!initialValue)return;
-        if(this.cache.storage[this.cache.globalKey]){
-            Object.keys(this.items).forEach(key=>this.cache.oldItemKeys.add(key));
-            // console.group("Ziko:useStorage")
-            // console.warn(`Storage key '${this.cache.globalKey}' already exists. we will not overwrite it.`);
-            // console.info(`%cWe'll keep the existing data.`,"background-color:#2222dd; color:gold;");
-            // console.group("")
+        const items = this.items;
+        this.cache.oldItemKeys.forEach(k => delete this[k]);
+        for (const key in items) {
+            this[key] = items[key];
+            this.cache.oldItemKeys.add(key);
         }
+    }
+    #init(initialValue, use_channel) {
+        if (use_channel && this.cache.channel) this.cache.channel.on("Ziko-Storage-Updated", () => this.#maintain());
+        if (!initialValue) {
+            this.#maintain();
+            return;
+        }
+        if (this.cache.storage.getItem(this.cache.globalKey)) {
+            const existing = this.items;
+            Object.keys(existing).forEach(k => this.cache.oldItemKeys.add(k));
+            this.#maintain();
+        } 
         else this.set(initialValue);
     }
-    set(data){
-        this.cache.storage.setItem(this.cache.globalKey,JSON.stringify(data));
-        this.cache.channel.emit("Ziko-Storage-Updated",{});
-        Object.keys(data).forEach(key=>this.cache.oldItemKeys.add(key));
-        this.#maintain();
-        return this
-    }
-    add(data){
-        const db={
-            ...this.items,
-            ...data
-        }
-        this.cache.storage.setItem(this.cache.globalKey,JSON.stringify(db));
-        this.#maintain();
-        return this;
-    }
-    remove(...keys){
-        const db={...this.items};
-        for(let i=0;i<keys.length;i++){
-            delete db[keys[i]];
-            delete this[keys[i]];
-        }
-        this.set(db);
-        return this;
-    }
-    get(key){
-        return this.items[key];
-    }
-    clear(){
-        this.cache.storage.removeItem(this.cache.globalKey);
+
+    set(data) {
+        this.cache.storage.setItem(this.cache.globalKey, JSON.stringify(data));
+        if (this.cache.channel) this.cache.channel.emit("Ziko-Storage-Updated", data);
         this.#maintain();
         return this;
     }
 
+    add(data) {
+        this.set({
+            ...this.items,
+            ...data
+        });
+        return this;
+    }
+    remove(...keys) {
+        const items = { ...this.items };
+        keys.forEach(key => {
+            delete items[key];
+            delete this[key];
+            this.cache.oldItemKeys.delete(key);
+        });
+        this.set(items);
+        return this;
+    }
+    get(key) {
+        return this.items[key];
+    }
+    clear() {
+        this.cache.storage.removeItem(this.cache.globalKey);
+        this.cache.oldItemKeys.forEach(k => delete this[k]);
+        this.cache.oldItemKeys.clear();
+        this.#maintain();
+        return this;
+    }
+    onStorageUpdated(callback) {
+        if (this.cache.channel) {
+            this.cache.channel.on("Ziko-Storage-Updated", callback);
+        }
+        return this;
+    }
 }
-const useLocaleStorage=(key,initialValue)=>new UseStorage(localStorage,key,initialValue);
-const useSessionStorage=(key,initialValue)=>new UseStorage(sessionStorage,key,initialValue);
-export{
+
+// factory functions
+const useLocaleStorage = (key, initialValue, use_channel = true) =>
+    new UseStorage(localStorage, key, initialValue, use_channel);
+
+const useSessionStorage = (key, initialValue, use_channel = true) =>
+    new UseStorage(sessionStorage, key, initialValue, use_channel);
+
+export {
     useLocaleStorage,
     useSessionStorage
-}
+};
