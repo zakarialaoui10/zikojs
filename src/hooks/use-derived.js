@@ -4,7 +4,7 @@ export function useDerived(deriveFn, sources) {
     let paused = false;
 
     sources.forEach(source => {
-        const srcValue = source(); // getValue()
+        const srcValue = source();
         srcValue._subscribe(() => {
             if (!paused) {
                 const newVal = deriveFn(...sources.map(s => s().value));
