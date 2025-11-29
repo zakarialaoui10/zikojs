@@ -1,6 +1,6 @@
 import { Random } from "../math/random/index.js";
 
-class UseChannel {
+class UseIPC {
     #channel;
     #eventData;
     #handlers;
@@ -81,5 +81,5 @@ class UseChannel {
     }
 }
 
-const useChannel = (name) => new UseChannel(name);
-export { useChannel };
+const useIPC = (name) => new UseIPC(name);
+export { useIPC };

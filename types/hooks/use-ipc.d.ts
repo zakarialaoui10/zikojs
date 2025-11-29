@@ -1,4 +1,4 @@
-export declare class UseChannel {
+export declare class UseIPC {
     emit(event: string, data: any, rooms?: string[]): this;
     on(event: string, handler: (data: any) => void, rooms?: string | string[]): this;
     off(event: string, handler: (data: any) => void): this;
@@ -9,4 +9,4 @@ export declare class UseChannel {
 
 }
 
-export declare const useChannel: (name?: string) => UseChannel;
+export declare const useIPC: (name?: string) => UseIPC;

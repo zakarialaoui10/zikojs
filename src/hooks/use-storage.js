@@ -1,11 +1,11 @@
-import { useChannel } from "./use-channel.js";
+import { useIPC } from "./use-ipc.js";
 
 class UseStorage {
     constructor(storage, globalKey, initialValue, use_channel = true) {
         this.cache = {
             storage,
             globalKey,
-            channel: use_channel ? useChannel(`Ziko:useStorage-${globalKey}`) : null,
+            channel: use_channel ? useIPC(`Ziko:useStorage-${globalKey}`) : null,
             oldItemKeys: new Set()
         };
 
