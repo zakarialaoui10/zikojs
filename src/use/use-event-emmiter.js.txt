@@ -1,7 +1,7 @@
 class UseEventEmitter {
-    constructor() {
+    constructor(maxListeners = 10) {
       this.events = {};
-      this.maxListeners = 10; 
+      this.maxListeners = maxListeners; 
     }
     on(event, listener) {
       if (!this.events[event]) {
@@ -60,5 +60,5 @@ class UseEventEmitter {
     }
   }
 
-const useEventEmitter=()=>new UseEventEmitter()
+const useEventEmitter=(maxListeners)=>new UseEventEmitter(maxListeners)
 export{useEventEmitter}
