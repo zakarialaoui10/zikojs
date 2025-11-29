@@ -1,5 +1,5 @@
 import { tags, Flex , tick, loop} from "ziko";
-import { useDerived, useState, useChannel, useThread } from "ziko/hooks";
+import { useDerived, useState, useChannel, useThread, useMediaQuery } from "ziko/hooks";
 import { define_wc } from 'ziko/ui/web-component'
 console.log(useThread)
 globalThis.ch1 = useChannel('state-sync1')
@@ -22,6 +22,19 @@ useThread(heavyComputation, (result, error) => {
         console.log("Computation result:", result);
     }
 });
+
+useMediaQuery(
+    [
+    {
+        query: '(min-width: 600px)',
+        callback: () => console.log(1)
+    },
+    {
+        query: '(max-width: 300px)',
+        callback: () => console.log(2)
+    }
+  ]
+)
 
 
 const {slot, div, p, button, style} = tags

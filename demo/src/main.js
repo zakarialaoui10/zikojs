@@ -2,7 +2,20 @@ import { FileBasedRouting } from "ziko";
 FileBasedRouting(import.meta.glob('./pages/**/*.js'))
 
 import {cos} from 'ziko/math'
-import {useChannel} from 'ziko/hooks'
+import {useChannel, useMediaQuery} from 'ziko/hooks'
+
+useMediaQuery(
+    [
+    {
+        query: '(min-width: 600px)',
+        callback: () => console.log(1)
+    },
+    {
+        query: '(max-width: 300px)',
+        callback: () => console.log(2)
+    }
+  ]
+)
 
 cos(1, 2, 3, {a : 1})
 
