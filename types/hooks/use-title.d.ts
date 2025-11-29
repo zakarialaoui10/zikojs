@@ -9,13 +9,13 @@ export declare class UseTitle {
     /**
      * Enables the internal event emitter.
      */
-    enableEmitter(): this;
+    useEventEmitter(): this;
 
     /**
      * Sets the document title.
      * Emits "ziko:title-changed" if emitter is enabled.
      */
-    set(title: string): this;
+    setTitle(title: string): this;
 
     /**
      * Returns the current document title.
@@ -28,14 +28,10 @@ export declare class UseTitle {
     onChange(callback: (title: string) => void): this;
 
     /**
-     * Listen once for the next title change.
+     * To Do 
+     * Disable or remove the internal event emitter entirely.
      */
-    onceChange(callback: (title: string) => void): this;
-
-    /**
-     * Remove a listener from title changes.
-     */
-    offChange(callback: (title: string) => void): this;
+    removeEventEmitter(): this;
 }
 
 export declare const useTitle: (title?: string, withEmitter?: boolean) => UseTitle;

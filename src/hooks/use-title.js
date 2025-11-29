@@ -6,16 +6,16 @@ class UseTitle {
             emitter: null
         };
 
-        if (withEmitter) this.enableEmitter();
+        if (withEmitter) this.useEventEmitter();
         this.set(title);
     }
 
-    enableEmitter() {
+    useEventEmitter() {
         this.cache.emitter = useEventEmitter();
         return this;
     }
 
-    set(title) {
+    setTitle(title) {
         if (title !== document.title) {
             document.title = title;
 
@@ -33,20 +33,6 @@ class UseTitle {
     onChange(callback) {
         if (this.cache.emitter) {
             this.cache.emitter.on("ziko:title-changed", callback);
-        }
-        return this;
-    }
-
-    onceChange(callback) {
-        if (this.cache.emitter) {
-            this.cache.emitter.once("ziko:title-changed", callback);
-        }
-        return this;
-    }
-
-    offChange(callback) {
-        if (this.cache.emitter) {
-            this.cache.emitter.off("ziko:title-changed", callback);
         }
         return this;
     }

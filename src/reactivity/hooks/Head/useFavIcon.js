@@ -1,11 +1,11 @@
 import { useEventEmitter } from "../../../hooks/use-event-emitter.js";
 class ZikoUseFavIcon{
-    constructor(FavIcon,useEventEmitter=true){
+    constructor(FavIcon,withEmitter=true){
         this.#init();
         this.cache={
             Emitter:null
         }
-        if(useEventEmitter)this.useEventEmitter();
+        if(withEmitter)this.useEventEmitter();
         this.set(FavIcon);
     }
     #init(){     
@@ -34,5 +34,5 @@ class ZikoUseFavIcon{
     }
 
 }
-const useFavIcon=(FavIcon,useEventEmitter)=>new ZikoUseFavIcon(FavIcon,useEventEmitter);
+const useFavIcon=(FavIcon,withEmitter)=>new ZikoUseFavIcon(FavIcon,withEmitter);
 export{ useFavIcon }
