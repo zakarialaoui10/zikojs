@@ -1,7 +1,7 @@
 import { ZikoEvent } from "../ziko-event.js";
 class ZikoCustomEvent extends ZikoEvent{
     constructor(target, events, customizer){
-        super(target, events, details_setter, customizer)
+        super('custom', target, events, details_setter, customizer)
     }
     _register_events(events){
         super._register_events(events, null, null, false);

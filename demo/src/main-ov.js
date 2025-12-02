@@ -11,6 +11,8 @@ a.style({
     userSelect: 'none',
     touchAction: 'none',
 })
+
+a.onClick(()=>console.log('1'))
 a.onSwipeRight(e=>console.log(1111))
 
 a.onResizeView(e=> console.log('resized'))

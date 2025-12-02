@@ -1,48 +1,55 @@
-import { getEvent } from "./utils.js"
+import { getEvent } from './utils.js'
 class ZikoEvent {
-    constructor(target = null, Events = [], details_setter, customizer){
+    constructor(signature, target = null, Events = [], details_setter, customizer){
         this.target = target;
         this.cache = {
+            signature,
             currentEvent : null,
             event: null,
             options : {},
             preventDefault : {},
             stopPropagation : {},
             stopImmediatePropagation : {},
-            event_flow : {},
             paused : {},
-            stream : {
-                enabled : {},
-                clear : {},
-                history : {}
-            },
             callbacks : {},
             __controllers__:{}
         }
-        if(Events)this._register_events(Events, details_setter, customizer);
+        if (Events) this._register_events(Events, details_setter, customizer);
     }
-    _register_events(Events, details_setter, customizer, REGISTER_METHODES = true){
-        const events = Events?.map(n=>getEvent(n))
-        events?.forEach((event,i)=>{
-            Object.assign(this.cache.preventDefault, {[event] : false});
-            Object.assign(this.cache.options, {[event] : {}});
-            Object.assign(this.cache.paused, {[event] : false});
-            Object.assign(this.cache.stream.enabled, {[event] : false});
-            Object.assign(this.cache.stream.clear, {[event] : false});
-            Object.assign(this.cache.stream.history, {[event] : []});
-            Object.assign(this.cache.__controllers__, {[event] : e=>event_controller.call(this, e, event, details_setter, customizer)});
-            if(REGISTER_METHODES)Object.assign(this, { [`on${Events[i]}`] : (...callbacks)=> this.__onEvent(event, this.cache.options[event], {}, ...callbacks)})
-        })
+    _register_events(Events, details_setter, customizer, REGISTER_METHODES = true) {
+        const events = Events?.map(n => getEvent(n));
+        events?.forEach((event, i) => {
+            this.cache.preventDefault[event] = false;
+            this.cache.options[event] = {};
+            this.cache.paused[event] = false;
+            this.cache.__controllers__[event] = (e) =>
+                event_controller.call(this, e, event, details_setter, customizer);
+            if (REGISTER_METHODES) {
+                this[`on${Events[i]}`] = (callback) =>
+                    this.__onEvent(event, this.cache.options[event], {}, callback);
+            }
+        });
+        return this;
+}
+
+    __onEvent(event, options, dispose, callback) {
+        if (!callback) return this;
+
+        // Store single callback directly
+        this.cache.callbacks[event] = callback;
+
+        this.__handle(event, this.cache.__controllers__[event], options, dispose);
         return this;
     }
+
     get targetElement(){
         return this.target?.element;
     }
     get isParent(){
-        return this.target?.element === this.event.srcElement;
+        return this.target?.element === this.event?.srcElement;
     }
     get item(){
-        return this.target.find(n=>n.element == this.event?.srcElement)?.[0];
+        return this.target.find(n => n.element == this.event?.srcElement)?.[0];
     }
     get currentEvent(){
         return this.cache.currentEvent;
@@ -50,115 +57,89 @@ class ZikoEvent {
     get event(){
         return this.cache.event;
     }
+    get detail(){
+        return this.cache.event.detail
+    }
     setTarget(UI){
-        this.target=UI;
+        this.target = UI;
         return this;
     }
-    __handle(event, handler, options, dispose){
+    __handle(event, handler, options){
         this.targetElement?.addEventListener(event, handler, options);
         return this;
     }
-    __onEvent(event, options, dispose, ...callbacks){
-        if(callbacks.length===0){
-            console.log("00")
-            if(this.cache.callbacks[event]){
-                console.log("Call")
-                // this.cache.callbacks.map(n=>e=>n.call(this,e));
-                this.cache.callbacks[event].map(n=>e=>n.call(this,e))
-            }   
-            else {
-                return this;
-            }
-        }
-        else this.cache.callbacks[event] = callbacks.map(n=>e=>n.call(this,e));
-        this.__handle(event, this.cache.__controllers__[event],options, dispose)
-        return this;  
-    }
-    #override(methode, overrides, defaultValue){
-        if(defaultValue === "default") Object.assign(this.cache[methode], {...this.cache[methode], ...overrides});
-        const all = defaultValue === "default" 
-        ? this.cache[methode]
-        : Object.fromEntries(Object.keys(this.cache.preventDefault).map(n=>[n,defaultValue]))
-        Object.assign(this.cache[methode], {...all,...overrides});
-        return this       
-    }
-    preventDefault(overrides = {}, defaultValue = "default"){
-        this.#override("preventDefault", overrides, defaultValue);
-        // const all=Object.fromEntries(Object.keys(this.cache.preventDefault).map(n=>[n,defaultValue]))
-        // Object.assign(this.cache.preventDefault, {...all,...overrides});
+    #override(method, ...events) {
+        const keys = events.length === 0 ? Object.keys(this.cache[method]) : events
+        keys.forEach(e => {
+            if (this.cache[method].hasOwnProperty(e)) this.cache[method][e] = true;
+        });
         return this;
     }
-    stopPropagation(overrides = {}, defaultValue = "default"){
-        this.#override("stopPropagation", overrides, defaultValue);
-        return this;
+    preventDefault(...events) {
+        return this.#override('preventDefault', ...events);
     }
-    stopImmediatePropagation(overrides = {}, defaultValue = "default"){
-        this.#override("stopImmediatePropagation", overrides, defaultValue);
-        return this;
+    stopPropagation(...events) {
+        return this.#override('stopPropagation', ...events);
+    }
+    stopImmediatePropagation(...events) {
+        return this.#override('stopImmediatePropagation', ...events);
     }
     setEventOptions(event, options){
-        this.pause({[event] : true, }, "default");
-        Object.assign(this.cache.options[getEvent(event)], options);
-        this.resume({[event] : true, }, "default");
+        const evt = getEvent(event);
+        this.pause({ [evt]: true });
+        Object.assign(this.cache.options[evt], options);
+        this.resume({ [evt]: true });
         return this;
     }
-    pause(overrides = {}, defaultValue = "default"){
-        const all = defaultValue === "default" 
-          ? this.cache.stream.enabled
-          : Object.entries(Object.keys(this.cache.stream.enabled).map(n=>[n,defaultValue]));
-        overrides={...all,...overrides};
-        for(let key in overrides){
-            if(overrides[key]){
-                this.targetElement?.removeEventListener(key, this.cache.__controllers__[key], this.cache.options[key]);
-                this.cache.paused[key]=true;
-            }
-        }
+    #toggleEventListener(method, ...events) {
+        console.log(events, events.length)
+        const keys = events.length === 0
+            ? Object.keys(this.cache.paused) 
+            : events;
+        keys.forEach(key => {
+            if (!this.cache.paused.hasOwnProperty(key)) return;
+            this.targetElement?.[method](
+                key,
+                this.cache.__controllers__[key],
+                this.cache.options[key]
+            );
+            this.cache.paused[key] = method === 'removeEventListener';
+        });
         return this;
     }
-    resume(overrides = {}, defaultValue = "default"){
-        const all = defaultValue === "default" 
-          ? this.cache.stream.enabled
-          : Object.entries(Object.keys(this.cache.stream.enabled).map(n=>[n,defaultValue]));
-        overrides={...all,...overrides};
-        for(let key in overrides){
-            if(overrides[key]){
-                this.targetElement?.addEventListener(key,this.cache.__controllers__[key], this.cache.options[key]);
-                this.cache.paused[key]=false;
-            }
-        }
-        return this;
-     }
-    stream(overrides = {}, defaultValue = "default"){
-        this.cache.stream.t0=Date.now();
-        const all=Object.fromEntries(Object.keys(this.cache.stream.enabled).map(n=>[n,defaultValue]))
-        overrides={...all,...overrides}
-        Object.assign(this.cache.stream.enabled,overrides);
-        return this;
-     }
+    pause(...events) {
+        return this.#toggleEventListener('removeEventListener', ...events);
+    }
+    resume(...events) {
+        return this.#toggleEventListener('addEventListener', ...events);
+    }
     clear(){
         return this;
     }
-    dispose(overrides = {}, defaultValue = "default"){
-        this.pause(overrides, defaultValue);
-
+    dispose(){
+        this.pause(true);
+        this.target.cache.event[this.cache.signature] = null
         return this;
     }
 }
 
-function event_controller(e, event_name, details_setter, customizer, push_object){
+function event_controller(e, event_name, details_setter, customizer) {
     this.cache.currentEvent = event_name;
     this.cache.event = e;
+
     details_setter?.call(this);
-    customizer?.hasOwnProperty("prototype") ? customizer?.call(this) : customizer?.call(null, this);
-    // if(customizer?.hasOwnProperty("prototype")) customizer?.call(this)
-    // else customizer?.call(null, this)
-    if(this.cache.preventDefault[event_name]) e.preventDefault();
-    if(this.cache.stopPropagation[event_name]) e.stopPropagation();
-    if(this.cache.stopImmediatePropagation[event_name]) e.stopImmediatePropagation();
-    
-    if(this.cache.stream.enabled[event_name]&&push_object)this.cache.stream.history[event_name].push(push_object);
-    this.cache.callbacks[event_name]?.map(n=>n(this));
+    if (customizer?.hasOwnProperty('prototype')) customizer?.call(this);
+    else customizer?.call(null, this);
+
+    if (this.cache.preventDefault[event_name]) e.preventDefault();
+    if (this.cache.stopPropagation[event_name]) e.stopPropagation();
+    if (this.cache.stopImmediatePropagation[event_name]) e.stopImmediatePropagation();
+
+    // Call the single callback if it exists
+    this.cache.callbacks[event_name]?.(this);
 }
+
+
 
 export {
     ZikoEvent,
