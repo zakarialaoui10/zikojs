@@ -1,4 +1,4 @@
-import { Events } from "../../events/__Events__.js";
+import { EventsMap } from "../../events/events-map.js";
 import {
   bind_pointer_event,
   bind_mouse_event,
@@ -23,7 +23,7 @@ const binderMap = {
 
 const EventsMethodes = {};
 
-Object.entries(Events).forEach(([name, eventList]) => {
+Object.entries(EventsMap).forEach(([name, eventList]) => {
   eventList.forEach(event => {
     const methodName = `on${event}`;
     EventsMethodes[methodName] = function (...callbacks) {

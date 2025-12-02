@@ -1,3 +1,3 @@
 export * from './binders/index.js'
-export * from "./__ZikoEvent__.js";
+export * from "./ziko-event.js"
 export * from "./utils.js";

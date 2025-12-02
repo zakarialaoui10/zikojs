@@ -1,5 +1,5 @@
-import { __ZikoEvent__ } from "../__ZikoEvent__.js";
-class ZikoEventCustom extends __ZikoEvent__{
+import { ZikoEvent } from "../ziko-event.js";
+class ZikoEventCustom extends ZikoEvent{
     constructor(target, events, customizer){
         super(target, events, details_setter, customizer)
     }

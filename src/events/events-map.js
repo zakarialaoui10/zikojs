@@ -1,4 +1,4 @@
-const Events = {
+const EventsMap = {
     'Click' : [
         'Click',
         'DblClick',
@@ -54,5 +54,5 @@ const Events = {
 }
 
 export {
-    Events
+    EventsMap
 }

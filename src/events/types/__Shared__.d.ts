@@ -1,4 +1,4 @@
-export type EventCustomizer = ((this: __ZikoEvent__) => void) | ((ctx: __ZikoEvent__) => void);
+export type EventCustomizer = ((this: ZikoEvent) => void) | ((ctx: ZikoEvent) => void);
 
 export type EventMethodesBinder<
   EventKeys extends string,
@@ -30,11 +30,11 @@ export interface ZikoEventCache {
   __controllers__: Record<string, (e: Event) => void>;
 }
 
-export declare class __ZikoEvent__ {
+export declare class ZikoEvent {
   constructor(
     target: any,
     Events: string[],
-    details_setter?: (this: __ZikoEvent__) => void,
+    details_setter?: (this: ZikoEvent) => void,
     customizer?: EventCustomizer
   );
 

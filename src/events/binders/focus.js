@@ -1,8 +1,8 @@
-import { __ZikoEvent__ } from "../__ZikoEvent__.js";
-import { Events } from "../__Events__.js";
-class ZikoEventFocus extends __ZikoEvent__{
+import { ZikoEvent } from "../ziko-event.js";
+import { EventsMap } from "../events-map.js";
+class ZikoEventFocus extends ZikoEvent{
     constructor(target, customizer){
-        super(target, Events.Focus, details_setter, customizer)
+        super(target, EventsMap.Focus, details_setter, customizer)
     }
 }
 function details_setter(){

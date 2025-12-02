@@ -1,8 +1,8 @@
-import { __ZikoEvent__ } from "../__ZikoEvent__.js";
+import { ZikoEvent } from "../ziko-event.js";
 import type { Callback, ClipboardEventKeys } from './__Shared__.js';
 import { UIElement } from "../../ui/index.js";
 
-declare class ZikoEventClipboard extends __ZikoEvent__ {
+declare class ZikoEventClipboard extends ZikoEvent {
   constructor(target: any, customizer?: Function);
 
   // Explicitly declare the dynamic methods to get editor support

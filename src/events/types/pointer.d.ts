@@ -1,10 +1,10 @@
-import { __ZikoEvent__ } from "../__ZikoEvent__.js";
+import { ZikoEvent } from "../ziko-event.js";
 import type { EventMethodesBinder, Callback, PointerEventKeys } from './__Shared__.js';
 import { UIElement } from "../../ui/index.js";
 
 type PointerEventMethodesBinder = EventMethodesBinder<PointerEventKeys, ZikoEventPointer>;
 
-declare class ZikoEventPointer extends __ZikoEvent__ implements PointerEventMethodesBinder {
+declare class ZikoEventPointer extends ZikoEvent implements PointerEventMethodesBinder {
   constructor(target: any, customizer?: Function);
 
   isDown: boolean;
