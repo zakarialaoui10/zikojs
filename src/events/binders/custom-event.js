@@ -1,5 +1,5 @@
 import { ZikoEvent } from "../ziko-event.js";
-class ZikoEventCustom extends ZikoEvent{
+class ZikoCustomEvent extends ZikoEvent{
     constructor(target, events, customizer){
         super(target, events, details_setter, customizer)
     }
@@ -7,8 +7,12 @@ class ZikoEventCustom extends ZikoEvent{
         super._register_events(events, null, null, false);
         return this;
     }
-    emit(event_name, details = {}){
-        const event = new Event(event_name);
+    emit(event_name, detail = {}){
+        const event = new CustomEvent(event_name, {
+            detail,
+            bubbles: true,
+            cancelable: true
+        });
         this.targetElement.dispatchEvent(event);
         return this;
     }
@@ -21,9 +25,9 @@ class ZikoEventCustom extends ZikoEvent{
 function details_setter(){
 
 }
-const bindCustomEvent = (target, events, customizer) => new ZikoEventCustom(target, events, customizer)
+const bind_custom_event = (target, events, customizer) => new ZikoCustomEvent(target, events, customizer)
 
 export{
-    bindCustomEvent,
-    ZikoEventCustom
+    bind_custom_event,
+    ZikoCustomEvent
 }

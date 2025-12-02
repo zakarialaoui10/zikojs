@@ -1,4 +1,8 @@
 const EventsMap = {
+    'Custom' : [
+        'emit',
+        'on'
+    ],
     'Click' : [
         'Click',
         'DblClick',

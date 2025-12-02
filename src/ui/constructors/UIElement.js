@@ -28,6 +28,8 @@ class UIElement extends UIElementCore{
       IndexingMethods, 
       EventsMethodes
     );
+
+    // console.log(EventsMethodes)
     if(element)this.init(element, name, type, render)
   }
   get element(){

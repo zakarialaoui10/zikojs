@@ -10,6 +10,8 @@ import {
   bind_wheel_event
 } from "../../events/binders/index.js";
 
+import { bind_custom_event } from "../../events/binders/custom-event.js";
+
 const binderMap = {
   ptr: bind_pointer_event,
   mouse : bind_mouse_event,
@@ -21,14 +23,26 @@ const binderMap = {
   wheel : bind_wheel_event
 };
 
-const EventsMethodes = {};
+const EventsMethodes = {
+  on(event_name,...callbacks){
+    if(!this.events.custom)this.events.custom = bind_custom_event(this);
+    this.events.custom.on(event_name,...callbacks);
+    return this;
+  },
+  emit(event_name,detail={}){
+    if(!this.events.custom)this.events.custom = bind_custom_event(this);
+    this.events.custom.emit(event_name,detail);
+    return this;
+  }
+};
 
 Object.entries(EventsMap).forEach(([name, eventList]) => {
+  const lname = name.toLowerCase()
   eventList.forEach(event => {
     const methodName = `on${event}`;
     EventsMethodes[methodName] = function (...callbacks) {
-      if (!this.events[name]) this.events[name] = binderMap[name.toLowerCase()](this);
-      this.events[name][methodName](...callbacks);
+      if (!this.events[lname]) this.events[lname] = binderMap[lname](this);
+      this.events[lname][methodName](...callbacks);
       return this;
     };
   });

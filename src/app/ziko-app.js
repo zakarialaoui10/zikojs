@@ -1,4 +1,4 @@
-import { ZikoHead , useHead} from "../reactivity/hooks/head/index.js";
+// import { ZikoHead , useHead} from "../reactivity/hooks/head/index.js";
 class ZikoApp {
     constructor({head = null, wrapper = null, target = null}){
         this.head = head;
@@ -25,11 +25,11 @@ class ZikoApp {
         else if(typeof wrapper === "function") this.wrapper = wrapper();
         return this;
     }
-    setHead(head){
-        if(head instanceof ZikoHead) this.head = head;
-        else this.head = useHead(head);
-        return this;  
-    }
+    // setHead(head){
+    //     if(head instanceof ZikoHead) this.head = head;
+    //     else this.head = useHead(head);
+    //     return this;  
+    // }
     
 }
 const App = ({head, wrapper, target}) => new ZikoApp({head, wrapper, target})
