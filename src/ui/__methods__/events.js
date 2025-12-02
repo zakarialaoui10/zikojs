@@ -44,9 +44,9 @@ Object.entries(EventsMap).forEach(([name, eventList]) => {
   const lname = name.toLowerCase()
   eventList.forEach(event => {
     const methodName = `on${event}`;
-    EventsMethodes[methodName] = function (...callbacks) {
+    EventsMethodes[methodName] = function (callbacks) {
       if (!this.events[lname]) this.events[lname] = binderMap[lname](this);
-      this.events[lname][methodName](...callbacks);
+      this.events[lname][methodName](callbacks);
       return this;
     };
   });

@@ -1,4 +1,8 @@
-import { getEvent } from './utils.js'
+import { 
+    getEvent,
+    event_controller,
+    toggle_event_listener
+} from './utils.js'
 class ZikoEvent {
     constructor(signature, target = null, Events = [], details_setter, customizer){
         this.target = target;
@@ -30,18 +34,13 @@ class ZikoEvent {
             }
         });
         return this;
-}
-
+    }
     __onEvent(event, options, dispose, callback) {
         if (!callback) return this;
-
-        // Store single callback directly
         this.cache.callbacks[event] = callback;
-
         this.__handle(event, this.cache.__controllers__[event], options, dispose);
         return this;
     }
-
     get targetElement(){
         return this.target?.element;
     }
@@ -86,61 +85,23 @@ class ZikoEvent {
     }
     setEventOptions(event, options){
         const evt = getEvent(event);
-        this.pause({ [evt]: true });
+        this.pause();
         Object.assign(this.cache.options[evt], options);
-        this.resume({ [evt]: true });
-        return this;
-    }
-    #toggleEventListener(method, ...events) {
-        console.log(events, events.length)
-        const keys = events.length === 0
-            ? Object.keys(this.cache.paused) 
-            : events;
-        keys.forEach(key => {
-            if (!this.cache.paused.hasOwnProperty(key)) return;
-            this.targetElement?.[method](
-                key,
-                this.cache.__controllers__[key],
-                this.cache.options[key]
-            );
-            this.cache.paused[key] = method === 'removeEventListener';
-        });
+        this.resume();
         return this;
     }
     pause(...events) {
-        return this.#toggleEventListener('removeEventListener', ...events);
+        return toggle_event_listener.call(this, 'removeEventListener', ...events)
     }
     resume(...events) {
-        return this.#toggleEventListener('addEventListener', ...events);
-    }
-    clear(){
-        return this;
+        return toggle_event_listener.call(this, 'addEventListener', ...events);
     }
     dispose(){
-        this.pause(true);
-        this.target.cache.event[this.cache.signature] = null
+        this.pause();
+        this.target.events[this.cache.signature] = null
         return this;
     }
 }
-
-function event_controller(e, event_name, details_setter, customizer) {
-    this.cache.currentEvent = event_name;
-    this.cache.event = e;
-
-    details_setter?.call(this);
-    if (customizer?.hasOwnProperty('prototype')) customizer?.call(this);
-    else customizer?.call(null, this);
-
-    if (this.cache.preventDefault[event_name]) e.preventDefault();
-    if (this.cache.stopPropagation[event_name]) e.stopPropagation();
-    if (this.cache.stopImmediatePropagation[event_name]) e.stopImmediatePropagation();
-
-    // Call the single callback if it exists
-    this.cache.callbacks[event_name]?.(this);
-}
-
-
-
 export {
     ZikoEvent,
     getEvent
