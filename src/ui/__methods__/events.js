@@ -7,7 +7,9 @@ import {
   bind_drag_event,
   bind_clipboard_event,
   bind_focus_event,
-  bind_wheel_event
+  bind_wheel_event,
+  bind_view_event,
+  bind_swipe_event
 } from "../../events/binders/index.js";
 
 import { bind_custom_event } from "../../events/binders/custom-event.js";
@@ -20,7 +22,9 @@ const binderMap = {
   drag : bind_drag_event,
   clipboard : bind_clipboard_event,
   focus : bind_focus_event,
-  wheel : bind_wheel_event
+  wheel : bind_wheel_event,
+  view : bind_view_event,
+  swipe : bind_swipe_event
 };
 
 const EventsMethodes = {

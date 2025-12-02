@@ -4,7 +4,11 @@ import {
     ptr_details_setter,
     key_details_setter
 } from '../details-setter/index.js'
-import { register_click_away_event } from "../custom-events-registry/click-away.js";
+import { 
+    register_click_away_event,
+    register_view_event,
+    register_swipe_event
+} from "../custom-events-registry/index.js";
 
 export const bind_click_event = (target, customizer) => {
     register_click_away_event(target.element)
@@ -64,9 +68,22 @@ export const bind_wheel_event = (target, customizer) => new ZikoEvent(
     customizer
 );
 
+export const bind_view_event = (target, customizer) => {
+    register_view_event(target.element)
+    return new ZikoEvent(
+        target, 
+        EventsMap.View,
+        null, 
+        customizer
+    )
+}
 
-// function details_setter(){
-//     if(this.currentEvent==="click") this.dx = 0
-//     else this.dx = 1
-//     // console.log(this.currentEvent)
-// }
+export const bind_swipe_event = (target, customizer) => {
+    register_swipe_event(target.element)
+    return new ZikoEvent(
+        target, 
+        EventsMap.Swipe,
+        null, 
+        customizer
+    )
+}

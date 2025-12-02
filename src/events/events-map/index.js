@@ -1,8 +1,4 @@
 const EventsMap = {
-    'Custom' : [
-        'emit',
-        'on'
-    ],
     'Click' : [
         'Click',
         'DblClick',
@@ -48,13 +44,25 @@ const EventsMap = {
     ],
     'Wheel': [
         'Wheel'
-    ]
+    ],
     // 'Media':[
 
     // ],
     // 'Hash':[
     //     "HashChange"
     // ]
+
+    'View':[
+        'EnterView',
+        'ExitView',
+        'ResizeView'
+    ],
+    'Swipe':[
+        'SwipeLeft',
+        'SwipeUp',
+        'SwipeRight',
+        'SwipeDown'
+    ]
 }
 
 export {
