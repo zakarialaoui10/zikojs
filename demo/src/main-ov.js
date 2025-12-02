@@ -5,10 +5,13 @@ class Ov extends UIElement{
         super({element : 'div'})
         this.append(items)
     }
+    append(){
+        return 1
+    }
     show(){
         console.log(1)
     }
 }
 
-const ov = new Ov('jkj')
+globalThis.ov = new Ov('jkj')
 ov.show()

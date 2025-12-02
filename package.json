@@ -25,6 +25,9 @@
     "LICENCE"
   ],
   "exports": {
+    "./src/*": {
+      "import" : "./src/*"
+    },
     "./*": {
       "types" : "./types/*/index.d.ts",
       "import" : "./src/*/index.js"

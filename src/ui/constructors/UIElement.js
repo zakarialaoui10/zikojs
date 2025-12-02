@@ -8,13 +8,13 @@ import {
   StyleMethods
 } from "../__methods__/index.js";
 import { 
-  useCustomEvent,
+  // useCustomEvent,
   // useSwipeEvent,
   // watchIntersection, 
   // watchSize,
   // watchAttr,
   // watchChildren
-} from "../../reactivity/events/custom-event.js"
+} from "../../--reactivity-deprecated/events/custom-event.js"
 class UIElement extends UIElementCore{
   constructor({element, name ='', type='html', render = __Ziko__.__Config__.default.render}={}){
     super()
@@ -165,16 +165,16 @@ class UIElement extends UIElementCore{
   //   this.events.clipboard.onSelect(...callbacks);
   //   return this;
   // }
-  on(event_name,...callbacks){
-    if(!this.events.custom)this.events.custom = useCustomEvent(this);
-    this.events.custom.on(event_name,...callbacks);
-    return this;
-  }
-  emit(event_name,detail={}){
-    if(!this.events.custom)this.events.custom = useCustomEvent(this);
-    this.events.custom.emit(event_name,detail);
-    return this;
-  }
+  // on(event_name,...callbacks){
+  //   if(!this.events.custom)this.events.custom = useCustomEvent(this);
+  //   this.events.custom.on(event_name,...callbacks);
+  //   return this;
+  // }
+  // emit(event_name,detail={}){
+  //   if(!this.events.custom)this.events.custom = useCustomEvent(this);
+  //   this.events.custom.emit(event_name,detail);
+  //   return this;
+  // }
   // watchAttr(callback){
   //   if(!this.observer.attr)this.observer.attr = watchAttr(this,callback);
   //   return this;
