@@ -1,4 +1,4 @@
-import {UIElement} from "../constructors/UIElement-lite.js";
+import {UIElement} from "../mini/UIElement.js";
 class ZikoUISuspense extends UIElement{
     constructor(fallback_ui, callback){
         super({element : "div", name : "suspense"})
@@ -12,7 +12,6 @@ class ZikoUISuspense extends UIElement{
                 const ui = await callback()
                 fallback_ui.unmount()
                 this.append(ui)
-                // console.log(content)
             }
             catch(error){
                 console.log({error})

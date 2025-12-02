@@ -1,3 +1,6 @@
+export * from './lifecycle.js'
+export * as LifecycleMethods from './lifecycle.js'
+
 export * from './attrs.js'
 export * as AttrsMethods from './attrs.js'
 
