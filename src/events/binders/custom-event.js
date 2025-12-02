@@ -8,7 +8,7 @@ class ZikoEventCustom extends ZikoEvent{
         return this;
     }
     emit(event_name, details = {}){
-        const event=new Event(event_name);
+        const event = new Event(event_name);
         this.targetElement.dispatchEvent(event);
         return this;
     }

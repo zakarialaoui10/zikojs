@@ -1,4 +1,4 @@
-import { EventsMap } from "../../events/events-map.js";
+import { EventsMap } from "../../events/events-map/index.js";
 import {
   bind_pointer_event,
   bind_mouse_event,

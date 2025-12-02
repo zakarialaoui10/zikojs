@@ -1,12 +1,4 @@
-import { ZikoEvent } from "../ziko-event.js";
-import { EventsMap } from "../events-map.js";
-class ZikoEventPointer extends ZikoEvent{
-    constructor(target, customizer){
-        super(target, EventsMap.Ptr, details_setter, customizer);
-        this.isDown = false;
-    }
-}
-function details_setter(){
+export function ptr_details_setter(){
     switch(this.currentEvent){
         case "pointerdown" : {
             this.dx = parseInt(this.event.offsetX);
@@ -38,10 +30,4 @@ function details_setter(){
     // if(this.currentEvent==="click") this.dx = 0
     // else this.dx = 1
     // console.log(this.currentEvent)
-}
-const bind_pointer_event = (target, customizer) => new ZikoEventPointer(target, customizer)
-
-export{
-    bind_pointer_event,
-    ZikoEventPointer
 }
