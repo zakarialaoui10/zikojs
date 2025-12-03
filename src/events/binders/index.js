@@ -6,6 +6,9 @@ import {
     mouse_details_setter,
     touch_details_setter
 } from '../details-setter/index.js'
+import {
+    CoordinatesBasedEvent
+} from './coordinates-based-event.js'
 import { 
     register_click_away_event,
     register_view_event,
@@ -50,21 +53,21 @@ export const bind_key_event = (target, customizer) => new ZikoEvent(
     key_details_setter, 
     customizer
 );
-export const bind_mouse_event = (target, customizer) => new ZikoEvent(
+export const bind_mouse_event = (target, customizer) => new CoordinatesBasedEvent(
     'mouse',
     target,
     EventsMap.Mouse,
     mouse_details_setter,
     customizer
 );
-export const bind_pointer_event = (target, customizer) => new ZikoEvent(
+export const bind_pointer_event = (target, customizer) => new CoordinatesBasedEvent(
     'ptr',
     target,
     EventsMap.Ptr, 
     ptr_details_setter, 
     customizer
 );
-export const bind_touch_event = (target, customizer) => new ZikoEvent(
+export const bind_touch_event = (target, customizer) => new CoordinatesBasedEvent(
     'touch',
     target,
     EventsMap.Touch,

@@ -5,8 +5,15 @@ export function touch_details_setter() {
     if (!touch) return; // should never happen but safe
 
     const rect = this.targetElement.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
+    let x = touch.clientX - rect.left;
+    let y = touch.clientY - rect.top;
+
+    if(this.cache.useNormalisedCoordinates){
+        const w = this.targetElement.clientWidth;
+        const h = this.targetElement.clientHeight;
+        x = +((x / w) * 2 - 1).toFixed(8);
+        y = +((y / h) * -2 + 1).toFixed(8);
+    }
 
     switch (this.currentEvent) {
         case "touchstart":

@@ -1,7 +1,7 @@
 import { UIElement, tags } from "ziko";
 
 
-tags.p().style({
+globalThis.sk = tags.p().style({
     width : '200px',
     height : '200px',
     border : '1px dotted red'
