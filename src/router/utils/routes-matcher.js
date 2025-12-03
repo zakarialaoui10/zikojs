@@ -57,30 +57,4 @@ export function routes_matcher(mask, route) {
 // console.log(routes_matcher("/blog/[id]", "/blog")); // false
 // console.log(routes_matcher("/product/:id", "/product/99")); // true
 
-// console.log("\n=== PARSER TESTS ===");
-// console.log(dynamic_routes_parser("/user/[id]+", "/user"));
-// // 👉 {}
 
-// console.log(dynamic_routes_parser("/user/[id]+", "/user/42"));
-// // 👉 { id: "42" }
-
-// console.log(dynamic_routes_parser("/blog/[...slug]", "/blog/2025/oct/post"));
-// // 👉 { slug: "2025/oct/post" }
-
-// console.log(
-//   dynamic_routes_parser("/product/[category]/[id]+", "/product/electronics"),
-// );
-// // 👉 { category: "electronics" }
-
-// console.log("\n=== FIX TEST ===");
-// console.log(dynamic_routes_parser("/[...slug]/[id]", "/sl1/sl2/9"));
-// // 👉 { slug: "sl1/sl2", id: "9" }
-
-// console.log(dynamic_routes_parser("/[slug]/[...id]", "/sl1/id1/id2"));
-// // 👉 { slug: "sl1", id: "id1/id2" }
-
-// console.log(dynamic_routes_parser("/blog/lang/[lang]/id/[id]", "/blog/lang/en/id/10"));
-// // 👉 { lang: "en", id: "10" }
-
-
-// // Only the last one that can be optional 
