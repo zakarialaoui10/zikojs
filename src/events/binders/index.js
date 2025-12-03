@@ -2,7 +2,9 @@ import { ZikoEvent } from "../ziko-event.js";
 import { EventsMap } from "../events-map/index.js";
 import {
     ptr_details_setter,
-    key_details_setter
+    key_details_setter,
+    mouse_details_setter,
+    touch_details_setter
 } from '../details-setter/index.js'
 import { 
     register_click_away_event,
@@ -52,7 +54,7 @@ export const bind_mouse_event = (target, customizer) => new ZikoEvent(
     'mouse',
     target,
     EventsMap.Mouse,
-    null,
+    mouse_details_setter,
     customizer
 );
 export const bind_pointer_event = (target, customizer) => new ZikoEvent(
@@ -66,7 +68,7 @@ export const bind_touch_event = (target, customizer) => new ZikoEvent(
     'touch',
     target,
     EventsMap.Touch,
-    null,
+    touch_details_setter,
     customizer
 );
 export const bind_wheel_event = (target, customizer) => new ZikoEvent(

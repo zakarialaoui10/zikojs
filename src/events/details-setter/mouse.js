@@ -1,4 +1,4 @@
-export function ptr_details_setter() {
+export function mouse_details_setter() {
     const rect = this.targetElement.getBoundingClientRect();
     const e = this.event;
     const x = (e.clientX - rect.left) | 0;
@@ -6,19 +6,19 @@ export function ptr_details_setter() {
 
     switch (this.currentEvent) {
 
-        case "pointerdown":
+        case "mousedown":
             this.dx = x;
             this.dy = y;
             this.isDown = true;
             break;
 
-        case "pointermove":
+        case "mousemove":
             this.mx = x;
             this.my = y;
             this.isMoving = true;
             break;
 
-        case "pointerup":
+        case "mouserup":
             this.ux = x;
             this.uy = y;
             this.isDown = false;
@@ -26,4 +26,3 @@ export function ptr_details_setter() {
             break;
     }
 }
-

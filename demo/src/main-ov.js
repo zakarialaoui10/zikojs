@@ -1,5 +1,13 @@
 import { UIElement, tags } from "ziko";
 
+
+tags.p().style({
+    width : '200px',
+    height : '200px',
+    border : '1px dotted red'
+})
+.onPtrMove(e=>console.log({mx : e.mx, my : e.my}))
+.mount(document.body)
 globalThis.a = tags.p('Test')
 a.mount(document.body)
 a.style({
