@@ -1,5 +1,4 @@
 import { Fixed } from "./helper.js";
-import { Complex } from "../complex/index.js";
 import { mapfun } from "../utils/mapfun.js";
 import { 
     min,
@@ -11,12 +10,12 @@ const sqrt=(...x)=>mapfun(Math.sqrt,...x);
 const pow=(x,n)=>{
     if(typeof x === "number"){
         if(typeof n === "number")return Math.pow(x,n);
-        else if(n instanceof Complex)return Complex.fromExpo(x**n.a,n.b*ln(x))
+        else if(n?.isComplex?.())return n.constructor.fromExpo(x**n.a,n.b*ln(x))
         else return mapfun(a=>pow(x,a),...n);
     }
-    else if(x instanceof Complex){
-        if(typeof n === "number")return Complex.fromExpo(x.z**n,x.phi*n);
-        else if(n instanceof Complex)return Complex.fromExpo(
+    else if(x.isComplex?.()){
+        if(typeof n === "number")return x.constructor.fromExpo(x.z**n,x.phi*n);
+        else if(n.isComplex?.())return x.constructor.fromExpo(
             x.z**n.a*e(-x.phi*n.b),
             ln(x.z)*n.b+n.a*x.phi
         )
@@ -38,8 +37,8 @@ const sqrtn=(x,n)=>{
         if(typeof n === "number")return Math.pow(x,1/n);
         else return mapfun(a=>sqrtn(x,a),...n);
     }
-    else if(x instanceof Complex){
-        if(typeof n === "number")return Complex.fromExpo(sqrtn(x.z,n),x.phi/n);
+    else if(x.isComplex?.()){
+        if(typeof n === "number")return x.constructor.fromExpo(sqrtn(x.z,n),x.phi/n);
         else return mapfun(a=>sqrtn(x,a),...n);
     }
     else if(x instanceof Array){
@@ -81,8 +80,8 @@ const atan2=(x,y,rad=true)=>{
         if(typeof y === "number")return rad?Math.atan2(x,y):Math.atan2(x,y)*180/Math.PI;
         else return mapfun(a=>atan2(x,a,rad),...y);
     }
-    // else if(x instanceof Complex){
-    //     if(typeof n === "number")return Complex.fromExpo(x.z**n,x.phi*n);
+    // else if(x.isComplex?.()){
+    //     if(typeof n === "number")return x.constructor.fromExpo(x.z**n,x.phi*n);
     //     else return mapfun(a=>pow(x,a),...n);
     // }
     else if(x instanceof Array){

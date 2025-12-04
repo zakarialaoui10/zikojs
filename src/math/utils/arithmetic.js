@@ -1,13 +1,11 @@
-import { Complex,complex} from "../complex/index.js";
-import { Matrix  } from "../matrix/index.js";
 const _add=(a,b)=>{
     if(typeof(a)==="number"){
         if (typeof b == "number") return a + b;
-        else if (b instanceof Complex)return complex(a + b.a, b.b);
-        else if (b instanceof Matrix) return Matrix.nums(b.rows, b.cols, a).add(b);
+        else if (b.isComplex?.())return new b.constructor(a + b.a, b.b);
+        else if (b.isMatrix?.()) return b.constructor.nums(b.rows, b.cols, a).add(b);
         else if (b instanceof Array)return b.map(n=>add(n,a));                 
     }
-    else if(a instanceof Complex||a instanceof Matrix){
+    else if(a.isComplex?.()||a.isMatrix?.()){
         if(b instanceof Array)return b.map(n=>a.clone.add(n));
         return a.clone.add(b);
     }
@@ -23,11 +21,11 @@ const _add=(a,b)=>{
 const _sub=(a,b)=>{
     if(typeof(a)==="number"){
         if (typeof b == "number") return a - b;
-        else if (b instanceof Complex)return complex(a - b.a, -b.b);
-        else if (b instanceof Matrix) return Matrix.nums(b.rows, b.cols, a).sub(b);
+        else if (b.isComplex?.())return new b.constructor(a - b.a, -b.b);
+        else if (b.isMatrix?.()) return b.constructor.nums(b.rows, b.cols, a).sub(b);
         else if (b instanceof Array)return b.map(n=>sub(n,a));                 
     }
-    else if(a instanceof Complex||a instanceof Matrix){
+    else if(a.isComplex?.()||a.isMatrix?.()){
         if(b instanceof Array)return b.map(n=>a.clone.sub(n));
         return a.clone.sub(b);
     }
@@ -45,11 +43,11 @@ const _sub=(a,b)=>{
 const _mul=(a,b)=>{
     if(typeof(a)==="number"){
     if (typeof b == "number") return a * b;
-        else if (b instanceof Complex)return complex(a * b.a,a * b.b);
-        else if (b instanceof Matrix) return Matrix.nums(b.rows, b.cols, a).mul(b);
+        else if (b.isComplex?.())return new b.constructor(a * b.a,a * b.b);
+        else if (b.isMatrix?.()) return b.constructor.nums(b.rows, b.cols, a).mul(b);
         else if (b instanceof Array)return b.map(n=>mul(a,n)); 
     }
-    else if(a instanceof Complex||a instanceof Matrix){
+    else if(a.isComplex?.()||a.isMatrix?.()){
         if(b instanceof Array)return b.map(n=>a.clone.mul(n));
         return a.clone.mul(b);
     }
@@ -67,11 +65,11 @@ const _mul=(a,b)=>{
 const _div=(a,b)=>{
     if(typeof(a)==="number"){
     if (typeof b == "number") return a / b;
-        else if (b instanceof Complex)return complex(a / b.a,a / b.b);
-        else if (b instanceof Matrix) return Matrix.nums(b.rows, b.cols, a).div(b);
+        else if (b.isComplex?.())return new b.constructor(a / b.a,a / b.b);
+        else if (b.isMatrix?.()) return b.constructor.nums(b.rows, b.cols, a).div(b);
         else if (b instanceof Array)return b.map(n=>div(a,n));
     }
-    else if(a instanceof Complex||a instanceof Matrix){
+    else if(a.isComplex?.()||a.isMatrix?.()){
         if(b instanceof Array)return b.map(n=>a.clone.div(n));
         return a.clone.div(b);
     }
@@ -89,11 +87,11 @@ const _div=(a,b)=>{
 const _modulo=(a,b)=>{
     if(typeof(a)==="number"){
         if (typeof b == "number") return a % b;
-            else if (b instanceof Complex)return complex(a % b.a,a % b.b);
-            else if (b instanceof Matrix) return Matrix.nums(b.rows, b.cols, a).modulo(b);
+            else if (b.isComplex?.())return new b.constructor(a % b.a,a % b.b);
+            else if (b.isMatrix?.()) return b.constructor.nums(b.rows, b.cols, a).modulo(b);
             else if (b instanceof Array)return b.map(n=>div(a,n));
         }
-        else if(a instanceof Complex||a instanceof Matrix){
+        else if(a.isComplex?.()||a.isMatrix?.()){
             if(b instanceof Array)return b.map(n=>a.clone.div(n));
             return a.clone.div(b);
         }

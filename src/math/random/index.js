@@ -1,8 +1,6 @@
 
-import{Complex}from"../complex/index.js"
 import { Utils } from "../utils/index.js";
-import{Base}from"../discret/index.js"
-import { matrix } from "../matrix/index.js";
+import{ Base } from "../discret/index.js"
 class Random {
     static float(a = 1, b) {
         return b ? Math.random() * (b - a) + a : a * Math.random();
@@ -45,10 +43,6 @@ class Random {
     static shuffleArr(arr){
         return arr.sort(()=>0.5-Math.random())    
     }
-    static shuffleMatrix(M){
-            const {rows,cols,arr}=M;
-            return matrix(rows,cols,arr.flat().sort(()=>0.5-Math.random()))
-    }
     static floats(n, a, b) {
         return new Array(n).fill(0).map(() => this.float(a, b));
     }
@@ -83,91 +77,93 @@ class Random {
     static colors(n) {
         return new Array(n).fill(null).map(()=>this.color());
     }
-    static complex(a = [0,1], b = [0,1]) {
-        return a instanceof Array?
-        new Complex(
-            this.float(a[0], a[1]),
-            this.float(b[0], b[1])
-        ):
-        new Complex(
-            ...this.floats(2,a,b)
-        )
+
+    // Should be Moved to Matrix and Complex to avoid Circular dependencies
+    // static complex(a = [0,1], b = [0,1]) {
+    //     return a instanceof Array?
+    //     new Complex(
+    //         this.float(a[0], a[1]),
+    //         this.float(b[0], b[1])
+    //     ):
+    //     new Complex(
+    //         ...this.floats(2,a,b)
+    //     )
         
-    }
-    static complexInt(a = [0,1], b = [0,1]) {
-        return new Complex(
-            this.int(a[0], a[1]),
-            this.int(b[0], b[1])
-            );
-    }
-    static complexBin() {
-        return new Complex(...this.bins(2));
-    }
-    static complexOct() {
-        return new Complex(...this.octs(2));
-    }
-    static complexDec() {
-        return new Complex(...this.decs(10));
-    }
-    static complexHex() {
-        return new Complex(...this.octs(2));
-    }
-    static complexes(n, a = 0, b = 1) {
-        return new Array(n).fill(0).map(() => this.complex(a, b));
-    }
-    static complexesInt(n, a = 0, b = 1) {
-        return new Array(n).fill(0).map(() => this.complexInt(a, b));
-    }
-    static complexesBin(n) {
-        return new Array(n).fill(0).map(() => this.complexBin());
-    }
-    static complexesOct(n) {
-        return new Array(n).fill(0).map(() => this.complexOct());
-    }
-    static complexesDec(n) {
-        return new Array(n).fill(0).map(() => this.complexDec());
-    }
-    static complexesHex(n) {
-        return new Array(n).fill(0).map(() => this.complexHex());
-    }
-    static matrix(r,c,min,max){
-        return matrix(r,c,this.floats(r*c,min,max))
-    }
-    static matrixInt(r,c,min,max){
-        return matrix(r,c,this.ints(r*c,min,max))
-    }
-    static matrixBin(r,c){
-        return matrix(r,c,this.bins(r*c))
-    }
-    static matrixOct(r,c){
-        return matrix(r,c,this.octs(r*c))
-    }
-    static matrixDec(r,c){
-        return matrix(r,c,this.decs(r*c))
-    }
-    static matrixHex(r,c){
-        return matrix(r,c,this.hex(r*c))
-    }
-    static matrixColor(r,c){
-        return matrix(r,c,this.colors(r*c))
-    }
-    static matrixComplex(r,c,a,b){
-        return matrix(r,c,this.complexes(r*c,a,b))
-    }
-    static matrixComplexInt(r,c,a,b){
-        return matrix(r,c,this.complexesInt(r*c,a,b))
-    }
-    static matrixComplexBin(r,c){
-        return matrix(r,c,this.complexesBin(r*c))
-    }
-    static matrixComplexOct(r,c){
-        return matrix(r,c,this.complexesBin(r*c))
-    }
-    static matrixComplexDec(r,c){
-        return matrix(r,c,this.complexesBin(r*c))
-    }
-    static matrixComplexHex(r,c){
-        return matrix(r,c,this.complexesBin(r*c))
-    }
+    // }
+    // static complexInt(a = [0,1], b = [0,1]) {
+    //     return new Complex(
+    //         this.int(a[0], a[1]),
+    //         this.int(b[0], b[1])
+    //         );
+    // }
+    // static complexBin() {
+    //     return new Complex(...this.bins(2));
+    // }
+    // static complexOct() {
+    //     return new Complex(...this.octs(2));
+    // }
+    // static complexDec() {
+    //     return new Complex(...this.decs(10));
+    // }
+    // static complexHex() {
+    //     return new Complex(...this.octs(2));
+    // }
+    // static complexes(n, a = 0, b = 1) {
+    //     return new Array(n).fill(0).map(() => this.complex(a, b));
+    // }
+    // static complexesInt(n, a = 0, b = 1) {
+    //     return new Array(n).fill(0).map(() => this.complexInt(a, b));
+    // }
+    // static complexesBin(n) {
+    //     return new Array(n).fill(0).map(() => this.complexBin());
+    // }
+    // static complexesOct(n) {
+    //     return new Array(n).fill(0).map(() => this.complexOct());
+    // }
+    // static complexesDec(n) {
+    //     return new Array(n).fill(0).map(() => this.complexDec());
+    // }
+    // static complexesHex(n) {
+    //     return new Array(n).fill(0).map(() => this.complexHex());
+    // }
+    // static matrix(r,c,min,max){
+    //     return matrix(r,c,this.floats(r*c,min,max))
+    // }
+    // static matrixInt(r,c,min,max){
+    //     return matrix(r,c,this.ints(r*c,min,max))
+    // }
+    // static matrixBin(r,c){
+    //     return matrix(r,c,this.bins(r*c))
+    // }
+    // static matrixOct(r,c){
+    //     return matrix(r,c,this.octs(r*c))
+    // }
+    // static matrixDec(r,c){
+    //     return matrix(r,c,this.decs(r*c))
+    // }
+    // static matrixHex(r,c){
+    //     return matrix(r,c,this.hex(r*c))
+    // }
+    // static matrixColor(r,c){
+    //     return matrix(r,c,this.colors(r*c))
+    // }
+    // static matrixComplex(r,c,a,b){
+    //     return matrix(r,c,this.complexes(r*c,a,b))
+    // }
+    // static matrixComplexInt(r,c,a,b){
+    //     return matrix(r,c,this.complexesInt(r*c,a,b))
+    // }
+    // static matrixComplexBin(r,c){
+    //     return matrix(r,c,this.complexesBin(r*c))
+    // }
+    // static matrixComplexOct(r,c){
+    //     return matrix(r,c,this.complexesBin(r*c))
+    // }
+    // static matrixComplexDec(r,c){
+    //     return matrix(r,c,this.complexesBin(r*c))
+    // }
+    // static matrixComplexHex(r,c){
+    //     return matrix(r,c,this.complexesBin(r*c))
+    // }
 }
 export{Random}

@@ -1,9 +1,6 @@
-import { Matrix } from "../matrix/index.js";
-import { Complex , complex } from "../complex/index.js";
 import {ln,e,cos,sin,sqrt,cosh,sinh} from "../functions/index.js";
 import { Fixed } from "../functions/helper.js";
 // To generalise
-
 const mapfun=(fun,...X)=>{
     const Y=X.map(x=>{
         if(x===null) return fun(null);
@@ -12,10 +9,9 @@ const mapfun=(fun,...X)=>{
         if(ArrayBuffer.isView(x)) return x.map(n=>fun(n));
         if(x instanceof Set) return new Set(mapfun(fun,...[...x]));
         if(x instanceof Map) return new Map([...x].map(n=>[n[0],mapfun(fun,n[1])]));
-        if(x instanceof Matrix){
-            return new Matrix(x.rows,x.cols, mapfun(x.arr.flat(1)))
-        }
-        if(x instanceof Complex){
+        if(x.isMatrix?.()) return new x.constructor(x.rows, x.cols, mapfun(x.arr.flat(1)))
+        if(x.isComplex?.()){
+            const complex = (...args) => new x.constructor(...args) 
             const [a,b,z,phi]=[x.a,x.b,x.z,x.phi];
             switch(fun){
                 case Math.log: return complex(ln(z),phi); // Done

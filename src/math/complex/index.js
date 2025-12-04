@@ -12,7 +12,6 @@ import{
     sqrt,
     ln
   }from "../functions/index.js"
-import { Matrix } from "../matrix/index.js";
 import {sum,prod,deg2rad} from "../utils/index.js";
 class Complex{
     constructor(a = 0, b = 0) {
@@ -183,10 +182,10 @@ class Complex{
 }
 const complex=(a,b)=>{
     if((a instanceof Array||ArrayBuffer.isView(a)) && (b instanceof Array||ArrayBuffer.isView(a)))return a.map((n,i)=>complex(a[i],b[i]));
-    if(a instanceof Matrix && b instanceof Matrix){
+    if(a.isMatrix?.() && b.isMatrix?.()){
         if((a.shape[0]!==b.shape[0])||(a.shape[1]!==b.shape[1]))return Error(0)
         const arr=a.arr.map((n,i)=>complex(a.arr[i],b.arr[i]))
-        return new Matrix(a.rows,a.cols,...arr)
+        return new a.constructor(a.rows,a.cols,...arr)
     }
     return new Complex(a,b)
 }

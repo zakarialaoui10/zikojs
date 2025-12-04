@@ -1,15 +1,13 @@
-import { Complex , complex } from "../complex/index.js";
 import { abs , pow , sqrtn , max , min} from "../functions/index.js";
 import { mul } from "../utils/index.js";
 import { E } from "../const.js";
-import { Matrix } from "../matrix/matrix.js";
 const zeros=(n)=>new Array(n).fill(0);
 const ones=(n)=>new Array(n).fill(1);
 const nums=(num,n)=>new Array(n).fill(num);
 const norm=(value, min, max)=>{
     if (typeof value === "number") return min !== max ? (value - min) / (max - min) : 0;
-    else if (value instanceof Matrix) return new Matrix(value.rows, value.cols, norm(value.arr.flat(1), min, max));
-    else if (value instanceof Complex) return new Complex(norm(value.a, min, max), norm(value.b, min, max));
+    else if (value.isMatrix?.()) return new value.constructor(value.rows, value.cols, norm(value.arr.flat(1), min, max));
+    else if (value.isComplex?.()) return new value.constructor(norm(value.a, min, max), norm(value.b, min, max));
     else if (value instanceof Array) {
         if (value.every((n) => typeof (n === "number"))) {
             return value.map((n) => norm(n, min, max));
@@ -23,8 +21,8 @@ const norm=(value, min, max)=>{
 }
 const lerp=(value, min, max)=>{
     if (typeof value === "number") return (max - min) * value + min;
-    else if (value instanceof Matrix) return new Matrix(value.rows, value.cols, lerp(value.arr.flat(1), min, max));
-    else if (value instanceof Complex) return new Complex(lerp(value.a, min, max), lerp(value.b, min, max));
+    else if (value.isMatrix?.()) return new value.constructor(value.rows, value.cols, lerp(value.arr.flat(1), min, max));
+    else if (value.isComplex?.()) return new value.constructor(lerp(value.a, min, max), lerp(value.b, min, max));
     else if (value instanceof Array) {
         if (value.every((n) => typeof (n === "number"))) {
             return value.map((n) => lerp(n, min, max));
@@ -36,17 +34,17 @@ const lerp=(value, min, max)=>{
         }
     }
 }
-const map=(value, a, b, c, d)=>{
-    if (typeof value === "number") return lerp(norm(value, a, b), c, d);
-    else if (value instanceof Matrix) return new Matrix(value.rows, value.cols, map(value.arr.flat(1), a, b, c, d));
-    else if (value instanceof Complex) return new Complex(map(value.a, b, c, d), map(value.b, a, b, c, d));
-    else if (value instanceof Array) {
-        if (value.every((n) => typeof (n === "number"))) {
-            return value.map((n) => map(n, a, b, c, d));
+const map=(x, a, b, c, d)=>{
+    if (typeof x === "number") return lerp(norm(x, a, b), c, d);
+    else if (x.isMatrix?.()) return new x.constructor(x.rows, x.cols, map(x.arr.flat(1), a, b, c, d));
+    else if (x.isComplex?.()) return new x.constructor(map(x.a, b, c, d), map(x.b, a, b, c, d));
+    else if (x instanceof Array) {
+        if (x.every((n) => typeof (n === "number"))) {
+            return x.map((n) => map(n, a, b, c, d));
         } else {
-            let y = new Array(value.length);
-            for (let i = 0; i < value.length; i++) {
-                y[i] = map(value[i], a, b, c, d);
+            let y = new Array(x.length);
+            for (let i = 0; i < x.length; i++) {
+                y[i] = map(x[i], a, b, c, d);
             }
         }
     }
@@ -54,8 +52,8 @@ const map=(value, a, b, c, d)=>{
 const clamp=(x, a , b)=>{
     const [min_value,max_value]=[min(a,b),max(a,b)]
     if (typeof x === "number") return min(max(x, min_value), max_value);
-    else if (x instanceof Matrix) return new Matrix(x.rows, x.cols, clamp(x.arr.flat(1), min_value, max_value));
-    else if (x instanceof Complex) return new Complex(clamp(x.a, min_value, max_value), clamp(x.b, min_value, max_value));
+    else if (x.isMatrix?.()) return new x.constructor(x.rows, x.cols, clamp(x.arr.flat(1), min_value, max_value));
+    else if (x.isComplex?.()) return new x.constructor(clamp(x.a, min_value, max_value), clamp(x.b, min_value, max_value));
     else if (x instanceof Array) {
         if (x.every((n) => typeof (n === "number"))) {
             return x.map((n) => clamp(n, min_value, max_value));
@@ -90,14 +88,14 @@ const linspace=(a,b,n=abs(b-a)+1,endpoint=true)=>{
         return Y
     }
 
-    if([a,b].some(n=>n instanceof Complex)){
-        const z1=complex(a)
-        const z2=complex(b)
+    if([a,b].some(n=>n.isComplex?.())){
+        const z1 = new n.constructor(a)
+        const z2 = new n.constructor(b)
         n=n||Math.abs(z1.a-z2.a)+1;
         const X=linspace(z1.a,z2.a,n,endpoint);
         const Y=linspace(z1.b,z2.b,n,endpoint);
         let Z=new Array(n).fill(null);
-        Z=Z.map((n,i)=>complex(X[i],Y[i]));
+        Z=Z.map((n,i)=> new n.constructor(X[i],Y[i]));
         return Z;
     }
 }
@@ -117,9 +115,9 @@ const geomspace=(a,b,n=abs(b-a)+1,endpoint=true)=>{
         return a<b?Y:Y.reverse()
     }
 
-    if([a,b].some(n=>n instanceof Complex)){
-        const z1=complex(a)
-        const z2=complex(b)
+    if([a,b].some(n=>n.isComplex?.())){
+        const z1 = new n.constructor(a)
+        const z2 = new n.constructor(b)
         n=n||Math.abs(z1.a-z2.a)+1;
         let base;
         endpoint ? base = sqrtn(z2.div(z1),n-1) : base = sqrtn(z2.div(z1),n) ;

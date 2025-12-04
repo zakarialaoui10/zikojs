@@ -16,7 +16,7 @@ import {
 
 } from "../utils/index.js";
 import { Complex } from "../complex/index.js";
-import { Random } from "../random/index.js"
+// import { Random } from "../random/index.js"
 import { arr2str } from "../../data/index.js";
 import { 
     matrix_inverse,
@@ -179,6 +179,13 @@ class Matrix{
     static vqueue(matrix,...matrices) {
         return matrix.clone().vqueue(...matrices);
     }
+    shuffle(){
+        this.arr = this.arr.sort(()=>0.5-Math.random());
+        return this;
+    }
+    static shuffle(M){
+        return M.clone().shuffle()
+    }
     // get reel() {
     //     return new Matrix(this.cols, this.rows, this.arr.flat(1).reel);
     // }
@@ -270,42 +277,42 @@ class Matrix{
         return true;
     }
     
-    static get rand(){
-        return {
-            int:(rows, cols, a, b)=>{
-                let result = new Matrix(rows, cols);
-                for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randInt(a, b);
-                return result;
-            },
-            bin:(rows,cols)=>{
-                let result = new Matrix(rows, cols);
-                for (let i = 0; i < rows; i++) {
-                    for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randBin;
-                }
-                return result;       
-            },
-            hex:(rows,cols)=>{
-                let result = new Matrix(rows, cols);
-                for (let i = 0; i < rows; i++) {
-                    for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randHex;
-                }
-                return result;       
-            },
-            choices:(rows, cols, choices, p)=>{
-                let result = new Matrix(rows, cols);
-                for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.choice(choices, p);
-                return result
-            },
-            permutation:(rows,cols,arr)=>{
-                //return new Matrix(rows, cols, Random.permutation(...arr))
-            }
-        }
-    }
-    static rands(rows, cols, a = 1, b) {
-        let result = new Matrix(rows, cols);
-        for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.rand(a, b);
-        return result;
-    }
+    // static get rand(){
+    //     return {
+    //         int:(rows, cols, a, b)=>{
+    //             let result = new Matrix(rows, cols);
+    //             for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randInt(a, b);
+    //             return result;
+    //         },
+    //         bin:(rows,cols)=>{
+    //             let result = new Matrix(rows, cols);
+    //             for (let i = 0; i < rows; i++) {
+    //                 for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randBin;
+    //             }
+    //             return result;       
+    //         },
+    //         hex:(rows,cols)=>{
+    //             let result = new Matrix(rows, cols);
+    //             for (let i = 0; i < rows; i++) {
+    //                 for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randHex;
+    //             }
+    //             return result;       
+    //         },
+    //         choices:(rows, cols, choices, p)=>{
+    //             let result = new Matrix(rows, cols);
+    //             for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.choice(choices, p);
+    //             return result
+    //         },
+    //         permutation:(rows,cols,arr)=>{
+    //             //return new Matrix(rows, cols, Random.permutation(...arr))
+    //         }
+    //     }
+    // }
+    // static rands(rows, cols, a = 1, b) {
+    //     let result = new Matrix(rows, cols);
+    //     for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.rand(a, b);
+    //     return result;
+    // }
     map(Imin, Imax, Fmin, Fmax) {
         this.arr = map(this.arr, Imin, Imax, Fmin, Fmax)
         return this;
