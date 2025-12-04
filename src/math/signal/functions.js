@@ -2,7 +2,7 @@ import { Complex , complex } from "../complex/index.js";
 import { abs , pow , sqrtn , max , min} from "../functions/index.js";
 import { mul } from "../utils/index.js";
 import { E } from "../const.js";
-import { Matrix  } from "../matrix/Matrix.js";
+import { Matrix } from "../matrix/matrix.js";
 const zeros=(n)=>new Array(n).fill(0);
 const ones=(n)=>new Array(n).fill(1);
 const nums=(num,n)=>new Array(n).fill(num);

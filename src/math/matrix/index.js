@@ -1,1 +1,1 @@
-export * from "./Matrix.js"
+export * from "./matrix.js"

@@ -1,4 +1,4 @@
-import { Matrix } from "../../math/matrix/Matrix.js"
+import { Matrix } from "../../math/matrix/matrix.js"
 const csv2arr = (csv, delimiter = ",")=>csv.trim().trimEnd().split("\n").map(n=>n.split(delimiter));
 const csv2matrix = (csv, delimiter = ",")=>new Matrix(csv2arr(csv,delimiter));
 const csv2object = (csv, delimiter = ",") => {
