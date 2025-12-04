@@ -1,5 +1,5 @@
-import {ln,e,cos,sin,sqrt,cosh,sinh} from "../functions/index.js";
-import { Fixed } from "../functions/helper.js";
+// import { ln,e,cos,sin,sqrt,cosh,sinh } from "../functions/index.js";
+// import { Fixed } from "../functions/helper.js";
 // To generalise
 const mapfun=(fun,...X)=>{
     const Y=X.map(x=>{
@@ -11,25 +11,25 @@ const mapfun=(fun,...X)=>{
         if(x instanceof Map) return new Map([...x].map(n=>[n[0],mapfun(fun,n[1])]));
         if(x.isMatrix?.()) return new x.constructor(x.rows, x.cols, mapfun(x.arr.flat(1)))
         if(x.isComplex?.()){
-            const complex = (...args) => new x.constructor(...args) 
             const [a,b,z,phi]=[x.a,x.b,x.z,x.phi];
             switch(fun){
-                case Math.log: return complex(ln(z),phi); // Done
-                case Math.exp: return complex(e(a)*cos(b),e(a)*sin(b)); // Done
-                case Math.abs: return z; // Done
-                case Math.sqrt: return complex(sqrt(z)*cos(phi/2),sqrt(z)*sin(phi/2)); // Done
-                case Fixed.cos: return complex(cos(a)*cosh(b),-(sin(a)*sinh(b)));
-                case Fixed.sin: return complex(sin(a)*cosh(b),cos(a)*sinh(b));
-                case Fixed.tan:{
-                    const DEN = cos(2*a)+cosh(2*b);
-                    return complex(sin(2*a)/DEN,sinh(2*b)/DEN);
-                }
-                case Fixed.cosh:return complex(cosh(a)*cos(b),sinh(a)*sin(b));
-                case Fixed.sinh:return complex(sinh(a)*cos(b),cosh(a)*sin(b));
-                case Fixed.tanh:{
-                    const DEN=cosh(2*a)+cos(2*b);
-                    return complex(sinh(2*a)/DEN,sin(2*b)/DEN)
-                }
+                // Moved to Fixed to avoid Circular Dep
+                // case Math.log: return new x.constructor(ln(z),phi); // Done
+                // case Math.exp: return new x.constructor(e(a)*cos(b),e(a)*sin(b)); // Done
+                // case Math.abs: return z; // Done
+                // case Math.sqrt: return new x.constructor(sqrt(z)*cos(phi/2),sqrt(z)*sin(phi/2)); // Done
+                // case Fixed.cos: return new x.constructor(cos(a)*cosh(b),-(sin(a)*sinh(b)));
+                // case Fixed.sin: return new x.constructor(sin(a)*cosh(b),cos(a)*sinh(b));
+                // case Fixed.tan:{
+                //     const DEN = cos(2*a)+cosh(2*b);
+                //     return new x.constructor(sin(2*a)/DEN,sinh(2*b)/DEN);
+                // }
+                // case Fixed.cosh:return new x.constructor(cosh(a)*cos(b),sinh(a)*sin(b));
+                // case Fixed.sinh:return new x.constructor(sinh(a)*cos(b),cosh(a)*sin(b));
+                // case Fixed.tanh:{
+                //     const DEN=cosh(2*a)+cos(2*b);
+                //     return new x.constructor(sinh(2*a)/DEN,sin(2*b)/DEN)
+                // }
                 default : return fun(x)
             }
         }

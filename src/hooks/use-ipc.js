@@ -1,5 +1,3 @@
-import { Random } from "../math/random/index.js";
-
 class UseIPC {
     #channel;
     #eventData;
@@ -11,7 +9,7 @@ class UseIPC {
         this.#channel = new BroadcastChannel(name);
         this.#eventData = new Map();
         this.#handlers = new Map(); // Map<event, Array<{fn, rooms}>>
-        this.#uuid = "ziko-channel:" + Random.string(10);
+        this.#uuid = "ziko-channel:" + (Math.random()*10e16);  // To Be Replaced by UUID
         this.#subscribers = new Set([this.#uuid]);
         this.#currentRooms = new Set(); 
         this.#channel.addEventListener("message", (e) => {

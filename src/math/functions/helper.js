@@ -1,6 +1,9 @@
 const {PI, cos, sin, tan, acos, asin, atan, cosh, sinh, tanh, acosh, asinh, atanh, log} = Math
 export let Fixed={
-    cos,
+    cos : x=> {
+        if(x.isComplex) return new x.constructor(cos(x.a)*cosh(x.b),-(sin(x.a)*sinh(x.b)))
+            return cos(x)
+    },
     sin,
     tan,
     sinc: x => sin(PI*x)/(PI*x),
@@ -20,11 +23,11 @@ export let Fixed={
     atanh,
 }
 
-Fixed = new Proxy(Fixed, {
-    get(target, prop) {
-        if(prop in target){
-            return x => + target[prop](x).toFixed(15);
-        }
-        return undefined;
-    }
-})
+// Fixed = new Proxy(Fixed, {
+//     get(target, prop) {
+//         if(prop in target){
+//             return x => + target[prop](x).toFixed(15);
+//         }
+//         return undefined;
+//     }
+// })

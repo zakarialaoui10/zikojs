@@ -1,7 +1,7 @@
 import {UINode} from "./UINode.js";
-// import {__init__global__} from '../../__ziko__/index.js';
+import {__init__global__} from '../../__ziko__/index.js';
 import { UIStore } from "../../__ziko__/__ui__.js";
-// __init__global__()
+__init__global__()
 class UIElementCore extends UINode{
   constructor(){
     super()

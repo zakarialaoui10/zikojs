@@ -8,14 +8,14 @@ import {
   EventsMethodes,
   StyleMethods
 } from "../__methods__/index.js";
-import { 
-  // useCustomEvent,
-  // useSwipeEvent,
-  // watchIntersection, 
-  // watchSize,
-  // watchAttr,
-  // watchChildren
-} from "../../--reactivity-deprecated/events/custom-event.js"
+// import { 
+//   // useCustomEvent,
+//   // useSwipeEvent,
+//   // watchIntersection, 
+//   // watchSize,
+//   // watchAttr,
+//   // watchChildren
+// } from "../../--reactivity-deprecated/events/custom-event.js"
 class UIElement extends UIElementCore{
   constructor({element, name ='', type='html', render = __Ziko__.__Config__.default.render}={}){
     super()
