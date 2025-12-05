@@ -1,9 +1,10 @@
 import { Fixed } from "./helper.js";
-import { mapfun } from "../utils/mapfun.js";
+import { mapfun } from "../mapfun/index.js";
 import { 
     min,
     max 
-}from "../statistics/index.js";
+}
+from "../statistics/index.js";
 
 const abs=(...x)=>mapfun(Math.abs,...x);
 const sqrt=(...x)=>mapfun(Math.sqrt,...x);

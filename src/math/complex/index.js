@@ -41,14 +41,17 @@ class Complex{
                 this.a=a.b/tan(a.phi);
             }
             else if(("z" in a && "phi" in a)){
-                this.a=a.z*cos(a.phi);
-                this.a=a.z*sin(a.phi);
+                this.a = +a.z*cos(a.phi).toFixed(15);
+                this.b = +a.z*sin(a.phi).toFixed(15);
             }
         }
         else if(typeof(a)==="number"&&typeof(b)==="number"){
             this.a = +a.toFixed(32);
             this.b = +b.toFixed(32);
         }
+    }
+    get __mapfun__(){
+        return true
     }
     isComplex(){
         return true

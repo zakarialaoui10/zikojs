@@ -16,7 +16,7 @@ export declare class Complex {
 
     isComplex(): true;
     toString(): string;
-
+    readonly __mapfun__ : boolean
     readonly clone: Complex;
     readonly z: number;
     readonly phi: number;

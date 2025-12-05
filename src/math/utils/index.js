@@ -1,4 +1,4 @@
-import { mapfun } from "./mapfun.js";
+import { mapfun } from "../mapfun/index.js";
 import { 
     add,
     sub,

@@ -1,5 +1,5 @@
 import { register_to_class } from "./register-to-class.js";
-import { register_to_instance } from "./register-to-instance"; // Not Overridable
+import { register_to_instance } from "./register-to-instance.js"; // Not Overridable
 export const register = (target, ...mixins) => {
   console.log(target)
   // return register_to_class(target, ...mixins)
