@@ -69,7 +69,7 @@ class Complex{
         return str;
     }
       
-    get clone() {
+    clone() {
         return new Complex(this.a, this.b);
     }
     get z(){
@@ -146,19 +146,19 @@ class Complex{
         return [this.z, this.phi];
     }
     static add(c,...z) {
-        return c.clone.add(...z);
+        return c.clone().add(...z);
     }
     static sub(c,...z) {
-        return c.clone.sub(...z);
+        return c.clone().sub(...z);
     }
     static mul(c,...z) {
-        return c.clone.mul(...z);
+        return c.clone().mul(...z);
     }
     static div(c,...z) {
-        return c.clone.div(...z);
+        return c.clone().div(...z);
     }
     static pow(z,n){
-        return z.clone.pow(n);
+        return z.clone().pow(n);
     }
     static xpowZ(x){
         return complex((x**this.a)*cos(this.b*ln(x)),(x**this.a)*sin(this.b*ln(x)));
