@@ -1,18 +1,5 @@
-import{
-    cos,
-    sin,
-    tan,
-    pow,
-    floor,
-    hypot,
-    cosh,
-    sinh,
-    sqrtn,
-    atan2,
-    sqrt,
-    ln
-  }from "../functions/index.js"
-import {sum,prod,deg2rad} from "../utils/index.js";
+// import {sum,prod,deg2rad} from "../utils/index.js";
+// Should avoid CD
 class Complex{
     constructor(a = 0, b = 0) {
         if(a instanceof Complex){
@@ -21,33 +8,33 @@ class Complex{
         }
         else if(typeof(a)==="object"){
             if(("a" in a && "b" in a)){
-                this.a=a.a;
-                this.b=a.b;
+                this.a = a.a;
+                this.b = a.b;
             }
             else if(("a" in a && "z" in a)){
-                this.a=a.a;
-                this.b=sqrt((a.z**2)-(a.a**2));
+                this.a = a.a;
+                this.b = Math.sqrt((a.z**2)-(a.a**2));
             }
             else if(("a" in a && "phi" in a)){
-                this.a=a.a;
-                this.b=a.a*tan(a.phi);
+                this.a = a.a;
+                this.b = a.a * Math.tan(a.phi);
             }
             else if(("b" in a && "z" in a)){
-                this.b=a.b;
-                this.a=sqrt((a.z**2)-(a.b**2));
+                this.b = a.b;
+                this.a = Math.sqrt((a.z**2)-(a.b**2));
             }
             else if(("b" in a && "phi" in a)){
-                this.b=b;
-                this.a=a.b/tan(a.phi);
+                this.b = b;
+                this.a = a.b / Math.tan(a.phi);
             }
             else if(("z" in a && "phi" in a)){
-                this.a = +a.z*cos(a.phi).toFixed(15);
-                this.b = +a.z*sin(a.phi).toFixed(15);
+                this.a = + a.z * Math.cos(a.phi).toFixed(15);
+                this.b = + a.z * Math.sin(a.phi).toFixed(15);
             }
         }
-        else if(typeof(a)==="number"&&typeof(b)==="number"){
-            this.a = +a.toFixed(32);
-            this.b = +b.toFixed(32);
+        else if(typeof(a)==="number" && typeof(b)==="number"){
+            this.a = + a.toFixed(32);
+            this.b = + b.toFixed(32);
         }
     }
     get __mapfun__(){
@@ -73,10 +60,10 @@ class Complex{
         return new Complex(this.a, this.b);
     }
     get z(){
-        return hypot(this.a,this.b);    
+        return Math.hypot(this.a,this.b);    
     }
     get phi(){
-        return atan2(this.b , this.a);        
+        return Math.atan2(this.b , this.a);        
     }
     static Zero() {
         return new Complex(0, 0);
@@ -85,55 +72,45 @@ class Complex{
         return new Complex(this.a, -this.b);
     }
     get inv() {
-        return new Complex(this.a / (pow(this.a, 2) + pow(this.b, 2)), -this.b / (pow(this.a, 2) + pow(this.b, 2)));
+        return new Complex(
+            this.a / Math.hypot(this.a, this.b),
+            -this.b / Math.hypot(this.a, this.b)
+        );
     }
-    add(...z) {
-        for (let i = 0; i < z.length; i++) {
-            if (typeof z[i] === "number") z[i] = new Complex(z[i], 0);
+    add(...c) {
+        for (let i = 0; i < c.length; i++) {
+            if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
         }
-        let re = z.map((n) => n.a);
-        let im = z.map((n) => n.b);
-        this.a+=+sum(...re).toFixed(15);
-        this.b+=+sum(...im).toFixed(15);
+        this.a += + c.reduce((sum, obj) => sum + obj.a).toFixed(15);
+        this.b += + c.reduce((sum, obj) => sum + obj.b).toFixed(15); 
         return this;
     }
-    sub(...z) {
-        for (let i = 0; i < z.length; i++) {
-            if (typeof z[i] === "number") z[i] = new Complex(z[i], 0);
+    sub(...c) {
+        for (let i = 0; i < c.length; i++) {
+            if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
         }
-        let re = z.map((n) => n.a);
-        let im = z.map((n) => n.b);
-        this.a-=+sum(...re).toFixed(15);
-        this.b-=+sum(...im).toFixed(15);
+        this.a -= + c.reduce((sum, obj) => sum + obj.a).toFixed(15);
+        this.b -= + c.reduce((sum, obj) => sum + obj.b).toFixed(15); 
         return this;
     }
-    mul(...z){
-        for (let i = 0; i < z.length; i++) {
-            if (typeof z[i] === "number") z[i] = new Complex(z[i], 0);
+    mul(...c){
+        for (let i = 0; i < c.length; i++) {
+            if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
         }
-        let Z=+prod(this.z,...z.map(n=>n.z)).toFixed(15);
-        let phi=+sum(this.phi,...z.map(n=>n.phi)).toFixed(15);
-        this.a=+(Z*cos(phi).toFixed(15)).toFixed(14);
-        this.b=+(Z*sin(phi).toFixed(15)).toFixed(14);    
+        let z = this.z * c.reduce((prod, obj)=> prod * obj.z);
+        let phi = this.phi * c.reduce((sum, obj)=> sum + obj.phi);
+        this.a = z*Math.cos(phi)
+        this.a = z*Math.sin(phi)  
         return this;
     }
-    div(...z) {
-        for (let i = 0; i < z.length; i++) {
-            if (typeof z[i] === "number") z[i] = new Complex(z[i], 0);
+    div(...c) {
+        for (let i = 0; i < c.length; i++) {
+            if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
         }
-        let Z=+(this.z/prod(...z.map(n=>n.z))).toFixed(15);
-        let phi=+(this.phi-sum(...z.map(n=>n.phi))).toFixed(15);
-        this.a=+(Z*cos(phi).toFixed(15)).toFixed(15);
-        this.b=+(Z*sin(phi).toFixed(15)).toFixed(15);
-        return this;
-    }
-    pow(n) {
-        if (floor(n) === n && n > 0) {
-            let z=+(this.z**n).toFixed(15);
-            let phi=+(this.phi*n).toFixed(15);
-            this.a=+(z*cos(phi).toFixed(15)).toFixed(15);
-            this.b=+(z*sin(phi).toFixed(15)).toFixed(15);
-        }
+        let z = this.z / c.reduce((prod, obj)=> prod * obj.z);
+        let phi = this.phi - c.reduce((sum, obj)=> sum + obj.phi);
+        this.a = z*Math.cos(phi)
+        this.a = z*Math.sin(phi) 
         return this;
     }
     static fromExpo(z, phi) {
@@ -157,30 +134,37 @@ class Complex{
     static div(c,...z) {
         return c.clone().div(...z);
     }
-    static pow(z,n){
-        return z.clone().pow(n);
-    }
-    static xpowZ(x){
-        return complex((x**this.a)*cos(this.b*ln(x)),(x**this.a)*sin(this.b*ln(x)));
-    }
-    sqrtn(n=2){
-        return complex(sqrtn(this.z,n)*cos(this.phi/n),sqrtn(this.z,n)*sin(this.phi/n));
+
+    nthr(n=2){
+        return complex({z: this.z ** (1/n), phi: this.phi / n});
     }
     get sqrt(){
-        return this.sqrtn(2);
+        return this.nrth(2);
+    }
+    get cbrt(){
+        return this.nrth(3);
     }
     get log(){
-        return complex(this.z,this.phi);
+        return complex(this.z, this.phi);
     }
     get cos(){
-        return complex(cos(this.a)*cosh(this.b),sin(this.a)*sinh(this.b))
+        return complex(
+            Math.cos(this.a) * Math.cosh(this.b),
+            Math.sin(this.a) * Math.sinh(this.b)
+        )
     }
     get sin(){
-        return complex(sin(this.a)*cosh(this.b),cos(this.a)*sinh(this.b))
+        return complex(
+            Math.sin(this.a) * Math.cosh(this.b),
+            Math.cos(this.a) * Math.sinh(this.b)
+        )
     }
     get tan(){
-        const de=cos(this.a*2)+cosh(this.b*2);
-        return complex(sin(2*this.a)/de,sinh(2*this.b)/de);
+        const D=cos(this.a*2)+cosh(this.b*2);
+        return complex(
+            Math.sin(2 * this.a) / D,
+            Math.sinh(2 * this.b) / D
+        );
     }
 }
 const complex=(a,b)=>{

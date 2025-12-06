@@ -1,4 +1,4 @@
-import { abs , pow , sqrtn , max , min} from "../functions/index.js";
+import { abs , pow , nthr , max , min} from "../functions/index.js";
 import { mul } from "../utils/index.js";
 import { E } from "../const.js";
 const zeros=(n)=>new Array(n).fill(0);
@@ -107,7 +107,7 @@ const geomspace=(a,b,n=abs(b-a)+1,endpoint=true)=>{
     if([a,b].every(n=>typeof n==="number")){
         const [max,min]=[a,b].sort((a,b)=>b-a);
         let base;
-        endpoint ? base = sqrtn(max/min,n-1) : base = sqrtn(max/min,n) ;
+        endpoint ? base = nthr(max/min,n-1) : base = nthr(max/min,n) ;
         const Y = [min];
         for (let i = 1; i < n; i++) {
             Y.push(Y[i-1]*base)
@@ -120,7 +120,7 @@ const geomspace=(a,b,n=abs(b-a)+1,endpoint=true)=>{
         const z2 = new n.constructor(b)
         n=n||Math.abs(z1.a-z2.a)+1;
         let base;
-        endpoint ? base = sqrtn(z2.div(z1),n-1) : base = sqrtn(z2.div(z1),n) ;
+        endpoint ? base = nthr(z2.div(z1),n-1) : base = nthr(z2.div(z1),n) ;
         const Y = [z1];
         for (let i = 1; i < n; i++) {
             Y.push(mul(Y[i-1],base))

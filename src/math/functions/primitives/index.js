@@ -1,4 +1,5 @@
 import { mapfun } from '../../mapfun/index.js';
+import { complex } from '../../complex/index.js'
 
 export const abs = (...x) => mapfun(
     x =>{
@@ -22,7 +23,7 @@ export const pow = (...x) => {
             if(n.isComplex?.()) return new x.constructor({
                     z: Math.exp(n.a * Math.log(x)),
                     phi: n.b * Math.log(x)
-                })
+            })
             return Math.pow(x, n)
         },
         ...x
@@ -32,7 +33,8 @@ export const pow = (...x) => {
 export const sqrt = (...x) => mapfun(
     x=>{
         if(x.isComplex?.()) 
-            return new x.constructor({z: x.z**(1/2), phi: x.phi/2})
+            return new x.constructor({z: x.z**(1/2), phi: x.phi/2});
+        if(x < 0) return complex(0, Math.sqrt(-x)) 
         return Math.sqrt(x);
     },
     ...x
@@ -42,34 +44,43 @@ export const cbrt = (...x) => mapfun(
     x=>{
         if(x.isComplex?.()) 
             return new x.constructor({z: x.z**(1/3), phi: x.phi/3})
-        return Math.sqrt(x);
+        return Math.cbrt(x);
     },
     ...x
 );
 
 export const nthr = (...x) => {
     const n = x.pop();
+    if(typeof n !== 'number') throw Error('nthr expects a real number n');
     return mapfun(
         x => {
-            if(x.isComplex?.()) return new x.constructor({z: x.z ** 1/n, phi: x.phi / n});
+            if(x.isComplex?.()) return new x.constructor({z: x.z ** (1/n), phi: x.phi / n});
+            if(x<0) return n%2===2 ? complex(0, (-x)**(1/n)) : -1 * (-x)**(1/n)                
             return x**(1/n)
         },
         ...x
     )
 }
 
-
 export const croot = (...x) =>{
-    const z = x.pop()
+    const c = x.pop()
+    if(!c.isComplex?.()) throw Error('croot expect Complex number as root')
     return mapfun(
         x => {
-            if(x.isComplex?.()) return null
-            return null
+            if(typeof x === 'number') x = new c.constructor(x, 0);
+            const {a : c_a, b : c_b} = c;
+            const {z, phi} = x;
+            const D = Math.hypot(c_a, c_b);
+            const A = Math.exp((Math.log(z)*c_a + phi*c_b)/D);
+            const B = (phi*c_a - Math.log(z)*c_b)/D
+            return new c.constructor(
+                A * Math.cos(B),
+                A * Math.sin(B)
+            )
         },
         ...x
     )
 }
-
 
 export const exp = (...x) => mapfun(
     x => {
@@ -77,7 +88,7 @@ export const exp = (...x) => mapfun(
             Math.exp(x.a) * Math.cos(x.b),
             Math.exp(x.a) * Math.sin(x.b)
         );
-        return Math.ln(x)
+        return Math.exp(x)
     }
     ,...x
 );
@@ -88,7 +99,7 @@ export const ln = (...x) => mapfun(
             Math.log(x.z),
             x.phi
         );
-        return Math.ln(x)
+        return Math.log(x)
     }
     ,...x
 );
@@ -270,33 +281,33 @@ export const acot = (...x) => mapfun(
 export const cosh = (...x) => mapfun(
     x =>{
         if(x?.isComplex) return new x.constructor(
-            cosh(x.a)*cos(x.b),
-            sinh(x.a)*sin(x.b)
+            Math.cosh(x.a) * Math.cos(x.b),
+            Math.sinh(x.a) * Math.sin(x.b)
         ); 
-        return cosh(x)
+        return Math.cosh(x)
     },
     ...x
 )
 export const sinh = (...x) => mapfun(
     x =>{
         if(x?.isComplex) return new x.constructor(
-            sinh(x.a)*cos(x.b),
-            cosh(x.a)*sin(x.b)
+            Math.sinh(x.a) * Math.cos(x.b),
+            Math.cosh(x.a) * Math.sin(x.b)
         ); 
-        return sinh(x)
+        return Math.sinh(x)
     },
     ...x
 )
 export const tanh = (...x) => mapfun(
     x =>{
         if(x?.isComplex){
-            const D=cosh(2*a)+cos(2*b);
+            const D = Math.cosh(2*a) + Math.cos(2*b);
             return new x.constructor(
-                sinh(2*a)/D,
-                sin(2*b)/D
+                Math.sinh(2*a) / D,
+                Math.sin(2*b) / D
             )
         } 
-        return tanh(x)
+        return Math.tanh(x)
     },
     ...x
 )
@@ -351,7 +362,7 @@ export const sig = (...x) => mapfun(
         if(x?.isComplex){
 
         } 
-        return 1/(1+Math.e(-x))
+        return 1/(1+Math.exp(-x))
     },
     ...x
 )

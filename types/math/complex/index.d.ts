@@ -23,6 +23,7 @@ export declare class Complex {
     readonly conj: Complex;
     readonly inv: Complex;
     readonly sqrt: Complex;
+    readonly cbrt: Complex;
     readonly log: Complex;
     readonly cos: Complex;
     readonly sin: Complex;
@@ -34,7 +35,7 @@ export declare class Complex {
     mul(...z: (number | Complex)[]): this;
     div(...z: (number | Complex)[]): this;
     pow(n: number): this;
-    sqrtn(n?: number): Complex;
+    nrth(n?: number): Complex;
 
     static Zero(): Complex;
     static fromExpo(z: number, phi: number): Complex;
