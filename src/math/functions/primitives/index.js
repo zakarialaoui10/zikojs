@@ -38,26 +38,40 @@ export const sqrt = (...x) => mapfun(
     ...x
 );
 
-export const sqrtn = (...x) => {
+export const cbrt = (...x) => mapfun(
+    x=>{
+        if(x.isComplex?.()) 
+            return new x.constructor({z: x.z**(1/3), phi: x.phi/3})
+        return Math.sqrt(x);
+    },
+    ...x
+);
+
+export const nthr = (...x) => {
     const n = x.pop();
     return mapfun(
         x => {
-            if(x.isComplex?.()){
-                if(n.isComplex?.()){
-                    // To Be implemented
-                }
-                return new x.constructor({z: x.z ** 1/n, phi: x.phi / n});
-            }
-            if(n.isComplex?.()){
-                // To Be implemented
-            }
+            if(x.isComplex?.()) return new x.constructor({z: x.z ** 1/n, phi: x.phi / n});
             return x**(1/n)
         },
         ...x
     )
 }
 
-export const e = (...x) => mapfun(
+
+export const croot = (...x) =>{
+    const z = x.pop()
+    return mapfun(
+        x => {
+            if(x.isComplex?.()) return null
+            return null
+        },
+        ...x
+    )
+}
+
+
+export const exp = (...x) => mapfun(
     x => {
         if(x.isComplex?.()) return new x.constructor(
             Math.exp(x.a) * Math.cos(x.b),
