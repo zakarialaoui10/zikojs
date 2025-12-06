@@ -1,70 +1,10 @@
-import { abs , pow , nthr , max , min} from "../functions/index.js";
-import { mul } from "../utils/index.js";
+import { abs , pow , nthr } from "../functions/index.js";
+import { mul } from "../functions/arithmetic/index.js";
 import { E } from "../const.js";
 const zeros=(n)=>new Array(n).fill(0);
 const ones=(n)=>new Array(n).fill(1);
 const nums=(num,n)=>new Array(n).fill(num);
-const norm=(value, min, max)=>{
-    if (typeof value === "number") return min !== max ? (value - min) / (max - min) : 0;
-    else if (value.isMatrix?.()) return new value.constructor(value.rows, value.cols, norm(value.arr.flat(1), min, max));
-    else if (value.isComplex?.()) return new value.constructor(norm(value.a, min, max), norm(value.b, min, max));
-    else if (value instanceof Array) {
-        if (value.every((n) => typeof (n === "number"))) {
-            return value.map((n) => norm(n, min, max));
-        } else {
-            let y = new Array(value.length);
-            for (let i = 0; i < value.length; i++) {
-                y[i] = norm(value[i]);
-            }
-        }
-    }
-}
-const lerp=(value, min, max)=>{
-    if (typeof value === "number") return (max - min) * value + min;
-    else if (value.isMatrix?.()) return new value.constructor(value.rows, value.cols, lerp(value.arr.flat(1), min, max));
-    else if (value.isComplex?.()) return new value.constructor(lerp(value.a, min, max), lerp(value.b, min, max));
-    else if (value instanceof Array) {
-        if (value.every((n) => typeof (n === "number"))) {
-            return value.map((n) => lerp(n, min, max));
-        } else {
-            let y = new Array(value.length);
-            for (let i = 0; i < value.length; i++) {
-                y[i] = lerp(value[i]);
-            }
-        }
-    }
-}
-const map=(x, a, b, c, d)=>{
-    if (typeof x === "number") return lerp(norm(x, a, b), c, d);
-    else if (x.isMatrix?.()) return new x.constructor(x.rows, x.cols, map(x.arr.flat(1), a, b, c, d));
-    else if (x.isComplex?.()) return new x.constructor(map(x.a, b, c, d), map(x.b, a, b, c, d));
-    else if (x instanceof Array) {
-        if (x.every((n) => typeof (n === "number"))) {
-            return x.map((n) => map(n, a, b, c, d));
-        } else {
-            let y = new Array(x.length);
-            for (let i = 0; i < x.length; i++) {
-                y[i] = map(x[i], a, b, c, d);
-            }
-        }
-    }
-}
-const clamp=(x, a , b)=>{
-    const [min_value,max_value]=[min(a,b),max(a,b)]
-    if (typeof x === "number") return min(max(x, min_value), max_value);
-    else if (x.isMatrix?.()) return new x.constructor(x.rows, x.cols, clamp(x.arr.flat(1), min_value, max_value));
-    else if (x.isComplex?.()) return new x.constructor(clamp(x.a, min_value, max_value), clamp(x.b, min_value, max_value));
-    else if (x instanceof Array) {
-        if (x.every((n) => typeof (n === "number"))) {
-            return x.map((n) => clamp(n, min_value, max_value));
-        } else {
-            let y = new Array(x.length);
-            for (let i = 0; i < x.length; i++) {
-                y[i] = clamp(x[i], min_value, max_value);
-            }
-        }
-    }
-}
+
 const arange=(a, b, step , include = false)=>{
     let tab = [];
     if(a<b){
@@ -132,10 +72,10 @@ export {
     zeros,
     ones,
     nums,
-    norm,
-    lerp,
-    map,
-    clamp,
+    // norm,
+    // lerp,
+    // map,
+    // clamp,
     arange,
     linspace,
     logspace,

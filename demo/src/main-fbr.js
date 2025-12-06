@@ -1,7 +1,7 @@
 import { createSPAFileBasedRouter } from "ziko/router";
 import { Matrix, complex, Complex } from "ziko/math";
 
-import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from 'ziko/math/functions/primitives'
+import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from '../../src/math/functions/nested'
 
 import { mapfun } from "ziko/math/mapfun";
 import { adapted_cos } from "ziko/math/adapted";
@@ -38,3 +38,8 @@ const b = adapted_cos(complex(1, 2));
 
 const aa = cos(1)
 
+
+
+import {add} from 'ziko/math/functions/arithmetic'
+
+console.log(add(1,2,3, complex(1,2)))

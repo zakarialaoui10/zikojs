@@ -1,22 +1,17 @@
-import{
-    min,
-    max,
-  } from "../functions/index.js"
-import { 
-    Utils,
+import {
     add,
     sub, 
     mul, 
-    div, 
-    modulo,
+    div,
+    modulo
+} from '../functions/arithmetic/index.js'
+import {
     map,
-    lerp,
-    norm,
-    clamp
-
-} from "../utils/index.js";
+    lerp, 
+    clamp, 
+    norm 
+} from '../functions/utils/index.js'
 import { Complex } from "../complex/index.js";
-// import { Random } from "../random/index.js"
 import { arr2str } from "../../data/index.js";
 import { 
     matrix_inverse,

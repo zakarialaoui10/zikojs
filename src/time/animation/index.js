@@ -1,5 +1,5 @@
 import { linear } from "../ease/index.js";
-import { map } from "../../math/utils/index.js";
+import { map } from "../../math/functions/utils/index.js";
 
 class TimeAnimation {
   constructor(callback, { ease = linear, step = 50, t0 = 0, start = true, duration = 3000 } = {}) {

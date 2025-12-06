@@ -43,7 +43,7 @@ const _sub=(a,b)=>{
 const _mul=(a,b)=>{
     if(typeof(a)==="number"){
     if (typeof b == "number") return a * b;
-        else if (b.isComplex?.())return new b.constructor(a * b.a,a * b.b);
+        else if (b.isComplex?.())return new b.constructor(a * b.a, a * b.b);
         else if (b.isMatrix?.()) return b.constructor.nums(b.rows, b.cols, a).mul(b);
         else if (b instanceof Array)return b.map(n=>mul(a,n)); 
     }

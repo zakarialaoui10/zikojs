@@ -1,28 +1,28 @@
-import { mapfun } from "../mapfun/index.js";
-import { 
-    add,
-    sub,
-    mul,
-    div,
-    modulo
- } from "./arithmetic.js";
+// import { mapfun } from "../mapfun/index.js";
+// import { 
+//     add,
+//     sub,
+//     mul,
+//     div,
+//     modulo
+//  } from "./arithmetic.js";
 import {
     zeros,
     ones,
     nums,
-    norm,
-    lerp,
-    map,
-    clamp,
+    // norm,
+    // lerp,
+    // map,
+    // clamp,
     arange,
     linspace,
     logspace,
     geomspace
 } from "../signal/functions.js"
-import {
-    deg2rad,
-    rad2deg
-} from "./conversions.js"
+// import {
+//     deg2rad,
+//     rad2deg
+// } from "./conversions.js"
 import{
     sum,
     prod,
@@ -38,19 +38,19 @@ import{
     pgcd
 } from "./discret.js"
 const Utils={
-    add,
-    sub,
-    mul,
-    div,
-    modulo,
+    // add,
+    // sub,
+    // mul,
+    // div,
+    // modulo,
 
     zeros,
     ones,
     nums,
-    norm,
-    lerp,
-    map,
-    clamp,
+    // norm,
+    // lerp,
+    // map,
+    // clamp,
     arange,
     linspace,
     logspace,
@@ -64,35 +64,35 @@ const Utils={
     ppcm,
     pgcd,
 
-    deg2rad,
-    rad2deg,
+    // deg2rad,
+    // rad2deg,
 
     inRange,
     isApproximatlyEqual
 }
 export {
-    mapfun,
+    // mapfun,
     Utils,
     zeros,
     ones,
     nums,
     sum,
     prod,
-    add,
-    mul,
-    sub,
-    div,
-    modulo,
-    rad2deg,
-    deg2rad,
+    // add,
+    // mul,
+    // sub,
+    // div,
+    // modulo,
+    // rad2deg,
+    // deg2rad,
     arange,
     linspace,
     logspace,
     geomspace,
-    norm,
-    lerp,
-    map,
-    clamp,
+    // norm,
+    // lerp,
+    // map,
+    // clamp,
     pgcd,
     ppcm,
     isApproximatlyEqual,

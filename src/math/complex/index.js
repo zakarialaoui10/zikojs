@@ -80,37 +80,47 @@ class Complex{
     add(...c) {
         for (let i = 0; i < c.length; i++) {
             if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
+            this.a += c[i].a;
+            this.b += c[i].b;
         }
-        this.a += + c.reduce((sum, obj) => sum + obj.a).toFixed(15);
-        this.b += + c.reduce((sum, obj) => sum + obj.b).toFixed(15); 
         return this;
     }
     sub(...c) {
         for (let i = 0; i < c.length; i++) {
             if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
+            this.a -= c[i].a;
+            this.b -= c[i].b;
         }
-        this.a -= + c.reduce((sum, obj) => sum + obj.a).toFixed(15);
-        this.b -= + c.reduce((sum, obj) => sum + obj.b).toFixed(15); 
         return this;
     }
     mul(...c){
+        let {z, phi} = this;
         for (let i = 0; i < c.length; i++) {
             if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
+            z *= c[i].z;
+            phi += c[i].z;
         }
-        let z = this.z * c.reduce((prod, obj)=> prod * obj.z);
-        let phi = this.phi * c.reduce((sum, obj)=> sum + obj.phi);
         this.a = z*Math.cos(phi)
-        this.a = z*Math.sin(phi)  
+        this.b = z*Math.sin(phi)  
         return this;
     }
-    div(...c) {
+    div(...c){
+        let {z, phi} = this;
         for (let i = 0; i < c.length; i++) {
             if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
+            z /= c[i].z;
+            phi -= c[i].z;
         }
-        let z = this.z / c.reduce((prod, obj)=> prod * obj.z);
-        let phi = this.phi - c.reduce((sum, obj)=> sum + obj.phi);
         this.a = z*Math.cos(phi)
-        this.a = z*Math.sin(phi) 
+        this.b = z*Math.sin(phi)  
+        return this;
+    }
+    modulo(...c) {
+        for (let i = 0; i < c.length; i++) {
+            if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
+            this.a %= c[i].a;
+            this.b %= c[i].b;
+        }
         return this;
     }
     static fromExpo(z, phi) {
