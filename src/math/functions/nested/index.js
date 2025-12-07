@@ -1,9 +1,6 @@
 import { mapfun } from '../mapfun/index.js';
 import { complex } from '../../complex/index.js'
 
-export const deg2rad = (...deg) => mapfun(x => x * Math.PI / 180, ...deg);
-export const rad2deg = (...rad) => mapfun(x => x / Math.PI * 180, ...rad);
-
 export const abs = (...x) => mapfun(
     x =>{
         if(x.isComplex?.()) return x.z;

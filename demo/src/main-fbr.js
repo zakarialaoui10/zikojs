@@ -3,7 +3,7 @@ import { Matrix, complex, Complex } from "ziko/math";
 
 import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from '../../src/math/functions/nested'
 
-import { mapfun } from "ziko/math/mapfun";
+import { mapfun } from "ziko/math/functions/mapfun";
 import { adapted_cos } from "ziko/math/adapted";
 
 globalThis.pairs = await createSPAFileBasedRouter(
@@ -43,3 +43,17 @@ const aa = cos(1)
 import {add} from 'ziko/math/functions/arithmetic'
 
 console.log(add(1,2,3, complex(1,2)))
+
+
+import { 
+    arange, 
+    linspace
+ } from 'ziko/math/functions/signal'
+
+console.log(arange(1, 10, 1))
+console.log(arange(1, 10, 1, true))
+
+console.log(arange(10, 1, 1))
+console.log(arange(10, 1, 1, true))
+
+console.log(linspace(0, complex(1,1), 100, true))

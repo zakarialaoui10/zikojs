@@ -1,6 +1,3 @@
-export const min = (...x) => Math.min(...x);
-export const max = (...x) => Math.max(...x);
-
 export const percentile = (X, p) => {
   if (X.length === 0) 
     return NaN;

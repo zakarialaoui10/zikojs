@@ -17,3 +17,17 @@ export const mapfun=(fun,...X)=>{
     });
    return Y.length==1? Y[0]: Y; 
 }
+
+export const apply_fun = (x, fn) => {
+    if (x.isComplex?.()) return new x.constructor(
+        fn(x.a),
+        fn(x.b)
+    )
+    if (x.isMatrix?.()) return new x.constructor(
+        x.rows,
+        x.cols,
+        x.arr.flat(1).map(fn)
+    )
+    if (x instanceof Array) mapfun(fn, ...x)
+    return fn(x)
+}

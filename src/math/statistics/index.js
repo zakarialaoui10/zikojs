@@ -1,15 +1,15 @@
 import {
     sum,
     prod,
-    min,
-    max,
+    // min,
+    // max,
     accum
 } from "./functions/index.js"
 const Stats={
     sum,
     prod,
-    min,
-    max,
+    // min,
+    // max,
     accum,
 }
 export default Stats;
