@@ -55,7 +55,16 @@ class Complex{
             : (str = `-${Math.abs(this.b)}*i`);
         return str;
     }
-      
+    toFixed(n){
+        this.a = + this.a.toFixed(n);
+        this.b = + this.b.toFixed(n);
+        return this; 
+    }  
+    toPrecision(n){
+        this.a = + this.a.toPrecision(n);
+        this.b = + this.b.toPrecision(n);
+        return this; 
+    }  
     clone() {
         return new Complex(this.a, this.b);
     }
@@ -98,10 +107,10 @@ class Complex{
         for (let i = 0; i < c.length; i++) {
             if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
             z *= c[i].z;
-            phi += c[i].z;
+            phi += c[i].phi;
         }
-        this.a = z*Math.cos(phi)
-        this.b = z*Math.sin(phi)  
+        this.a = z * Math.cos(phi)
+        this.b = z * Math.sin(phi)  
         return this;
     }
     div(...c){
@@ -109,7 +118,7 @@ class Complex{
         for (let i = 0; i < c.length; i++) {
             if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
             z /= c[i].z;
-            phi -= c[i].z;
+            phi -= c[i].phi;
         }
         this.a = z*Math.cos(phi)
         this.b = z*Math.sin(phi)  
@@ -121,6 +130,17 @@ class Complex{
             this.a %= c[i].a;
             this.b %= c[i].b;
         }
+        return this;
+    }
+    pow(...c){
+        let {z, phi} = this;
+        for (let i = 0; i < c.length; i++) {
+            if (typeof c[i] === "number") c[i] = new Complex(c[i], 0);
+            z *= Math.exp(c[i].a * Math.log(z) - c[i].b * phi);
+            phi += c[i].b * Math.log(z) + c[i].a * phi;
+        }
+        this.a = z * Math.cos(phi)
+        this.b = z * Math.sin(phi)  
         return this;
     }
     static fromExpo(z, phi) {
