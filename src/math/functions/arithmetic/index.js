@@ -26,7 +26,7 @@ const _mul = (x, y) =>{
         if(y.isComplex?.()) return y.clone().mul(x);
     }
     if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return new x.clone().mul(y);
+        if(typeof y === 'number' || y.isComplex?.()) return x.clone().mul(y);
     }
 }
 

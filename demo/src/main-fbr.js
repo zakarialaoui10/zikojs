@@ -47,7 +47,9 @@ console.log(add(1,2,3, complex(1,2)))
 
 import { 
     arange, 
-    linspace
+    linspace,
+    logspace,
+    geomspace
  } from 'ziko/math/functions/signal'
 
 console.log(arange(1, 10, 1))
@@ -57,3 +59,9 @@ console.log(arange(10, 1, 1))
 console.log(arange(10, 1, 1, true))
 
 console.log(linspace(0, complex(1,1), 100, true))
+
+console.log(logspace(1, 10, 100, Math.E, true))
+console.log(geomspace(1, 10, 20, true))
+console.log(geomspace(1, 20, 20, true))
+
+console.log(geomspace(complex(0, 1), complex(1, 0), 20, true))
