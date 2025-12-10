@@ -65,3 +65,7 @@ console.log(geomspace(1, 10, 20, true))
 console.log(geomspace(1, 20, 20, true))
 
 console.log(geomspace(complex(0, 1), complex(1, 0), 20, true))
+
+    const z1 = complex(1, 2)
+    const z2 = complex(2, 1)
+    console.log(z1.mul(z2))

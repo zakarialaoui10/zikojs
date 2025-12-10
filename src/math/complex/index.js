@@ -111,7 +111,7 @@ class Complex{
         }
         this.a = z * Math.cos(phi)
         this.b = z * Math.sin(phi)  
-        return this;
+        return this.toFixed(8);
     }
     div(...c){
         let {z, phi} = this;
@@ -120,9 +120,9 @@ class Complex{
             z /= c[i].z;
             phi -= c[i].phi;
         }
-        this.a = z*Math.cos(phi)
-        this.b = z*Math.sin(phi)  
-        return this;
+        this.a = z * Math.cos(phi)
+        this.b = z * Math.sin(phi)  
+        return this.toFixed(8);;
     }
     modulo(...c) {
         for (let i = 0; i < c.length; i++) {
