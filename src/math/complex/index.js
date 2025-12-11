@@ -77,6 +77,13 @@ class Complex{
     static Zero() {
         return new Complex(0, 0);
     }
+    static Twidlle(N, K){
+        const phi = -2 * Math.PI * K / N;
+        return new Complex(
+            Math.cos(phi), 
+            Math.sin(phi)
+        );
+    }
     get conj() {
         return new Complex(this.a, -this.b);
     }
