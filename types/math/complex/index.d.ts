@@ -38,6 +38,7 @@ export declare class Complex {
     nrth(n?: number): Complex;
 
     static Zero(): Complex;
+    static Twuddle(N : number, K : number): Complex;
     static fromExpo(z: number, phi: number): Complex;
     static add(c: Complex, ...z: (number | Complex)[]): Complex;
     static sub(c: Complex, ...z: (number | Complex)[]): Complex;

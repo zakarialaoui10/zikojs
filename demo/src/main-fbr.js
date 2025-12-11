@@ -71,3 +71,8 @@ console.log(geomspace(complex(0, 1), complex(1, 0), 20, true))
     console.log(z1.mul(z2))
 
 console.log(cos(Math.PI/2))
+
+const PI = Math.PI
+const mm = new Matrix([[PI, PI/2], [PI*3/2, 2*PI]])
+
+console.log(mm.toComplex().det)

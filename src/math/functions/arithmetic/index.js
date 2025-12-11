@@ -6,7 +6,7 @@ const _add = (x, y) =>{
         }
     }
     if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return new x.clone().add(y);
+        if(typeof y === 'number' || y.isComplex?.()) return x.clone().add(y);
     }
 }
 
@@ -16,7 +16,7 @@ const _sub = (x, y) =>{
         if(y.isComplex?.()) return new y.constructor(x - y.a, y.b);
     }
     if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return new x.clone().sub(y);
+        if(typeof y === 'number' || y.isComplex?.()) return x.clone().sub(y);
     }
 }
 
@@ -36,7 +36,7 @@ const _div = (x, y) =>{
         if(y.isComplex?.()) return new y.constructor(x, 0).div(y)
     }
     if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return new x.clone().mul(y);
+        if(typeof y === 'number' || y.isComplex?.()) return x.clone().mul(y);
     }
 }
 
@@ -46,7 +46,7 @@ const _modulo = (x, y) =>{
         if(y.isComplex?.()) return new y.constructor(x, 0).modulo(y)
     }
     if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return new x.clone().modulo(y);
+        if(typeof y === 'number' || y.isComplex?.()) return x.clone().modulo(y);
     }
 }
 
