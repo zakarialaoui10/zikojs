@@ -77,7 +77,7 @@ class Complex{
     static Zero() {
         return new Complex(0, 0);
     }
-    static Twidlle(N, K){
+    static Twiddle(N, K){
         const phi = -2 * Math.PI * K / N;
         return new Complex(
             Math.cos(phi), 
