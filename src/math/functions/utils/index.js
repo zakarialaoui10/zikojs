@@ -20,64 +20,6 @@ export const map = (x, a, b, c, d) => apply_fun(
     v => lerp(norm(v, a, b), c, d)
 );
 
-
-// export const norm = (x, min, max) => {
-//     if(x.isComplex?.()) return new x.constructor(
-//         norm(x.a, min, max),
-//         norm(x.b, min, max)
-//     )
-//     if(x.isMatrix?.()) return new x.constructor(
-//         x.rows, 
-//         x.cols, 
-//         norm(x.arr.flat(1), min, max)
-//     );
-//     if(x instanceof Array) return mapfun(n => norm(n, min, max), ...x);
-//     return min !== max ? (x - min) / (max - min) : 0;
-// }
-
-
-// export const lerp = (x, min, max) => {
-//     if(x.isComplex?.()) return new x.constructor(
-//         lerp(x.a, min, max),
-//         lerp(x.b, min, max)
-//     )
-//     if(x.isMatrix?.()) return new x.constructor(
-//         x.rows, 
-//         x.cols, 
-//         lerp(x.arr.flat(1), min, max)
-//     );
-//     if(x instanceof Array) return mapfun(n => lerp(n, min, max), ...x);
-//     return (max - min) * x + min;
-// }
-
-// export const map = (x, a, b, c, d) => {
-//     if(x.isComplex?.()) return new x.constructor(
-//         map(x.a, a, b, c, d),
-//         map(x.b, a, b, c, d)
-//     )
-//     if(x.isMatrix?.()) return new x.constructor(
-//         x.rows, 
-//         x.cols, 
-//         map(x.arr.flat(1), a, b, c, d)
-//     );
-//     if(x instanceof Array) return mapfun(n => map(n, a, b, c, d), ...x);
-//     return lerp(norm(x, a, b), c, d);
-// }
-
-// export const clamp = (x, min, max) => {
-//     if(x.isComplex?.()) return new x.constructor(
-//         clamp(x.a, min, max),
-//         clamp(x.b, min, max)
-//     )
-//     if(x.isMatrix?.()) return new x.constructor(
-//         x.rows, 
-//         x.cols, 
-//         clamp(x.arr.flat(1), min, max)
-//     );
-//     if(x instanceof Array) return mapfun(n => clamp(n, min, max), ...x);
-//     return Math.min(Math.max(x, min), max)
-// }
-
 export const hypot = (...x) => {
   const c0 = x.find(a => a.isComplex?.());
   if (c0) {

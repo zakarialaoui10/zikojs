@@ -3,6 +3,18 @@ import {add, mul} from '../arithmetic/index.js';
 export const min = (...x) => Math.min(...x);
 export const max = (...x) => Math.max(...x);
 
+export const binomial = (n, k) =>{
+  if(n !== Math.floor(n)) return TypeError('n must be an integer');
+  if(k !== Math.floor(k)) return TypeError('k must be an integer');
+  if (n < 0) return TypeError('n must be non-negative');
+  if (k < 0 || n < 0 || k > n) return 0;
+  if (k > n - k) k = n - k;
+    let c = 1, i;
+    for (i = 0; i < k; i++)
+        c = c * (n - i) / (i + 1);
+    return c;
+}
+
 export const mean = (...x) => x.reduce((a, b) => a + b) / x.length;
 
 export const variance = (...x) => {
