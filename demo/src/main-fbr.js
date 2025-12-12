@@ -4,7 +4,7 @@ import { Matrix, complex, Complex } from "ziko/math";
 import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from '../../src/math/functions/nested'
 
 import { mapfun } from "ziko/math/functions/mapfun";
-import { adapted_cos } from "ziko/math/adapted";
+import { and, nand } from 'ziko/math/functions/logic'
 
 globalThis.pairs = await createSPAFileBasedRouter(
     import.meta.glob('./pages/**/*.js')
@@ -31,10 +31,10 @@ const z = complex(2, 3)
 // console.log(zz)
 
 
-const a = mapfun(adapted_cos, 1,2, complex(1,2), [1, 2, {a : 1}])
+// const a = mapfun(adapted_cos, 1,2, complex(1,2), [1, 2, {a : 1}])
 
-const c = adapted_cos(1); // number
-const b = adapted_cos(complex(1, 2)); 
+// const c = adapted_cos(1); // number
+// const b = adapted_cos(complex(1, 2)); 
 
 const aa = cos(1)
 
@@ -76,3 +76,17 @@ const PI = Math.PI
 const mm = new Matrix([[PI, PI/2], [PI*3/2, 2*PI]])
 
 console.log(mm.toComplex().det)
+
+
+console.log(and([1,1,1,1], [1,0,1]))
+
+globalThis.mm = mm
+
+
+console.log(
+    nand(
+        new Matrix(2,2, [1,1,1,1]),
+        new Matrix(2,2, [1,1,1,1]),
+        new Matrix(2,2, [1,0,0,1])
+    )
+)

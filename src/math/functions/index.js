@@ -3,6 +3,7 @@ export * from './nested/index.js'
 export * from './arithmetic/index.js'
 export * from './utils/index.js'
 export * from './stats/index.js'
+export * from './logic/index.js'
 // export const atan2=(x,y,rad=true)=>{
 //     if(typeof x === "number"){
 //         if(typeof y === "number")return rad?Math.atan2(x,y):Math.atan2(x,y)*180/Math.PI;
