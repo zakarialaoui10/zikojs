@@ -28,7 +28,7 @@ export const std = (...x) => Math.sqrt(variance(...x));
 
 export const accum_sum = (...x) => {
   let result = [];
-  let total = 0, i; n = x.length;
+  let total = 0, i, n = x.length;
   for(i = 0; i < n ; i++){
     total = add(total, x[i])
     result.push(total);
@@ -38,7 +38,7 @@ export const accum_sum = (...x) => {
 
 export const accum_prod = (...x) => {
   let result = [];
-  let prod = 1, i; n = x.length;
+  let prod = 1, i, n = x.length;
   for(i = 0; i < n ; i++){
     prod = mul(prod, x[i])
     result.push(prod);

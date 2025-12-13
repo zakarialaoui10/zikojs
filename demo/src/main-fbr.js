@@ -1,7 +1,7 @@
 import { createSPAFileBasedRouter } from "ziko/router";
 import { Matrix, complex, Complex } from "ziko/math";
 
-import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from '../../src/math/functions/nested'
+import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from '../../src/math/functions'
 
 import { mapfun } from "ziko/math/functions/mapfun";
 import { and, nand } from 'ziko/math/functions/logic'

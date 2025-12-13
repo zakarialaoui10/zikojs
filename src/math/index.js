@@ -18,9 +18,9 @@ export * from "./const.js"
 export * from "./functions/index.js"
 export * from "./complex"
 export * from "./matrix"
-export * from "./discret"
+// export * from "./discret"
 export * from "./random"
 export * from "./utils"
-export * from "./statistics"
+// export * from "./statistics"
 // export default Math;
 

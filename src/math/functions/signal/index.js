@@ -1,5 +1,5 @@
 import { mapfun } from "../mapfun/index.js";
-import { nthr, pow } from "../nested/index.js";
+import { nthr, pow } from "../fundamentals/index.js";
 
 export const zeros = n => new Array(n).fill(0);
 export const ones = n => new Array(n).fill(1);
