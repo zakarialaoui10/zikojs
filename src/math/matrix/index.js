@@ -20,6 +20,7 @@ import {
     vstack
 } from "./helpers/index.js";
 import { mapfun } from '../functions/index.js';
+import { Random } from '../random/index.js';
 class Matrix{
     constructor(rows, cols, element = [] ) {
         if(rows instanceof Matrix){
@@ -93,13 +94,16 @@ class Matrix{
         if (j < 0 || j >= this.cols) throw new Error('Column index out of bounds');
         return this.arr[i][j];
     }
-    slice(r0=0, c0=0, r1=this.rows-1, c1=this.cols-1) {
+    slice(r0=0, c0=0, r1 = this.rows-1, c1 = this.cols-1) {
+        if(r1 < 0) r1 = this.rows + r1
+        if(c1 < 0 ) c1 = this.cols + c1
         let newRow = r1 - r0,
             newCol = c1 - c0;
         let newArr = new Array(newCol);
         for (let i = 0; i < newRow; i++) {
             newArr[i] = [];
-            for (let j = 0; j < newCol; j++) newArr[i][j] = this.arr[i + r0][j + c0];
+            for (let j = 0; j < newCol; j++) 
+                newArr[i][j] = this.arr[i + r0][j + c0];
         }
         return new Matrix(newRow, newCol, newArr.flat(1));
     }
@@ -125,6 +129,7 @@ class Matrix{
     get inv() {
         return matrix_inverse(this)
     }
+    // normalize names
     static eye(size) {
         let result = new Matrix(size, size);
         for (let i = 0; i < size; i++) 
@@ -148,6 +153,20 @@ class Matrix{
         for (let i = 0; i < rows; i++) 
             for (let j = 0; j < cols; j++) result.arr[i][j] = number;
         return result;
+    }
+    static get random(){
+        return {
+            int : (r, c, a, b)=> new Matrix(
+                r,
+                c,
+                Random.sample.int(r*c, a, b)
+            ),
+            float : (r, c, a,)=> new Matrix(
+                r,
+                c,
+                Random.sample.float(r*c, a, b)
+            ),
+        }
     }
     hstack(...matrices) {
         const M=[this, ...matrices].reduce((a,b)=>hstack(a, b));
@@ -184,19 +203,31 @@ class Matrix{
         return matrix.clone().vqueue(...matrices);
     }
     shuffle(){
-        this.arr = this.arr.sort(()=>0.5-Math.random());
-        return this;
+        const arr = this.arr.flat(1).sort(() => 0.5-Math.random())
+        return new Matrix(
+            this.rows, 
+            this.cols,
+            arr
+        )
     }
     static shuffle(M){
         return M.clone().shuffle()
     }
-    // get reel() {
-    //     return new Matrix(this.cols, this.rows, this.arr.flat(1).reel);
-    // }
-    // get imag() {
-    //     return new Matrix(this.cols, this.rows, this.arr.flat(1).imag);
-    // }
-
+    shuffleRows(){
+        this.arr = this.arr.sort(() => 0.5-Math.random());
+        return this;
+    }
+    static shuffleRows(M){
+        return M.clone().shuffleRows()
+    }
+    
+    shuffleCols(){
+        this.arr = this.clone().T.arr.sort(() => 0.5-Math.random());
+        return this.T
+    }
+    static shuffleCols(M){
+        return M.clone().shuffleCols()
+    }
     // Checkers
     get isSquare() {
         return this.rows === this.cols;
@@ -351,22 +382,6 @@ class Matrix{
                 this.arr[i][j] = +this.arr[i][j].toPrecision(p);
         return this;
     }
-    // get toBin() {
-    //     let newArr = this.arr.flat(1).toBin;
-    //     return new Matrix(this.rows, this.cols, newArr);
-    // }
-    // get toOct() {
-    //     let newArr = this.arr.flat(1).toOct;
-    //     return new Matrix(this.rows, this.cols, newArr);
-    // }
-    // get toHex() {
-    //     let newArr = this.arr.flat(1).toHex;
-    //     return new Matrix(this.rows, this.cols, newArr);
-    // }
-    /*get isOdd() {
-        let newArr = this.arr.flat(1).isOdd;
-        return new Matrix(this.rows, this.cols, newArr);
-    }*/
     max2min() {
         let newArr = this.arr.flat(1).max2min;
         return new Matrix(this.rows, this.cols, newArr);
@@ -504,42 +519,44 @@ class Matrix{
     }
     get somme() {
         let S = 0;
-        for (let i = 0; i < this.rows; i++) for (let j = 0; j < this.cols; j++) S += this.arr[i][j];
+        for (let i = 0; i < this.rows; i++) 
+            for (let j = 0; j < this.cols; j++) 
+                S += this.arr[i][j];
         return S;
     }
-    get hasComplex() {
+    hasComplex(){
         return this.arr.flat(Infinity).some((n) => n instanceof Complex);
     }
     get min() {
-        if (this.hasComplex) console.error("Complex numbers are not comparable");
+        if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let minRow = [];
         for (let i = 0; i < this.rows; i++) minRow.push(min(...this.arr[i]));
         return min(...minRow);
     }
     get max() {
-        if (this.hasComplex) console.error("Complex numbers are not comparable");
+        if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let maxRow = [];
         for (let i = 0; i < this.rows; i++) maxRow.push(max(...this.arr[i]));
         return max(...maxRow);
     }
     get minRows() {
-        if (this.hasComplex) console.error("Complex numbers are not comparable");
+        if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let minRow = [];
         for (let i = 0; i < this.rows; i++) minRow.push(min(...this.arr[i]));
         return minRow;
     }
     get maxRows() {
-        if (this.hasComplex) console.error("Complex numbers are not comparable");
+        if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let maxRow = [];
         for (let i = 0; i < this.rows; i++) maxRow.push(max(...this.arr[i]));
         return maxRow;
     }
     get minCols() {
-        if (this.hasComplex) console.error("Complex numbers are not comparable");
+        if (this.hasComplex()) console.error("Complex numbers are not comparable");
         return this.T.minRows;
     }
     get maxCols() {
-        if (this.hasComplex) console.error("Complex numbers are not comparable");
+        if (this.hasComplex()) console.error("Complex numbers are not comparable");
         return this.T.maxRows;
     }
     static fromVector(v) {

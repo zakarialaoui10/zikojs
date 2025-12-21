@@ -35,17 +35,17 @@ export declare class Complex {
     mul(...z: (number | Complex)[]): this;
     div(...z: (number | Complex)[]): this;
     pow(n: number): this;
-    nrth(n?: number): Complex;
+    nthr(n?: number): Complex;
 
-    static Zero(): Complex;
-    static Twiddle(N : number, K : number): Complex;
-    static fromExpo(z: number, phi: number): Complex;
+    static zero(): Complex;
+    static twiddle(N : number, K : number): Complex;
+    static fromPolar(z: number, phi: number): Complex;
+    
     static add(c: Complex, ...z: (number | Complex)[]): Complex;
     static sub(c: Complex, ...z: (number | Complex)[]): Complex;
     static mul(c: Complex, ...z: (number | Complex)[]): Complex;
     static div(c: Complex, ...z: (number | Complex)[]): Complex;
     static pow(c: Complex, n: number): Complex;
-    static xpowZ(x: number): Complex;
 }
 
 export declare function complex(a: number, b?: number): Complex;

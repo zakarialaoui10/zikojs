@@ -1,5 +1,4 @@
-// import {sum,prod,deg2rad} from "../utils/index.js";
-// Should avoid CD
+import { Random } from "../random/index.js";
 class Complex{
     constructor(a = 0, b = 0) {
         if(a instanceof Complex){
@@ -74,10 +73,23 @@ class Complex{
     get phi(){
         return Math.atan2(this.b , this.a);        
     }
-    static Zero() {
+    static zero() {
         return new Complex(0, 0);
     }
-    static Twiddle(N, K){
+    static fromPolar(z, phi) {
+        return new Complex(
+            +(z * cos(phi)).toFixed(13), 
+            +(z * sin(phi)).toFixed(13)
+        );
+    }
+    
+    static get random(){
+        return {
+            int : (a, b)=> new Complex(...Random.sample.int(2, a, b) ),
+            float : (a, b)=> new Complex(...Random.sample.float(2, a, b) ),
+        }
+    }
+    static twiddle(N, K){
         const phi = -2 * Math.PI * K / N;
         return new Complex(
             Math.cos(phi), 
@@ -150,12 +162,6 @@ class Complex{
         this.b = z * Math.sin(phi)  
         return this;
     }
-    static fromExpo(z, phi) {
-        return new Complex(
-            +(z * cos(phi)).toFixed(13), 
-            +(z * sin(phi)).toFixed(13)
-            );
-    }
     get expo() {
         return [this.z, this.phi];
     }
@@ -176,10 +182,10 @@ class Complex{
         return complex({z: this.z ** (1/n), phi: this.phi / n});
     }
     get sqrt(){
-        return this.nrth(2);
+        return this.nthr(2);
     }
     get cbrt(){
-        return this.nrth(3);
+        return this.nthr(3);
     }
     get log(){
         return complex(this.z, this.phi);

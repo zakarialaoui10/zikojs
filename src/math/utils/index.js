@@ -23,11 +23,11 @@ import {
 //     deg2rad,
 //     rad2deg
 // } from "./conversions.js"
-import{
-    sum,
-    prod,
-    accum
-} from "../statistics/index.js"
+// import{
+//     sum,
+//     prod,
+//     accum
+// } from "../statistics/index.js"
 import{
     inRange,
     isApproximatlyEqual
@@ -56,9 +56,9 @@ const Utils={
     logspace,
     geomspace,
 
-    sum,
-    prod,
-    accum,
+    // sum,
+    // prod,
+    // accum,
 
     cartesianProduct,
     ppcm,
@@ -76,8 +76,8 @@ export {
     zeros,
     ones,
     nums,
-    sum,
-    prod,
+    // sum,
+    // prod,
     // add,
     // mul,
     // sub,

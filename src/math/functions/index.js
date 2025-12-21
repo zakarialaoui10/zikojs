@@ -1,5 +1,5 @@
 export * from './mapfun/index.js'
-export * from './fundamentals/index.js'
+export * from './ufunc/index.js'
 export * from './arithmetic/index.js'
 export * from './utils/index.js'
 export * from './stats/index.js'
