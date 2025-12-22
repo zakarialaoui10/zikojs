@@ -14,6 +14,7 @@ import {
 import { Complex } from "../complex/index.js";
 import { arr2str } from "../../data/index.js";
 import { 
+    matrix_constructor,
     matrix_inverse,
     matrix_det,
     hstack,
@@ -23,32 +24,12 @@ import { mapfun } from '../functions/index.js';
 import { Random } from '../random/index.js';
 class Matrix{
     constructor(rows, cols, element = [] ) {
-        if(rows instanceof Matrix){
-            this.arr=rows.arr;
-            this.rows=rows.rows;
-            this.cols=rows.cols;
-        }
-        else {
-        let arr = [], i, j;
-        if (arguments[0] instanceof Array) {
-            rows = arguments[0].length;
-            cols = arguments[0][0].length;
-            arr = arguments[0];
-        } else {
-            for (i = 0; i < rows; i++) {
-                arr.push([]);
-                arr[i].push(new Array(cols));
-                for (j = 0; j < cols; j++) {
-                    arr[i][j] = element[i * cols + j];
-                    if (element[i * cols + j] == undefined) arr[i][j] = 0;
-                }
-            }
-        }
-        this.rows = rows;
-        this.cols = cols;
-        this.arr = arr;   
-    }
-    this.#maintain();
+        [
+            this.rows, 
+            this.cols, 
+            this.arr
+        ] = matrix_constructor(rows, cols, element);
+        this.#maintain();
     }
     isMatrix(){
         return true
@@ -202,31 +183,134 @@ class Matrix{
     static vqueue(matrix,...matrices) {
         return matrix.clone().vqueue(...matrices);
     }
-    shuffle(){
-        const arr = this.arr.flat(1).sort(() => 0.5-Math.random())
+
+    apply(fn){
+        const arr = this.arr.flat(1).map(fn)
         return new Matrix(
             this.rows, 
             this.cols,
             arr
         )
     }
+    static apply(M, fn){
+        return M.clone().apply(fn)
+    }
+    applyRows(fn = ()=>{}){
+        this.arr = this.arr.map(fn)
+        return this;
+    }
+    static applyRows(M, fn){
+        return M.clone().applyRows(fn)
+    }
+    applyCols(fn){
+        return this.clone().T.applyRows(fn).T;
+    }
+    static applyCols(M, fn){
+        return M.clone().applyCols(fn);
+    }
+    sort(fn = ()=>{}){
+        const arr = this.arr.flat(1).sort(fn)
+        return new Matrix(
+            this.rows, 
+            this.cols,
+            arr
+        )  
+    }
+    static sort(M, fn){
+        return M.clone().sort(fn)
+    }
+    shuffle(){
+        return this.sort(() => 0.5-Math.random())
+    }
     static shuffle(M){
         return M.clone().shuffle()
     }
-    shuffleRows(){
-        this.arr = this.arr.sort(() => 0.5-Math.random());
+    sortRows(fn = ()=>{}){
+        this.arr = this.arr.map(row => row.sort(fn))
         return this;
+    }
+    static sortRows(M, fn){
+        return M.clone().sortRows(fn)
+    }
+    shuffleRows(){
+        return this.sortRows(() => 0.5-Math.random())
     }
     static shuffleRows(M){
         return M.clone().shuffleRows()
     }
-    
+    sortCols(fn){
+        return this.clone().T.sortRows(fn).T;
+    }
+    static sortCols(M, fn){
+        return M.clone().sortCols(fn);
+    }
     shuffleCols(){
-        this.arr = this.clone().T.arr.sort(() => 0.5-Math.random());
-        return this.T
+        return this.sortCols(() => 0.5-Math.random())
     }
     static shuffleCols(M){
         return M.clone().shuffleCols()
+    }
+
+    reduce(fn, initialValue){
+        const value = initialValue 
+            ? this.arr.flat(1).reduce(fn, initialValue) 
+            : this.arr.flat(1).reduce(fn);
+        return new Matrix([[value]])
+    }
+    static reduce(M, fn, initialValue){
+        return M.clone().reduce(fn, initialValue)
+    }
+    reduceRows(fn, initialValue){
+        const values = initialValue 
+            ? this.arr.map(row => row.reduce(fn, initialValue)) 
+            : this.arr.map(row => row.reduce(fn)) 
+        return new Matrix(1, this.cols, values)
+    }
+    static reduceRows(M, fn, initialValue){
+        return M.clone().reduceRows(fn, initialValue)
+    }
+    reduceCols(fn, initialValue){
+        return this.T.reduceRows(fn, initialValue).T
+
+    }
+    static reduceCols(M, fn, initialValue){
+        return M.clone().reduceCols(fn, initialValue)
+    }
+    filterRows(fn){
+        const mask = this.arr.map(n => n.some(m => fn(m)));
+        const arr = [];
+        let i;
+        for(i = 0; i < mask.length; i++)
+            if(mask[i]) arr.push(this.arr[i])
+        return new Matrix(arr)
+    }
+    static filterCols(M, fn){
+        return M.clone().filterRows(fn)
+    }
+    filterCols(fn){
+        const arr = this.T.filterRows(fn);
+        return new Matrix(arr).T
+    }
+    static filterCols(M, fn){
+        return M.clone().filterCols(fn);
+    }
+    every(fn){
+        return this.arr.flat(1).every(fn)
+    }
+    everyRow(fn){
+        return this.arr.map(n => n.every(fn))
+    }
+    everyCol(fn){
+        return this.T.arr.map(n => n.every(fn))
+    }
+    some(fn){
+        return this.arr.flat(1).some(fn)
+    }
+    someRow(fn){
+        return this.arr.map(n => n.some(fn))
+    }
+    someCol(fn){
+        return this.T.arr.map(n => n.some(fn))
     }
     // Checkers
     get isSquare() {
@@ -311,43 +395,7 @@ class Matrix{
         }
         return true;
     }
-    
-    // static get rand(){
-    //     return {
-    //         int:(rows, cols, a, b)=>{
-    //             let result = new Matrix(rows, cols);
-    //             for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randInt(a, b);
-    //             return result;
-    //         },
-    //         bin:(rows,cols)=>{
-    //             let result = new Matrix(rows, cols);
-    //             for (let i = 0; i < rows; i++) {
-    //                 for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randBin;
-    //             }
-    //             return result;       
-    //         },
-    //         hex:(rows,cols)=>{
-    //             let result = new Matrix(rows, cols);
-    //             for (let i = 0; i < rows; i++) {
-    //                 for (let j = 0; j < cols; j++) result.arr[i][j] = Random.randHex;
-    //             }
-    //             return result;       
-    //         },
-    //         choices:(rows, cols, choices, p)=>{
-    //             let result = new Matrix(rows, cols);
-    //             for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.choice(choices, p);
-    //             return result
-    //         },
-    //         permutation:(rows,cols,arr)=>{
-    //             //return new Matrix(rows, cols, Random.permutation(...arr))
-    //         }
-    //     }
-    // }
-    // static rands(rows, cols, a = 1, b) {
-    //     let result = new Matrix(rows, cols);
-    //     for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) result.arr[i][j] = Random.rand(a, b);
-    //     return result;
-    // }
+
     map(Imin, Imax, Fmin, Fmax) {
         this.arr = map(this.arr, Imin, Imax, Fmin, Fmax)
         return this;
@@ -382,46 +430,23 @@ class Matrix{
                 this.arr[i][j] = +this.arr[i][j].toPrecision(p);
         return this;
     }
-    max2min() {
-        let newArr = this.arr.flat(1).max2min;
-        return new Matrix(this.rows, this.cols, newArr);
+    toFixed(p) {
+        for (let i = 0; i < this.cols; i++) 
+            for (let j = 0; j < this.rows; j++) 
+                this.arr[i][j] = +this.arr[i][j].toFixed(p);
+        return this;
     }
-    min2max() {
-        let newArr = this.arr.flat(1).min2max;
-        return new Matrix(this.rows, this.cols, newArr);
-    }
-    sortRows(calback=undefined){
-        let newArr=this.arr.map(n=>n.sort(calback)).flat(1);
-        return new Matrix(this.rows, this.cols, newArr);           
-    }
-    sortCols(calback=undefined){
-        let m=this.T;
-        let newArr=m.arr.map(n=>n.sort(calback)).flat(1);
-        return new Matrix(this.rows, this.cols, newArr).T;           
-    }
-    filterByRows(item){
-        var truth=this.arr.map(n=>n.map(m=>+(""+m).includes(item)))
-        var mask=truth.map(n=>!!Logic.or(...n))
-        var filtredArray=this.arr.filter((n,i)=>mask[i]===true)
-        if(filtredArray.length===0)filtredArray.push([])
-        console.log(filtredArray)
-        return new Matrix(filtredArray)
-    }
-    filterByCols(item){
-        return new Matrix(this.T.arr.filter(n=>n.includes(item)))
-    }
-    sortAll(calback=undefined){
-        let newArr=this.arr.flat(1).sort(calback);
-        return new Matrix(this.rows, this.cols, newArr);         
-    }
-    count(n) {
-        return this.arr.flat(1).count(n);
-    }
-    // toBase(n) {
-    //     let newArr = this.arr.flat(1).toBase(n);
+    // max2min() {
+    //     let newArr = this.arr.flat(1).max2min;
     //     return new Matrix(this.rows, this.cols, newArr);
     // }
-    
+    // min2max() {
+    //     let newArr = this.arr.flat(1).min2max;
+    //     return new Matrix(this.rows, this.cols, newArr);
+    // }
+    // count(n) {
+    //     return this.arr.flat(1).count(n);
+    // }
     splice(r0,c0,deleteCount,...items){
         
     }
@@ -437,54 +462,41 @@ class Matrix{
     static getCols(m, ci, cf = ci + 1) {
         return m.slice(0, ci, m.rows, cf);
     }
-    add(...matr) {
+    #arithmetic(fn, ...matr){
         for (let k = 0; k < matr.length; k++) {
             if (typeof matr[k] == "number"||matr[k] instanceof Complex) matr[k] = Matrix.nums(this.rows, this.cols, matr[k]);
-            for (let i = 0; i < this.rows; i++) for (var j = 0; j < this.cols; j++) this.arr[i][j] = add(this.arr[i][j],matr[k].arr[i][j]);
+            for (let i = 0; i < this.rows; i++) 
+                for (var j = 0; j < this.cols; j++) 
+                    this.arr[i][j] = fn(this.arr[i][j], matr[k].arr[i][j]);
         }
-        return new Matrix(this.rows, this.cols, this.arr.flat(1));
+        return new Matrix(this.rows, this.cols, this.arr.flat(1));  
     }
-    sub(...matr) {
-        for (let k = 0; k < matr.length; k++) {
-            if (typeof matr[k] == "number") matr[k] = Matrix.nums(this.rows, this.cols, matr[k]);
-            for (let i = 0; i < this.rows; i++) for (var j = 0; j < this.cols; j++) this.arr[i][j] = sub(this.arr[i][j],matr[k].arr[i][j]);
-        }
-        return new Matrix(this.rows, this.cols, this.arr.flat(1));
+    add(...matr) {
+        return this.#arithmetic(add, ...matr)
     }
     static add(m1, ...m2) {
         return m1.clone().add(...m2);
+    }
+    sub(...matr) {
+        return this.#arithmetic(sub, ...matr)
     }
     static sub(m1, ...m2) {
         return m1.clone().sub(...m2);
     }
     mul(...matr) {
-        for (let k = 0; k < matr.length; k++) {
-            if (typeof matr[k] == "number") matr[k] = Matrix.nums(this.rows, this.cols, matr[k]);
-            for (var i = 0; i < this.rows; i++) for (var j = 0; j < this.cols; j++) this.arr[i][j] = mul(this.arr[i][j],matr[k].arr[i][j]);
-        }
-        return new Matrix(this.rows, this.cols, this.arr.flat(1));
-    }
-    div(...matr) {
-        for (let k = 0; k < matr.length; k++) {
-            if (typeof matr[k] == "number") matr[k] = Matrix.nums(this.rows, this.cols, matr[k]);
-            for (let i = 0; i < this.rows; i++) for (var j = 0; j < this.cols; j++) this.arr[i][j] = div(this.arr[i][j],matr[k].arr[i][j]);
-        }
-        return new Matrix(this.rows, this.cols, this.arr.flat(1));
-    }
-    static div(m1, ...m2) {
-        return m1.clone().div(...m2);
+        return this.#arithmetic(mul, ...matr)
     }
     static mul(m1, ...m2) {
         return m1.clone().mul(...m2);
     }
+    div(...matr) {
+        return this.#arithmetic(div, ...matr)
+    }
+    static div(m1, ...m2) {
+        return m1.clone().div(...m2);
+    }
     modulo(...matr) {
-        for (let k = 0; k < matr.length; k++) {
-            if (typeof matr[k] == "number") matr[k] = Matrix.nums(this.rows, this.cols, matr[k]);
-            for (let i = 0; i < this.rows; i++) 
-                for (var j = 0; j < this.cols; j++)
-                    this.arr[i][j]=modulo(this.arr[i][j],matr[k].arr[i][j]);
-        }
-        return new Matrix(this.rows, this.cols, this.arr.flat(1));
+        return this.#arithmetic(modulo, ...matr)
     }
     static modulo(m1, ...m2) {
         return m1.clone().modulo(...m2);
@@ -530,25 +542,29 @@ class Matrix{
     get min() {
         if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let minRow = [];
-        for (let i = 0; i < this.rows; i++) minRow.push(min(...this.arr[i]));
-        return min(...minRow);
+        for (let i = 0; i < this.rows; i++) 
+            minRow.push(Math.min(...this.arr[i]));
+        return Math.min(...minRow);
     }
     get max() {
         if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let maxRow = [];
-        for (let i = 0; i < this.rows; i++) maxRow.push(max(...this.arr[i]));
-        return max(...maxRow);
+        for (let i = 0; i < this.rows; i++) 
+            maxRow.push(Math.max(...this.arr[i]));
+        return Math.max(...maxRow);
     }
     get minRows() {
         if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let minRow = [];
-        for (let i = 0; i < this.rows; i++) minRow.push(min(...this.arr[i]));
+        for (let i = 0; i < this.rows; i++) 
+            minRow.push(Math.min(...this.arr[i]));
         return minRow;
     }
     get maxRows() {
         if (this.hasComplex()) console.error("Complex numbers are not comparable");
         let maxRow = [];
-        for (let i = 0; i < this.rows; i++) maxRow.push(max(...this.arr[i]));
+        for (let i = 0; i < this.rows; i++) 
+            maxRow.push(Math.max(...this.arr[i]));
         return maxRow;
     }
     get minCols() {
@@ -612,11 +628,14 @@ class Matrix{
 }
 
 
-/**
-* @returns {Matrix}
-*/
 const matrix=(r, c, element)=>new Matrix(r, c, element);
 const matrix2=(...element)=>new Matrix(2, 2, element);
 const matrix3=(...element)=>new Matrix(3, 3, element);
 const matrix4=(...element)=>new Matrix(4, 4, element);
-export{Matrix,matrix,matrix2,matrix3,matrix4}
+export{
+    Matrix,
+    matrix,
+    matrix2,
+    matrix3,
+    matrix4
+}
