@@ -1,40 +1,11 @@
 import { Random } from "../random/index.js";
+import { complex_constructor } from "./helpers/index.js";
 class Complex{
     constructor(a = 0, b = 0) {
-        if(a instanceof Complex){
-            this.a=a.a;
-            this.b=a.b;
-        }
-        else if(typeof(a)==="object"){
-            if(("a" in a && "b" in a)){
-                this.a = a.a;
-                this.b = a.b;
-            }
-            else if(("a" in a && "z" in a)){
-                this.a = a.a;
-                this.b = Math.sqrt((a.z**2)-(a.a**2));
-            }
-            else if(("a" in a && "phi" in a)){
-                this.a = a.a;
-                this.b = a.a * Math.tan(a.phi);
-            }
-            else if(("b" in a && "z" in a)){
-                this.b = a.b;
-                this.a = Math.sqrt((a.z**2)-(a.b**2));
-            }
-            else if(("b" in a && "phi" in a)){
-                this.b = b;
-                this.a = a.b / Math.tan(a.phi);
-            }
-            else if(("z" in a && "phi" in a)){
-                this.a = + a.z * Math.cos(a.phi).toFixed(15);
-                this.b = + a.z * Math.sin(a.phi).toFixed(15);
-            }
-        }
-        else if(typeof(a)==="number" && typeof(b)==="number"){
-            this.a = + a.toFixed(32);
-            this.b = + b.toFixed(32);
-        }
+        [
+            this.a,
+            this.b
+        ] = complex_constructor(Complex, a, b)
     }
     get __mapfun__(){
         return true
@@ -54,6 +25,19 @@ class Complex{
             : (str = `-${Math.abs(this.b)}*i`);
         return str;
     }
+    serialize() {
+        return JSON.stringify({
+            type : 'complex',
+            data : this
+        });
+    }
+    static deserialize(json){
+        if(typeof json === 'string') json = JSON.parse(json);
+        let {data, type} = json;
+        return (type === 'complex' && ('a' in data) && ('b' in data))
+            ? new Complex(data.a, data.b)
+            : TypeError('Not a valid complex')
+    } 
     toFixed(n){
         this.a = + this.a.toFixed(n);
         this.b = + this.b.toFixed(n);
@@ -165,19 +149,6 @@ class Complex{
     get expo() {
         return [this.z, this.phi];
     }
-    static add(c,...z) {
-        return c.clone().add(...z);
-    }
-    static sub(c,...z) {
-        return c.clone().sub(...z);
-    }
-    static mul(c,...z) {
-        return c.clone().mul(...z);
-    }
-    static div(c,...z) {
-        return c.clone().div(...z);
-    }
-
     nthr(n=2){
         return complex({z: this.z ** (1/n), phi: this.phi / n});
     }

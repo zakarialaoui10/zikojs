@@ -1,82 +1,56 @@
-const _add = (x, y) =>{
+const arithmetic_helper=(op, x, y)=>{
     if(typeof x === 'number'){
-        if(typeof y === 'number') return x + y;
-        if(y.isComplex?.()) {
-            return y.clone().add(x);
+        if(typeof y === 'number'){
+            switch(op){
+                case 'add' : return x + y;
+                case 'sub' : return x - y;
+                case 'mul' : return x * y;
+                case 'div' : return x / y;
+                case 'modulo' : return x % y;
+            }
+        }
+        if(y?.isComplex?.()) x = new y.constructor(x, 0);
+        if(y?.isMatrix?.()) x = y.constructor.nums(y.rows, y.cols, x);
+        return x[op](y)
+    }
+    if(x?.isComplex?.()){
+        if(typeof y === 'number' || y?.isComplex?.()) return x.clone()[op](y);
+        if(y?.isMatrix?.()){
+            x = y.constructor.nums(y.rows, y.cols, x);
+            return x.clone()[op](y)
         }
     }
-    if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return x.clone().add(y);
-    }
+    if(x?.isMatrix?.()){
+        return x.clone()[op](y)
+    }    
 }
-
-const _sub = (x, y) =>{
-    if(typeof x === 'number'){
-        if(typeof y === 'number') return x - y;
-        if(y.isComplex?.()) return new y.constructor(x - y.a, y.b);
-    }
-    if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return x.clone().sub(y);
-    }
-}
-
-const _mul = (x, y) =>{
-    if(typeof x === 'number'){
-        if(typeof y === 'number') return x * y;
-        if(y.isComplex?.()) return y.clone().mul(x);
-    }
-    if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return x.clone().mul(y);
-    }
-}
-
-const _div = (x, y) =>{
-    if(typeof x === 'number'){
-        if(typeof y === 'number') return x / y;
-        if(y.isComplex?.()) return new y.constructor(x, 0).div(y)
-    }
-    if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return x.clone().mul(y);
-    }
-}
-
-const _modulo = (x, y) =>{
-    if(typeof x === 'number'){
-        if(typeof y === 'number') return x % y;
-        if(y.isComplex?.()) return new y.constructor(x, 0).modulo(y)
-    }
-    if(x.isComplex?.()){
-        if(typeof y === 'number' || y.isComplex?.()) return x.clone().modulo(y);
-    }
-}
-
 export const add=(a,...b)=>{
     let res = a;
     for(let i=0; i<b.length; i++)
-        res = _add(res, b[i])
+        res = arithmetic_helper('add', res, b[i])
     return res;
 }
 export const sub=(a,...b)=>{
     let res = a;
     for(let i=0; i<b.length; i++)
-        res = _sub(res, b[i])
+        res = arithmetic_helper('sub', res, b[i])
     return res;
 }
 export const mul=(a,...b)=>{
     let res = a;
     for(let i=0; i<b.length; i++)
-        res = _mul(res, b[i])
+        res = arithmetic_helper('mul', res, b[i])
     return res;
 }
 export const div=(a,...b)=>{
     let res = a;
     for(let i=0; i<b.length; i++)
-        res = _div(res, b[i])
+        res = arithmetic_helper('div', res, b[i])
     return res;
 }
 export const modulo=(a,...b)=>{
     let res = a;
     for(let i=0; i<b.length; i++)
-        res = _modulo(res, b[i])
+        res = arithmetic_helper('modulo', res, b[i])
     return res;
 }

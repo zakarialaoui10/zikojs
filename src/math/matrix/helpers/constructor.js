@@ -1,5 +1,5 @@
-export const matrix_constructor = (rows, cols, element) => {
-  if (rows.isMatrix?.()) {
+export const matrix_constructor = (Matrix, rows, cols, element) => {
+  if (rows instanceof Matrix) {
     arr = rows.arr;
     rows = rows.rows;
     cols = rows.cols;
