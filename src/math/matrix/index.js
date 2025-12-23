@@ -146,6 +146,27 @@ class Matrix{
             ),
         }
     }
+    get range(){
+        return {
+            map : (xmin, xmax, ymin, ymax) => {
+                this.arr = map(this.arr, xmin, xmax, ymin, ymax);
+                return this;
+            },
+            norm : (min, max) => {
+                this.arr = norm(this.arr, min, max);
+                return this;
+            },
+            lerp : (min, max) => {
+                this.arr = lerp(this.arr, min, max);
+                return this;
+            },
+            clamp : (min, max) => {
+                this.arr = clamp(this.arr, min, max);
+                return this;
+            },
+
+        }
+    }
     hstack(...matrices) {
         const M=[this, ...matrices].reduce((a,b)=>hstack(a, b));
         Object.assign(this, M);
@@ -180,7 +201,7 @@ class Matrix{
         this.clone().T.forEachRow(fn);
         return this
     }
-    apply(fn){
+    map(fn){
         const arr = this.arr.flat(1).map(fn)
         return new Matrix(
             this.rows, 
@@ -188,12 +209,12 @@ class Matrix{
             arr
         )
     }
-    applyRows(fn = ()=>{}){
+    mapRows(fn = ()=>{}){
         this.arr = this.arr.map(fn)
         return this;
     }
-    applyCols(fn){
-        return this.clone().T.applyRows(fn).T;
+    mapCols(fn){
+        return this.clone().T.mapRows(fn).T;
     }
     sort(fn = ()=>{}){
         const arr = this.arr.flat(1).sort(fn)
@@ -347,22 +368,6 @@ class Matrix{
             }
         }
         return true;
-    }
-    map(Imin, Imax, Fmin, Fmax) {
-        this.arr = map(this.arr, Imin, Imax, Fmin, Fmax)
-        return this;
-    }
-    lerp(min, max) {
-        this.arr = lerp(this.arr, min, max)
-        return this;
-    }
-    norm(min, max) {
-        this.arr = norm(this.arr, min, max)
-        return this;
-    }
-    clamp(min, max) {
-        this.arr = clamp(this.arr, min, max)
-        return this;
     }
     toPrecision(p) {
         for (let i = 0; i < this.cols; i++) 
