@@ -73,7 +73,7 @@ class Complex{
             float : (a, b)=> new Complex(...Random.sample.float(2, a, b) ),
         }
     }
-    static twiddle(N, K){
+    static twiddle(K, N){
         const phi = -2 * Math.PI * K / N;
         return new Complex(
             Math.cos(phi), 

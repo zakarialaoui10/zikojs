@@ -38,7 +38,7 @@ export declare class Complex {
     nthr(n?: number): Complex;
 
     static zero(): Complex;
-    static twiddle(N : number, K : number): Complex;
+    static twiddle(K : number, N : number): Complex;
     static fromPolar(z: number, phi: number): Complex;
     
     static add(c: Complex, ...z: (number | Complex)[]): Complex;
