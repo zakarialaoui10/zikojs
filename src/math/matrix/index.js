@@ -12,9 +12,10 @@ import {
     norm 
 } from '../functions/utils/index.js'
 import { Complex } from "../complex/index.js";
-import { arr2str } from "../../data/index.js";
+// import { arr2str } from "../../data/index.js";
 import { 
     matrix_constructor,
+    maintain_indexes,
     matrix_inverse,
     matrix_det,
     hstack,
@@ -29,7 +30,7 @@ class Matrix{
             this.cols, 
             this.arr
         ] = matrix_constructor(Matrix, rows, cols, element);
-        this.#maintain();
+        maintain_indexes(this)
     }
     isMatrix(){
         return true
@@ -42,21 +43,11 @@ class Matrix{
             x => x?.isComplex?.() ? x : new Complex(x, 0),
             ...this.arr
         )
-        this.#maintain()
+        maintain_indexes(this)
         return this;
     }
     [Symbol.iterator]() {
       return this.arr[Symbol.iterator]();
-    }
-    #maintain() {
-        for (let i = 0; i < this.arr.length; i++) {
-            Object.defineProperty(this, i, {
-                value: this.arr[i],
-                writable: true,
-                configurable: true,
-                enumerable: false 
-            });
-        }
     }
     get size() {
         return this.rows * this.cols;
@@ -64,9 +55,9 @@ class Matrix{
     get shape() {
         return [this.rows, this.cols];
     }
-    toString(){
-        return arr2str(this.arr,false);
-    }
+    // toString(){
+    //     return arr2str(this.arr,false);
+    // }
     at(i = 0, j = undefined) {
         if(i < 0) i += this.rows;
         if(i < 0 || i >= this.rows) throw new Error('Row index out of bounds');
@@ -86,11 +77,18 @@ class Matrix{
             for (let j = 0; j < newCol; j++) 
                 newArr[i][j] = this.arr[i + r0][j + c0];
         }
-        return new Matrix(newRow, newCol, newArr.flat(1));
+        this.arr = newArr;
+        maintain_indexes(this.rows)
+        this.rows = newRow;
+        this.cols = newCol;
+        return this;
     }
     reshape(newRows, newCols) {
-        if(!(newRows * newCols === this.rows * this.cols)) throw Error('size not matched')
-        return new Matrix(newRows, newCols, this.arr.flat(1));
+        if(!(newRows * newCols === this.rows * this.cols)) throw Error('size not matched');
+        const oldRows = this.rows;
+        Object.assign(this, new Matrix(newRows, newCols, this.arr.flat(1)));
+        maintain_indexes(oldRows);
+        return this;
     }
     get T() {
         let transpose = [];
@@ -170,23 +168,25 @@ class Matrix{
     hstack(...matrices) {
         const M=[this, ...matrices].reduce((a,b)=>hstack(a, b));
         Object.assign(this, M);
-        this.#maintain();
+        maintain_indexes(this);
         return this;
     }
     vstack(...matrices){
         const M=[this, ...matrices].reduce((a,b)=>vstack(a, b));
         Object.assign(this, M);
-        this.#maintain();
+        maintain_indexes(this);
         return this;
     }
     hqueue(...matrices){
         const M=[this, ...matrices].reverse().reduce((a,b)=>hstack(a, b));
-        Object.assign(this, M)
+        Object.assign(this, M);
+        maintain_indexes(this);
         return this;
     }
     vqueue(...matrices){
         const M=[this,...matrices].reverse().reduce((a, b)=>vstack(a, b));
-        Object.assign(this, M)
+        Object.assign(this, M);
+        maintain_indexes(this);
         return this;
     }
     forEach(fn){
@@ -254,7 +254,6 @@ class Matrix{
     }
     reduceCols(fn, initialValue){
         return this.T.reduceRows(fn, initialValue).T
-
     }
     filterRows(fn){
         const mask = this.arr.map(n => n.some(m => fn(m)));
@@ -529,36 +528,19 @@ class Matrix{
         }, ...arr)
         return new Matrix(arr)
     }
-    // To Be Moved to Table or GridView
-    // sortTable(n=0,{type="num",order="asc"}={}) {
-    //     var obj=this.T.arr.map(n=>n.map((n,i)=>Object.assign({},{x:n,y:i})));
-    //     var newObj=this.T.arr.map(n=>n.map((n,i)=>Object.assign({},{x:n,y:i})));
-    //     if(type==="num"){
-    //         if(order==="asc")obj[n].sort((a,b)=>a.x-b.x);
-    //         else if(order==="desc")obj[n].sort((a,b)=>b.x-a.x);
-    //         else if(order==="toggle"){
-    //            // console.log(obj[n][0])
-    //             //console.log(obj[n][1])
-    //             if(obj[n][0].x>obj[n][1].x)obj[n].sort((a,b)=>b.x-a.x);
-    //             else obj[n].sort((a,b)=>a.x-b.x);
-    //         }
-    //     }
-    //     else if(type==="alpha"){
-    //         if(order==="asc")obj[n].sort((a,b)=>(""+a.x).localeCompare(""+b.x));
-    //         else if(order==="desc")obj[n].sort((a,b)=>(""+b.x).localeCompare(""+a.x));            
-    //     }
-    //     //var order=obj[n].map(n=>n.y);
-    //     order=obj[n].map(n=>n.y);
-    //     for(let i=0;i<obj.length;i++){
-    //         if(i!==n)obj[i].map((n,j)=>n.y=order[j]);
-    //     }
-    //     for(let i=0;i<obj.length;i++){
-    //         if(i!==n)newObj[i].map((n,j)=>n.x=obj[i][order[j]].x)
-    //     }
-    //     newObj[n]=obj[n];
-    //     var newArr=newObj.map(n=>n.map(m=>m.x));
-    //     return new Matrix(newArr).T;
-    // }
+    flip(){
+        return this.flipeH().flipeV()
+    }
+    flipeH(){
+        this.arr = this.arr.map(row => [...row].reverse());
+        maintain_indexes(this);
+        return this;
+    }
+    flipeV(){
+        this.arr = this.arr.reverse();
+        maintain_indexes(this);
+        return this;
+    }
 }
 
 
