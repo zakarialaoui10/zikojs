@@ -1,3 +1,45 @@
+import { tags } from 'ziko/ui'
+import {useState, useDerived} from 'ziko/hooks'
+export const Timer=()=>{
+    const {floor} = Math
+    const [timer, setTimer] = useState(0);
+    const converToHMS = seconds => `${floor(seconds / 3600)} : ${floor((seconds % 3600) / 60)} : ${seconds % 60} `
+    const time = useDerived(t => converToHMS(t) , [timer] )
+    // const [time] = useDerived(t => converToHMS(t) , [timer] )
+    let i = 1;
+    setInterval(()=>{
+        setTimer(i);
+        i++
+    }, 1000)
+    return tags.p('Elapsed Time : ', time)
+}
+
+Timer().mount()
+// import {tags} from 'ziko/ui'
+// import {useState} from 'ziko/hooks'
+
+
+// export const Counter=()=>{
+//     const {div, span, button} = tags
+//     const [counter, setCounter] = useState(0);
+//     return div(
+//         span(counter),
+//         button('+').onClick(()=> setCounter(n => ++n)),
+//         button('-').onClick(()=> setCounter(n => --n)),
+//         button('reset').onClick(()=> setCounter(0))
+//     )
+// }
+
+// Counter().mount()
+
+// const [isVisible, toggleVisibility] = useState(true);
+// globalThis.para = tags.p('Hello world', isVisible).style({
+//     visibility : isVisible ? 'visible' : 'hidden'
+// }).mount()
+// globalThis.toggleVisibility = toggleVisibility
+// tags.button('Toggle Visibility').onClick(()=> currentValue => toggleVisibility(!currentValue)).mount()
+
+
 import { createSPAFileBasedRouter } from "ziko/router";
 // import { Matrix, complex, Complex } from "ziko/math";
 

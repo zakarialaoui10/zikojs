@@ -8,16 +8,10 @@ import starlightThemeObsidian from 'starlight-theme-obsidian'
 const referenceModules = [
 	'math',
 	'ui',
+	'router',
 	'time',
 	'hooks',
-	// 'typed-matrix',
-	// 'functions', 
-	// // 'matrix',
-	// 'complex',
-	// 'signal', 
-	// 'stats',
-	// 'calculs',
-	// 'discret'
+	'events',
 ];
 
 // https://astro.build/config
@@ -57,18 +51,6 @@ export default defineConfig({
 					label : 'Ecosystem',
 					slug : 'ecosystem'
 				},
-				// {
-				// 	label: 'overview',
-				// 	autogenerate: { directory: `overview` }
-				// },
-				// {
-				// 	label : 'philosophy',
-				// 	slug : 'philosophy'
-				// },
-				// {
-				// 	label : 'about',
-				// 	slug : 'about'
-				// },
 				{
 					label : 'Reference',
 					items : referenceModules.map(label => ({
@@ -77,6 +59,7 @@ export default defineConfig({
 						autogenerate: { directory: `reference/${label}` },
 					})),
 				},
+				
 			],
 		}),
 	],

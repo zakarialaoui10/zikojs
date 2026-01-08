@@ -1,7 +1,7 @@
 ---
-title: Zikojs | Hooks | useDerived
-description: useDerived
+title: Zikojs | Hooks | useReactive
+description: useReactive
 sidebar:
-    label : useDerived
+    label : useReactive
 ---
 

@@ -105,7 +105,7 @@ export const HTMLTags = [
   'wbr'
 ];
 
-const SVGTags = [
+export const SVGTags = [
     "svg", "g", "defs", "symbol", "use", "image", "switch",
     "rect", "circle", "ellipse", "line", "polyline", "polygon", "path",
     "text", "tspan", "textPath", "altGlyph", "altGlyphDef", "altGlyphItem", "glyph", "glyphRef",
@@ -133,9 +133,3 @@ export const MathMLTags = [
   `mtable`, `mtd`, `mtext`, `mtr`,
   `munder`, `munderover`
 ]
-
-export{
-    HTMLTags,
-    SVGTags,
-    MathMLTags
-}

@@ -5,3 +5,13 @@ sidebar:
     label : animation
 ---
 
+## Definition
+
+## Usage
+
+## Signature
+
+```ts
+```
+
+## Methods
