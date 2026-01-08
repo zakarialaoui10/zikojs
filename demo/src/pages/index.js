@@ -38,6 +38,7 @@ const AArrowDown = (props) =>
     )
 
 export default function App(){
-    return AArrowDown({stroke : 'red'})
+    globalThis.aa = AArrowDown({stroke : 'red'})
+    return aa
 }
 

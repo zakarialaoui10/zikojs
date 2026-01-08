@@ -6,21 +6,25 @@ import starlightThemeObsidian from 'starlight-theme-obsidian'
 
 
 const referenceModules = [
-	'typed-matrix',
-	'functions', 
-	// 'matrix',
-	'complex',
-	'signal', 
-	'stats',
-	'calculs',
-	'discret'
+	'math',
+	'ui',
+	'time',
+	'hooks',
+	// 'typed-matrix',
+	// 'functions', 
+	// // 'matrix',
+	// 'complex',
+	// 'signal', 
+	// 'stats',
+	// 'calculs',
+	// 'discret'
 ];
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'NumZ',
+			title: 'Zikojs',
 			plugins: [
 				starlightThemeObsidian({
 					graph: false
@@ -37,11 +41,25 @@ export default defineConfig({
 					href: 'https://github.com/zakarialaoui10/numz.git' 
 				}],
 			sidebar: [
+				{
+					label : 'overview',
+					slug : 'overview'
+				},
+				{
+					label : 'architecture',
+					slug : 'architecture'
+				},
+				{
+					label : 'concepts',
+					slug : 'concepts'
+				},
+				{
+					label : 'ecosystem',
+					slug : 'ecosystem'
+				},
 				// {
-				// 	label: 'Guides',
-				// 	items: [
-				// 		{ label: 'Example Guide', slug: 'guides/example' },
-				// 	],
+				// 	label: 'overview',
+				// 	autogenerate: { directory: `overview` }
 				// },
 				// {
 				// 	label : 'philosophy',

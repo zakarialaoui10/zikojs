@@ -1,4 +1,4 @@
-// import { createSPAFileBasedRouter } from "ziko/router";
+import { createSPAFileBasedRouter } from "ziko/router";
 // import { Matrix, complex, Complex } from "ziko/math";
 
 // import { pow, cos, sign, acos, asin, atan, acot, coth, acosh, ln, sqrt, atanh, sec } from '../../src/math/functions'
@@ -6,9 +6,9 @@
 // import { mapfun } from "ziko/math/functions/mapfun";
 // import { and, nand } from 'ziko/math/functions/logic'
 
-// globalThis.pairs = await createSPAFileBasedRouter(
-//     import.meta.glob('./pages/**/*.js')
-// )
+globalThis.pairs = await createSPAFileBasedRouter(
+    import.meta.glob('./pages/**/*.js')
+)
 
 // globalThis.m = new Matrix([[1,2], [3,4]])
 // globalThis.c = complex(1,1)
@@ -92,25 +92,25 @@
 // )
 
 
-import { Matrix } from "ziko/math/matrix";
-import { complex } from "ziko/math/complex";
-globalThis.Matrix = Matrix
-globalThis.m = new Matrix([
-    [1, 2, complex(3,0)],
-    [4, 5, 6],
-    [7, 8, 9]
-])
+// import { Matrix } from "ziko/math/matrix";
+// import { complex } from "ziko/math/complex";
+// globalThis.Matrix = Matrix
+// globalThis.m = new Matrix([
+//     [1, 2, complex(3,0)],
+//     [4, 5, 6],
+//     [7, 8, 9]
+// ])
 
-globalThis.m2 = new Matrix([
-    [1, 2, 3],
-    [4, 5, 6],
-])
+// globalThis.m2 = new Matrix([
+//     [1, 2, 3],
+//     [4, 5, 6],
+// ])
 
-globalThis.a = m.serialize()
-globalThis.m3 = Matrix.deserialize(a)
-// console.log()
+// globalThis.a = m.serialize()
+// globalThis.m3 = Matrix.deserialize(a)
+// // console.log()
 
-globalThis.m4 = new Matrix([[m, m],[m, m]])
+// globalThis.m4 = new Matrix([[m, m],[m, m]])
 
-import {add} from 'ziko/math'
-globalThis.add = add
+// import {add} from 'ziko/math'
+// globalThis.add = add

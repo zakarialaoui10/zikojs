@@ -1,5 +1,5 @@
 import {UIElement} from "../constructors/UIElement.js";
-import { HTMLTags, SVGTags } from "./tags-list.js";
+import { HTMLTags, SVGTags, MathMLTags } from "./tags-list.js";
 // import { isStateGetter } from "../../hooks/use-state.js";
 const _h=(tag, type, attributes, ...children)=>{
     const { name, style, ...attrs } = attributes;
@@ -19,6 +19,7 @@ const tags = new Proxy({}, {
     let type ;
     if(HTMLTags.includes(tag)) type = 'html'
     if(SVGTags.includes(tag)) type = 'svg'
+    if(MathMLTags.includes(tag)) type = 'mathml'
     return (...args)=>{
       // Fix undefined
       // console.log(isStateGetter(args[0]))

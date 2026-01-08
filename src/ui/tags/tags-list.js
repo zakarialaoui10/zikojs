@@ -1,4 +1,4 @@
-const HTMLTags = [
+export const HTMLTags = [
   'a',
   'abb',
   'address',
@@ -119,7 +119,23 @@ const SVGTags = [
     "desc", "title", "metadata", "foreignObject"
   ];
 
+export const MathMLTags = [
+  'math', 'annotation', 
+  `merror`,
+  `mfrac`,
+  `mi`, 
+  `mprescripts`,
+  `mn`, 
+  `mo`, `mover`,
+  `mpadded`, `mphantom`, `mprescripts`,
+  `mroot`, `mrow`,
+  `ms`, `semantics`, `mspace`, `msqrt`, `mstyle`, `msub`, `msup`, `msubsup`,
+  `mtable`, `mtd`, `mtext`, `mtr`,
+  `munder`, `munderover`
+]
+
 export{
     HTMLTags,
-    SVGTags
+    SVGTags,
+    MathMLTags
 }
