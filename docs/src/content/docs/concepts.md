@@ -5,3 +5,5 @@ sidebar:
     label : concepts
 ---
 
+- Hyperscript 
+- Chaining 

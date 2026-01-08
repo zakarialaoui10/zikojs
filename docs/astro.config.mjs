@@ -42,19 +42,19 @@ export default defineConfig({
 				}],
 			sidebar: [
 				{
-					label : 'overview',
+					label : 'Overview',
 					slug : 'overview'
 				},
 				{
-					label : 'architecture',
+					label : 'Architecture',
 					slug : 'architecture'
 				},
 				{
-					label : 'concepts',
+					label : 'Concepts',
 					slug : 'concepts'
 				},
 				{
-					label : 'ecosystem',
+					label : 'Ecosystem',
 					slug : 'ecosystem'
 				},
 				// {
@@ -70,7 +70,7 @@ export default defineConfig({
 				// 	slug : 'about'
 				// },
 				{
-					label : 'reference',
+					label : 'Reference',
 					items : referenceModules.map(label => ({
 						label,
 						collapsed: true,
