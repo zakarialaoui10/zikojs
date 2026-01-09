@@ -23,3 +23,11 @@ p a{
 strong{
     color: var(--slsg-node-color-8);
 }
+
+strong code{
+    font-size: large;
+}
+
+em{
+   color: var(--slsg-node-color-8); 
+}

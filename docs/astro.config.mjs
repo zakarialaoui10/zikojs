@@ -66,8 +66,11 @@ export default defineConfig({
 				},
 				{
 					label : 'Wrapper',
-					// slug : 'wrapper',
 					autogenerate : { directory : `wrapper/`}
+				},
+				{
+					label : 'Server',
+					autogenerate : { directory : `server/`}
 				}
 				// {
 				// 	label : 'Reference',
