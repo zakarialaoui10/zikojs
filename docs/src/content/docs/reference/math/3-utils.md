@@ -11,5 +11,5 @@ sidebar:
 - `norm(x, min, max)` :
 - `lerp(x, min, max)` : 
 - `clamp(x, min, max)` :
-- `hypot(...x)` :
+- `hypot(...x)` : 
 - `atan2(y, x, rad? : boolean)` : 

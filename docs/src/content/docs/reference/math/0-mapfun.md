@@ -8,7 +8,7 @@ sidebar:
 
 ## Introduction
 
-**Mapfun** is the heart of Numz’s extended array programming.  
+**Mapfun** is the heart of Zikojs extended array programming.  
 It allows applying functions recursively to deeply nested structures — arrays, objects, or mixed types — preserving their shape and type, without manual loops or recursion.
 
 
@@ -38,7 +38,7 @@ Array programming libraries in other languages partially solve this problem:
 Even these solutions do not fully support deeply nested or heterogeneous structures in a clean, recursive, type-preserving way.
 
 ## Solution : 
-[Zikojs]() which is the core of Numz introduces mapfun, a functional, type-preserving mapper.
+Zikojs introduces mapfun, a functional, type-preserving mapper.
 It enables you to apply any function over numbers, arrays, objects, and nested combinations thereof without side effects.
 
 ### Features 

@@ -5,7 +5,7 @@ sidebar:
     label : useState
 ---
 
-`useState` is a hook that lets you add a state variable to your componenet.
+`useState` is a hook that lets you add a state variable to your component.
 
 ```js
 const [state, setState, controller] = useState(initialValue)
