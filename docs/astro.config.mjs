@@ -5,9 +5,9 @@ import starlight from '@astrojs/starlight';
 import starlightThemeObsidian from 'starlight-theme-obsidian'
 
 
-const referenceModules = [
-	'math',
+const CoreReference = [
 	'ui',
+	'math',
 	'router',
 	'time',
 	'hooks',
@@ -52,13 +52,31 @@ export default defineConfig({
 					slug : 'ecosystem'
 				},
 				{
-					label : 'Reference',
-					items : referenceModules.map(label => ({
-						label,
-						collapsed: true,
-						autogenerate: { directory: `reference/${label}` },
-					})),
+					label : 'Core',
+					items : [
+						{
+							label : 'reference',
+							items : CoreReference.map(label => ({
+								label,
+								collapsed: true,
+								autogenerate: { directory: `core/reference/${label}` },
+							})),
+						},
+					]
 				},
+				{
+					label : 'Wrapper',
+					// slug : 'wrapper',
+					autogenerate : { directory : `wrapper/`}
+				}
+				// {
+				// 	label : 'Reference',
+				// 	items : CoreReference.map(label => ({
+				// 		label,
+				// 		collapsed: true,
+				// 		autogenerate: { directory: `reference/${label}` },
+				// 	})),
+				// },
 				
 			],
 		}),
