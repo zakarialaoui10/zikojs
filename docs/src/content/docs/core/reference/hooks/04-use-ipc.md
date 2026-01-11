@@ -4,6 +4,18 @@ description: useIPC
 sidebar:
     label : useIPC
 ---
+## Definition 
+
+`useIPC` is an **inter-process / inter-tab communication hook** built on top of the browser’s
+`BroadcastChannel` API.
+
+It allows different browser contexts (tabs, windows, iframes, workers) to **emit and listen to events**
+while supporting:
+- Event names
+- Room-based messaging
+- One-time listeners
+- Listener filtering
+- Automatic sender isolation
 
 ## Signature 
 

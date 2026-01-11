@@ -5,7 +5,11 @@ sidebar:
     label : useState
 ---
 
-`useState` is a hook that lets you add a state variable to your component.
+## Definition 
+
+`useState` is a hook that lets you add **reactive state** to your component.
+
+When the state value changes, any UI that depends on it updates automatically.
 
 ```js
 const [state, setState, controller] = useState(initialValue)
@@ -25,6 +29,16 @@ export const Counter=()=>{
     )
 }
 ```
+
+## Reactivity Model
+
+`useState` in **Zikojs** is conceptually closer to **`createSignal` in SolidJS** than to **`useState` in React**.
+
+- It updates **only the affected DOM node**
+- It does **not re-render the entire component**
+- State changes are applied **at node level**, not component level
+
+This makes Zikojs state updates more **granular**, **efficient**, and **predictable**, especially for frequently changing values.
 
 <!-- ```js
 const [isVisible, toggleVisibility] = useState(true);

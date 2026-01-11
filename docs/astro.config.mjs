@@ -55,6 +55,10 @@ export default defineConfig({
 					label : 'Core',
 					items : [
 						{
+							label : 'overview',
+							slug : 'core/overview'
+						},
+						{
 							label : 'reference',
 							items : CoreReference.map(label => ({
 								label,

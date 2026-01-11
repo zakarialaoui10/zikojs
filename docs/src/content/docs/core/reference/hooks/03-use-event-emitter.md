@@ -5,6 +5,19 @@ sidebar:
     label : useEventEmitter
 ---
 
+## Definition
+
+`useEventEmitter` is a lightweight event system hook that allows you to **register**, **emit**, and **manage custom events**.
+
+It provides a familiar EventEmitter-style API with support for:
+- Multiple listeners
+- One-time listeners
+- Listener limits
+- Safe emission
+- Event cleanup
+
+---
+
 
 ## Signature
 

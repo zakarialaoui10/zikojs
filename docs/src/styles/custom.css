@@ -2,6 +2,8 @@
   --sl-content-width: 50rem;
   --sl-text-5xl: 3.5rem;
 }
+
+
 h1{
     color : var(--sl-color-accent-high);
 }
@@ -22,6 +24,7 @@ p a{
 }
 strong{
     color: var(--slsg-node-color-8);
+    font-weight: normal;
 }
 
 strong code{
@@ -30,4 +33,12 @@ strong code{
 
 em{
    color: var(--slsg-node-color-8); 
+}
+
+
+/* Scroll */
+
+*{
+  scrollbar-width:auto;
+  scrollbar-color: var(--slsg-node-color-8) transparent;
 }
