@@ -12,9 +12,13 @@ import { UIElement } from '../../../src/ui/constructors/UIElement.js'
  * @param target - Optional DOM element to mount the component. Defaults to `document.body`.
  */
 export function createSPAFileBasedRouter(
-  pages: Record<
-    string, 
-    () => Promise<{ default: (param? : Record<string, string>) => UIElement }>
-  >,
-  target?: HTMLElement | UIElement
+  options : {
+    pages: Record<
+      string, 
+      () => Promise<{ default: (param? : Record<string, string>) => UIElement | UIElement[]}>
+    >,
+    target?: HTMLElement | UIElement
+    extensions : string[],
+    domifier : Function
+  },
 ): Promise<void>;

@@ -54,7 +54,12 @@ export async function createSPAFileBasedRouter({
   // return;
   // const mounted = params ? await component(params) : await component();
 
-  if(mounted instanceof HTMLElement) target.append(mounted);
-  else mounted.mount(target);
+  if(mounted instanceof HTMLElement) 
+      mounted instanceof Array 
+        ? target.append(...mounted) 
+        : target.append(mounted);
+  else mounted instanceof Array 
+        ? mounted.forEach(el => el.mount(target)) 
+        : mounted.mount(target);
 
 }
