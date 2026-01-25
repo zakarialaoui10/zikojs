@@ -7,7 +7,8 @@ import {
  } from "../utils/index.js"
 export async function createSPAFileBasedRouter(
   pages, 
-  target = globalThis?.document?.body
+  target = globalThis?.document?.body,
+  extensions = ['js', 'ts']
 ) {
   if(!(target instanceof HTMLElement) && target?.element instanceof HTMLElement) target = target?.element;
   if (!(target instanceof HTMLElement)) {
@@ -21,7 +22,7 @@ export async function createSPAFileBasedRouter(
   for (const route of routes) {
     const module = await pages[route]();
     const modComponent = await module.default;
-    pairs[normalize_path(route, root)] = modComponent;
+    pairs[normalize_path(route, root, extensions)] = modComponent;
   }
 
   let mask = null;

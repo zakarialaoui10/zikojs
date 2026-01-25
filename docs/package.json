@@ -13,6 +13,9 @@
     "@astrojs/starlight": "^0.37.1",
     "astro": "^5.6.1",
     "sharp": "^0.34.2",
-    "starlight-theme-obsidian": "^0.4.1"
+    "starlight-sidebar-topics-dropdown": "^0.5.2",
+    "starlight-theme-obsidian": "^0.4.1",
+    "zextra": "^0.9.4",
+    "ziko": "^0.57.1"
   }
 }

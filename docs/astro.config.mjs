@@ -1,8 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+// import ziko from "ziko-wrapper/astro"
 // import starlightGitHubAlerts from 'starlight-github-alerts'
 import starlightThemeObsidian from 'starlight-theme-obsidian'
+// import mermaid from "astro-mermaid";
+// import astroD2 from 'astro-d2'
 
 
 const CoreReference = [
@@ -17,6 +20,7 @@ const CoreReference = [
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
+		// ziko(),
 		starlight({
 			title: 'Zikojs',
 			plugins: [
@@ -39,10 +43,10 @@ export default defineConfig({
 					label : 'Overview',
 					slug : 'overview'
 				},
-				{
-					label : 'Architecture',
-					slug : 'architecture'
-				},
+				// {
+				// 	label : 'Architecture',
+				// 	slug : 'architecture'
+				// },
 				{
 					label : 'Concepts',
 					slug : 'concepts'
@@ -87,5 +91,6 @@ export default defineConfig({
 				
 			],
 		}),
+		// astroD2({}),
 	],
 });
