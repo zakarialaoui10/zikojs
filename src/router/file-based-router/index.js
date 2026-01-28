@@ -9,7 +9,8 @@ export async function createSPAFileBasedRouter({
   pages = {},
   target = globalThis?.document?.body,
   extensions = ['js', 'ts'],
-  domifier = null
+  domifier = null,
+  renderer
 } = {}) {
   if(!(target instanceof HTMLElement) && target?.element instanceof HTMLElement) target = target?.element;
   if (!(target instanceof HTMLElement)) {
@@ -39,6 +40,11 @@ export async function createSPAFileBasedRouter({
 
   if (!mask) return; // no route matched
   const params = is_dynamic(mask) ? dynamic_routes_parser(mask, path) : undefined;
+  if(renderer) {
+    console.log(component)
+    renderer(target, component, params)
+    return;
+  }
 
 
   let mounted = domifier
