@@ -37,11 +37,9 @@ export async function createSPAFileBasedRouter({
       break;
     }
   }
-
-  if (!mask) return; // no route matched
+  if (mask === null) return; // no route matched
   const params = is_dynamic(mask) ? dynamic_routes_parser(mask, path) : undefined;
   if(renderer) {
-    console.log(component)
     renderer(target, component, params)
     return;
   }
