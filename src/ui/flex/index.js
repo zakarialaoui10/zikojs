@@ -1,20 +1,23 @@
 import { UIElement } from "../constructors/UIElement.js";
-class ZikoUIFlex extends UIElement {
-  constructor(tag = "div", w = "100%", h = "100%") {
+import { 
+  set_vertical,
+  set_horizontal,
+  map_pos_x,
+  map_pos_y
+} from './utils/index.js'
+class UIFlex extends UIElement {
+  constructor({tag = "div", orientation = "h", order, w = "100%", h = "100%"} = {}) {
     super({element : tag , name : "Flex"});
     this.direction = "cols";
-    if (typeof w == "number") w += "%";
-    if (typeof h == "number") h += "%";
-    this.style({ width: w, height: h });
     this.style({ display: "flex" });
     // this.mount();
   }
-  get isFlex(){
+  isFlex(){
     return true;
   }
-  resp(px,wrap = true) {
+  responsify(respBreakPoint, wrap = true) {
     this.wrap(wrap);
-    if (this.element.clientWidth < px) this.vertical();
+    if (this.element.clientWidth < respBreakPoint) this.vertical();
     else this.horizontal();
     return this;
   }
@@ -46,16 +49,18 @@ class ZikoUIFlex extends UIElement {
     this.style({ justifyContent: align });
     return this;
   }
-  vertical(x, y, order=1) {
-    set_vertical.call(this,order)
+  // verticalize
+  vertical(x, y, order = 1) {
+    set_vertical.call(this, order)
     this.style({
       alignItems: typeof(x)==="number"?map_pos_x.call(this,x):x,
       justifyContent: typeof(y)=="number"?map_pos_y.call(this,y):y
     });
     return this;
   }
-  horizontal(x, y, order=1) {
-    set_horizontal.call(this,order)
+  // horizontalize
+  horizontal(x, y, order = 1) {
+    set_horizontal.call(this, order)
     this.style({
       alignItems: typeof(y)=="number"?map_pos_y.call(this,y):y,
       justifyContent: typeof(x)==="number"?map_pos_x.call(this,x):x
@@ -75,29 +80,10 @@ const Flex = (...UIElement) =>{
     tag=UIElement[0];
     UIElement.pop();
   }
-  return new ZikoUIFlex(tag).append(...UIElement);
+  return new UIFlex(tag).append(...UIElement);
 }
-function set_vertical(direction){
-  direction == 1
-    ? this.style({ flexDirection: "column" })
-    : direction == -1 && this.style({ flexDirection: "column-reverse" });
-  return this;
-}
-function set_horizontal(direction){
-direction == 1
-    ? this.style({ flexDirection: "row" })
-    : direction == -1 && this.style({ flexDirection: "row-reverse" });
-  return this;
-}
-function map_pos_x(align){
-let pos = ["flex-start", "center", "flex-end"];
-if (typeof align === "number") align = pos[align + 1];
-return align;
-}
-function map_pos_y(align){
-return map_pos_x(-align);
-}
+
 export{
   Flex,
-  ZikoUIFlex
+  UIFlex
 }

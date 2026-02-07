@@ -1,6 +1,37 @@
-import {tags} from 'ziko/ui'
+import {tags, Flex} from 'ziko/ui'
+import { Random } from 'ziko/math';
 import {Switch} from 'ziko/ui'
 const {svg} = tags;
+globalThis.Random = Random
+const El = () => tags.section().style({
+    width : Random.int(100, 200)+'px',
+    height : Random.int(50, 100)+'px',
+    width : '120px',
+    height : '70px',
+    background : Random.color.hex(),
+    border : '2px solid black',
+    borderRadius : '10px'
+})
+globalThis.f = Flex(
+    El(),
+    El(),
+    El(),
+    El(),
+    // El(),
+    // El(),
+    // El(),
+    // El(),
+).mount(document.body).style({
+    border : '2px dotted darkblue',
+    padding : '10px',
+    width : "60vw",
+    height : '60vh',
+    gap : '10px',
+    margin : 'auto',
+    justifyContent : 'space-around'
+})
+// .vertical('space-between', 'space-around')
+.responsify('300px', true)
 
 globalThis.s = key => Switch({
     key ,
