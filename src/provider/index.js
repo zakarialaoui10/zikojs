@@ -1,4 +1,7 @@
 export class ZikoProvider {
+    constructor(component){
+        if(component) this.init(component)
+    }
     init(component){
         this.component = component instanceof ZikoProvider ? component.component : component
     }
