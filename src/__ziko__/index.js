@@ -12,6 +12,7 @@ export function __init__global__(){
                     __State__,
                     __Config__,
                     __CACHE__,
+                    __PROVIDERS__: {}
                 };
         defineParamsGetter(__Ziko__)
     }
