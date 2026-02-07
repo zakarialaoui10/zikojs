@@ -1,6 +1,6 @@
 export class ZikoProvider {
     init(component){
-        if(component instanceof ZikoProvider) this.component = component.component; 
+        this.component = component instanceof ZikoProvider ? component.component : component
     }
     get element(){
         return this.component.element;
