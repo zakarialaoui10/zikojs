@@ -1,3 +1,12 @@
+export const call_with_optional_props = (Component) => {
+    return (...args) => {
+        const first = args[0];
+        const isChild = first?.isUIElement() || isPrimitive(first) ;
+        return isChild 
+                ? new Component({}, ...args)
+                : new Component(first, ...args.slice(1))
+    };
+};
 export function add_vendor_prefix(property) {
 	const propertyUC = property.slice(0, 1).toUpperCase() + property.slice(1);
 	const vendors = ['Webkit', 'Moz', 'O', 'ms'];
