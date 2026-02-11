@@ -1,7 +1,7 @@
 export const call_with_optional_props = (Component) => {
     return (...args) => {
         const first = args[0];
-        const isChild = first?.isUIElement() || isPrimitive(first) ;
+        const isChild = first?.isUIElement?.() || isPrimitive(first) ;
         return isChild 
                 ? new Component({}, ...args)
                 : new Component(first, ...args.slice(1))
