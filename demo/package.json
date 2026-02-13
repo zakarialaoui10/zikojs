@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "exports":{
-    "./*" : "./src/generated-icons/*/index.js"
+  "exports": {
+    "./*": "./src/generated-icons/*/index.js"
   },
   "devDependencies": {
     "vite": "^7.0.4"

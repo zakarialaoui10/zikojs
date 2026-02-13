@@ -1,7 +1,8 @@
 import { createSPAFileBasedRouter } from "ziko/router";
 createSPAFileBasedRouter(
     {
-        pages : import.meta.glob('./pages/**/*.js')
+        pages : import.meta.glob('./pages/**/*.js'),
+        wrapper : (component) => component.style({color : 'red'})
     }
 )
 

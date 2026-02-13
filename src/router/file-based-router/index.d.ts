@@ -19,6 +19,6 @@ export function createSPAFileBasedRouter(
     >,
     target?: HTMLElement | UIElement
     extensions : string[],
-    domifier : Function
+    wrapper : Function
   },
 ): Promise<void>;
