@@ -24,7 +24,7 @@ export async function __addItem__(adder, pusher, ...ele) {
       }
     }
     if (typeof globalThis?.Node === "function" && ele[i] instanceof globalThis?.Node) ele[i] = new this.constructor(ele[i]);
-    if (ele[i]?.isZikoUINode) {
+    if (ele[i]?.isUINode) {
         ele[i].cache.parent = this;
         this.element?.[adder](ele[i].element);
         ele[i].target = this.element;

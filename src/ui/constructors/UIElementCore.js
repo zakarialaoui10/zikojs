@@ -30,7 +30,6 @@ class UIElementCore extends UINode{
       isRoot:false,
       isHidden: false,
       isFrozzen:false,
-      legacyParent : null,
       attributes: {},
       filters: {},
       temp:{}
@@ -53,14 +52,6 @@ class UIElementCore extends UINode{
       intersection:null
     }
     if(element) Object.assign(this.cache,{element});
-    // useDefaultStyle && this.style({ 
-    //   position: "relative",
-    //   boxSizing:"border-box",
-    //   margin:0,
-    //   padding:0,
-    //   width : "auto",
-    //   height : "auto"
-    //  });
     this.items = new UIStore();
     globalThis.__Ziko__.__UI__[this.cache.name]?globalThis.__Ziko__.__UI__[this.cache.name]?.push(this):globalThis.__Ziko__.__UI__[this.cache.name]=[this];
     element && render && this?.render?.()

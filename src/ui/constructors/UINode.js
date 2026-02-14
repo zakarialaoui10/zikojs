@@ -4,7 +4,7 @@ export class UINode {
             node
         }
     }
-    isZikoUINode(){
+    isUINode(){
         return true
     }
     get node(){

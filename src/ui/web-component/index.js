@@ -1,4 +1,4 @@
-export function define_wc(name, UIElement, props = {}, { mode = 'open'} = {}) {
+export function define_wc(name, UI_Constructor, props = {}, { mode = 'open'} = {}) {
     if (globalThis.customElements?.get(name)) {
         console.warn(`Custom element "${name}" is already defined`);
         return;
@@ -30,7 +30,7 @@ export function define_wc(name, UIElement, props = {}, { mode = 'open'} = {}) {
 
             render() {
                 this.shadowRoot.innerHTML = '';
-                const item = UIElement(this.props);
+                const item = UI_Constructor(this.props);
                 if(item instanceof Array) item.forEach(n => n.mount(this.shadowRoot)) 
                 else item.mount(this.shadowRoot)
             }
