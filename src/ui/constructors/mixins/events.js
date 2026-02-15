@@ -1,4 +1,4 @@
-import { EventsMap } from "../../events/events-map/index.js";
+import { EventsMap } from "../../../events/events-map/index.js";
 import {
   bind_pointer_event,
   bind_mouse_event,
@@ -10,9 +10,9 @@ import {
   bind_wheel_event,
   bind_view_event,
   bind_swipe_event
-} from "../../events/binders/index.js";
+} from "../../../events/binders/index.js";
 
-import { bind_custom_event } from "../../events/binders/custom-event.js";
+import { bind_custom_event } from "../../../events/binders/custom-event.js";
 
 const binderMap = {
   ptr: bind_pointer_event,

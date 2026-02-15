@@ -7,10 +7,19 @@ import {
   IndexingMethods,
   EventsMethodes,
   StyleMethods
-} from "../__methods__/index.js";
+} from "./mixins/index.js";
+
+import {
+  EventController
+} from '../../exp-events/index.js'
 class UIElement extends UIElementCore{
   constructor({element, name ='', type='html', render = __Ziko__.__Config__.default.render}={}){
     super()
+    this.exp = {
+      events : {
+
+      }
+    }
     register_to_class(
       this, 
       LifecycleMethods,
@@ -22,6 +31,15 @@ class UIElement extends UIElementCore{
     );
 
     if(element)this.init(element, name, type, render)
+  }
+  _on(event, callback, {details_setter, category = 'global'} = {}){
+    if(category && !this.exp.events.hasOwnProperty(category)) this.exp.events[category] = new EventController(this, category);
+    const EVENT = this.exp.events[category]
+    EVENT.addListener(event, callback);
+    if(details_setter) details_setter.call(EVENT);
+  }
+  _off(event, category = 'global'){
+    this.exp.events[category].removeListener(event)
   }
   get element(){
     return this.cache.element;

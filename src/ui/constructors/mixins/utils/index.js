@@ -1,9 +1,9 @@
-import { isStateGetter } from "../../../hooks/use-state.js";
+import { isStateGetter } from "../../../../hooks/use-state.js";
 import { 
   is_camelcase,
   camel2hyphencase
- } from '../../../data/string/index.js'
- import { text } from "../../text/index.js";
+ } from '../../../../data/string/index.js'
+ import { text } from "../../../text/index.js";
 export async function __addItem__(adder, pusher, ...ele) {
   if (this.cache.isFrozzen) {
     console.warn("You can't append new item to frozzen element");

@@ -1,4 +1,4 @@
-import { text } from "../text/index.js";
+import { text } from "../../text/index.js";
 import { __addItem__ } from "./utils/index.js";
 export function append(...ele) {
   __addItem__.call(this, "append", "push", ...ele);

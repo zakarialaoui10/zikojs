@@ -33,6 +33,9 @@ globalThis.f = Flex(
 // .vertical('space-between', 'space-around')
 .responsify('300px', true)
 
+f._on('click', e => console.log(e))
+f._on('dblclick', e => console.log(e))
+
 globalThis.s = key => Switch({
     key ,
     cases : {
