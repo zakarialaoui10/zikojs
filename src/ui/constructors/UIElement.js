@@ -5,8 +5,9 @@ import {
   AttrsMethods,
   DomMethods,
   IndexingMethods,
-  EventsMethodes,
-  StyleMethods
+  // EventsMethodes,
+  StyleMethods,
+  PtrEvents
 } from "./mixins/index.js";
 
 import {
@@ -27,7 +28,8 @@ class UIElement extends UIElementCore{
       DomMethods, 
       StyleMethods,
       IndexingMethods, 
-      EventsMethodes
+      PtrEvents
+      // EventsMethodes
     );
 
     if(element)this.init(element, name, type, render)
@@ -35,8 +37,11 @@ class UIElement extends UIElementCore{
   _on(event, callback, {details_setter, category = 'global'} = {}){
     if(category && !this.exp.events.hasOwnProperty(category)) this.exp.events[category] = new EventController(this, category);
     const EVENT = this.exp.events[category]
-    EVENT.addListener(event, callback);
-    if(details_setter) details_setter.call(EVENT);
+    EVENT.addListener(event, (e)=>{
+      if(details_setter) details_setter(EVENT);
+      callback(e)
+    });
+    
   }
   _off(event, category = 'global'){
     this.exp.events[category].removeListener(event)

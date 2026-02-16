@@ -4,8 +4,12 @@ export class EventController {
       category,
       target,
       listeners : {},
-      currentEvent : null
+      currentEvent : null,
+      event : null
     }
+  }
+  get event(){
+    return this.cache.event
   }
   get element(){
     return this.cache.target.element;
@@ -13,29 +17,30 @@ export class EventController {
   get currentEvent(){
     return this.cache.currentEvent;
   }
-  addListener(event, callback){
-    this.cache.listeners[event] = {
+  addListener(event_name, callback){
+    this.cache.listeners[event_name] = {
       paused : false,
-      callback : ()=>{
-        if(!this.cache.listeners[event].paused) {
-          this.cache.currentEvent = event
+      callback : e =>{
+        this.cache.event = e;
+        if(!this.cache.listeners[event_name].paused) {
+          this.cache.currentEvent = event_name;
           callback.call(this, this)
         }
       },
     };
-    this.element.addEventListener(event, this.cache.listeners[event].callback);
+    this.element.addEventListener(event_name, this.cache.listeners[event_name].callback);
     return this;
   }
-  removeListener(event){
-    this.element.removeEventListener(event, this.cache.listeners[event].callback);
+  removeListener(event_name){
+    this.element.removeEventListener(event_name, this.cache.listeners[event_name].callback);
     return this;
   }
-  pause(event){
-    this.cache.listeners[event].paused = true;
+  pause(event_name){
+    this.cache.listeners[event_name].paused = true;
     return this;
   }
-  resume(event){
-    this.cache.listeners[event].paused = false;
+  resume(event_name){
+    this.cache.listeners[event_name].paused = false;
     return this;
   }
 }

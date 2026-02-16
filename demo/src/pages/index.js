@@ -33,8 +33,12 @@ globalThis.f = Flex(
 // .vertical('space-between', 'space-around')
 .responsify('300px', true)
 
-f._on('click', e => console.log(e))
-f._on('dblclick', e => console.log(e))
+// f._on('click', e => console.log(e))
+// f._on('dblclick', e => console.log(e))
+
+f._onPtrDown(e => console.log({dx : e.dx, dy : e.dy}), true)
+f._onPtrMove(e => e.isDown && console.log({mx : e.mx, my : e.my}), true)
+f._onPtrUp(e => console.log({ux : e.ux, uy : e.uy}), true)
 
 globalThis.s = key => Switch({
     key ,
