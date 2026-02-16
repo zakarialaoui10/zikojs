@@ -1,6 +1,6 @@
 {
   "name": "ziko",
-  "version": "0.66.0",
+  "version": "0.67.0",
   "description": "A versatile JavaScript library offering a rich set of Hyperscript Based UI components, advanced mathematical utilities, interactivity ,animations, client side routing and more ...",
   "keywords": [
     "front-end",
@@ -90,7 +90,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "cross-env": "^10.1.0",
     "eslint": "^10.0.0",
-    "jsdom": "^28.0.0",
+    "jsdom": "^26.0.0",
     "rollup": "^4.57.1",
     "vitest": "^4.0.18"
   }

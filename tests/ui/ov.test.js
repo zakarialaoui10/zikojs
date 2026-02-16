@@ -9,14 +9,19 @@ class Ov extends UIElement{
     show(){
         console.log(1)
     }
+    append(){
+      return 1
+    }
 }
 
 describe('Ov class', () => {
 
   it('should create an instance of Ov', () => {
     const ov = new Ov('test item');
+    console.log(ov.append())
     expect(ov).toBeInstanceOf(Ov);
     expect(ov).toBeInstanceOf(UIElement);
+    // expect(ov.append()).toEqual(1)
   });
 
 //   it('should append items correctly', () => {
