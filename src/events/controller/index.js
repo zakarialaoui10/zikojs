@@ -5,7 +5,8 @@ export class EventController {
       target,
       listeners : {},
       currentEvent : null,
-      event : null
+      event : null,
+      customEvents : new Set()
     }
   }
   get event(){

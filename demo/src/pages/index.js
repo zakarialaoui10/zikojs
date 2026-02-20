@@ -36,10 +36,10 @@ globalThis.f = Flex(
 globalThis.l = tags.input({href : "#"},'Click Me!')
 
 l.mount(document.body)
-l._on('keydown', e => console.log(e))
+l.on('keydown', e => console.log(e))
 
-// f._on('click', e => console.log(e))
-// f._on('dblclick', e => console.log(e))
+// f.on('click', e => console.log(e))
+// f.on('dblclick', e => console.log(e))
 
 // f._onPtrDown(e => console.log({dx : e.dx, dy : e.dy, d: e.isDragging}), true)
 // f._onPtrMove(e => console.log(e.isDragging)

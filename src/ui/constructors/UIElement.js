@@ -5,15 +5,15 @@ import {
   AttrsMethods,
   DomMethods,
   IndexingMethods,
-  // EventsMethodes,
   StyleMethods,
-  PtrListeners,
-  ClickListeners,
-  KeyListeners,
 } from "./mixins/index.js";
 
 import {
-  EventController
+  EventController,
+  PtrListeners,
+  ClickListeners,
+  KeyListeners,
+  ViewListeners
 } from '../../events/index.js'
 class UIElement extends UIElementCore{
   constructor({element, name ='', type='html', render = __Ziko__.__Config__.default.render}={}){
@@ -29,18 +29,20 @@ class UIElement extends UIElementCore{
       AttrsMethods, 
       DomMethods, 
       StyleMethods,
-      IndexingMethods, 
+      IndexingMethods,
       PtrListeners,
       ClickListeners,
-      KeyListeners
+      KeyListeners,
+      ViewListeners
     );
 
     if(element)this.init(element, name, type, render)
   }
-  _on(event, callback, {details_setter, category = 'global', preventDefault = false} = {}){
+  on(event_name, callback, {details_setter, category = 'global', isCustom = false,preventDefault = false} = {}){
     if(category && !this.exp.events.hasOwnProperty(category)) this.exp.events[category] = new EventController(this, category);
-    const EVENT = this.exp.events[category]
-    EVENT.addListener(event, (e)=>{
+    isCustom && this.exp.events[category].cache.customEvents.add(event_name)
+    const EVENT = this.exp.events[category];
+    EVENT.addListener(event_name, (e)=>{
       if(details_setter) details_setter(EVENT);
       callback(e)
     },{
