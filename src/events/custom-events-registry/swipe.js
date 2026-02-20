@@ -10,7 +10,7 @@ class SwipeEvent extends CustomEvent {
 
 function register_swipe_event(
   element,
-  threshold = 50,
+  threshold = 5,
   restraint = 100,
   allowedTime = 500
 ) {

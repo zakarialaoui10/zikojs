@@ -13,7 +13,7 @@ import {
   PtrListeners,
   ClickListeners,
   KeyListeners,
-  ViewListeners
+  ViewListeners,
 } from '../../events/index.js'
 class UIElement extends UIElementCore{
   constructor({element, name ='', type='html', render = __Ziko__.__Config__.default.render}={}){
@@ -33,7 +33,7 @@ class UIElement extends UIElementCore{
       PtrListeners,
       ClickListeners,
       KeyListeners,
-      ViewListeners
+      ViewListeners,
     );
 
     if(element)this.init(element, name, type, render)
