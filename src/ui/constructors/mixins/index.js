@@ -16,4 +16,4 @@ export * as IndexingMethods from './indexing.js'
 export * from './style.js'
 export * as StyleMethods from './style.js'
 
-export * from './exp-events/index.js'
+export * from './events/index.js'

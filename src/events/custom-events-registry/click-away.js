@@ -7,6 +7,7 @@ class ClickAwayEvent extends Event {
 }
 
 function register_click_away_event(element) {
+  // console.log(element)
   function handler(e) {
     if (!element.contains(e.target)) {
       const clickAwayEvent = new ClickAwayEvent(e, element);

@@ -14,7 +14,7 @@ import {
 
 import {
   EventController
-} from '../../exp-events/index.js'
+} from '../../events/index.js'
 class UIElement extends UIElementCore{
   constructor({element, name ='', type='html', render = __Ziko__.__Config__.default.render}={}){
     super()

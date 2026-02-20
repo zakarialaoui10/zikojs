@@ -1,5 +1,5 @@
 const CATEGORY = 'click';
-import {register_click_away_event} from '../../../../exp-events/custom-events-registry/click-away.js'
+import {register_click_away_event} from '../../../../events/custom-events-registry/click-away.js'
 export const ClickListeners = {
     onClick(callback){
         this._on(

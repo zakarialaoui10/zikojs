@@ -1,18 +1,18 @@
 const CATEGORY = 'key'
 export const KeyListeners = {
-    _onKeyDown(callback){
+    onKeyDown(callback){
         this._on(
             'keydown', callback, 
             { category : CATEGORY, details_setter : ctx=> { ctx.kd = ctx.event.key }
         })
     },
-    _onKeyPress(callback){
+    onKeyPress(callback){
         this._on(
             'keypress', callback, 
             { category : CATEGORY, details_setter : ctx=> { ctx.kp = ctx.event.key }
         })
     },
-    _onKeyUp(callback){
+    onKeyUp(callback){
         this._on(
             'keydown', callback, 
             { category : CATEGORY, details_setter : ctx=> { ctx.ku = ctx.event.key }

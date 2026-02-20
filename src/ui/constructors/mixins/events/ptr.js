@@ -1,7 +1,7 @@
 import { getCoordinates } from "./utils/index.js";
 const CATEGORY = 'ptr';
 export const PtrListeners = {
-    _onPtrDown(callback, useNormalizedCoordinates = false){
+    onPtrDown(callback, useNormalizedCoordinates = false){
         this._on(
             'pointerdown', callback, 
             { category : CATEGORY, details_setter : (ctx)=> {
@@ -13,7 +13,7 @@ export const PtrListeners = {
             }}
         )
     },
-    _onPtrMove(callback, useNormalizedCoordinates = false){
+    onPtrMove(callback, useNormalizedCoordinates = false){
         this._on(
             'pointermove', callback, 
             { category : CATEGORY, details_setter : (ctx)=> {
@@ -25,7 +25,7 @@ export const PtrListeners = {
             }}
         )
     },
-    _onPtrUp(callback, useNormalizedCoordinates = false){
+    onPtrUp(callback, useNormalizedCoordinates = false){
         this._on(
             'pointerup', callback, 
             { category : CATEGORY, details_setter : (ctx)=> {
