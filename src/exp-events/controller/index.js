@@ -17,16 +17,18 @@ export class EventController {
   get currentEvent(){
     return this.cache.currentEvent;
   }
-  addListener(event_name, callback){
+  addListener(event_name, callback, {preventDefault = false, paused = false} = {}){
     this.cache.listeners[event_name] = {
-      paused : false,
       callback : e =>{
         this.cache.event = e;
+        if(this.cache.listeners[event_name].preventDefault) e.preventDefault()
         if(!this.cache.listeners[event_name].paused) {
           this.cache.currentEvent = event_name;
           callback.call(this, this)
         }
       },
+      preventDefault,
+      paused,
     };
     this.element.addEventListener(event_name, this.cache.listeners[event_name].callback);
     return this;
@@ -41,6 +43,15 @@ export class EventController {
   }
   resume(event_name){
     this.cache.listeners[event_name].paused = false;
+    return this;
+  }
+  preventDefault(event_name){
+    // if(!event_name) 
+    this.cache.listeners[event_name].preventDefault = true;
+    return this;
+  }
+  useDefault(event_name){
+    this.cache.listeners[event_name].preventDefault = false;
     return this;
   }
 }

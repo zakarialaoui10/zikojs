@@ -33,12 +33,19 @@ globalThis.f = Flex(
 // .vertical('space-between', 'space-around')
 .responsify('300px', true)
 
+globalThis.l = tags.input({href : "#"},'Click Me!')
+
+l.mount(document.body)
+l._on('keydown', e => console.log(e))
+
 // f._on('click', e => console.log(e))
 // f._on('dblclick', e => console.log(e))
 
-f._onPtrDown(e => console.log({dx : e.dx, dy : e.dy}), true)
-f._onPtrMove(e => e.isDown && console.log({mx : e.mx, my : e.my}), true)
-f._onPtrUp(e => console.log({ux : e.ux, uy : e.uy}), true)
+// f._onPtrDown(e => console.log({dx : e.dx, dy : e.dy, d: e.isDragging}), true)
+// f._onPtrMove(e => console.log(e.isDragging)
+//     // e.isDown && console.log({mx : e.mx, my : e.my, d: e.isDragging})
+//     , true)
+// f._onPtrUp(e => console.log({ux : e.ux, uy : e.uy}), true)
 
 globalThis.s = key => Switch({
     key ,
