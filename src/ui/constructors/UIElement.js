@@ -48,7 +48,7 @@ class UIElement extends UIElementCore{
     },{
       preventDefault
     });
-    
+    return this;
   }
   _off(event, category = 'global'){
     this.exp.events[category].removeListener(event)
