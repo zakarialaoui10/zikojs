@@ -12,6 +12,9 @@ export class EventController {
   get event(){
     return this.cache.event
   }
+  get target(){
+    return this.cache.target;
+  }
   get element(){
     return this.cache.target.element;
   }
