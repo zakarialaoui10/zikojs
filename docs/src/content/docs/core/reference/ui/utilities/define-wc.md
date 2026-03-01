@@ -12,7 +12,7 @@ It provides a simple way to define **custom elements** with isolated logic, styl
 Usage : 
 
 ```js
- import { defineWC, tags } from 'ziko/ui' 
+ import { defineWC, tags } from 'ziko/dom' 
  defineWC('hello-world', ({color = 'darkblue', text = 'world'} = {})=>{
     const {p, span} = tags;
     return p(`Hello ${text}`).style({

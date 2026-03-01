@@ -1,4 +1,4 @@
-import { tags } from 'ziko/ui'
+import { tags } from 'ziko/dom'
 import {useState, useDerived} from 'ziko/hooks'
 export const Timer=()=>{
     const {floor} = Math
@@ -15,7 +15,7 @@ export const Timer=()=>{
 }
 
 Timer().mount()
-// import {tags} from 'ziko/ui'
+// import {tags} from 'ziko/dom'
 // import {useState} from 'ziko/hooks'
 
 

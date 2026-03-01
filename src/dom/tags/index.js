@@ -1,16 +1,5 @@
 import {UIElement} from "../constructors/UIElement.js";
 import { HTMLTags, SVGTags, MathMLTags } from "./tags-list.js";
-// import { isStateGetter } from "../../hooks/use-state.js";
-const _h=(tag, type, attributes, ...children)=>{
-    const { name, style, ...attrs } = attributes;
-    let element = new UIElement(tag, name, type);
-    style && element.style(style);
-    attrs && element.setAttr(attrs);
-    children && element.append(...children);
-    return element; 
-}
-// const h=(tag, attributes = {}, ...children)=> _h(tag, "html", attributes, ...children);
-// const s=(tag, attributes = {}, ...children)=> _h(tag, "svg", attributes, ...children);
 
 const tags = new Proxy({}, {
   get(target, prop) {

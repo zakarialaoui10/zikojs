@@ -1,4 +1,4 @@
-import { tags, UIElement } from 'ziko/ui'
+import { tags, UIElement } from 'ziko/dom'
 import { useState } from 'ziko/hooks'
 import { expect, test} from 'vitest'
 

@@ -1,6 +1,6 @@
 // ov.test.js
 import { describe, it, expect, vi } from 'vitest';
-import { UIElement } from 'ziko/ui';
+import { UIElement } from 'ziko/dom';
 class Ov extends UIElement{
     constructor(items){
         super({element : 'div'})

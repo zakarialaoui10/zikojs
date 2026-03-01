@@ -1,7 +1,11 @@
-import {tags, Flex} from 'ziko/ui'
+import {tags, Flex} from 'ziko/dom'
 import { Random } from 'ziko/math';
-import {Switch} from 'ziko/ui'
+import {Switch} from 'ziko/dom'
 const {svg} = tags;
+
+const {html, div} = tags
+
+
 globalThis.Random = Random
 const El = () => tags.section().style({
     width : Random.int(100, 200)+'px',

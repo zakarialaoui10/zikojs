@@ -1,5 +1,5 @@
 // import { Flex, useTimeLoop, UIElement, tags} from 'ziko'
-// // import { tags } from 'ziko/ui'
+// // import { tags } from 'ziko/dom'
 // import { useState, useDerived } from 'ziko/hooks'
 // // import { composeInstance } from '../../src/__helpers__/composition-dep'
 // import { register } from '../../src/__helpers__/register'

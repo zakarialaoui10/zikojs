@@ -126,7 +126,7 @@ globalThis.s = section(
 // ev.onPtrDown(e=>console.log(e))
 // // ev2.onCopy(e=>console.log(e))
 
-// // import {tags} from "ziko/ui"
+// // import {tags} from "ziko/domm"
 // // console.log(tags["div"])
 
 // // globalThis.h = tags.head

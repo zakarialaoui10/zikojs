@@ -16,7 +16,7 @@ This makes it ideal for **computed values**, **formatting**, and **state transfo
 ## Usage
 
 ```js
-import { tags } from 'ziko/ui'
+import { tags } from 'ziko/dom'
 import {useState, useDerived} from 'ziko/hooks'
 export const Timer=()=>{
     const {floor} = Math

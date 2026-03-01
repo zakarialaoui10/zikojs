@@ -1,6 +1,6 @@
 import { tags, Flex , tick, loop} from "ziko";
 import { useDerived, useState, useChannel, useThread, useMediaQuery } from "ziko/hooks";
-import { define_wc } from 'ziko/ui/web-component'
+import { define_wc } from 'ziko/dom/web-component'
 console.log(useThread)
 globalThis.ch1 = useChannel('state-sync1')
 globalThis.ch2 = useChannel('state-sync2')

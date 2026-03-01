@@ -137,8 +137,4 @@ export type Tags = HtmlTags & SvgTags & MathTags & {
   [key: string]: UIElement;
 };
 
-declare const tags: Tags;
-
-export {
-    tags
-};
+export declare const tags: Tags;

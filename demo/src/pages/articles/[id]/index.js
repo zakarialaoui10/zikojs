@@ -1,4 +1,4 @@
-import {tags} from 'ziko/ui'
+import {tags} from 'ziko/dom'
 
 export default async function App({id}){
     console.log({id})
