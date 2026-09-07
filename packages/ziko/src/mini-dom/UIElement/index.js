@@ -7,16 +7,12 @@ class UIElement extends UINode{
   constructor(){
     super()
   }
-  init({element, name, type, render, props = {}, items = []} = {}){
+  init({element, name, type, mount, props = {}, items = []} = {}){
     this.target = globalThis.__Ziko__.__Config__.default.target||globalThis?.document?.body;
     if(typeof element === "string") {
       switch(type){
-        case "html" : {
-          element = globalThis?.document?.createElement(element);
-        }; break;
-        case "svg" : {
-          element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element); 
-        }; break;
+        case "html" : element = globalThis?.document?.createElement(element); break;
+        case "svg" : element = globalThis?.document?.createElementNS("http://www.w3.org/2000/svg", element); break;
         default : throw Error("Not supported")
       }
     }
@@ -26,37 +22,37 @@ class UIElement extends UINode{
       itemsTarget : this,
       isInteractive : false,
       parent:null,
-      isBody:false,
-      isRoot:false,
-      isHidden: false,
-      isFrozzen:false,
-      attributes: {},
-      filters: {},
-      temp:{}
+      // isBody:false,
+      // isRoot:false,
+      // isHidden: false,
+      // isFrozzen:false,
+      // attributes: {},
+      // filters: {},
+      // temp:{}
     })
-    this.events = {
-      ptr:null,
-      mouse:null,
-      wheel:null,
-      key:null,
-      drag:null,
-      drop:null,
-      click:null,
-      clipboard:null,
-      focus:null,
-      swipe:null,
-      custom:null,
-    }
-    this.observer={
-      resize:null,
-      intersection:null
-    }
+    // this.events = {
+    //   ptr:null,
+    //   mouse:null,
+    //   wheel:null,
+    //   key:null,
+    //   drag:null,
+    //   drop:null,
+    //   click:null,
+    //   clipboard:null,
+    //   focus:null,
+    //   swipe:null,
+    //   custom:null,
+    // }
+    // this.observer={
+    //   resize:null,
+    //   intersection:null
+    // }
     if(element) Object.assign(this.cache,{element});
     this.items = new UIStore();
     globalThis.__Ziko__.__UI__[this.cache.name]
       ? globalThis.__Ziko__.__UI__[this.cache.name]?.push(this)
       : globalThis.__Ziko__.__UI__[this.cache.name]=[this];
-    element && render && this?.render?.()
+    element && mount && this?.mount?.()
     globalThis.__Ziko__.__UI__.push(this)
     
     const parsed_props = parse_props(props);

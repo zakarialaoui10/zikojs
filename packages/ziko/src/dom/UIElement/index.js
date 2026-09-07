@@ -87,9 +87,9 @@ class UIElement extends UIElementCore{
     if(directive)this.element.setAttribute('data-hydration-directive', directive);
     return this;
   }
-  get st(){
-    return this.cache.style;
-  }
+  // get st(){
+  //   return this.cache.style;
+  // }
   get attr(){
     return this.cache.attributes;
   }
