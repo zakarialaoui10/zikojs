@@ -1,4 +1,4 @@
-import type { UIElement } from "../../dom/UIElement";
+import type { UIElement } from "../dom/UIElement";
 export interface UILayoutOptions {
   title?: string;
   icon?: string;

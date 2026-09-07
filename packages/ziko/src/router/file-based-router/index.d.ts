@@ -1,6 +1,6 @@
 // createSPAFileBasedRouter.d.ts
 
-import { UIElement } from '../../../src/ui/constructors/UIElement.js'
+import { UIElement } from '../../dom/UIElement'
 
 /**
  * Creates a SPA (Single Page Application) file-based router.
